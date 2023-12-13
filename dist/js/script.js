@@ -121,7 +121,7 @@ var typed = new Typed('#autotext',{
 // Slider
 const swiper = new Swiper('.swiper', {
     // Optional parameters
-    speed:400,
+    speed:600,
     spaceBetween:100,
     autoplay:{
         delay:3000,
