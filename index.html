@@ -17,7 +17,6 @@
 </head>
 <body>
 
-
     <!-- Header START -->
     <header class="bg-transparent absolute top-0 left-0 w-full flex  itemns-center z-10">
         <div class="container">
@@ -38,7 +37,7 @@
                             <li class="group"> <a href="#about" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">About me</a></li>
                             <li class="group"> <a href="#portfolio" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Portfolio</a></li>
                             <li class="group"> <a href="#client" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Clients</a></li>
-                            <li class="group"> <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Contact</a></li>
+                            <li class="group"> <a href="blog.html" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Blog</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -46,6 +45,7 @@
         </div>
     </header>
     <!-- HEADER END -->
+
     <!-- HERO SECTION START -->
     <section id="home" class="pt-36">
         <div class="container">
@@ -168,46 +168,46 @@
                     <p class="font-medium text-secondary max-w-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                          Obcaecati, quaerat suscipit! Amet eaque assumenda rerum omnis?</p>
                 </div>
-                <div class="w-full px-4 mb-10 lg:w-1/2">
+                <div class="w-full px-4 lg:w-1/2">
                     <div class="flex flex-wrap items-center">
                         <!-- HTML -->
                         <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
-                        class="w-9 h-9 mr-3 pb-5">
+                        class="w-9 h-9 mr-3 m-5">
                             <img src="dist/image/skills/html.svg" alt="html">
                         </a>
                         <!-- CSS -->
                         <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
-                        class="w-9 h-9 mr-3 pb-5">
+                        class="w-9 h-9 mr-3 m-5">
                             <img src="dist/image/skills/css.svg" alt="css">
                         </a>
                         <!-- JAVASCRIPT -->
                         <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
-                        class="w-9 h-9 mr-3 pb-5">
+                        class="w-9 h-9 mr-3 m-5">
                             <img src="dist/image/skills/js.svg" alt="js">
                         </a>
                         <!-- TAILWIND -->
                         <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
-                        class="w-9 h-9 mr-3 pb-5">
+                        class="w-9 h-9 mr-3 m-5">
                             <img src="dist/image/skills/tailwind.svg" alt="tailwind">
                         </a>
                         <!-- JAVA -->
                         <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
-                        class="w-9 h-9 mr-3 pb-5">
+                        class="w-9 h-9 mr-3 m-5">
                             <img src="dist/image/skills/java.svg" alt="java">
                         </a>
                         <!-- CSS -->
                         <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
-                        class="w-9 h-9 mr-3 pb-5">
+                        class="w-9 h-9 mr-3 m-5">
                             <img src="dist/image/skills/php.svg" alt="php">
                         </a>
                         <!-- Figma -->
                         <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
-                        class="w-9 h-9 mr-3 pb-5">
+                        class="w-9 h-9 mr-3 m-5">
                             <img src="dist/image/skills/figma.svg" alt="figma">
                         </a>
                         <!-- photoshop -->
                         <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
-                        class="w-9 h-9 mr-3 pb-5">
+                        class="w-9 h-9 mr-3 m-5">
                             <img src="dist/image/skills/ps.svg" alt="ps">
                         </a>
                         <!-- premier -->
@@ -261,45 +261,47 @@
                 </div>
                 <div class="menu__items">
                     <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
-                    <li class="item_wrap uidesign">
-                        <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
-                        <img src="dist/image/portfolio/uiux/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full">
+                    <li class="relative item_wrap uidesign">
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('dist/image/portfolio/uiux/IPB Redisgn.png', 'Redesign Website IPB UNIVERSITY ')">
+                        <img src="dist/image/portfolio/uiux/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full" @click="showModal = true">
                         </div>
                         <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
-                            Redesign IPB UNIVERSITY website
+                            Redesign Website IPB UNIVERSITY 
                         </h3>
                         <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
                             elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        
                     </li>
 
                     <li class="item_wrap uidesign">
-                        <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                         <img src="dist/image/portfolio/uiux/SEMAR UI.png" alt="food image"alt="UI design 3" width="w-full">
                         </div>
                         <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
-                            Redesign IPB UNIVERSITY website
+                            Semar UI Web Design Portfolio 
                         </h3>
                         <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
                             elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
                     </li>
 
                     <li class="item_wrap uidesign">
-                        <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                         <img src="dist/image/portfolio/uiux/UI BROMO Fix.png" alt="food image"alt="UI design 3" width="w-full">
                         </div>
                         <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
-                            Redesign IPB UNIVERSITY website
+                            Dashboard UI Bromo Web and Application
                         </h3>
                         <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
                             elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
                     </li>
 
                     <li class="item_wrap uidesign">
-                        <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
-                        <img src="dist/image/portfolio/uiux/BUTCHERYAPP.png" alt="food image"alt="UI design 3" width="w-full">
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                        <img src="dist/image/portfolio/uiux/BUTCHERYAPP.jpg" alt="food image"alt="UI design 3" width="w-full">
                         </div>
                         <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
-                            Redesign IPB UNIVERSITY website
+                            Mobile Application E-ccomerce Butchery
                         </h3>
                         <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
                             elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
@@ -315,7 +317,7 @@
                     <div class="menu__items videografi">
                         <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
                         <li class="item_wrap videografi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/videografi/graduationsma.png" alt="graduation"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -329,7 +331,7 @@
                         </li>
         
                         <li class="item_wrap videografi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/videografi/shortmovie.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -340,7 +342,7 @@
                         </li>
         
                         <li class="item_wrap videografi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/videografi/cinematicsv.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -351,7 +353,7 @@
                         </li>
         
                         <li class="item_wrap videografi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/videografi/prewed.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -361,7 +363,7 @@
                                 elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
                         </li>
                         <li class="item_wrap videografi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/videografi/dekomposer.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -383,7 +385,7 @@
                     <div class="menu__items animasi">
                         <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
                         <li class="item_wrap animasi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -394,7 +396,7 @@
                         </li>
         
                         <li class="item_wrap animasi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/SEMAR UI.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -405,7 +407,7 @@
                         </li>
         
                         <li class="item_wrap animasi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/UI BROMO Fix.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -416,7 +418,7 @@
                         </li>
         
                         <li class="item_wrap animasi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/BUTCHERYAPP.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -439,7 +441,7 @@
                     <div class="menu__items desain">
                         <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
                         <li class="item_wrap desain">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -450,7 +452,7 @@
                         </li>
         
                         <li class="item_wrap desain">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/SEMAR UI.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -461,7 +463,7 @@
                         </li>
         
                         <li class="item_wrap desain">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/UI BROMO Fix.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -472,7 +474,7 @@
                         </li>
         
                         <li class="item_wrap desain">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/BUTCHERYAPP.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -497,7 +499,7 @@
                     <div class="menu__items ilustrasi">
                         <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
                         <li class="item_wrap ilustrasi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -508,7 +510,7 @@
                         </li>
         
                         <li class="item_wrap ilustrasi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/SEMAR UI.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -519,7 +521,7 @@
                         </li>
         
                         <li class="item_wrap ilustrasi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/UI BROMO Fix.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -530,7 +532,7 @@
                         </li>
         
                         <li class="item_wrap ilustrasi">
-                            <div class="rounded-md shadow-md overflow-hidden transform hover:scale-110 ease-in-out duration-200">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
                             <img src="dist/image/portfolio/BUTCHERYAPP.png" alt="food image"alt="UI design 3" width="w-full">
                             </div>
                             <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -547,90 +549,95 @@
             
         </div>
     </section>
-<!-- PORTFOIO SECTION END -->
-
-<!-- PORTOFOLIO MODAL START -->
-<!-- Modal -->
-
-<!-- PORTOFOLIO MODAL END-->
+    <!-- PORTFOIO SECTION END -->
 
 
-<!-- Client section start -->
-<section id="client" class="pt-36 pb-16 bg-dark">
-    <div class="container">
-        <div class="w-full px-4 justify-center">
-            <div class="mx-auto text-center mb-6">
-                <h4 class="font-semibold text-lg text-primary mb-2">Clients</h4>
-                <h2 class="font-bold text-white text-3xl mb-4 sm:text-4xl lg:text-5xl">Colaboration with</h2>
-                <p class="font-medium text-md text-secondary md:text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est inventore voluptates eaque. At, mollitia reiciendis. Pariatur voluptatem commodi error molestiae!</p>
-            </div>
-        </div>
-        <div class="w-full px-4">
-            <div class="flex flex-wrap item-center items-center justify-center mt-8" >
-                <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
-                transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                <img src="dist/image/clients/google.svg"  alt="google"></a>
-                <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
-                transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8" >
-                <img src="dist/image/clients/microit.png" width="85%" alt="micro"></a>
-                <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
-                transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                <img src="dist/image/clients/nuri.png" alt="google"></a>
-                <a href="#" class="max-w-[130px] mx-4 py-4 grayscale opacity-60 
-                transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                <img src="dist/image/clients/svipb.png" alt="svipb" width="200px"></a>
-                <a href="#" class="max-w-[130px] mx-4 py-4 grayscale opacity-60 
-                transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                <img src="dist/image/clients/ipb.png" alt="ipb" width="200px"></a>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Client section end -->
 
-<!-- Organitation section start -->
-<section id="organitation" class="pt-36 pb-16 bg-slate-100">
+
+    <!-- Client section start -->
+    <section id="client" class="pt-36 pb-32 bg-dark">
         <div class="container">
-            <div class="flex flex-wrap items-center">
-                <div class="teksorganisasi px-4 lg:w-1/2 w-full ">
-                    <div class="max-w-xl mb-6">
-                        <h4 class="font-semibold text-lg text-primary mb-2">Eksperience</h4>
-                        <h2 class="font-bold text-dark text-3xl mb-4 sm:text-4xl lg:text-4xl">My Eksperience</h2>
-                        <p class="font-medium text-md text-secondary md:text-md">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est inventore voluptates eaque. At, mollitia reiciendis. Pariatur voluptatem commodi error molestiae!</p>
-                    </div>
+            <div class="w-full px-4 justify-center">
+                <div class="mx-auto text-center mb-6">
+                    <h4 class="font-semibold text-lg text-primary mb-2">Clients</h4>
+                    <h2 class="font-bold text-white text-3xl mb-4 sm:text-4xl lg:text-5xl">Colaboration with</h2>
+                    <p class="font-medium text-md text-secondary md:text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est inventore voluptates eaque. At, mollitia reiciendis. Pariatur voluptatem commodi error molestiae!</p>
                 </div>
-                <!-- Slider main container -->
-                <div class="swiper px-4 lg:w-1/2 w-full relative">
-                    <!-- If we need pagination -->
-                    <div class="swiper-pagination absolute top-0 mt-4"></div>
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper relative">
-                    <!-- Slides -->
-                    <div class="swiper-slide relative"><img src="dist/image/organitations/mpkmb.jpg" alt="" class="object-center object-cover w-full rounded-md">
-                        <div class="deksripsi ">
-                            <p class="mt-6"><b>MPKMB SV IPB 2023</b> atau Masa Pengenalan Kampus Mahasiswa Baru adalah kegiatan resmi orientasi
-                                 dan pengenalan kampus bagi mahasiswa baru di lingkungan IPB.</p>
-                        </div>
-                    </div>
-                    <div class="swiper-slide relative"><img src="dist/image/organitations/agri.jpg" alt="" class="object-center object-cover w-full rounded-md">
-                        <div class="deksripsi">
-                            <p class="mt-6"><b>Agrimovie SV IPB 2023</b> merupakan sebuah organisasi kemahasiswaan di Sekolah Vokasi Institut Pertanian Bogor yang bergerak di bidang seni audiovisual.</p>
-                        </div>
-                    </div>
-                    <div class="swiper-slide relative"><img src="dist/image/organitations/micro.jpg" alt="" class="object-center object-cover w-full rounded-md">
-                        <div class="deksripsi">
-                            <p class="mt-6"><b>Himavo Micro IT Community</b> adalah Himpunan Mahasiswa Vokasi Sekolah Vokasi IPB University yang terdiri atas 3 Program Studi yaitu KMN, TRK, dan TRPL.</p>
-                        </div>
-                    </div>
-                    </div>
+            </div>
+            <div class="w-full px-4">
+                <div class="flex flex-wrap item-center items-center justify-center mt-8" >
+                    <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                    <img src="dist/image/clients/google.svg"  alt="google"></a>
+                    <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8" >
+                    <img src="dist/image/clients/microit.png" width="85%" alt="micro"></a>
+                    <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                    <img src="dist/image/clients/nuri.png" alt="google"></a>
+                    <a href="#" class="max-w-[130px] mx-4 py-4 grayscale opacity-60 
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                    <img src="dist/image/clients/svipb.png" alt="svipb" width="200px"></a>
+                    <a href="#" class="max-w-[130px] mx-4 py-4 grayscale opacity-60 
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                    <img src="dist/image/clients/ipb.png" alt="ipb" width="200px"></a>
                 </div>
             </div>
         </div>
+    </section>
+    <!-- Client section end -->
+
+    <!-- Organitation section start -->
+    <section id="organitation" class="pt-36 pb-16 bg-slate-100">
+            <div class="container">
+                <div class="flex flex-wrap items-center">
+                    <div class="teksorganisasi px-4 lg:w-1/2 w-full ">
+                        <div class="max-w-xl mb-6">
+                            <h4 class="font-semibold text-lg text-primary mb-2">Eksperience</h4>
+                            <h2 class="font-bold text-dark text-3xl mb-4 sm:text-4xl lg:text-4xl">My Eksperience</h2>
+                            <p class="font-medium text-md text-secondary md:text-md">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est inventore voluptates eaque. At, mollitia reiciendis. Pariatur voluptatem commodi error molestiae!</p>
+                        </div>
+                    </div>
+                    <!-- Slider main container -->
+                    <div class="swiper px-4 lg:w-1/2 w-full relative">
+                        <!-- If we need pagination -->
+                        <!-- <div class="swiper-pagination absolute top-0 mt-4"></div> -->
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper relative">
+                        <!-- Slides -->
+                        <div class="swiper-slide relative"><img src="dist/image/organitations/mpkmb.jpg" alt="" class="object-center object-cover w-full rounded-md">
+                            <div class="deksripsi ">
+                                <p class="mt-6"><b>MPKMB SV IPB 2023</b> atau Masa Pengenalan Kampus Mahasiswa Baru adalah kegiatan resmi orientasi
+                                    dan pengenalan kampus bagi mahasiswa baru di lingkungan IPB.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide relative"><img src="dist/image/organitations/agri.jpg" alt="" class="object-center object-cover w-full rounded-md">
+                            <div class="deksripsi">
+                                <p class="mt-6"><b>Agrimovie SV IPB 2023</b> merupakan sebuah organisasi kemahasiswaan di Sekolah Vokasi Institut Pertanian Bogor yang bergerak di bidang seni audiovisual.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide relative"><img src="dist/image/organitations/micro.jpg" alt="" class="object-center object-cover w-full rounded-md">
+                            <div class="deksripsi">
+                                <p class="mt-6"><b>Himavo Micro IT Community</b> adalah Himpunan Mahasiswa Vokasi Sekolah Vokasi IPB University yang terdiri atas 3 Program Studi yaitu KMN, TRK, dan TRPL.</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
     </section>
+    <!-- Organitation section finish -->
 
-<!-- Organitation section finish -->
 
+
+
+
+
+
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

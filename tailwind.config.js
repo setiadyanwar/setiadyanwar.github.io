@@ -12,6 +12,9 @@ module.exports = {
         dark:'#0f172a',
         secondary:'#64748b',
       },
+      zIndex: {
+        '9999': 9999,
+      },
       screens:{
         '2xl':'1536px',
       }

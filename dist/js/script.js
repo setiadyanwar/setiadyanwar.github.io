@@ -139,3 +139,82 @@ const swiper = new Swiper('.swiper', {
     },
 
   });
+
+
+
+
+
+
+  function showDetail(imageSrc, title) {
+    // Buat elemen untuk menampilkan detail gambar
+    const detailContainer = document.createElement('div');
+    detailContainer.classList.add('container', 'relative'); // Tambahkan kelas container dan relative
+    detailContainer.style.marginTop = '40px'; // Atur nilai margin top sesuai kebutuhan Anda
+
+    // Tambahkan tombol silang di kanan atas
+    const closeButton = document.createElement('button');
+    closeButton.innerHTML = '&times;'; // Simbol silang (×)
+    closeButton.classList.add('absolute', 'top-0', 'right-4', 'text-black', 'text-4xl', 'cursor-pointer', 'bg-white', 'rounded-full', 'p-2', 'shadow-md', 'text-dark');
+    
+    // Tambahkan properti width dan height untuk mengatur ukuran lingkaran
+    closeButton.style.width = '46px';
+    closeButton.style.height = '46px';
+
+    closeButton.addEventListener('click', function () {
+        // Tambahkan event listener untuk menutup detailContainer saat tombol silang diklik
+        document.body.removeChild(detailContainer);
+        location.reload(); // Me-refresh halaman setelah menutup detailContainer
+    });
+
+    const detailContent = document.createElement('div');
+    detailContent.classList.add('detail-container', 'max-w-lg', 'mx-auto'); // Tambahkan kelas detail-container dan atur lebar maksimum
+
+    const detailImage = document.createElement('img');
+    detailImage.src = imageSrc;
+    detailImage.alt = title;
+    detailImage.classList.add('h-auto', 'rounded-md', 'mb-6', 'mx-auto', 'lg:w-1/2', 'w-full', 'lg:w-auto');
+    // Tambahkan kelas-kelas responsif untuk mengatur lebar gambar
+
+    const detailTitleWrapper = document.createElement('div');
+    detailTitleWrapper.classList.add('flex', 'justify-between', 'items-center', 'mb-6');
+
+    const detailTitle = document.createElement('h3');
+    detailTitle.innerHTML = `<b  class="text-2xl font-extrabold">${title}</b>`; 
+    detailTitle.classList.add('mt-6');
+
+
+    // Buat tombol untuk mengunjungi situs web
+    const visitWebsiteButton = document.createElement('a');
+    visitWebsiteButton.href = 'https://setiadyanwar.000webhostapp.com/';
+    visitWebsiteButton.target = '_blank'; // Buka tautan di tab baru
+    visitWebsiteButton.textContent = ' 🔗 Visit Website';
+    visitWebsiteButton.classList.add('flex-shrink-0', 'px-4', 'py-2', 'text-white', 'bg-dark', 'rounded-lg', 'hover:bg-primary', 'focus:outline-none', 'focus:shadow-outline-blue', 'active:bg-blue-800');
+
+    // Tambahkan subtitle teknologi
+    // const technologySubtitle = document.createElement('p');
+    // technologySubtitle.textContent = 'Teknologi yang Digunakan';
+    // technologySubtitle.classList.add('mt-2', 'text-dark');
+
+    detailTitleWrapper.appendChild(detailTitle);
+    detailTitleWrapper.appendChild(visitWebsiteButton);
+    // detailTitleWrapper.appendChild(technologySubtitle);
+
+    const detailLorem = document.createElement('p');
+    detailLorem.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel purus eget tellus maximus pellentesque non et enim. Nulla facilisi. Morbi commodo erat vel magna placerat interdum. Sed varius justo eget magna gravida, sit amet dignissim nulla tincidunt. Suspendisse auctor sem non nisi vehicula, et bibendum dolor facilisis. Integer fringilla, orci vel scelerisque venenatis, tellus orci aliquet nulla, ut posuere elit felis id nunc.';
+    detailLorem.classList.add('mt-6', 'mb-6');
+
+    detailContent.appendChild(closeButton); // Tambahkan tombol silang ke detailContent
+    detailContent.appendChild(detailImage);
+    detailContent.appendChild(detailTitle);
+    detailContent.appendChild(detailLorem); 
+    detailContent.appendChild(detailTitleWrapper);
+    detailContainer.appendChild(detailContent);
+
+    // Hapus semua elemen anak dari <body>
+    while (document.body.firstChild) {
+        document.body.removeChild(document.body.firstChild);
+    }
+
+    // Masukkan detailContainer ke <body>
+    document.body.appendChild(detailContainer);
+}
