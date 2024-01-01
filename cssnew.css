@@ -39,3 +39,12 @@
     left: 70px;
     z-index: 20;
 }
+
+.gambar{
+    animation: animate__fadeInRight; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+}
+.gambarl{
+    animation: animate__fadeInLeft; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 1.8s;
+}

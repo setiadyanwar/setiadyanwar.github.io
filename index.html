@@ -13,6 +13,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="dist/output.css">
     <link rel="stylesheet" href="cssnew.css">
+    <!-- ANIMATE CSSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- Swiper js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
@@ -61,17 +63,17 @@
     <section id="home" class="pt-36">
         <div class="container">
             <div class="flex flex-wrap ">
-                <div class="w-full self-center px-4 lg:w-1/2 ">
+                <div class="w-full self-center px-4 lg:w-1/2 gambarl animate__fadeInLeft">
                     <h1 class="text-base font-semibold text-primary md:text-xl">Hallo Everyone, I'am<br> <span class="font-bold text-4xl text-dark">Setiady Ibrahim Anwar</span></h1>
                     <h2 class="font-medium text-lg mb-6 lg:text-2xl" ><span class="text-secondary">UI & UX Designer | </span><span id="autotext" class="text-primary" ></span></h2>
                     <p class="medium text-secondary mb-16 leading-relaxed" >Saya adalah mahasiswa <span class="font-bold">IPB University
                     </span> fakultas Sekolah Vokasi IPB Jurusan <span class="font-bold">Software Engeneering Technologhy.</span> </p>
 
-                    <a href="https://wa.me/6281286679046" class="text-base font-semibold text-white bg-primary py-3 px-8 rounded-full hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out" target="_blank">Contact me</a>
+                    <a href="https://wa.me/6281286679046" class="text-base font-semibold text-white bg-primary py-3 px-8 rounded-full hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out">Contact me</a>
                 </div>
-                <div class="w-full self-end px-4 lg:w-1/2">
+                <div class="w-full self-end px-4 lg:w-1/2 gambar animate__fadeInRight">
                     <div class="mt-10 lg:ml-32 relative lg:mt-0 lg:right-0">
-                        <img src="dist/image/setiady.png" alt="Setiady" class="max-wfull mx-auto h-full flex justify-center items-center">
+                        <img src="dist/image/setiady.png" alt="Setiady" class=" max-wfull mx-auto h-full flex justify-center items-center ">
                         <span class="absolute -bottom-0 -z-10 lg:-left-1 lg:translate-x-24 md:-left-2 ">
                             <svg widht="300" height="300" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="#7C3AED" d="M46,-71.9C59.4,-62.9,69.8,-49.8,77.7,-34.8C85.6,-19.9,90.8,-3,87.6,11.9C84.3,26.7,72.5,39.6,60.8,52.2C49.2,64.8,37.7,77.1,24.4,79.4C11,81.7,-4.2,73.9,-21.1,69.9C-37.9,65.8,-56.4,65.3,-65.9,56.1C-75.4,46.9,-75.9,29,-73.7,13.4C-71.5,-2.1,-66.8,-15.2,-62.2,-29.7C-57.6,-44.3,-53.3,-60.2,-43,-70.5C-32.6,-80.9,-16.3,-85.5,0,-85.5C16.3,-85.5,32.6,-80.8,46,-71.9Z" transform="translate(100 100)" />
@@ -88,13 +90,13 @@
     <section id="about" class="pt-44 pb-16">
         <div class="container">
             <div class="flex flex-wrap">
-                <div class="w-full px-4 mb-10 lg:w-1/2">
+                <div class="w-full px-4 mb-10 lg:w-1/2 gambarl animate__fadeInLeft">
                     <h4 class="font-bold uppercase text-primary text-lg mb-3 ">About ME</h4>
                     <h2 class="font-bold text-dark text-3xl mb-5 max-w-md lg:text-4xl">Let's get to know me more!</h2>
                     <p class="font-medium text-secondary max-w-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                          Obcaecati, quaerat suscipit! Amet eaque assumenda rerum omnis?</p>
                 </div>
-                <div class="w-full px-4 lg:w-1/2">
+                <div class="w-full px-4 lg:w-1/2 gambar animate__fadeInRight">
                     <h3 class="font-medium text-dark text-2xl lg:text-3xl lg:pt-10">let's be friends on my social media</h3>
                     <p class="font-medium text-base text-secondary mb-6 lg:text-lg lg:text-lg">Lorem ipsum dolor sit amet,
                          consectetur adipisicing elit. Vero non exercitationem iste perspiciatis
@@ -271,10 +273,10 @@
                 </div>
                 <div class="menu__items">
                     <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
-                    <li class="relative item_wrap uidesign">
+                    <li id="ipbDetail" class="relative item_wrap uidesign">
                         <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
-                        onclick="showDetail('dist/image/portfolio/uiux/IPB Redisgn.png', 'Redesign Website IPB UNIVERSITY ')">
-                        <img src="dist/image/portfolio/uiux/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full" @click="showModal = true">
+                        onclick="showDetail('ipbDetail')">
+                        <img src="dist/image/portfolio/uiux/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full">
                         </div>
                         <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
                             Redesign Website IPB UNIVERSITY 
@@ -284,8 +286,9 @@
                         
                     </li>
 
-                    <li class="item_wrap uidesign">
-                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                    <li id="semarDetail" class="relative item_wrap uidesign">
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('semarDetail')">
                         <img src="dist/image/portfolio/uiux/SEMAR UI.png" alt="food image"alt="UI design 3" width="w-full">
                         </div>
                         <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -295,8 +298,9 @@
                             elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
                     </li>
 
-                    <li class="item_wrap uidesign">
-                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                    <li id="bromoDetail" class="item_wrap uidesign">
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('bromoDetail')">
                         <img src="dist/image/portfolio/uiux/UI BROMO Fix.png" alt="food image"alt="UI design 3" width="w-full">
                         </div>
                         <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -306,8 +310,9 @@
                             elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
                     </li>
 
-                    <li class="item_wrap uidesign">
-                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                    <li id="butcheryDetail" class="item_wrap uidesign">
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('butcheryDetail')">
                         <img src="dist/image/portfolio/uiux/BUTCHERYAPP.jpg" alt="food image"alt="UI design 3" width="w-full">
                         </div>
                         <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
@@ -577,23 +582,23 @@
             <div class="w-full px-4">
                 <div class="flex flex-wrap item-center items-center justify-center mt-8" >
                     <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
-                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                    <img src="dist/image/clients/google.svg"  alt="google"></a>
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-6">
+                    <img src="dist/image/clients/google.svg"  alt="google" class="w-full h-full"></a>
                     <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
-                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8" >
-                    <img src="dist/image/clients/microit.png" width="85%" alt="micro"></a>
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-6" >
+                    <img src="dist/image/clients/microit.png" class="w-full h-full" alt="micro"></a>
                     <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
                     transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
                     <img src="dist/image/clients/nuri.png" alt="google"></a>
                     <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
-                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                    <img src="dist/image/clients/svipb.png" alt="svipb" width="85%"></a>
-                    <a href="#" class="max-w-[130px] mx-4 py-4 grayscale opacity-60 
-                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                    <img src="dist/image/clients/ipb.png" alt="ipb" width="85%"></a>
-                    <a href="#" class="max-w-[110px] mx-4 py-4 grayscale opacity-60 
-                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                    <img src="dist/image/clients/Agrimovie.png" alt="ipb" width="85%"></a>
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-6">
+                    <img src="dist/image/clients/svipb.png" alt="svipb" class="w-full h-full "></a>
+                    <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-6">
+                    <img src="dist/image/clients/ipb.png" alt="ipb" class="w-full h-full object-cover"></a>
+                    <a href="#" class="max-w-[120px] mx-4 py-4 grayscale opacity-60 
+                    transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-6">
+                    <img src="dist/image/clients/Agrimovie.png" alt="ipb" class="w-full h-full"></a>
                 </div>
             </div>
         </div>
