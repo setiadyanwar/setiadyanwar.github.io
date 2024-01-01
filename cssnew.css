@@ -1,0 +1,41 @@
+.h-screen {
+    position: relative;
+}
+
+.elips-img {
+    position: absolute;
+    top: 100px;
+    right: 60px;
+    z-index: 20;
+}
+
+.elips-imga {
+    position: absolute;
+    top: 120px;
+    left: 40px;
+    z-index: 20;
+}
+.elips-imgb {
+    position: absolute;
+    top: 270px;
+    right: 100px;
+    z-index: 20;
+}
+.elips-imgc {
+    position: absolute;
+    top: 220px;
+    right: 20px;
+    z-index: 20;
+}
+.elips-imgd {
+    position: absolute;
+    top: 230px;
+    left: 20px;
+    z-index: 20;
+}
+.elips-imge {
+    position: absolute;
+    top: 507px;
+    left: 70px;
+    z-index: 20;
+}
