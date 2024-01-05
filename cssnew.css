@@ -41,10 +41,15 @@
 }
 
 .gambar{
-    animation: animate__fadeInRight; /* referring directly to the animation's @keyframe declaration */
+    animation: animate__fadeInRight; 
     animation-duration: 2s;
 }
 .gambarl{
-    animation: animate__fadeInLeft; /* referring directly to the animation's @keyframe declaration */
+    animation: animate__fadeInLeft; 
     animation-duration: 1.8s;
+}
+
+.nav{
+    animation: animate__fadeInDown; 
+    animation-duration: 1s;
 }
