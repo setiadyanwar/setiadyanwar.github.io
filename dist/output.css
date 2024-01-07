@@ -941,6 +941,11 @@ video {
   border-top-right-radius: 0.25rem;
 }
 
+.rounded-e-full {
+  border-start-end-radius: 9999px;
+  border-end-end-radius: 9999px;
+}
+
 .border {
   border-width: 1px;
 }
@@ -1108,6 +1113,16 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
 
 .pb-16 {
