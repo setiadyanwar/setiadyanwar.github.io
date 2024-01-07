@@ -13,6 +13,10 @@
     <!-- CSS -->
     <link rel="stylesheet" href="dist/output.css">
     <link rel="stylesheet" href="cssnew.css">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
     <!-- ANIMATE CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- AOS -->
@@ -79,7 +83,7 @@
                     <!-- Main modal overlay -->
                     <div id="modal-overlay" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
 
-                        <!-- Main modal -->
+                    <!-- Main modal -->
                     <div id="crud-modal" tabindex="-1" aria-hidden="true" class="container hidden fixed inset-0 overflow-y-auto z-50 flex items-center justify-center">
                         <div class="relative p-4 w-full max-w-md max-h-full">
                             <!-- Modal content -->
@@ -89,7 +93,7 @@
                                     <h3 class="text-xl font-semibold text-dark ">
                                         Contact Form
                                     </h3>
-                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
+                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-close="crud-modal">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                         </svg>
@@ -97,47 +101,55 @@
                                     </button>
                                 </div>
                                 <!-- Modal body -->
-                                <form class="p-4 md:p-5">
+                                <form id="contact-form" action="https://formspree.io/f/xyyryvjv" class="p-4 md:p-5" method="POST">
                                     <div class="grid gap-4 mb-4 grid-cols-2">
                                         <div class="col-span-2">
                                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
-                                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type your name" required="">
+                                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-800 focus:border-indi block w-full p-2.5" placeholder="Type your name" required>
                                         </div>
                                         <div class="col-span-2 sm:col-span-1">
                                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">From</label>
-                                            <input type="text" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Where you from?" required="">
+                                            <input type="text" name="from" id="from" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Where you from?" required>
                                         </div>
                                         <div class="col-span-2 sm:col-span-1">
                                             <label for="category" class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
-                                            <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
+                                            <select id="category" name= "category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
                                                 <option selected="">Select category</option>
                                                 <option value="HIRE">Hire</option>
                                                 <option value="COLAB">Colaboration</option>
                                                 <option value="Friend">Be Friend</option>
-                                                <option value="GI">Say HI</option>
+                                                <option value="HI">Say HI</option>
                                             </select>
                                         </div>
                                         <div class="col-span-2">
-                                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">Message</label>
-                                            <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your message for me"></textarea>                    
+                                            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 ">Message</label>
+                                            <textarea id="message" name="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your message for me"></textarea>                    
                                         </div>
                                     </div>
-                                    <button type="submit" class="text-white inline-flex items-center bg-primary hover:bg-indigo-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
-                                        Submit
+                                    <button type="submit" class="text-white inline-flex items-center bg-primary hover:bg-indigo-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 text-center">
+                                        <i class="fas fa-paper-plane text-white"></i>
+                                        <span class="ml-2">Submit</span>
                                     </button>
+                                    <button type="button" class="text-green-600 inline-flex items-center bg-transparent font-medium rounded-lg border border-green-600 text-sm px-5 py-2 text-center" onclick="window.location.href='https://wa.me/6281286679046'">
+                                        <i class="fab fa-lg fa-whatsapp text-green-600"></i>
+                                        <span class="ml-2">Whatsapp</span>
+                                    </button>
+                                    <div
+                                        class="loader ease-linear mt-5 rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 mx-auto"
+                                        ></div>
                                 </form>
                             </div>
                         </div>
                     </div> 
-                    
+                    <!-- Main modal Finish-->
+
                 </div>
                 <div class="w-full self-end px-4 lg:w-1/2  gambar animate__fadeInRight">
                     <div class="mt-10 lg:ml-32 relative lg:mt-0 lg:right-0">
                         <img src="dist/image/setiady.png" alt="Setiady" class=" max-wfull mx-auto h-full flex justify-center items-center ">
                         <span class="absolute -bottom-0 -z-10 lg:-left-1 lg:translate-x-24 md:-left-2 ">
                             <svg widht="300" height="300" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="#7C3AED" d="M46,-71.9C59.4,-62.9,69.8,-49.8,77.7,-34.8C85.6,-19.9,90.8,-3,87.6,11.9C84.3,26.7,72.5,39.6,60.8,52.2C49.2,64.8,37.7,77.1,24.4,79.4C11,81.7,-4.2,73.9,-21.1,69.9C-37.9,65.8,-56.4,65.3,-65.9,56.1C-75.4,46.9,-75.9,29,-73.7,13.4C-71.5,-2.1,-66.8,-15.2,-62.2,-29.7C-57.6,-44.3,-53.3,-60.2,-43,-70.5C-32.6,-80.9,-16.3,-85.5,0,-85.5C16.3,-85.5,32.6,-80.8,46,-71.9Z" transform="translate(100 100)" />
+                                <path fill="#4f46e5" d="M46,-71.9C59.4,-62.9,69.8,-49.8,77.7,-34.8C85.6,-19.9,90.8,-3,87.6,11.9C84.3,26.7,72.5,39.6,60.8,52.2C49.2,64.8,37.7,77.1,24.4,79.4C11,81.7,-4.2,73.9,-21.1,69.9C-37.9,65.8,-56.4,65.3,-65.9,56.1C-75.4,46.9,-75.9,29,-73.7,13.4C-71.5,-2.1,-66.8,-15.2,-62.2,-29.7C-57.6,-44.3,-53.3,-60.2,-43,-70.5C-32.6,-80.9,-16.3,-85.5,0,-85.5C16.3,-85.5,32.6,-80.8,46,-71.9Z" transform="translate(100 100)" />
                             </svg>
                         </span>
                     </div>
