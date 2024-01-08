@@ -236,8 +236,8 @@ function showDetail(detailId) {
     description =
       "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
   } else if (detailId === "butcheryDetail") {
-    title = "Mobile Application E-ccomerce Butchery";
-    imageSrc = "dist/image/portfolio/uiux/BUTCHERYAPP.jpg";
+    title = "Web and Mobile App E-ccomerce Butchery";
+    imageSrc = "dist/image/portfolio/uiux/Buthcery webapp.png";
     websiteUrl = "https://example.com/semar";
     description =
       "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";

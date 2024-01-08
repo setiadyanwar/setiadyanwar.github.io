@@ -40,3 +40,12 @@ body{
       @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
     }
   }
+
+
+  .skill-label {
+    @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white p-1 text-xs opacity-0 transition-opacity duration-300 ease-in-out;
+}
+
+.skill-link:hover .skill-label {
+    @apply opacity-100;
+}
