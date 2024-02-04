@@ -232,13 +232,13 @@ function showDetail(detailId) {
   } else if (detailId === "bromoDetail") {
     title = "Dashboard UI Bromo Web and Application";
     imageSrc = "dist/image/portfolio/uiux/UI BROMO Fix.png";
-    websiteUrl = "https://example.com/semar";
+    websiteUrl = "https://www.figma.com/file/naDymnkyYHEHqdayLcNaJ9/Bromo?type=design&node-id=204%3A4&mode=design&t=QxsYdU3HjO3elDhG-1";
     description =
       "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
   } else if (detailId === "butcheryDetail") {
     title = "Web and Mobile App E-ccomerce Butchery";
     imageSrc = "dist/image/portfolio/uiux/Buthcery webapp.png";
-    websiteUrl = "https://example.com/semar";
+    websiteUrl = "http://146.190.89.250/";
     description =
       "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
   } else if (detailId === "semarDetail") {
@@ -247,7 +247,15 @@ function showDetail(detailId) {
     websiteUrl = "https://example.com/semar";
     description =
       "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
-  } else {
+  } else if (detailId === "agridationDetail") {
+    title = "Semar UI Web Design Portfolio";
+    imageSrc = "dist/image/portfolio/uiux/Agridation.png";
+    websiteUrl = "https://www.figma.com/file/08iSgX68JqkLI5gRL00NYO/Agridation?type=design&node-id=0%3A1&mode=design&t=BcGG0QdEtJsC3iPH-1";
+    description =
+      "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
+  }
+  
+  else {
     console.error("Invalid detailId:", detailId);
     return;
   }
