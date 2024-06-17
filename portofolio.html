@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio
+        <!-- FAVICON -->
+    <link rel="icon" href="dist/image/logo setiadyanwar.png" sizes="32x32" type="image/png">
+    <!-- title -->
+    <title>Setiady Ibrahim Anwar | Portfolio</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="dist/output.css">
+    <link rel="stylesheet" href="cssnew.css">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+    <!-- ANIMATE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- Swiper js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    </title>
+</head>
+<body>
+
+    <!-- PORTFOIO SECTION START -->
+    <section id="portfolio" class="pt-36 pb-16 bg-slate-100">
+        <div class="container">
+            <div class="flex flex-wrap" >
+                <div class="w-full px-4 justify-center" >
+                    <div class="max-w-xl mx-auto text-center mb-6" data-aos="zoom-in-up">
+                        <h4 class="font-semibold text-lg text-primary mb-2">Portfolio</h4>
+                        <h2 class="font-bold text-dark text-3xl mb-4 sm:text-4xl lg:text-5xl">My Project</h2>
+                        <p class="font-medium text-md text-secondary md:text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est inventore voluptates eaque. At, mollitia reiciendis. Pariatur voluptatem commodi error molestiae!</p>
+                    </div>
+                    <div class="tabs_wrap" data-aos="zoom-in-up">
+                        <ul class="flex flex-wrap justify-center gap-3 py-8">
+                            <li data-tabs="uidesign" class="btn bg-white shadow-xl py-1 px-3 rounded-full font-medium cursor-pointer active " >UI/UX</li>
+                            <li data-tabs="videografi" class="btn bg-white shadow-xl py-1 px-3 rounded-full font-medium cursor-pointer ">Videography</li>
+                            <li data-tabs="animasi" class="btn bg-white shadow-xl py-1 px-3 rounded-full font-medium cursor-pointer ">Animation</li>
+                            <li data-tabs="desain" class="btn bg-white shadow-xl py-1 px-3 rounded-full font-medium cursor-pointer  hover:text-primary hover:text-bold">Design Graphic</li>
+                            <li data-tabs="ilustrasi" class="btn bg-white shadow-xl py-1 px-3 rounded-full font-medium cursor-pointer  hover:text-primary hover:text-bold">Illustration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap">
+                <!-- UI UX DESIGN -->
+                <div class="w-full px-4 mb-10 pt-6 item_wrap uidesign" data-tabs="uidesign">
+                    <h3 class="font-bold text-primary text-lg mb-3">UI/UX and Website <br> Development </h3>
+                </div>
+                <div class="menu__items" data-aos="zoom-in">
+                    <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12" >
+                    <li id="ipbDetail" class="relative item_wrap uidesign" >
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('ipbDetail')">
+                        <img src="dist/image/portfolio/uiux/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full">
+                        </div>
+                        <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                            Redesign Website IPB UNIVERSITY 
+                        </h3>
+                        <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                            elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        
+                    </li>
+
+                    <li id="semarDetail" class="relative item_wrap uidesign" >
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('semarDetail')">
+                        <img src="dist/image/portfolio/uiux/SEMAR UI.png" alt="food image"alt="UI design 3" width="w-full">
+                        </div>
+                        <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                            Semar UI Web Design Portfolio 
+                        </h3>
+                        <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                            elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                    </li>
+
+                    <li id="bromoDetail" class="item_wrap uidesign" >
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('bromoDetail')">
+                        <img src="dist/image/portfolio/uiux/UI BROMO Fix.png" alt="food image"alt="UI design 3" width="w-full">
+                        </div>
+                        <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                            Dashboard UI Bromo Web and Application
+                        </h3>
+                        <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                            elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                    </li>
+
+                    <li id="butcheryDetail" class="item_wrap uidesign" >
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('butcheryDetail')">
+                        <img src="dist/image/portfolio/uiux/Buthcery webapp.png" alt="food image"alt="UI design 3" width="w-full">
+                        </div>
+                        <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                            Web and Mobile App E-commerce Butchery
+                        </h3>
+                        <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                            elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                    </li>
+                    <li id="agridationDetail" class="item_wrap uidesign" >
+                        <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200"
+                        onclick="showDetail('agridationDetail')">
+                        <img src="dist/image/portfolio/uiux/Agridation.png" alt="food image"alt="UI design 3" width="w-full">
+                        </div>
+                        <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                            Competition Website Agridation
+                        </h3>
+                        <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                            elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                    </li>
+                    </ul>
+                </div>
+
+            <!-- VIDEOGRAFI -->
+            <div class="w-full px-4 mb-10 pt-6 item_wrap videografi" data-tabs="videografi">
+                <h3 class="font-bold text-primary text-lg mb-3">Videography</h3>
+            </div>
+                <div class="w-full px-4 flex flex-wrap justify-center item_wrap videografi" data-aos="zoom-in">
+                    <div class="menu__items videografi">
+                        <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
+                        <li class="item_wrap videografi" >
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/videografi/graduationsma.png" alt="graduation"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary ">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                                <button class="text-base font-semibold text-white bg-primary mt-4 py-2 px-8 rounded-full hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out"
+                                onclick="window.location.href='https://www.behance.net/gallery/158993041/Documenter-Graduation-Video'">
+                                    See video</button>
+                        </li>
+        
+                        <li class="item_wrap videografi" >
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/videografi/shortmovie.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap videografi" >
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/videografi/cinematicsv.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap videografi" >
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/videografi/prewed.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+                        <li class="item_wrap videografi" >
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/videografi/dekomposer.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANIMATION -->
+            <div class="w-full px-4 mb-10 pt-6 item_wrap animasi" data-tabs="animasi">
+                <h3 class="font-bold text-primary text-lg mb-3">Animation</h3>
+            </div>
+                <div class="w-full px-4 flex flex-wrap justify-center item_wrap animasi" data-aos="zoom-in">
+                    <div class="menu__items animasi">
+                        <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
+                        <li class="item_wrap animasi">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap animasi">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/SEMAR UI.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap animasi">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/UI BROMO Fix.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap animasi">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/BUTCHERYAPP.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESIGN GRAFIC -->
+            <div class="container">
+                <div class="w-full px-4 mb-10 pt-6 item_wrap desain" data-tabs="desain">
+                <h3 class="font-bold text-primary text-lg mb-3">Design Graphic</h3>
+            </div>
+                <div class="w-full px-4 flex flex-wrap justify-center item_wrap desain" data-aos="zoom-in">
+                    <div class="menu__items desain">
+                        <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
+                        <li class="item_wrap desain">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/desain_graphic/poster1.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap desain">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/desain_graphic/poster2.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap desain">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/desain_graphic/poster3.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap desain">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/desain_graphic/logo1.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+                        <li class="item_wrap desain">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/desain_graphic/logo2.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+                        <li class="item_wrap desain">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/desain_graphic/logo3.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+                        <li class="item_wrap desain">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/desain_graphic/mockup.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+
+            <!-- ILLUSTRATION -->
+            <div class="container">
+                <div class="w-full px-4 mb-10 pt-6 item_wrap ilustrasi" data-tabs="ilustrasi">
+                <h3 class="font-bold text-primary text-lg mb-3">Ilustrasi</h3>
+            </div>
+                <div class="w-full px-4 flex flex-wrap justify-center item_wrap ilustrasi" data-aos="zoom-in">
+                    <div class="menu__items ilustrasi">
+                        <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 px-4 mb-12">
+                        <li class="item_wrap ilustrasi">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/IPB Redisgn.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap ilustrasi">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/SEMAR UI.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap ilustrasi">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/UI BROMO Fix.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+        
+                        <li class="item_wrap ilustrasi">
+                            <div class="rounded-md shadow-md overflow-hidden cursor-pointer transform hover:scale-110 ease-in-out duration-200">
+                            <img src="dist/image/portfolio/BUTCHERYAPP.png" alt="food image"alt="UI design 3" width="w-full">
+                            </div>
+                            <h3 class="font-semibold text-xl text-dark mt-5 mb-3">
+                                Redesign IPB UNIVERSITY website
+                            </h3>
+                            <p class="font-medium text-base text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.</p>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+    </section>
+    <!-- PORTFOIO SECTION END -->
+    
+</body>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="dist/js/script.js"></script>
+</html>
