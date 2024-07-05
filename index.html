@@ -453,6 +453,17 @@
 <script src="dist/js/index.js"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+        var response = grecaptcha.getResponse();
+        if (response.length === 0) {
+            event.preventDefault();
+            alert("Please complete the CAPTCHA.");
+        } else {
+            // CAPTCHA has been checked, allow form submission
+        }
+    });
+</script>
   <script>
     AOS.init();
   </script>

@@ -112,8 +112,6 @@ tabs.forEach((tab) => {
 
 uiuxTab.classList.add("active");
 
-
-//detailportof
 function showDetail(detailId) {
   const detailContainer = document.createElement("div");
   detailContainer.classList.add("container", "relative");
@@ -127,40 +125,34 @@ function showDetail(detailId) {
     imageSrc = "dist/image/portfolio/uiux/IPB Redisgn.png";
     websiteUrl = "https://example.com/ipb";
     description =
-      "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
   } else if (detailId === "semarDetail") {
     title = "Semar UI Web Design Portfolio";
     imageSrc = "dist/image/portfolio/uiux/SEMAR UI.png";
     websiteUrl = "https://example.com/semar";
     description =
-      "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
   } else if (detailId === "bromoDetail") {
     title = "Dashboard UI Bromo Web and Application";
     imageSrc = "dist/image/portfolio/uiux/UI BROMO Fix.png";
-    websiteUrl = "https://www.figma.com/file/naDymnkyYHEHqdayLcNaJ9/Bromo?type=design&node-id=204%3A4&mode=design&t=QxsYdU3HjO3elDhG-1";
+    websiteUrl =
+      "https://www.figma.com/file/naDymnkyYHEHqdayLcNaJ9/Bromo?type=design&node-id=204%3A4&mode=design&t=QxsYdU3HjO3elDhG-1";
     description =
-      "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
   } else if (detailId === "butcheryDetail") {
-    title = "Web and Mobile App E-ccomerce Butchery";
+    title = "Web and Mobile App E-commerce Butchery";
     imageSrc = "dist/image/portfolio/uiux/Buthcery webapp.png";
     websiteUrl = "http://146.190.89.250/";
     description =
-      "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
-  } else if (detailId === "semarDetail") {
-    title = "Semar UI Web Design Portfolio";
-    imageSrc = "dist/image/portfolio/uiux/SEMAR UI.png";
-    websiteUrl = "https://example.com/semar";
-    description =
-      "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
   } else if (detailId === "agridationDetail") {
-    title = "Semar UI Web Design Portfolio";
+    title = "Agridation Web Design Portfolio";
     imageSrc = "dist/image/portfolio/uiux/Agridation.png";
-    websiteUrl = "https://www.figma.com/file/08iSgX68JqkLI5gRL00NYO/Agridation?type=design&node-id=0%3A1&mode=design&t=BcGG0QdEtJsC3iPH-1";
+    websiteUrl =
+      "https://www.figma.com/file/08iSgX68JqkLI5gRL00NYO/Agridation?type=design&node-id=0%3A1&mode=design&t=BcGG0QdEtJsC3iPH-1";
     description =
-      "Lorem ipsum dolor sit amet consectetur adipisicing  elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
-  }
-  
-  else {
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
+  } else {
     console.error("Invalid detailId:", detailId);
     return;
   }
@@ -184,8 +176,7 @@ function showDetail(detailId) {
   closeButton.style.height = "46px";
 
   closeButton.addEventListener("click", function () {
-    detailContainer.style.display = "none";
-    window.location.href = "index.html";
+    document.body.removeChild(detailContainer);
   });
 
   const detailContent = document.createElement("div");

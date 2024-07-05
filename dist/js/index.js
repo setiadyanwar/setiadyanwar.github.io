@@ -92,5 +92,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Tambahkan event listener untuk menyembunyikan modal saat tombol close diklik
   modalCloseBtn.addEventListener("click", hideModal);
 
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    var response = grecaptcha.getResponse();
+    if (response.length === 0) {
+        event.preventDefault(); // Mencegah pengiriman formulir jika CAPTCHA belum dichecked
+        alert("Please complete the CAPTCHA.");
+    } else {
+        // CAPTCHA telah dichecked, izinkan pengiriman formulir
+        // Anda dapat menambahkan kode lain di sini, seperti mengirim formulir menggunakan fetch atau AJAX
+    }
+});
 
   
