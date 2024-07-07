@@ -77,7 +77,7 @@
                     <h1 class="text-base font-semibold text-primary md:text-xl">Hallo Everyone, I'am<br> <span class="font-bold text-4xl text-dark">Setiady Ibrahim Anwar</span></h1>
                     <h2 class="font-medium text-lg mb-6 lg:text-2xl" ><span class="text-secondary">UI & UX Designer | </span><span id="autotext" class="text-primary" ></span></h2>
                     <p class="medium text-secondary mb-16 leading-relaxed" >Saya adalah mahasiswa <span class="font-bold">IPB University
-                    </span> fakultas Sekolah Vokasi IPB Jurusan <span class="font-bold">Software Engeneering Technologhy.</span> </p>
+                    </span> fakultas Sekolah Vokasi IPB Jurusan <span class="font-bold">Software Engeneering Technologhy.</span> Saya memiliki minat yang besar dalam UI/UX design dan saya merupakan freelancer UI/UX designer yang sudah berpengalaman. </p>
 
                     <!-- Modal toggle -->
                     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-primary hover:bg-indigo-400 font-medium rounded-full text-md px-6 py-3 text-center" type="button">
@@ -176,13 +176,14 @@
                 <div class="w-full px-4 mb-10 lg:w-1/2" data-aos="fade-up">
                     <h4 class="font-bold uppercase text-primary text-lg mb-3 ">About ME</h4>
                     <h2 class="font-bold text-dark text-3xl mb-5 max-w-md lg:text-4xl">Let's get to know me more!</h2>
-                    <p class="font-medium text-secondary max-w-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                         Obcaecati, quaerat suscipit! Amet eaque assumenda rerum omnis?</p>
+                    <p id="text" class="font-medium text-secondary max-w-xl truncate">
+                        Nama saya <span class="text-dark font-semibold">Setiady Ibrahim Anwar</span> Orang sering memanggil saya Setiady ataupun Adi,saya memiliki minat dan kesukaan pada hal yang memerlukkan kreativitas sejak saya duduk dibangku sekolah hingga saat ini. Saya telah berpengalaman dalam mengikuti keorganisasian,project,lomba dan banyak membantu event ataupun client yang membutuhkan jasa saya dibidang kreatif. Saat ini saya sedang menempuh pendidikan formal di IPB University dibidang Software Engeneer, namun hal tersebut tidak menggoyahkan saya untuk tidak lagi memperdalam skill kreatif, justru dengan itu saya lebih mengetahui tentang sistem development pada suatu produk baik mobile maupun website.
+                    </p>
+                    <button id="toggle" onclick="toggleText()" class="text-primary">Show more</button>
                 </div>
                 <div class="w-full px-4 lg:w-1/2" data-aos="fade-up" >
                     <h3 class="font-medium text-dark text-2xl lg:text-3xl lg:pt-10">let's be friends on my social media</h3>
-                    <p class="font-medium text-base text-secondary mb-6 lg:text-lg lg:text-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero non exercitationem iste perspiciatis
-                          voluptatibus magni deleniti distinctio a!</p>
+                    <p class="font-medium text-base text-secondary mb-6 lg:text-lg">Mari berkenalan dengan dan berinteraksi dengan saya pada sosial media</p>
                           <div class="flex flex-wrap items-center">
                             <!-- LinkInd -->
                             <a href="https://www.linkedin.com/in/setiady-ibrahim-anwar-921b2720b/" target="_blank" 
@@ -254,79 +255,67 @@
     </section>
     <!-- ABOUT SECTION END -->
 
-    <!-- Skills Section Start -->
-    <section id="skills" class="pb-32">
-        <div class="container">
-            <div class="flex flex-wrap">
-                <div class="w-full px-4 mb-10 lg:w-1/2" data-aos="fade-up" >
-                    <h4 class="font-bold uppercase text-primary text-lg mb-3 ">Skills</h4>
-                    <h2 class="font-bold text-dark text-3xl mb-5 max-w-md lg:text-4xl">My Personal Skills</h2>
-                    <p class="font-medium text-secondary max-w-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                         Obcaecati, quaerat suscipit! Amet eaque assumenda rerum omnis?</p>
-                </div>
-                <div class="w-full px-4 lg:w-1/2">
-                    <div class="flex flex-wrap items-center" data-aos="fade-up">
-                        <!-- HTML -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/html.svg" alt="html" class="w-full h-full">
-                            <span class="skill-label">HTML</span>
-                        </div>
-                        <!-- CSS -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/css.svg" alt="css" class="w-full h-full">
-                            <span class="skill-label">CSS</span>
-                        </div>
-                        <!-- JAVASCRIPT -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/js.svg" alt="js" class="w-full h-full">
-                            <span class="skill-label">Javascript</span>
-                        </div>
-                        <!-- TAILWIND -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/tailwind.svg" alt="tailwind" class="w-full h-full">
-                            <span class="skill-label">TAILWIND</span>
-                        </div>
-                        <!-- JAVA -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/java.svg" alt="java" class="w-full h-full">
-                            <span class="skill-label">JAVA</span>
-                        </div>
-                        <!-- PHP -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/php.svg" alt="php" class="w-full h-full">
-                            <span class="skill-label">PHP</span>
-                        </div>
-                        <!-- Figma -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/figma.svg" alt="figma" class="w-full h-full">
-                            <span class="skill-label">FIGMA</span>
-                        </div>
-                        <!-- photoshop -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/ps.svg" alt="photoshop" class="w-full h-full">
-                            <span class="skill-label">photoshop</span>
-                        </div>
-                        <!-- premier -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/pr.svg" alt="premier" class="w-full h-full">
-                            <span class="skill-label">PREMIER</span>
-                        </div>
-                        <!-- after effect -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/ae.svg" alt="ae" class="w-full h-full">
-                            <span class="skill-label">AFTER EFFECT</span>
-                        </div>
-                        <!-- xd -->
-                        <div class="skill-link w-9 h-9 mr-5 mb-5 relative cursor-pointer">
-                            <img src="dist/image/skills/xd.svg" alt="xd" class="w-full h-full">
-                            <span class="skill-label">XD</span>
-                        </div>
+<!-- Skills Section Start -->
+<section id="skills" class="pb-28">
+    <div class="container">
+        <div class="flex flex-wrap">
+            <div class="w-full px-4 mb-10 lg:w-1/2" data-aos="fade-up">
+                <h4 class="font-bold uppercase text-primary text-lg mb-3">Skills</h4>
+                <h2 class="font-bold text-dark text-3xl mb-5 max-w-md lg:text-4xl">My Personal Skills</h2>
+                <p class="font-medium text-secondary max-w-xl">Kemampuan yang saya miliki seperti UI/UX Design, UX Research, Design thinking, software development, front-end web and mobile application,digital marketing, data analisis, Videografi,editing, motion graphy, desain grafis, ilustrasi, visual desain dan sebagainya.</p>
+            </div>
+            <div class="w-full px-4 lg:w-1/2">
+                <div class="skills-container grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" data-aos="fade-up">
+                    <!-- HTML -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/html.svg" alt="html" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- CSS -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/css.svg" alt="css" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- JAVASCRIPT -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/js.svg" alt="js" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- TAILWIND -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/tailwind.svg" alt="tailwind" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- JAVA -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/java.svg" alt="java" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- PHP -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/php.svg" alt="php" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- Figma -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/figma.svg" alt="figma" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- photoshop -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/ps.svg" alt="photoshop" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- premier -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/pr.svg" alt="premier" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- after effect -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/ae.svg" alt="ae" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
+                    </div>
+                    <!-- xd -->
+                    <div class="skill-link">
+                        <img src="dist/image/skills/xd.svg" alt="xd" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Skills Section End -->
+    </div>
+</section>
+<!-- Skills Section End -->
     
 
     <!-- Client section start -->
@@ -336,7 +325,7 @@
                 <div class="mx-auto text-center mb-6">
                     <h4 class="font-semibold text-lg text-primary mb-2">Clients</h4>
                     <h2 class="font-bold text-white text-3xl mb-4 sm:text-4xl lg:text-5xl">Colaboration with</h2>
-                    <p class="font-medium text-md text-secondary md:text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est inventore voluptates eaque. At, mollitia reiciendis. Pariatur voluptatem commodi error molestiae!</p>
+                    <p class="font-medium text-md text-secondary md:text-lg">Mari berkolaborasi dengan saya, Saya nantikkan<br> kolaborasi yang menarik bersama anda👋</p>
                 </div>
             </div>
             <div class="w-full px-4">
@@ -387,7 +376,7 @@
                             <div class="max-w-xl mb-6">
                                 <h4 class="font-semibold text-lg text-primary mb-2">Eksperience</h4>
                                 <h2 class="font-bold text-dark text-3xl mb-4 sm:text-4xl lg:text-4xl">My Eksperience</h2>
-                                <p class="font-medium text-md text-secondary md:text-md">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est inventore voluptates eaque. At, mollitia reiciendis. Pariatur voluptatem commodi error molestiae!</p>
+                                <p class="font-medium text-md text-secondary md:text-md">Kegiatan-kegiatan dan organisasi yang telah saya ikuti selama ini.</p>
                             </div>
                         </div>
                         <!-- Slider main container -->
@@ -433,7 +422,7 @@
             <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
                 SetiadyAnwar
             </a>
-            <p class="my-6 text-gray-500 dark:text-gray-400"> Albert Einstein: "Hidup adalah seperti bersepeda, untuk menjaga keseimbangan, kita harus terus bergerak maju."</p>
+            <p class="my-6 text-gray-500 dark:text-gray-400"> Albert Einstein: "Hidup adalah seperti bersepeda, <br> untuk menjaga keseimbangan, kita harus terus bergerak maju."</p>
             <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
                 <li>
                     <a href="#" class="mr-4 hover:text-primary md:mr-6 ">About</a>

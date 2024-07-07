@@ -1,94 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <!-- FAVICON -->
-    <link rel="icon" href="dist/image/logo setiadyanwar.png" sizes="32x32" type="image/png">
+    <link
+      rel="icon"
+      href="dist/image/logo setiadyanwar.png"
+      sizes="32x32"
+      type="image/png"
+    />
     <!-- title -->
     <title>Setiady Ibrahim Anwar | Portfolio</title>
     <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- CSS -->
-    <link rel="stylesheet" href="dist/output.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/output.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detail Project</title>
-</head>
-<body>
-  <div id="detail-container" class="container mx-auto p-4">
-    <!-- Product images container -->
-    <div id="product-images" class="container mx-auto p-4 grid grid-cols-2 gap-4">
-        <div id="product-images" class="container mx-auto p-4 grid grid-cols-2 gap-4">
-            <img src="dist/image/portfolio/uiux/IPB Redisgn.png" alt="Redesign Website IPB UNIVERSITY" class="w-full h-auto rounded-md">
-            <img src="dist/image/portfolio/uiux/Buthcery webapp.png" alt="Buthcery webapp" class="w-full h-auto rounded-md">
-            <img src="dist/image/portfolio/uiux/SwiftcareApp.png" alt="SwiftcareApp" class="w-full h-auto rounded-md">
-            <img src="dist/image/portfolio/uiux/UI BROMO Fix.png" alt="UI BROMO Fix" class="w-full h-auto rounded-md">
-          </div>
+  </head>
+  <body>
+    <div id="detail-container" class="container mx-auto p-4">
+      <!-- Konten detail produk akan ditambahkan di sini oleh JavaScript -->
     </div>
-  </div>
 
-  <script>
-    // Data produk
-    const products = {
-      ipbDetail: {
-        title: "Redesign Website IPB UNIVERSITY",
-        imageSrc: "dist/image/portfolio/uiux/IPB Redisgn.png",
-        websiteUrl: "https://example.com/ipb",
-        description: "Sebagai seorang UI/UX Designer dan Front-End Developer, saya bertanggung jawab atas proyek redesign website IPB University. Dalam proyek ini, saya berfokus pada peningkatan pengalaman pengguna (UX) dan memperbarui antarmuka pengguna (UI) untuk menciptakan tampilan yang modern, intuitif, dan responsif.",
-        date: "June 1, 2024",
-        tag: "UI/UX Design",
-        collageImages: [
-          "dist/image/portfolio/uiux/IPB Redisgn.png",
-          "dist/image/portfolio/uiux/Buthcery webapp.png",
-          "dist/image/portfolio/uiux/SwiftcareApp.png",
-          "dist/image/portfolio/uiux/UI BROMO Fix.png"
-        ]
-      },
-      semarDetail:{
-        title: "SEMAR",
-        imageSrc: "dist/image/portfolio/uiux/SEMAR UI.png",
-        websiteUrl: "https://example.com/ipb",
-        description: "Sebagai seorang UI/UX Designer dan Front-End Developer, saya bertanggung jawab atas proyek redesign website IPB University. Dalam proyek ini, saya berfokus pada peningkatan pengalaman pengguna (UX) dan memperbarui antarmuka pengguna (UI) untuk menciptakan tampilan yang modern, intuitif, dan responsif.",
-        date: "June 1, 2024",
-        tag: "UI/UX Design",
-        collageImages: [
-          "dist/image/portfolio/uiux/BUTCHERYAPP.jpg",
-          "dist/image/portfolio/uiux/Buthcery webapp.png",
-          "dist/image/portfolio/uiux/SwiftcareApp.png",
-          "dist/image/portfolio/uiux/UI BROMO Fix.png"
-        ]
-      }
-    };
+    <script>
+      // Data produk
+      const products = {
+        ipbDetail: {
+          title: "Redesign Website IPB UNIVERSITY",
+          imageSrc: "dist/image/portfolio/uiux/IPB Redisgn.png",
+          websiteUrl: "https://example.com/ipb",
+          description:
+            "Sebagai seorang UI/UX Designer dan Front-End Developer, saya bertanggung jawab atas proyek redesign website IPB University. Dalam proyek ini, saya berfokus pada peningkatan pengalaman pengguna (UX) dan memperbarui antarmuka pengguna (UI) untuk menciptakan tampilan yang modern, intuitif, dan responsif.",
+          date: "June 1, 2024",
+          tag: "UI/UX Design",
+        },
+        semarDetail: {
+          title: "SEMAR",
+          imageSrc: "dist/image/portfolio/uiux/SEMAR UI.png",
+          websiteUrl: "https://example.com/ipb",
+          description:
+            "Sebagai seorang UI/UX Designer dan Front-End Developer, saya bertanggung jawab atas proyek redesign website IPB University. Dalam proyek ini, saya berfokus pada peningkatan pengalaman pengguna (UX) dan memperbarui antarmuka pengguna (UI) untuk menciptakan tampilan yang modern, intuitif, dan responsif.",
+          date: "June 1, 2024",
+          tag: "UI/UX Design",
+        },
+        swiftDetail: {
+          title: "Swiftcare",
+          imageSrc: "dist/image/portfolio/uiux/SwiftcareApp.png",
+          websiteUrl: "https://example.com/ipb",
+          description:
+            "Sebagai seorang UI/UX Designer dan Front-End Developer, saya bertanggung jawab atas proyek redesign website IPB University. Dalam proyek ini, saya berfokus pada peningkatan pengalaman pengguna (UX) dan memperbarui antarmuka pengguna (UI) untuk menciptakan tampilan yang modern, intuitif, dan responsif.",
+          date: "June 1, 2024",
+          tag: "UI/UX Design",
+        },
+      };
 
-    // Ambil ID dari query string
-    const urlParams = new URLSearchParams(window.location.search);
-    const detailId = urlParams.get('id');
+      // Ambil ID dari query string
+      const urlParams = new URLSearchParams(window.location.search);
+      const detailId = urlParams.get("id");
 
-    // Ambil detail produk
-    const product = products[detailId];
+      console.log("Detail ID:", detailId); // Debugging log
 
-    if (product) {
-      const detailContainer = document.getElementById("detail-container");
-      const productImagesContainer = document.getElementById("product-images");
+      // Ambil detail produk
+      const product = products[detailId];
 
-      // Populate product images
-      product.collageImages.forEach(imageSrc => {
-        const imageElement = document.createElement("img");
-        imageElement.src = imageSrc;
-        imageElement.alt = product.title;
-        imageElement.classList.add("w-full", "h-auto", "rounded-md");
-        productImagesContainer.appendChild(imageElement);
-      });
+      console.log("Product:", product); // Debugging log
 
-      // Other product details rendering
-      // For example:
-      const detailContent = `
+      if (product) {
+        const detailContainer = document.getElementById("detail-container");
+
+        // Other product details rendering
+        const detailContent = `
         <button onclick="window.history.back()" class="absolute top-0 right-4 text-black text-4xl cursor-pointer bg-white rounded-full p-0 shadow-md text-dark" style="width: 46px; height: 46px;">&times;</button>
         <img src="${product.imageSrc}" alt="${product.title}" class="h-auto rounded-md mb-6 mx-auto w-full lg:w-1/2">
         <div class="flex items-center mb-4">
           <div class="flex items-center">
             <i class="fa-regular fa-calendar w-6 h-4 mr-2"></i>
-            <span class="text-sm text-gray-500">${product.date}</span>
+            <span class="text-sm text-gray-500 mr-4">${product.date}</span>
           </div>
           <div class="flex items-center ml-4">
             <i class="fa-solid fa-code w-6 h-4 mr-2"></i>
@@ -100,22 +94,30 @@
           <a href="${product.websiteUrl}" target="_blank" class="flex-shrink-0 px-2 py-2 text-white bg-dark rounded-lg hover:bg-primary focus:outline-none focus:shadow-outline-blue active:bg-blue-800">🔗 Visit Website</a>
         </div>
         <p class="mb-6">${product.description}</p>
-
       `;
-      detailContainer.innerHTML = detailContent;
-    } else {
-      detailContainer.innerHTML = "<p>Product not found.</p>";
-    }
-  </script>
+        detailContainer.innerHTML = detailContent;
+      } else {
+        document.getElementById("detail-container").innerHTML =
+          "<p>Product not found.</p>";
+      }
+    </script>
 
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="dist/js/script.js"></script>
-</body>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="dist/js/script.js"></script>
+  </body>
 </html>

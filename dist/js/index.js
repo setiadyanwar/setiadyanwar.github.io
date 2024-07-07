@@ -103,4 +103,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-  
+function toggleText() {
+  const text = document.getElementById('text');
+  const toggle = document.getElementById('toggle');
+  if (text.classList.contains('truncate')) {
+      text.classList.remove('truncate');
+      text.innerText = text.getAttribute('data-full-text'); // Kembalikan teks asli
+      toggle.textContent = 'Show less';
+  } else {
+      text.classList.add('truncate');
+      text.innerText = text.getAttribute('data-truncated-text'); // Tampilkan teks yang dipotong
+      toggle.textContent = 'Show more';
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const elements = document.querySelectorAll('.truncate');
+  elements.forEach(element => {
+      const words = element.innerText.split(' ');
+      if (words.length > 30) {
+          const fullText = element.innerText;
+          const truncatedText = words.slice(0, 30).join(' ') + '...';
+          element.setAttribute('data-full-text', fullText); // Simpan teks asli
+          element.setAttribute('data-truncated-text', truncatedText); // Simpan teks yang dipotong
+          element.innerText = truncatedText; // Tampilkan teks yang dipotong
+      }
+  });
+});

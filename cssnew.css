@@ -77,3 +77,58 @@
       transform: rotate(360deg);
     }
   }
+
+  .truncate {
+            overflow: hidden;
+            max-height: 3.6em;
+            line-height: 1.2em; 
+        }
+  
+  .skills-container {
+    position: relative;
+    width: 300px; /* Sesuaikan ukuran sesuai kebutuhan */
+    height: 300px; /* Sesuaikan ukuran sesuai kebutuhan */
+    margin: 0 auto; /* Untuk memusatkan kontainer */
+}
+
+.skill-link {
+    position: absolute;
+    width: 50px; /* Sesuaikan ukuran logo */
+    height: 50px; /* Sesuaikan ukuran logo */
+    background: none; /* Pastikan tidak ada latar belakang */
+    animation: rotate 10s linear infinite;
+    transition: transform 0.3s, box-shadow 0.3s; /* Tambahkan transition untuk animasi halus */
+}
+
+.skill-link:hover img{
+    transform: translate(-10px); /* Naik sedikit ke atas */
+    filter: drop-shadow(0 0 15px rgba(79, 70, 229, 0.7)); /* Drop shadow glow dengan warna primary */
+}
+
+.skill-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Posisi logo-logo diatur dalam 2 baris dengan pola zigzag */
+.skill-link:nth-child(1) { top: 20%; left: -10%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(2) { top: 40%; left: 0%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(3) { top: 20%; left: 10%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(4) { top: 40%; left: 20%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(5) { top: 20%; left: 30%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(6) { top: 40%; left: 40%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(7) { top: 20%; left: 50%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(8) { top: 40%; left: 60%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(9) { top: 20%; left: 70%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(10) { top: 40%; left: 80%; transform: translate(-50%, -50%); }
+.skill-link:nth-child(11) { top: 20%; left: 90%; transform: translate(-50%, -50%); }

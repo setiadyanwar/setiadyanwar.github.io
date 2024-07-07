@@ -15,9 +15,14 @@ window.onscroll = function () {
 const hamburger = document.querySelector("#hamburger");
 const navMenu = document.querySelector("#nav-menu");
 
-hamburger.addEventListener("click", function () {
-  hamburger.classList.toggle("hamburger-active");
-  navMenu.classList.toggle("hidden");
+document.addEventListener("DOMContentLoaded", function() {
+    const hamburgerElement = document.getElementById("hamburger");
+    if (hamburgerElement) {
+        hamburgerElement.addEventListener("click", function () {
+            hamburger.classList.toggle("hamburger-active");
+            navMenu.classList.toggle("hidden");
+        });
+    }
 });
 
 const tabs = document.querySelectorAll(".tabs_wrap ul li");
@@ -126,7 +131,13 @@ function showDetail(detailId) {
     websiteUrl = "https://example.com/ipb";
     description =
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
-  } else if (detailId === "semarDetail") {
+  }else if (detailId === "swiftDetail") {
+    title = "Swiftcare Application for fundaraise";
+    imageSrc = "dist/image/portfolio/uiux/SwiftcareApp.png";
+    websiteUrl = "https://example.com/semar";
+    description =
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus, molestiae rem doloribus earum nobis ex magni explicabo? Ipsum, sint.";
+  }else if (detailId === "semarDetail") {
     title = "Semar UI Web Design Portfolio";
     imageSrc = "dist/image/portfolio/uiux/SEMAR UI.png";
     websiteUrl = "https://example.com/semar";
