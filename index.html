@@ -56,7 +56,7 @@
                     <nav id="nav-menu" class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full 
                     lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
                         <ul class="block lg:flex">
-                            <li class="group"> <a href="#home" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Home</a></li>
+                            <li class="group"> <a href="/" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Home</a></li>
                             <li class="group"> <a href="#about" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">About me</a></li>
                             <li class="group"> <a href="portofolio.html" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Portfolio</a></li>
                             <li class="group"> <a href="#client" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Clients</a></li>
@@ -452,6 +452,10 @@
             // CAPTCHA has been checked, allow form submission
         }
     });
+
+    var validPaths = ['/','/portofolio.html']; // Daftar valid path 
+    var currentPath = window.location.pathname; if (!validPaths.includes(currentPath)) 
+    { window.location.href = '404.html'; }
 </script>
   <script>
     AOS.init();

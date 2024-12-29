@@ -10,6 +10,8 @@ window.onscroll = function () {
   }
 };
 
+
+
 //  Hamburger
 
 const hamburger = document.querySelector("#hamburger");

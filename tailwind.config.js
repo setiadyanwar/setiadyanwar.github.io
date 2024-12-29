@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['index.html'],
+  content: ['*'],
   theme: {
     container:{
       center:true,
@@ -16,7 +16,7 @@ module.exports = {
         '9999': 9999,
       },
       screens:{
-        '2xl':'1536px',
+        '2xl':'1200px',
       }
       
       
