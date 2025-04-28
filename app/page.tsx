@@ -5,8 +5,31 @@ import ClientsLogoSection from "@/components/clients-logo-section"
 import SkillsShowcase from "../components/skills-showcase"
 import RecentProjects from "../components/recent-projects"
 import { motion } from "framer-motion"
+import Head from 'next/head';
 
 export default function Home() {
+  <>
+      <Head>
+      <meta name="description" content="Hallo saya Setiady Ibrahim Anwar, Website Portofolio ini dibuat untuk mencatat apa saja yang telah saya lakukan dalam pengembangan diri saya. Terimakasih" />
+      <meta name="google-site-verification" content="bmPE0LPoqD2EPvUvuTxdGdWec3P16fepfWncWOOg2HU" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/dist/image/logo setiadyanwar.png" sizes="32x32" type="image/png" />
+        
+        {/* Title */}
+        <title>Setiady Ibrahim Anwar | Portfolio</title>
+
+        <link rel="stylesheet" href="/cssnew.css" />
+
+        {/* Google Captcha */}
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      </Head>
+
+      {/* Content Web Kamu */}
+      <main>
+        {/* isi portfolio */}
+      </main>
+    </>
   const container = {
     hidden: { opacity: 0 },
     show: {
