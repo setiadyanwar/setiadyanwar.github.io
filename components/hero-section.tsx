@@ -207,7 +207,7 @@ export default function HeroSection() {
                 className="absolute inset-0 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-700"
               >
                 <Image
-                  src="/placeholder.svg?height=500&width=400"
+                  src="/setiady.png?height=500&width=400"
                   alt="Setiady Ibrahim Anwar"
                   fill
                   className="object-cover"
