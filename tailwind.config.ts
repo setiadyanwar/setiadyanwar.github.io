@@ -53,6 +53,12 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Add custom color for direct access
+        customPurple: {
+          DEFAULT: "#5E6BF6", // New custom purple color
+          light: "#8A94F8", // Lighter shade
+          dark: "#4A56D6", // Darker shade
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
