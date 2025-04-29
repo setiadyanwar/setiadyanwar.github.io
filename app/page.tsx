@@ -10,9 +10,6 @@ import Head from 'next/head';
 export default function Home() {
   <>
       <Head>
-      <meta name="description" content="Hallo saya Setiady Ibrahim Anwar, Website Portofolio ini dibuat untuk mencatat apa saja yang telah saya lakukan dalam pengembangan diri saya. Terimakasih" />
-      <meta name="google-site-verification" content="bmPE0LPoqD2EPvUvuTxdGdWec3P16fepfWncWOOg2HU" />
-
         {/* Favicon */}
         <link rel="icon" href="/dist/image/logo setiadyanwar.png" sizes="32x32" type="image/png" />
         

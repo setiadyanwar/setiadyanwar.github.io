@@ -10,8 +10,12 @@ import AnimatedCursor from "@/components/animated-cursor"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Setiady Ibrahim Anwar | Frontend Developer & UI/UX Designer",
-  description: "Portfolio of Setiady Ibrahim Anwar, a Frontend Web Developer and UI/UX Designer",
+  title: "Setiady Ibrahim Anwar | Portfolio Developer",
+  description:
+    "Hallo saya Setiady Ibrahim Anwar, Website Portofolio ini dibuat untuk mencatat apa saja yang telah saya lakukan dalam pengembangan diri saya. Terimakasih",
+  verification: {
+    google: "bmPE0LPoqD2EPvUvuTxdGdWec3P16fepfWncWOOg2HU",
+  },
 }
 
 export default function RootLayout({
