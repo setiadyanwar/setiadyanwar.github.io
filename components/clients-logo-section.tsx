@@ -56,7 +56,7 @@ export default function ClientsLogoSection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold mb-2">Trusted by Leaders in the Industry</h2>
-          <div className="w-20 h-1 bg-purple-600 dark:bg-purple-400 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Proud to have worked with these amazing organizations
           </p>

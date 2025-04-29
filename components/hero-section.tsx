@@ -11,12 +11,12 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center pt-16">
       {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 via-white to-orange-50/30 dark:from-purple-950/30 dark:via-gray-900 dark:to-orange-950/20 opacity-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/50 via-white to-orange-50/30 dark:from-indigo-950/30 dark:via-gray-900 dark:to-orange-950/20 opacity-50"></div>
 
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-20 left-[10%] w-16 h-16 rounded-full bg-purple-200/30 dark:bg-purple-800/10"
+          className="absolute top-20 left-[10%] w-16 h-16 rounded-full bg-indigo-200/30 dark:bg-indigo-800/10"
           animate={{
             y: [0, 30, 0],
             opacity: [0.5, 0.8, 0.5],
@@ -72,7 +72,7 @@ export default function HeroSection() {
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6"
             >
               Setiady Ibrahim <br />
-              <span className="text-purple-600 dark:text-purple-400">Anwar</span>
+              <span className="text-indigo-600 dark:text-indigo-400">Anwar</span>
             </motion.h1>
 
             <motion.div
@@ -105,24 +105,27 @@ export default function HeroSection() {
             >
               <Button
                 asChild
-                className="bg-purple-600 hover:bg-purple-700 rounded-full px-8 relative overflow-hidden group"
+                className="bg-indigo-600 hover:bg-indigo-700 rounded-full px-8 relative overflow-hidden group"
+                variant="default"
+                size="lg"
               >
                 <Link href="/portfolio">
                   <span className="relative z-10">Explore Me</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                 </Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
-                className="border-purple-300 dark:border-purple-800 rounded-full px-8 relative overflow-hidden group"
+                size="lg"
+                className="border-indigo-300 dark:border-indigo-800 rounded-full px-8 relative overflow-hidden group"
               >
                 <Link href="#cv">
                   <span className="relative z-10 group-hover:text-white dark:group-hover:text-white transition-colors duration-300">
                     My CV
                   </span>
                   <Download className="relative z-10 ml-2 h-4 w-4 group-hover:text-white dark:group-hover:text-white transition-colors duration-300" />
-                  <span className="absolute inset-0 bg-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+                  <span className="absolute inset-0 bg-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                 </Link>
               </Button>
             </motion.div>
@@ -135,7 +138,7 @@ export default function HeroSection() {
             >
               <Link
                 href="https://behance.net"
-                className="text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition-transform hover:scale-110 duration-300"
+                className="text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-transform hover:scale-110 duration-300"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800">
                   <span className="font-semibold text-xs">Bē</span>
@@ -143,7 +146,7 @@ export default function HeroSection() {
               </Link>
               <Link
                 href="https://instagram.com"
-                className="text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition-transform hover:scale-110 duration-300"
+                className="text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-transform hover:scale-110 duration-300"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800">
                   <span className="sr-only">Instagram</span>
@@ -198,7 +201,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-200/50 to-orange-100/50 dark:from-purple-900/30 dark:to-orange-800/20 blur-xl"
+                className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-200/50 to-orange-100/50 dark:from-indigo-900/30 dark:to-orange-800/20 blur-xl"
               ></motion.div>
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
@@ -229,7 +232,7 @@ export default function HeroSection() {
                   opacity: [0.5, 0.7, 0.5],
                 }}
                 transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-purple-200 dark:bg-purple-700/30 blur-lg"
+                className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-indigo-200 dark:bg-indigo-700/30 blur-lg"
               ></motion.div>
 
               {/* Name tag */}

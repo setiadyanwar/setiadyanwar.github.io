@@ -5,23 +5,9 @@ import ClientsLogoSection from "@/components/clients-logo-section"
 import SkillsShowcase from "../components/skills-showcase"
 import RecentProjects from "../components/recent-projects"
 import { motion } from "framer-motion"
-import Head from 'next/head';
 
 export default function Home() {
   <>
-      <Head>
-        {/* Favicon */}
-        <link rel="icon" href="/dist/image/logo setiadyanwar.png" sizes="32x32" type="image/png" />
-        
-        {/* Title */}
-        <title>Setiady Ibrahim Anwar | Portfolio</title>
-
-        <link rel="stylesheet" href="/cssnew.css" />
-
-        {/* Google Captcha */}
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-      </Head>
-
       {/* Content Web Kamu */}
       <main>
         {/* isi portfolio */}
@@ -54,7 +40,7 @@ export default function Home() {
       <div className="container mx-auto px-4 py-20">
       <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-2">Specialist Service</h2>
-          <div className="w-20 h-1 bg-purple dark:bg-purple-light mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-indigo dark:bg-indigo-light mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Need a hand with your project? I offer services to help you achieve your goals.
           </p>
@@ -69,9 +55,9 @@ export default function Home() {
           <motion.div
             variants={item}
             whileHover={{ y: -10, transition: { duration: 0.3 } }}
-            className="p-8 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/20 border border-purple-200 dark:border-purple-800/30 transition-all duration-300 hover:shadow-lg"
+            className="p-8 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 transition-all duration-300 hover:shadow-lg"
           >
-            <h3 className="text-xl font-bold mb-4 text-customPurple dark:text-customPurple-light">
+            <h3 className="text-xl font-bold mb-4 text-indigo-500 dark:text-indigo-50">
               Frontend Development
             </h3>
             <p className="text-gray-700 dark:text-gray-300">

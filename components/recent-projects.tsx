@@ -17,7 +17,7 @@ export default function RecentProjects() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-2">Recent Projects</h2>
-          <div className="w-20 h-1 bg-purple dark:bg-purple-light mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-indigo dark:bg-indigo-light mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Check out my latest work and creative endeavors
           </p>
@@ -67,13 +67,13 @@ export default function RecentProjects() {
                 </div>
 
                 <div className="p-5">
-                  <h3 className="text-xl font-semibold mb-2 text-purple dark:text-purple-light">
+                  <h3 className="text-xl font-semibold mb-2 text-indigo dark:text-indigo-light">
                     {project.title}
                   </h3>
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.slice(0, 3).map((tech, idx) => (
-                      <Badge key={idx} variant="secondary" className="bg-purple-light/10 dark:bg-purple/20">
+                      <Badge key={idx} variant="secondary" className="bg-indigo-light/10 dark:bg-indigo/20">
                         {tech}
                       </Badge>
                     ))}
@@ -86,7 +86,7 @@ export default function RecentProjects() {
 
                   <Link
                     href={`/portfolio/${project.id}`}
-                    className="inline-flex items-center text-purple dark:text-purple-light hover:text-purple-dark dark:hover:text-purple transition-colors"
+                    className="inline-flex items-center text-indigo dark:text-indigo-light hover:text-indigo-dark dark:hover:text-indigo transition-colors"
                   >
                     View Details
                     <ArrowRight className="ml-1 h-4 w-4" />
@@ -98,8 +98,8 @@ export default function RecentProjects() {
         </div>
 
         <div className="text-center">
-          <Button asChild className="bg-purple hover:bg-purple-dark">
-            <Link href="/portfolio" className=" text-purple-500 inline-flex items-center">
+          <Button asChild className="bg-indigo hover:bg-indigo-dark">
+            <Link href="/portfolio" className=" text-indigo-500 inline-flex items-center">
               View All Projects
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

@@ -27,7 +27,7 @@ export default function GallerySection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold mb-2">Activity & Achievement Gallery</h2>
-          <div className="w-20 h-1 bg-purple-600 dark:bg-purple-400 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Highlights from my professional journey and community involvement
           </p>
@@ -55,7 +55,7 @@ export default function GallerySection() {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold text-purple-600 dark:text-purple-400 mb-1">{item.title}</h3>
+                  <h3 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-1">{item.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">{item.description}</p>
                 </div>
               </Card>

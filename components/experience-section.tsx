@@ -44,7 +44,7 @@ export default function ExperienceSection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold mb-2">Work Experience</h2>
-          <div className="w-20 h-1 bg-purple-600 dark:bg-purple-400 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             My professional journey in frontend development and UI/UX design
           </p>
@@ -52,7 +52,7 @@ export default function ExperienceSection() {
 
         <div className="relative max-w-3xl mx-auto">
           {/* Vertical timeline line */}
-          <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-purple-200 dark:bg-purple-800/30"></div>
+          <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-indigo-200 dark:bg-indigo-800/30"></div>
 
           {experiences.map((exp, index) => (
             <motion.div
@@ -66,15 +66,15 @@ export default function ExperienceSection() {
               }`}
             >
               {/* Timeline dot */}
-              <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 -translate-y-1/3 w-6 h-6 rounded-full bg-purple-600 dark:bg-purple-400 z-10"></div>
+              <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 -translate-y-1/3 w-6 h-6 rounded-full bg-indigo-600 dark:bg-indigo-400 z-10"></div>
 
               <Card className="glassmorphism overflow-hidden">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-purple-600 dark:text-purple-400">{exp.title}</h3>
+                    <h3 className="text-xl font-bold text-indigo-600 dark:text-indigo-400">{exp.title}</h3>
                     <Badge
                       variant="outline"
-                      className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800"
+                      className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800"
                     >
                       <Calendar className="h-3 w-3 mr-1" />
                       {exp.period}
@@ -90,7 +90,7 @@ export default function ExperienceSection() {
 
                   <div className="flex flex-wrap gap-2">
                     {exp.skills.map((skill, idx) => (
-                      <Badge key={idx} variant="secondary" className="bg-purple-100/50 dark:bg-purple-900/20">
+                      <Badge key={idx} variant="secondary" className="bg-indigo-100/50 dark:bg-indigo-900/20">
                         {skill}
                       </Badge>
                     ))}

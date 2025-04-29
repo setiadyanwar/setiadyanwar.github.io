@@ -88,7 +88,7 @@ export default function PortfolioSection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold mb-2">Portfolio</h2>
-          <div className="w-20 h-1 bg-purple-600 dark:bg-purple-400 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Explore my recent projects and creative work
           </p>
@@ -102,7 +102,7 @@ export default function PortfolioSection() {
                 onClick={() => setFilter(category.id)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   filter === category.id
-                    ? "bg-purple-600 text-white"
+                    ? "bg-indigo-600 text-white"
                     : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
@@ -157,11 +157,11 @@ export default function PortfolioSection() {
                 </div>
 
                 <div className="p-5">
-                  <h3 className="text-xl font-semibold mb-2 text-purple-600 dark:text-purple-400">{item.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-indigo-600 dark:text-indigo-400">{item.title}</h3>
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {item.technologies.map((tech, idx) => (
-                      <Badge key={idx} variant="secondary" className="bg-purple-100/50 dark:bg-purple-900/20">
+                      <Badge key={idx} variant="secondary" className="bg-indigo-100/50 dark:bg-indigo-900/20">
                         {tech}
                       </Badge>
                     ))}
@@ -169,7 +169,7 @@ export default function PortfolioSection() {
 
                   <Link
                     href={`/portfolio/${item.id}`}
-                    className="inline-flex items-center text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors"
+                    className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
                   >
                     View Details
                     <ArrowRight className="ml-1 h-4 w-4" />

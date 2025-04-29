@@ -28,7 +28,7 @@ export default function AboutSection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold mb-2">About Me</h2>
-          <div className="w-20 h-1 bg-purple-600 dark:bg-purple-400 mx-auto"></div>
+          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -41,7 +41,7 @@ export default function AboutSection() {
             className="relative"
           >
             <div className="relative h-[400px] w-full max-w-[500px] mx-auto overflow-hidden rounded-lg">
-              <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-orange-500/20 blur-xl" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-orange-500/20 blur-xl" />
               <div className="absolute inset-0 glassmorphism rounded-lg" />
               <div className="absolute inset-2 rounded-lg overflow-hidden">
                 <img
@@ -52,7 +52,7 @@ export default function AboutSection() {
               </div>
 
               {/* Decorative elements */}
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border-4 border-dashed border-purple-400 dark:border-purple-600 opacity-50" />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border-4 border-dashed border-indigo-400 dark:border-indigo-600 opacity-50" />
               <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full border-4 border-dashed border-orange-400 dark:border-orange-600 opacity-50" />
             </div>
           </motion.div>
@@ -65,7 +65,7 @@ export default function AboutSection() {
             variants={fadeIn}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
               Frontend Developer & UI/UX Designer
             </h3>
 
@@ -85,7 +85,7 @@ export default function AboutSection() {
               <ul className="space-y-2">
                 {values.map((value, index) => (
                   <li key={index} className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-2" />
+                    <CheckCircle className="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-2" />
                     <span>{value}</span>
                   </li>
                 ))}

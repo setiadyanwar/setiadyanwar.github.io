@@ -37,14 +37,14 @@ export default function ContactPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <Card className="glassmorphism overflow-hidden">
           <CardContent className="p-8">
-            <h2 className="text-2xl font-bold mb-6 text-purple-600 dark:text-purple-400">Get In Touch</h2>
+            <h2 className="text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">Get In Touch</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-8">
               Have a project in mind or want to discuss a potential collaboration? Feel free to reach out!
             </p>
 
             <div className="space-y-6">
               <div className="flex items-start">
-                <Mail className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-4 mt-1" />
+                <Mail className="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-4 mt-1" />
                 <div>
                   <h3 className="font-medium text-gray-900 dark:text-gray-100">Email</h3>
                   <p className="text-gray-600 dark:text-gray-400">contact@example.com</p>
@@ -52,7 +52,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start">
-                <Phone className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-4 mt-1" />
+                <Phone className="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-4 mt-1" />
                 <div>
                   <h3 className="font-medium text-gray-900 dark:text-gray-100">Phone</h3>
                   <p className="text-gray-600 dark:text-gray-400">+62 123 456 7890</p>
@@ -60,7 +60,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start">
-                <MapPin className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-4 mt-1" />
+                <MapPin className="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-4 mt-1" />
                 <div>
                   <h3 className="font-medium text-gray-900 dark:text-gray-100">Location</h3>
                   <p className="text-gray-600 dark:text-gray-400">Jakarta, Indonesia</p>
@@ -72,7 +72,7 @@ export default function ContactPage() {
 
         <Card className="glassmorphism overflow-hidden">
           <CardContent className="p-8">
-            <h2 className="text-2xl font-bold mb-6 text-purple-600 dark:text-purple-400">Send a Message</h2>
+            <h2 className="text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">Send a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -131,7 +131,7 @@ export default function ContactPage() {
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
+              <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700">
                 <Send className="h-4 w-4 mr-2" />
                 Send Message
               </Button>

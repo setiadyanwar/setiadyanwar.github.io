@@ -9,35 +9,35 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold text-purple-600 dark:text-purple-400 mb-4">Setiady Ibrahim Anwar</h3>
+            <h3 className="text-xl font-bold text-indigo-600 dark:text-indigo-400 mb-4">Setiady Ibrahim Anwar</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               Frontend Developer & UI/UX Designer creating modern, user-friendly web experiences.
             </p>
             <div className="flex space-x-4">
               <Link
                 href="https://github.com"
-                className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
                 href="https://linkedin.com"
-                className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
               <Link
                 href="https://twitter.com"
-                className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
               <Link
                 href="mailto:contact@example.com"
-                className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
                 <Mail className="h-5 w-5" />
                 <span className="sr-only">Email</span>
@@ -51,7 +51,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#about"
-                  className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
                   About Me
                 </Link>
@@ -59,7 +59,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#skills"
-                  className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
                   Skills
                 </Link>
@@ -67,7 +67,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#portfolio"
-                  className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
                   Portfolio
                 </Link>
@@ -75,7 +75,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#contact"
-                  className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
                   Contact
                 </Link>

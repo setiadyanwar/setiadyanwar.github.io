@@ -58,6 +58,7 @@
   }
 }
 
+
 .glassmorphism {
   @apply bg-white/30 dark:bg-black/30 backdrop-blur-md border border-white/20 dark:border-white/10;
 }

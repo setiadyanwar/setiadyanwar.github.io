@@ -46,7 +46,7 @@ export default function Header() {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold text-purple-600 dark:text-purple-400">
+          <Link href="/" className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
             Setiadyanwar<span className="text-orange-500">.</span>
           </Link>
 
@@ -59,15 +59,15 @@ export default function Header() {
                 className={cn(
                   "transition-colors relative",
                   pathname === link.href
-                    ? "text-purple-600 dark:text-purple-400 font-medium"
-                    : "text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400",
+                    ? "text-indigo-600 dark:text-indigo-400 font-medium"
+                    : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400",
                 )}
               >
                 {link.name}
                 {pathname === link.href && (
                   <motion.span
                     layoutId="underline"
-                    className="absolute left-0 top-full h-0.5 w-full bg-purple-600 dark:bg-purple-400"
+                    className="absolute left-0 top-full h-0.5 w-full bg-indigo-600 dark:bg-indigo-400"
                   />
                 )}
               </Link>
@@ -111,8 +111,8 @@ export default function Header() {
                 className={cn(
                   "transition-colors",
                   pathname === link.href
-                    ? "text-purple-600 dark:text-purple-400 font-medium"
-                    : "text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400",
+                    ? "text-indigo-600 dark:text-indigo-400 font-medium"
+                    : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400",
                 )}
                 onClick={() => setIsMenuOpen(false)}
               >
