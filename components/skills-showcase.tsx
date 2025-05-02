@@ -19,34 +19,33 @@ export default function SkillsShowcase() {
     // Left side skills
     { name: "React", icon: "/tech/react.svg", x: 0.15, y: 0.2, size: 1.2 },
     { name: "Next.js", icon: "/tech/next-js.svg", x: 0.15, y: 0.4, size: 1 },
-    { name: "Vue", icon: "/tech/vue.svg", x: 0.15, y: 0.6, size: 0.9 },
-    { name: "Laravel", icon: "/tech/laravel.svg", x: 0.15, y: 0.8, size: 0.9 },
+    { name: "Vue", icon: "/tech/vue.svg", x: 0.15, y: 0.65, size: 0.9 },
+    { name: "Laravel", icon: "/tech/laravel.svg", x: 0.15, y: 1, size: 0.9 },
 
     // Right side skills
-    { name: "JavaScript", icon: "/tech/javascript.svg", x: 0.85, y: 0.2, size: 1.1 },
+    { name: "JavaScript", icon: "/tech/javascript.svg", x: 0.85, y: 0.2, size: 1 },
       { name: "TypeScript", icon: "/tech/typescript.svg", x: 0.85, y: 0.4, size: 1 },
-      { name: "Flutter", icon: "/tech/flutter.svg", x: 0.85, y: 0.6, size: 0.8 },
-      { name: "Tailwind", icon: "/tech/tailwind.svg", x: 0.85, y: 0.8, size: 0.9 }
+      { name: "Flutter", icon: "/tech/flutter.svg", x: 0.85, y: 0.65, size: 0.8 },
+      { name: "Tailwind", icon: "/tech/tailwind.svg", x: 0.85, y: 1, size: 0.9 }
   ]
 
   // Adjust positions for mobile
   const getResponsivePosition = (skill: (typeof skills)[0]) => {
     if (isMobile) {
-      // On mobile, arrange in a circle around the center
       const mobilePositions: Record<string, { x: number; y: number }> = {
-        React: { x: 0.3, y: 0.2 },
-        "Next.js": { x: 0.7, y: 0.2 },
-        HTML5: { x: 0.2, y: 0.5 },
-        CSS3: { x: 0.8, y: 0.5 },
-        JavaScript: { x: 0.3, y: 0.8 },
-        TypeScript: { x: 0.7, y: 0.8 },
-        Flutter: { x: 0.5, y: 0.15 },
-        Tailwind: { x: 0.5, y: 0.85 },
+        React: { x: 0.2, y: 0.3 },
+        "Next.js": { x: 0.7, y: 0.3 },
+        JavaScript: { x: 0.2, y: 0.7 },
+        TypeScript: { x: 0.7, y: 0.7 },
+        Vue: { x: 0.1, y: 0.5 },
+        Laravel: { x: 0.28, y: 0.94 },
+        Flutter: { x: 0.54, y: 0.94 },
+        Tailwind: { x: 0.8, y: 0.5 },
       }
-
+  
       return mobilePositions[skill.name] || { x: skill.x, y: skill.y }
     }
-
+  
     return { x: skill.x, y: skill.y }
   }
 
@@ -94,7 +93,7 @@ export default function SkillsShowcase() {
     // Animation variables
     let animationFrame: number
     let time = 0
-    const lightSpeed = 0.02
+    const lightSpeed = 0.5
     const lightLength = 0.2
     const isDark = theme === "dark"
 
@@ -195,27 +194,27 @@ export default function SkillsShowcase() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="absolute"
                 style={{
-                  left: `${pos.x * 100}%`,
-                  top: `${pos.y * 100}%`,
+                  left: `${pos.x * 98}%`,
+                  top: `${pos.y * 80}%`,
                   transform: "translate(-50%, -50%)",
                   zIndex: 10,
                 }}
               >
                 <motion.div
-                  className="bg-white dark:bg-gray-800 shadow-lg p-2 rounded-lg flex items-center justify-center"
+                  className="bg-white dark:bg-gray-800 shadow-lg p-2 rounded-2xl flex items-center justify-center"
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <img
-                    src={skill.icon || "/public.svg"}
+                    src={skill.icon}
                     alt={skill.name}
                     className="w-10 h-10 md:w-12 md:h-12"
                     style={{ transform: `scale(${skill.size})` }}
                   />
                 </motion.div>
-                <div className="text-center mt-2 text-gray-800 dark:text-gray-200 text-xs md:text-sm font-medium">
+                {/* <div className="text-center mt-2 text-gray-800 dark:text-gray-200 text-xs md:text-sm font-medium">
                   {skill.name}
-                </div>
+                </div> */}
               </motion.div>
             )
           })}
