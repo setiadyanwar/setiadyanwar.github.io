@@ -137,7 +137,7 @@ export default function HeroSection() {
               className="flex items-center gap-4 mt-8"
             >
               <Link
-                href="https://behance.net"
+                href="https://behance.net/setiadyanwar"
                 className="text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-transform hover:scale-110 duration-300"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800">
@@ -145,7 +145,32 @@ export default function HeroSection() {
                 </div>
               </Link>
               <Link
-                href="https://instagram.com"
+                href="https://github.com/setiadyanwar"
+                className="text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-transform hover:scale-110 duration-300"
+              >
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800">
+                  <span className="sr-only">Github</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                  >
+                    <path d="M9.096 21.25v-3.146a3.33 3.33 0 0 1 .758-2.115c-3.005-.4-5.28-1.859-5.28-5.798c0-1.666 1.432-3.89 1.432-3.89c-.514-1.13-.5-3.084.06-3.551c0 0 1.95.175 3.847 1.75c1.838-.495 3.764-.554 5.661 0c1.897-1.575 3.848-1.75 3.848-1.75c.558.467.573 2.422.06 3.551c0 0 1.432 2.224 1.432 3.89c0 3.94-2.276 5.398-5.28 5.798a3.33 3.33 0 0 1 .757 2.115v3.146"></path>
+                    <path d="M3.086 16.57c.163.554.463 1.066.878 1.496c.414.431.932.77 1.513.988a4.46 4.46 0 0 0 3.62-.216"></path>
+                  </g>
+                </svg>
+                </div>
+              </Link>
+              <Link
+                href="https://instagram.com/setiadyanwarr"
                 className="text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-transform hover:scale-110 duration-300"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800">
@@ -240,7 +265,7 @@ export default function HeroSection() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1 }}
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full py-2 px-6 shadow-lg"
+                className="absolute bottom-8 left-20 transform -translate-x-1/2 w-fit bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full py-2 px-6 shadow-lg"
               >
                 <div className="text-center">
                   <p className="font-semibold text-gray-900 dark:text-white">Setiadyanwar</p>

@@ -17,16 +17,16 @@ export default function SkillsShowcase() {
   // Skills to display - arranged for 4 on each side vertically
   const skills = [
     // Left side skills
-    { name: "React", icon: "/public.svg?height=60&width=60", x: 0.15, y: 0.2, size: 1.2 },
-    { name: "Next.js", icon: "/public.svg?height=60&width=60", x: 0.15, y: 0.4, size: 1 },
-    { name: "HTML5", icon: "/public.svg?height=60&width=60", x: 0.15, y: 0.6, size: 0.9 },
-    { name: "CSS3", icon: "/public.svg?height=60&width=60", x: 0.15, y: 0.8, size: 0.9 },
+    { name: "React", icon: "/tech/react.svg", x: 0.15, y: 0.2, size: 1.2 },
+    { name: "Next.js", icon: "/tech/next-js.svg", x: 0.15, y: 0.4, size: 1 },
+    { name: "Vue", icon: "/tech/vue.svg", x: 0.15, y: 0.6, size: 0.9 },
+    { name: "Laravel", icon: "/tech/laravel.svg", x: 0.15, y: 0.8, size: 0.9 },
 
     // Right side skills
-    { name: "JavaScript", icon: "/public.svg?height=60&width=60", x: 0.85, y: 0.2, size: 1.1 },
-    { name: "TypeScript", icon: "/public.svg?height=60&width=60", x: 0.85, y: 0.4, size: 1 },
-    { name: "Flutter", icon: "/public.svg?height=60&width=60", x: 0.85, y: 0.6, size: 0.8 },
-    { name: "Tailwind", icon: "/public.svg?height=60&width=60", x: 0.85, y: 0.8, size: 0.9 },
+    { name: "JavaScript", icon: "/tech/javascript.svg", x: 0.85, y: 0.2, size: 1.1 },
+      { name: "TypeScript", icon: "/tech/typescript.svg", x: 0.85, y: 0.4, size: 1 },
+      { name: "Flutter", icon: "/tech/flutter.svg", x: 0.85, y: 0.6, size: 0.8 },
+      { name: "Tailwind", icon: "/tech/tailwind.svg", x: 0.85, y: 0.8, size: 0.9 }
   ]
 
   // Adjust positions for mobile
