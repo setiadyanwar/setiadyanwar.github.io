@@ -17,13 +17,13 @@ export default function SkillsShowcase() {
   // Skills to display - arranged for 4 on each side vertically
   const skills = [
     // Left side skills
-    { name: "React", icon: "/tech/react.svg", x: 0.15, y: 0.2, size: 1.2 },
+    { name: "React", icon: "/tech/react.svg", x: 0.15, y: 0.18, size: 1.2 },
     { name: "Next.js", icon: "/tech/next-js.svg", x: 0.15, y: 0.4, size: 1 },
     { name: "Vue", icon: "/tech/vue.svg", x: 0.15, y: 0.65, size: 0.9 },
     { name: "Laravel", icon: "/tech/laravel.svg", x: 0.15, y: 1, size: 0.9 },
 
     // Right side skills
-    { name: "JavaScript", icon: "/tech/javascript.svg", x: 0.85, y: 0.2, size: 1 },
+    { name: "JavaScript", icon: "/tech/javascript.svg", x: 0.85, y: 0.18, size: 1 },
       { name: "TypeScript", icon: "/tech/typescript.svg", x: 0.85, y: 0.4, size: 1 },
       { name: "Flutter", icon: "/tech/flutter.svg", x: 0.85, y: 0.65, size: 0.8 },
       { name: "Tailwind", icon: "/tech/tailwind.svg", x: 0.85, y: 1, size: 0.9 }
@@ -106,9 +106,9 @@ export default function SkillsShowcase() {
       ctx.font = "bold 80px sans-serif"
       ctx.textAlign = "center"
       ctx.textBaseline = "middle"
-      ctx.fillText("Skills", canvas.width / 2, canvas.height / 2)
+      ctx.fillText("Skills", canvas.width / 2, canvas.height / 2 - 5)
 
-      const centerX = canvas.width / 2
+      const centerX = canvas.width / 2 - 20
       const centerY = canvas.height / 2
 
       // Draw connections with animated light effect
@@ -194,8 +194,8 @@ export default function SkillsShowcase() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="absolute"
                 style={{
-                  left: `${pos.x * 98}%`,
-                  top: `${pos.y * 80}%`,
+                  left: `${pos.x * 95}%`,
+                  top: `${pos.y * 85}%`,
                   transform: "translate(-50%, -50%)",
                   zIndex: 10,
                 }}
@@ -221,8 +221,8 @@ export default function SkillsShowcase() {
         </div>
 
         <div className="text-center">
-          <Button asChild className="bg-indigo hover:bg-indigo-dark">
-            <Link href="/about#skills" className=" text-indigo-500 inline-flex items-center">
+          <Button asChild className="bg-indigo-500 hover:bg-indigo-dark">
+            <Link href="/about#skills" className=" text-white inline-flex items-center">
               View All Skills
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

@@ -1,16 +1,16 @@
 export const portfolioItems = [
   {
-    id: "project1",
-    title: "E-Commerce Website",
+    id: "kreavoks",
+    title: "Kreavoks E-learning & Agency Website",
     category: "web",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
-    technologies: ["React", "Next.js", "TailwindCSS", "Stripe"],
+    image: "/portfolio/web/kreavoks.png?height=400&width=600",
+    additionalImages: ["/portfolio/web/kreavoks-1.png?height=180&width=320", "/portfolio/web/kreavoks-1.png?height=180&width=320"],
+    technologies: ["React", "Laravel", "TailwindCSS"],
     description:
-      "A modern e-commerce platform with a seamless shopping experience, secure payment processing, and an intuitive admin dashboard for product management.",
-    role: "Lead Frontend Developer responsible for the entire user interface, checkout flow, and integration with the payment gateway.",
+      "Kreavoks is a multi-purpose platform built to support personal branding, deliver e-learning content, and attract clients for custom software development services. Designed to empower digital talents, Kreavoks also aims to open job opportunities for mentors by connecting them with students and companies in need of guidance, training, or development services. The platform includes a service showcase, a mentorship recruitment form, an LMS feature, and a booking system.",
+    role: "Lead Frontend Developer and UI/UX Designer responsible for the entire website from concept to implementation.",
     challenges:
-      "Implementing a responsive design that works across all devices while maintaining fast load times was challenging. I optimized images and implemented lazy loading to improve performance.",
+      "Combining three distinct goals branding, education, and service sales—into a single unified experience without overwhelming the user. I applied a modular design approach using atomic components and consistent layout grids, Flexbox, enabling scalable and maintainable development. By focusing on clarity, navigation flow, and performance (lazy loading, optimized images), we delivered a platform that feels cohesive and efficient across all devices.",
     demoUrl: "https://example.com",
     repoUrl: "https://github.com/example",
   },

@@ -20,10 +20,10 @@ export default function PortfolioSection() {
   // Sample portfolio items (would be replaced with actual projects)
   const portfolioItems = [
     {
-      id: "project1",
-      title: "E-Commerce Website",
+      id: "kreavoks",
+      title: "Agency & E-learning Website",
       category: "web",
-      image: "/public.svg?height=400&width=600",
+      image: "/portfolio/web/kreavoks.png?height=400&width=600",
       technologies: ["React", "Next.js", "TailwindCSS"],
       demoUrl: "#",
       repoUrl: "#",
