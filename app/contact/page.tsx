@@ -1,13 +1,14 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react"
+import EnhancedSectionHeader from "@/components/enhanced-section-header"
+import PageHeaderContainer from "@/components/page-header-container"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -32,7 +33,13 @@ export default function ContactPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-12 text-center">Contact Me</h1>
+      <PageHeaderContainer>
+        <EnhancedSectionHeader
+          title="Contact Me"
+          subtitle="Have a project in mind or want to discuss a potential collaboration? Feel free to reach out!"
+          icon={MessageSquare}
+        />
+      </PageHeaderContainer>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <Card className="glassmorphism overflow-hidden">

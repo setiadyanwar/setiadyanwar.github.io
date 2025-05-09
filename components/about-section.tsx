@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { CheckCircle } from "lucide-react"
 
 export default function AboutSection() {
@@ -19,18 +20,6 @@ export default function AboutSection() {
   return (
     <section id="about" className="py-16">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          variants={fadeIn}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl font-bold mb-2">About Me</h2>
-          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto"></div>
-        </motion.div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial="hidden"
@@ -40,21 +29,53 @@ export default function AboutSection() {
             variants={fadeIn}
             className="relative"
           >
-            <div className="relative h-[400px] w-full max-w-[500px] mx-auto overflow-hidden rounded-lg">
+            {/* Main photo container */}
+            <div className="relative h-[400px] w-full max-w-[500px] overflow-hidden rounded-lg mx-auto">
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-orange-500/20 blur-xl" />
               <div className="absolute inset-0 glassmorphism rounded-lg" />
               <div className="absolute inset-2 rounded-lg overflow-hidden">
-                <img
-                  src="/placeholder.svg?height=400&width=500"
+                <Image
+                  src="/setiady.png"
                   alt="About Setiady Ibrahim Anwar"
-                  className="w-full h-full object-cover"
+                  fill
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
 
-              {/* Decorative elements */}
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border-4 border-dashed border-indigo-400 dark:border-indigo-600 opacity-50" />
-              <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full border-4 border-dashed border-orange-400 dark:border-orange-600 opacity-50" />
+              {/* Certification photo overlapping front */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                className="absolute bottom-4 right-4 w-40 h-56 rounded-lg overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg rotate-6 z-10"
+              >
+                <Image
+                  src="/sertifikat/skk sample.png?height=160&width=96"
+                  alt="BNSP Certification"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </motion.div>
             </div>
+
+            {/* Additional photos container aligned left */}
+            <div className="flex space-x-4 mt-6 justify-start max-w-[500px] mx-auto">
+              {[1, 2].map((item) => (
+                <div key={item} className="relative w-32 h-32 rounded-lg overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg">
+                  <Image
+                    src="/placeholder.svg?height=128&width=128"
+                    alt={`Additional photo ${item}`}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Decorative elements */}
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border-4 border-dashed border-indigo-400 dark:border-indigo-600 opacity-50" />
+            <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full border-4 border-dashed border-orange-400 dark:border-orange-600 opacity-50" />
           </motion.div>
 
           <motion.div

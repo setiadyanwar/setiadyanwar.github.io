@@ -2,13 +2,13 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import Link from "next/link"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, ArrowRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import PortfolioCard from "@/components/portfolio-card"
 
 export default function PortfolioSection() {
   const [filter, setFilter] = useState("all")
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 6
 
   const categories = [
     { id: "all", name: "All" },
@@ -23,7 +23,7 @@ export default function PortfolioSection() {
       id: "kreavoks",
       title: "Agency & E-learning Website",
       category: "web",
-      image: "/portfolio/web/kreavoks.png?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600",
       technologies: ["React", "Next.js", "TailwindCSS"],
       demoUrl: "#",
       repoUrl: "#",
@@ -32,7 +32,7 @@ export default function PortfolioSection() {
       id: "upala",
       title: "Upala - Company Profile Website",
       category: "web",
-      image: "/portfolio/web/upala.png?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600",
       technologies: ["Tailwind", "Figma", "Laravel"],
       demoUrl: "#",
       repoUrl: null,
@@ -41,7 +41,7 @@ export default function PortfolioSection() {
       id: "project3",
       title: "Fitness Tracking App",
       category: "mobile",
-      image: "/public.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600",
       technologies: ["Flutter", "Firebase"],
       demoUrl: "#",
       repoUrl: "#",
@@ -50,7 +50,7 @@ export default function PortfolioSection() {
       id: "project4",
       title: "Dashboard Interface",
       category: "web",
-      image: "/public.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600",
       technologies: ["Vue.js", "Chart.js", "TailwindCSS"],
       demoUrl: "#",
       repoUrl: "#",
@@ -59,7 +59,7 @@ export default function PortfolioSection() {
       id: "project5",
       title: "Social Media App",
       category: "mobile",
-      image: "/public.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600",
       technologies: ["React Native", "Node.js"],
       demoUrl: "#",
       repoUrl: "#",
@@ -68,38 +68,73 @@ export default function PortfolioSection() {
       id: "project6",
       title: "Portfolio Website",
       category: "web",
-      image: "/public.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600",
       technologies: ["HTML/CSS", "JavaScript", "GSAP"],
       demoUrl: "#",
       repoUrl: "#",
+    },
+    {
+      id: "project7",
+      title: "E-Commerce App",
+      category: "mobile",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["React Native", "Redux", "Firebase"],
+      demoUrl: "#",
+      repoUrl: "#",
+    },
+    {
+      id: "project8",
+      title: "Admin Dashboard",
+      category: "web",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["React", "Material UI", "Node.js"],
+      demoUrl: "#",
+      repoUrl: "#",
+    },
+    {
+      id: "project9",
+      title: "Travel App UI Design",
+      category: "ui",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["Figma", "Adobe XD", "Illustrator"],
+      demoUrl: "#",
+      repoUrl: null,
     },
   ]
 
   const filteredItems = filter === "all" ? portfolioItems : portfolioItems.filter((item) => item.category === filter)
 
+  // Pagination
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const paginatedItems = filteredItems.slice(startIndex, startIndex + itemsPerPage)
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+  }
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+  }
+
   return (
     <section id="portfolio" className="py-16">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl font-bold mb-2">Portfolio</h2>
-          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Explore my recent projects and creative work
-          </p>
-        </motion.div>
-
         <div className="flex justify-center mb-8">
           <div className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <button
                 key={category.id}
-                onClick={() => setFilter(category.id)}
+                onClick={() => {
+                  setFilter(category.id)
+                  setCurrentPage(1)
+                }}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   filter === category.id
                     ? "bg-indigo-600 text-white"
@@ -113,72 +148,70 @@ export default function PortfolioSection() {
         </div>
 
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredItems.map((item, index) => (
-            <motion.div
+          {paginatedItems.map((item, index) => (
+            <PortfolioCard
               key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.1 * index }}
-              layout
-              className="h-full"
-            >
-              <Card className="overflow-hidden h-full glassmorphism hover:shadow-lg transition-all duration-300">
-                <div className="relative group h-48 overflow-hidden">
-                  <img
-                    src={item.image || "/public.svg"}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <div className="flex space-x-3">
-                      {item.demoUrl && (
-                        <a
-                          href={item.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors"
-                        >
-                          <ExternalLink className="h-5 w-5 text-white" />
-                        </a>
-                      )}
-                      {item.repoUrl && (
-                        <a
-                          href={item.repoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors"
-                        >
-                          <Github className="h-5 w-5 text-white" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold mb-2 text-indigo-600 dark:text-indigo-400">{item.title}</h3>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {item.technologies.map((tech, idx) => (
-                      <Badge key={idx} variant="secondary" className="bg-indigo-100/50 dark:bg-indigo-900/20">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <Link
-                    href={`/portfolio/${item.id}`}
-                    className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
-                  >
-                    View Details
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </div>
-              </Card>
-            </motion.div>
+              id={item.id}
+              title={item.title}
+              category={item.category}
+              image={item.image}
+              technologies={item.technologies}
+              demoUrl={item.demoUrl}
+              repoUrl={item.repoUrl ?? undefined}
+              delay={index}
+            />
           ))}
         </motion.div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center mt-12 space-x-2">
+            <button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              className={`p-2 rounded-full ${
+                currentPage === 1
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
+              }`}
+              aria-label="Previous page"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+
+            <div className="flex space-x-1">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setCurrentPage(i + 1)
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                    currentPage === i + 1
+                      ? "bg-indigo-600 text-white"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              className={`p-2 rounded-full ${
+                currentPage === totalPages
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
+              }`}
+              aria-label="Next page"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )
