@@ -4,7 +4,7 @@ export const portfolioItems = [
     title: "Kreavoks E-learning & Agency Website",
     category: "web",
     image: "/portfolio/web/kreavoks.png?height=400&width=600",
-    additionalImages: ["/portfolio/web/kreavoks-1.png?height=180&width=320", "/portfolio/web/kreavoks-1.png?height=180&width=320"],
+    additionalImages: ["/portfolio/web/kreavoks-1.png?height=180&width=320", "/portfolio/web/kreavoks-2.png?height=180&width=320"],
     technologies: ["React", "Laravel", "TailwindCSS"],
     description:
       "Kreavoks is a multi-purpose platform built to support personal branding, deliver e-learning content, and attract clients for custom software development services. Designed to empower digital talents, Kreavoks also aims to open job opportunities for mentors by connecting them with students and companies in need of guidance, training, or development services. The platform includes a service showcase, a mentorship recruitment form, an LMS feature, and a booking system.",
@@ -15,11 +15,11 @@ export const portfolioItems = [
     repoUrl: "https://github.com/example",
   },
   {
-    id: "project2",
-    title: "Travel App UI Design",
-    category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
+    id: "upala",
+    title: "Upala Company Profile Website",
+    category: "web",
+    image: "/portfolio/web/upala.png?height=400&width=600",
+    additionalImages: ["/portfolio/web/upala-2.png?height=180&width=320", "/portfolio/web/upala-3.png?height=180&width=320"],
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "A comprehensive UI/UX design for a travel application that helps users discover destinations, plan itineraries, and book accommodations.",
