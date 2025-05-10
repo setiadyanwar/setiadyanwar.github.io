@@ -15,27 +15,33 @@ export const portfolioItems = [
     // repoUrl: "https://github.com/example",
     projectSteps: [
       {
-        title: "Data Analysis & Planning",
+        title: "Market Research & Planning ",
         description:
-          "Analyzed the data structure and identified key metrics to visualize. Created a dashboard layout plan with stakeholders.",
+          "Identifying user needs, industry trends, and strategic goals for platform development.",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "UI Design",
+        title: "UI/UX Design & Prototyping",
         description:
-          "Designed an intuitive dashboard interface with a focus on data clarity and user experience. Created mockups for approval.",
+          "Creating an intuitive interface and interactive prototype to validate the design.",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Chart Implementation",
+        title: "Development & Feature Implementation",
         description:
-          "Implemented various chart types using Chart.js to visualize different data sets. Optimized for performance and interactivity.",
+          "Building the frontend with React, backend with Laravel, and integrating LMS and booking systems.",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Real-time Data Integration",
+        title: "Optimization & Testing",
         description:
-          "Integrated with Firebase to provide real-time data updates. Implemented filtering and export capabilities for enhanced usability.",
+          "Enhancing performance with caching and lazy loading, followed by comprehensive system testing.",
+        image: "/placeholder.svg?height=300&width=400",
+      },
+      {
+        title: "Deployment & Marketing",
+        description:
+          " Launching the website and developing digital marketing strategies to boost visibility and engagement.",
         image: "/placeholder.svg?height=300&width=400",
       },
     ],
@@ -112,42 +118,48 @@ export const portfolioItems = [
     ],
   },
   {
-    id: "project4",
-    title: "Dashboard Interface",
+    id: "studylens",
+    title: "Studylens - Ai Education Website",
     category: "web",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
-    technologies: ["Vue.js", "Chart.js", "TailwindCSS", "Firebase"],
+    image: "/portfolio/web/studylens.png?height=400&width=600",
+    //additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
+    technologies: ["Flask", "Tensorflow", "tailwind","opencv","yolov8","pytorch","python"],
     description:
-      "An analytics dashboard that visualizes complex data sets in an intuitive and interactive way, helping businesses make data-driven decisions.",
-    role: "Frontend Developer responsible for implementing the UI components and data visualization charts.",
+      "StudyLens is an AI-powered platform designed to help students maintain focus during self-study sessions. Using head movement tracking, the application detects distractions and provides real-time feedback, allowing students to understand their learning patterns and stay engaged. By analyzing study behavior and offering personalized recommendations, StudyLens supports users in building disciplined and productive study habits through intelligent assistance.",
+    role: "Web Developer.",
     challenges:
-      "Optimizing the rendering of multiple complex charts and data tables on a single page. I implemented virtualization for large data sets and optimized the update cycles.",
-    demoUrl: "https://example.com/dashboard",
-    repoUrl: "https://github.com/example",
+      "As a Web Developer, the main challenges include designing a responsive and interactive UI, ensuring efficient data processing, and optimizing AI integration for a seamless user experience.",
+    //demoUrl: "https://example.com/dashboard",
+    repoUrl: "https://github.com/egagaluh28/studylens",
     projectSteps: [
       {
-        title: "Data Analysis & Planning",
+        title: "Data Collection & Preprocessing",
         description:
-          "Analyzed the data structure and identified key metrics to visualize. Created a dashboard layout plan with stakeholders.",
+          "The system gathers images of students' heads from various angles and lighting conditions. These images are processed using OpenCV to enhance quality, normalize colors, and remove noise, ensuring accurate head position detection.",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "UI Design",
+        title: "Model Development (CNN & LSTM)",
         description:
-          "Designed an intuitive dashboard interface with a focus on data clarity and user experience. Created mockups for approval.",
+          "Involves training a convolutional neural network to recognize head positions in images, followed by an LSTM model to analyze movement patterns over time and assess student focus levels.",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Chart Implementation",
+        title: "Frontend Development & UI Design",
         description:
-          "Implemented various chart types using Chart.js to visualize different data sets. Optimized for performance and interactivity.",
+          "Focuses on creating an intuitive interface with Tailwind, enabling users to visualize their focus patterns and engagement levels.",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Real-time Data Integration",
+        title: "Testing & Optimization",
         description:
-          "Integrated with Firebase to provide real-time data updates. Implemented filtering and export capabilities for enhanced usability.",
+          "Ensures high detection accuracy by evaluating the models with real user data and optimizing performance for smooth interactions.",
+        image: "/placeholder.svg?height=300&width=400",
+      },
+        {
+        title: "Deployment & User Feedback",
+        description:
+          "Finalizes the application for public use while gathering student input to refine features and enhance the overall learning experience.",
         image: "/placeholder.svg?height=300&width=400",
       },
     ],
@@ -197,39 +209,51 @@ export const portfolioItems = [
     id: "nexaid",
     title: "Nexaid - Dashboard Website",
     category: "web",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/portfolio/web/nexaid.png?height=400&width=600",
     additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
-    technologies: ["HTML/CSS", "JavaScript", "GSAP", "Three.js"],
+    technologies: ["React", "Typescript", "Laravel", "TailwindCSS"],
     description:
-      "A creative portfolio website with interactive animations, 3D elements, and smooth scrolling effects to showcase design and development work.",
-    role: "Frontend Developer and Designer responsible for the entire website from concept to implementation.",
+      "Nexaid is a web-based dashboard designed for managing electronic products efficiently. Built with React, TypeScript, Laravel, and TailwindCSS, it provides an intuitive interface for inventory management, stock tracking, and product data visualization. With a modern UI and smooth user interactions, Nexaid enables businesses to streamline product organization while maintaining a responsive and scalable system.",
+    role: "Web Developer responsible for building a responsive and interactive dashboard for managing electronic products.",
     challenges:
-      "Creating performant animations and 3D effects that work across different browsers and devices. I implemented progressive enhancement to ensure a good experience for all users.",
-    demoUrl: "https://example.com/portfolio",
-    repoUrl: "https://github.com/example",
+      "Optimizing performance, integrating frontend and backend efficiently, ensuring scalable UI, managing state effectively, and maintaining data security.",
+    demoUrl: "nexaid.osk.dom.my.id",
+    repoUrl: "https://github.com/setiadyanwar/Nexaid",
     projectSteps: [
       {
-        title: "Data Analysis & Planning",
+        title: "Planning & Requirement Analysis",
         description:
-          "Analyzed the data structure and identified key metrics to visualize. Created a dashboard layout plan with stakeholders.",
+          "Defining core features, such as inventory tracking and product management, while structuring the application’s design",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "UI Design",
+        title: "UI/UX Design",
         description:
-          "Designed an intuitive dashboard interface with a focus on data clarity and user experience. Created mockups for approval.",
+          "Creating a visually appealing and user-friendly interface using TailwindCSS, ensuring accessibility and clarity in navigation.",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Chart Implementation",
+        title: "Frontend Development",
         description:
-          "Implemented various chart types using Chart.js to visualize different data sets. Optimized for performance and interactivity.",
+          "Developing dynamic and interactive elements using React and TypeScript, optimizing responsiveness for different devices.",
+        image: "/placBuilding a dynamic and responsive user interface using React and Typescript to ensure smooth interactions.eholder.svg?height=300&width=400",
+      },
+      {
+        title: "Backend Implementation",
+        description:
+          "Using Laravel for data management, authentication, and efficient handling of product-related operations.",
         image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Real-time Data Integration",
+        title: "Performance Optimization",
         description:
-          "Integrated with Firebase to provide real-time data updates. Implemented filtering and export capabilities for enhanced usability.",
+          "Enhancing load times, improving UI responsiveness, and ensuring smooth data handling across the dashboard.",
+        image: "/placeholder.svg?height=300&width=400",
+      },
+       {
+        title: "Testing & Deployment",
+        description:
+          "Conducting usability tests, debugging issues, and launching the dashboard with continuous maintenance for future improvements.",
         image: "/placeholder.svg?height=300&width=400",
       },
     ],
