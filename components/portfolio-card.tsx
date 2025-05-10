@@ -76,7 +76,7 @@ export default function PortfolioCard({
         </div>
 
         <div className="p-5">
-          <h3 className="text-xl font-semibold mb-3 text-indigo-600 dark:text-indigo-400">{title}</h3>
+          <h3 className="text-xl font-semibold mb-3 text-gray-600 dark:text-white">{title}</h3>
 
           <div className="flex flex-wrap gap-2 mb-4">
             {technologies.slice(0, 3).map((tech, idx) => (
@@ -97,7 +97,7 @@ export default function PortfolioCard({
 
           <Link
             href={`/portfolio/${id}`}
-            className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition-colors group"
+            className="inline-flex items-center text-gray-600 dark:text-white hover:text-indigo-500 dark:hover:text-indigo-300 font-medium transition-colors group"
           >
             View Details
             <ArrowRight className="ml-1 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />

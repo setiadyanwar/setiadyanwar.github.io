@@ -16,34 +16,6 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
   const prevPortfolio = currentIndex > 0 ? portfolioItems[currentIndex - 1] : null
   const nextPortfolio = currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null
 
-  // Project steps (example data)
-  const projectSteps = [
-    {
-      title: "Research & Planning",
-      description:
-        "Started with extensive research on user needs and market trends. Created a detailed project plan with milestones and deliverables.",
-      image: "/placeholder.svg?height=300&width=400",
-    },
-    {
-      title: "Design & Prototyping",
-      description:
-        "Developed wireframes and high-fidelity mockups. Created interactive prototypes for user testing and feedback collection.",
-      image: "/placeholder.svg?height=300&width=400",
-    },
-    {
-      title: "Development",
-      description:
-        "Implemented the frontend using modern technologies. Ensured responsive design and cross-browser compatibility.",
-      image: "/placeholder.svg?height=300&width=400",
-    },
-    {
-      title: "Testing & Launch",
-      description:
-        "Conducted thorough testing to identify and fix bugs. Optimized performance before the successful launch.",
-      image: "/placeholder.svg?height=300&width=400",
-    },
-  ]
-
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Breadcrumb */}
@@ -126,38 +98,40 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
         </div>
       </div>
 
-      {/* Project Steps */}
-      <div className="mt-20">
-        <h2 className="text-2xl font-bold mb-10 text-center">Project Development Process</h2>
+      {/* Project Steps - Now using dynamic data from the portfolio item */}
+      {portfolio.projectSteps && portfolio.projectSteps.length > 0 && (
+        <div className="mt-20">
+          <h2 className="text-2xl font-bold mb-10 text-center">Project Development Process</h2>
 
-        <div className="space-y-24">
-          {projectSteps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-8 items-center`}
-            >
-              <div className="w-full md:w-1/2">
-                <h3 className="text-xl font-bold mb-4 text-indigo-600 dark:text-indigo-400">
-                  <span className="inline-block w-8 h-8 bg-indigo-600 text-white rounded-full text-center leading-8 mr-3">
-                    {index + 1}
-                  </span>
-                  {step.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
-              </div>
-              <div className="w-full md:w-1/2">
-                <div className="relative h-[250px] overflow-hidden rounded-xl border border-indigo-200 dark:border-indigo-800">
-                  <Image src={step.image || "/placeholder.svg"} alt={step.title} fill className="object-cover" />
+          <div className="space-y-24">
+            {portfolio.projectSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-8 items-center`}
+              >
+                <div className="w-full md:w-1/2">
+                  <h3 className="text-xl font-bold mb-4 text-indigo-600 dark:text-indigo-400">
+                    <span className="inline-block w-8 h-8 bg-indigo-600 text-white rounded-full text-center leading-8 mr-3">
+                      {index + 1}
+                    </span>
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+                <div className="w-full md:w-1/2">
+                  <div className="relative h-[250px] overflow-hidden rounded-xl border border-indigo-200 dark:border-indigo-800">
+                    <Image src={step.image || "/placeholder.svg"} alt={step.title} fill className="object-cover" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Navigation between portfolio items */}
       <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-6">
