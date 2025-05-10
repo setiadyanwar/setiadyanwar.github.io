@@ -17,7 +17,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
   const nextPortfolio = currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 mt-12 py-12">
       {/* Breadcrumb */}
       <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8">
         <Link href="/" className="hover:text-indigo-600 dark:hover:text-indigo-400">
@@ -100,7 +100,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
 
       {/* Project Steps - Now using dynamic data from the portfolio item */}
       {portfolio.projectSteps && portfolio.projectSteps.length > 0 && (
-        <div className="mt-20">
+        <div className="mt-14">
           <h2 className="text-2xl font-bold mb-10 text-center">Project Development Process</h2>
 
           <div className="space-y-24">

@@ -11,8 +11,8 @@ export const portfolioItems = [
     role: "Lead Frontend Developer and UI/UX Designer responsible for the entire website from concept to implementation.",
     challenges:
       "Combining three distinct goals branding, education, and service sales—into a single unified experience without overwhelming the user. I applied a modular design approach using atomic components and consistent layout grids, Flexbox, enabling scalable and maintainable development. By focusing on clarity, navigation flow, and performance (lazy loading, optimized images), we delivered a platform that feels cohesive and efficient across all devices.",
-    demoUrl: "https://example.com",
-    repoUrl: "https://github.com/example",
+    demoUrl: "kreavoks.my.id",
+    // repoUrl: "https://github.com/example",
     projectSteps: [
       {
         title: "Data Analysis & Planning",
@@ -77,19 +77,19 @@ export const portfolioItems = [
     ],
   },
   {
-    id: "project3",
-    title: "Fitness Tracking App",
+    id: "freezemart",
+    title: "Freezemart - E-commerce Frozen food Website",
     category: "mobile",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
+    image: "/portfolio/web/freezemart.png?height=400&width=600",
+    // additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
     technologies: ["Flutter", "Firebase", "Google Fit API"],
     description:
       "A cross-platform mobile application that helps users track their workouts, set fitness goals, and monitor their progress over time.",
     role: "Mobile Developer responsible for building the app using Flutter and integrating with fitness tracking APIs.",
     challenges:
       "Ensuring accurate data synchronization between the app and external fitness tracking services. I implemented a robust caching mechanism to handle offline usage.",
-    demoUrl: "https://play.google.com/example",
-    repoUrl: "https://github.com/example",
+    demoUrl: "freezemart.osk.dom.my.id",
+    repoUrl: "https://github.com/setiadyanwar/freezemart",
     projectSteps: [
       {
         title: "User Research & Planning",
