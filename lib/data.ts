@@ -297,31 +297,31 @@ export const portfolioItems = [
         title: "Requirement Gathering",
         description:
           "Collaborated with stakeholders to define product catalog structure, user flows, and payment requirements.",
-        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI/UX Design",
         description:
           "Created wireframes and prototypes in Figma focusing on ease of browsing and quick checkout.",
-        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "API Integration",
         description:
           "Built RESTful endpoints in Java to fetch product data and handle orders, secured with JWT.",
-        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Frontend Implementation",
         description:
           "Developed RecyclerViews for product lists and implemented XML layouts for responsive design.",
-        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Testing & Deployment",
         description:
           "Conducted unit and UI tests, fixed bugs, and published to Google Play Store.",
-        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -354,30 +354,35 @@ export const portfolioItems = [
         title: "Concept & Planning",
         description:
           "Gathered requirements on product range from PT Godong Ijo Asri and defined core flows.",
+        image: null,
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "Design Prototyping",
         description:
           "Crafted high-fidelity screens in Figma focusing on plant catalog navigation and care guide UI.",
+        image: null,
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "Backend Setup",
         description:
           "Configured Laravel endpoints for product data and integrated Firebase for chat.",
+        image: null,
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "Android Development",
         description:
           "Built screens in Kotlin with Material components and integrated API and chat modules.",
+        image: null,
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "User Testing",
         description:
           "Conducted beta testing with 20 users, refined navigation and performance based on feedback.",
+        image: null,
         // image: "/placeholder.svg?height=300&width=400",
       },
     ],
@@ -876,22 +881,24 @@ export const portfolioItems = [
       {
         title: "Content Audit",
         description: "Reviewed existing pages and identified key user tasks.",
+        image: null,
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "Design System",
         description: "Established style guide and component library in Figma.",
+        image: null,
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "Development",
         description: "Built responsive templates with HTML, CSS, and JS.",
-        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Testing & Launch",
         description: "Tested across devices and deployed updated site.",
-        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -923,24 +930,28 @@ export const portfolioItems = [
         title: "Wireframing & Information Architecture",
         description:
           "Mapped out site structure and sketched low-fidelity wireframes for homepage, profile, news, events, and contact pages in Figma.",
-        // image: "/portfolio/ui/bemkm-ipb-step2.png?height=300&width=400"
+        image: null,
+          // image: "/portfolio/ui/bemkm-ipb-step2.png?height=300&width=400"
       },
       {
         title: "High-Fidelity UI Design",
         description:
           "Created polished mockups in Adobe XD, applying IPB color palette and typography to maintain brand consistency.",
+        image: null,
         // image: "/portfolio/ui/bemkm-ipb-step3.png?height=300&width=400"
       },
       {
         title: "Interactive Prototyping & Usability Testing",
         description:
           "Built clickable prototype in Figma, ran usability sessions with 10+ students, and iterated on navigation and content hierarchy.",
+        image: null,
         // image: "/portfolio/ui/bemkm-ipb-step4.png?height=300&width=400"
       },
       {
         title: "Design Handoff & Documentation",
         description:
           "Prepared design specs and redlines in Zeplin for developers, documented style guide and component library for consistent implementation.",
+        image: null,
         // image: "/portfolio/ui/bemkm-ipb-step5.png?height=300&width=400"
       },
     ],
