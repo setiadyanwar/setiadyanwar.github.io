@@ -21,31 +21,31 @@ export const portfolioItems = [
         title: "Market Research & Planning ",
         description:
           "Identifying user needs, industry trends, and strategic goals for platform development.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI/UX Design & Prototyping",
         description:
           "Creating an intuitive interface and interactive prototype to validate the design.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Development & Feature Implementation",
         description:
           "Building the frontend with React, backend with Laravel, and integrating LMS and booking systems.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Optimization & Testing",
         description:
           "Enhancing performance with caching and lazy loading, followed by comprehensive system testing.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Deployment & Marketing",
         description:
           " Launching the website and developing digital marketing strategies to boost visibility and engagement.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -64,26 +64,26 @@ export const portfolioItems = [
     role: "UI/UX Designer responsible for user research, wireframing, prototyping, and creating the final design system.",
     challenges:
       "Creating an intuitive navigation system that accommodates a large amount of content without overwhelming the user. I conducted multiple user testing sessions to refine the information architecture.",
-    demoUrl: "https://figma.com/example",
+    // demoUrl: "https://figma.com/example",
     // repoUrl: null,
     projectSteps: [
       {
         title: "User Research & Personas",
         description:
           "Conducted user interviews and surveys to gather insights on user needs and preferences. Created user personas to guide design decisions.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Wireframing & Prototyping",
         description:
           "Developed low-fidelity wireframes to outline the app's structure. Created high-fidelity prototypes for usability testing.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Design System & Handoff",
         description:
           "Created a comprehensive design system including typography, color palette, and UI components. Collaborated with developers for a smooth handoff.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -106,19 +106,19 @@ export const portfolioItems = [
         title: "User Research & Planning",
         description:
           "Conducted user interviews to understand pain points in fitness tracking. Created user personas and defined key features.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Wireframing & Prototyping",
         description:
           "Developed wireframes and interactive prototypes using Figma. Conducted usability testing to validate design decisions.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Development & Testing",
         description:
           "Built the app using Flutter, integrating with Firebase for backend services. Conducted extensive testing on multiple devices.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -149,31 +149,31 @@ export const portfolioItems = [
         title: "Data Collection & Preprocessing",
         description:
           "The system gathers images of students' heads from various angles and lighting conditions. These images are processed using OpenCV to enhance quality, normalize colors, and remove noise, ensuring accurate head position detection.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Model Development (CNN & LSTM)",
         description:
           "Involves training a convolutional neural network to recognize head positions in images, followed by an LSTM model to analyze movement patterns over time and assess student focus levels.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Frontend Development & UI Design",
         description:
           "Focuses on creating an intuitive interface with Tailwind, enabling users to visualize their focus patterns and engagement levels.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Testing & Optimization",
         description:
           "Ensures high detection accuracy by evaluating the models with real user data and optimizing performance for smooth interactions.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Deployment & User Feedback",
         description:
           "Finalizes the application for public use while gathering student input to refine features and enhance the overall learning experience.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -196,25 +196,25 @@ export const portfolioItems = [
         title: "Data Analysis & Planning",
         description:
           "Analyzed the data structure and identified key metrics to visualize. Created a dashboard layout plan with stakeholders.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI/UX Design",
         description:
           "Designed an intuitive dashboard interface with a focus on data clarity and user experience. Created mockups for approval.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Chart Implementation",
         description:
           "Implemented various chart types using Chart.js to visualize different data sets. Optimized for performance and interactivity.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Real-time Data Integration",
         description:
           "Integrated with Firebase to provide real-time data updates. Implemented filtering and export capabilities for enhanced usability.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -240,13 +240,15 @@ export const portfolioItems = [
         title: "Planning & Requirement Analysis",
         description:
           "Defining core features, such as inventory tracking and product management, while structuring the application’s design",
-        image: "/placeholder.svg?height=300&width=400",
+        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI/UX Design",
         description:
           "Creating a visually appealing and user-friendly interface using TailwindCSS, ensuring accessibility and clarity in navigation.",
-        image: "/placeholder.svg?height=300&width=400",
+        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Frontend Development",
@@ -259,19 +261,20 @@ export const portfolioItems = [
         title: "Backend Implementation",
         description:
           "Using Laravel for data management, authentication, and efficient handling of product-related operations.",
-        image: "/placeholder.svg?height=300&width=400",
+        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Performance Optimization",
         description:
           "Enhancing load times, improving UI responsiveness, and ensuring smooth data handling across the dashboard.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Testing & Deployment",
         description:
           "Conducting usability tests, debugging issues, and launching the dashboard with continuous maintenance for future improvements.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -329,7 +332,7 @@ export const portfolioItems = [
     id: "ecotainment",
     title: "Ecotainment E-Commerce Plant - Mobile App",
     category: "mobile",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/portfolio/mobile/ecotainment.png?height=400&width=600",
     // additionalImages: [
     //   "/portfolio/mobile/ecotainment-1.png?height=180&width=320",
     //   "/portfolio/mobile/ecotainment-2.png?height=180&width=320",
@@ -408,25 +411,26 @@ export const portfolioItems = [
       {
         title: "Research & Ideation",
         description: "Analyzed AI learning app trends and defined personas.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Wireframing",
         description:
           "Sketch flows for AI-driven exercises and progress tracking.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "High-Fidelity Design",
         description:
           "Created visuals in Figma and Adobe XD, submitted for competition.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Iteration",
         description:
           "Refined based on juror feedback leading to 1st winner title.",
-        image: "/placeholder.svg?height=300&width=400",
+        // image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -492,22 +496,22 @@ export const portfolioItems = [
         title: "Stakeholder Workshops",
         description:
           "Collaborated with Bandung officials to gather requirements.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Information Architecture",
         description: "Mapped user flows for complaint submission.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI Kit Creation",
         description: "Developed style guide and components in Figma.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "High-Fidelity Prototype",
         description: "Delivered interactive mockups for user testing.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -515,11 +519,11 @@ export const portfolioItems = [
     id: "rescuisine",
     title: "ResCuisine - Food Waste Solution App",
     category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/rescuisine-1.png?height=180&width=320",
-      "/portfolio/ui/rescuisine-2.png?height=180&width=320",
-    ],
+    image: "/portfolio/uiux/rescuisine.png?height=400&width=600",
+    // additionalImages: [
+    //   "/portfolio/ui/rescuisine-1.png?height=180&width=320",
+    //   "/portfolio/ui/rescuisine-2.png?height=180&width=320",
+    // ],
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "ResCuisine is a conceptual mobile UI focusing on solving food waste by connecting excess food providers with consumers. The design emphasizes ease of listing, searching, and claiming surplus meals.",
@@ -533,30 +537,30 @@ export const portfolioItems = [
         title: "User Research",
         description:
           "Conducted interviews with potential users to understand food waste behaviors.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Wireframing",
         description:
           "Sketched main screens focusing on listing and claiming food items.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Visual Design",
         description:
           "Developed color palette and UI kit in Figma reflecting fresh and sustainable themes.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Prototyping",
         description: "Created interactive prototypes for usability testing.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Iteration",
         description:
           "Refined layouts based on test feedback to improve clarity and accessibility.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -582,30 +586,30 @@ export const portfolioItems = [
         title: "Conceptualization",
         description:
           "Defined AR use cases and user scenarios within Transjakarta network.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Storyboard Design",
         description:
           "Created storyboards to visualize AR interactions at bus stops.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI Kit Development",
         description: "Designed AR icons and overlay elements in Adobe XD.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Prototype Testing",
         description:
           "Tested AR mockups using device camera feeds for alignment and readability.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Refinement",
         description:
           "Iterated on contrast and placement to ensure consistency across varying lighting conditions.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -630,25 +634,25 @@ export const portfolioItems = [
       {
         title: "User Persona Definition",
         description: "Identified key user personas and booking behaviors.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Wireframe Sketching",
         description:
           "Drafted multi-step booking flow in low-fidelity wireframes.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "High-Fidelity Design",
         description:
           "Created polished screens in Figma ensuring clarity and usability.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Prototype Testing",
         description:
           "Conducted click-through tests to refine navigation and form interactions.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -656,7 +660,7 @@ export const portfolioItems = [
     id: "swiftcare",
     title: "SwiftCare Crowdfunding Platform - Mobile App",
     category: "mobile",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/portfolio/mobile/swiftcare.png?height=400&width=600",
     additionalImages: [
       "/portfolio/mobile/swiftcare-1.png?height=180&width=320",
       "/portfolio/mobile/swiftcare-2.png?height=180&width=320",
@@ -680,23 +684,23 @@ export const portfolioItems = [
         title: "Campaign Research",
         description:
           "Reviewed crowdfunding best practices and user motivations.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Flow Design",
         description: "Mapped donation process steps and UI requirements.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI Mockups",
         description: "Created campaign listing and detail screens in Adobe XD.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Feedback Iteration",
         description:
           "Incorporated user feedback to refine trust indicators and ease of use.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -721,23 +725,23 @@ export const portfolioItems = [
       {
         title: "Requirement Definition",
         description: "Outlined event flow, registration, and admin needs.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI Design",
         description: "Designed landing and dashboard pages with TailwindCSS.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Backend Development",
         description: "Implemented registration and data storage in Laravel.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Testing & Launch",
         description:
           "Performed user acceptance tests and deployed to production.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -763,22 +767,22 @@ export const portfolioItems = [
         title: "Stakeholder Interviews",
         description:
           "Gathered mentor requirements for task and progress tracking.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Wireframe",
         description: "Outlined dashboard widgets and navigation in Figma.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "High-Fidelity Design",
         description: "Designed polished UI screens in Adobe Illustrator.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Prototype Feedback",
         description: "Tested with mentors and iterated on layout and features.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -803,22 +807,22 @@ export const portfolioItems = [
       {
         title: "Market Research",
         description: "Researched financial dashboard standards and user needs.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Dashboard Wireframes",
         description: "Created low-fi layouts for charts and tables.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Visual Design",
         description: "Designed chart components and UI kit in Figma.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Prototype Testing",
         description: "Validated interactions and readability with test users.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -843,23 +847,23 @@ export const portfolioItems = [
       {
         title: "User Interviews",
         description: "Understood parent needs and care provider expectations.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Flow Mapping",
         description: "Mapped service discovery to booking confirmation steps.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "UI Prototyping",
         description: "Designed key screens in Figma and Photoshop.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Usability Testing",
         description:
           "Tested with users to refine trust signals and ease of booking.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
