@@ -556,6 +556,57 @@ export const portfolioItems = [
       { title: "Testing & Launch", description: "Tested across devices and deployed updated site.", image: "/placeholder.svg?height=300&width=400" }
     ]
   },
+  {
+    id: "bemkmipb",
+    title: "BEM KM IPB – Organization Profile Website",
+    category: "ui",
+    image: "/portfolio/uiux/bemkm.png?height=400&width=600",
+    // additionalImages: [
+    //   "/portfolio/uiux/bemkmipb-1.png?height=180&width=320",
+    //   "/portfolio/ui/bemkmipb-2.png?height=180&width=320",
+    // ],
+    technologies: ["Figma", "Adobe XD", "Illustrator"],
+    description:
+      "A clean and modern UI design for the official website of BEM KM IPB, showcasing the student executive board’s mission, vision, organizational structure, news updates, event galleries, and contact information.",
+    role:
+      "UI/UX Designer responsible for user research, wireframing, high-fidelity mockups, and prototyping to ensure an intuitive and accessible interface.",
+    challenges:
+      "Balancing the presentation of dense organizational information with a clean layout, ensuring responsiveness across devices, and reflecting the IPB brand guidelines.",
+    // demoUrl: "https://bemkm.ipb.ac.id",
+    // repoUrl: "https://github.com/username/bemkm-ipb-website-ui",
+    projectSteps: [
+      {
+        title: "User Research & Persona Definition",
+        description:
+          "Conducted interviews and surveys with students to identify key information needs and usage patterns, then defined primary user personas.",
+        // image: "/portfolio/ui/bemkm-ipb-step1.png?height=300&width=400"
+      },
+      {
+        title: "Wireframing & Information Architecture",
+        description:
+          "Mapped out site structure and sketched low-fidelity wireframes for homepage, profile, news, events, and contact pages in Figma.",
+        // image: "/portfolio/ui/bemkm-ipb-step2.png?height=300&width=400"
+      },
+      {
+        title: "High-Fidelity UI Design",
+        description:
+          "Created polished mockups in Adobe XD, applying IPB color palette and typography to maintain brand consistency.",
+        // image: "/portfolio/ui/bemkm-ipb-step3.png?height=300&width=400"
+      },
+      {
+        title: "Interactive Prototyping & Usability Testing",
+        description:
+          "Built clickable prototype in Figma, ran usability sessions with 10+ students, and iterated on navigation and content hierarchy.",
+        // image: "/portfolio/ui/bemkm-ipb-step4.png?height=300&width=400"
+      },
+      {
+        title: "Design Handoff & Documentation",
+        description:
+          "Prepared design specs and redlines in Zeplin for developers, documented style guide and component library for consistent implementation.",
+        // image: "/portfolio/ui/bemkm-ipb-step5.png?height=300&width=400"
+      }
+    ]
+  },
 ]
 
 // Work experience data
