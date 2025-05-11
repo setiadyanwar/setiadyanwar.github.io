@@ -172,6 +172,52 @@ export default function PortfolioSection() {
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
     },
+    {
+      id: "pembimbingid",
+      title: "Dashboard Pembimbing.id - Academic Mentoring Platform",
+      category: "ui",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["Figma","Adobe Illustrator","Adobe Photoshop"],
+      // demoUrl: "#",
+      // repoUrl: "Gobojongsoang.id",
+    },  
+    {
+      id: "famiapp",
+      title: "Redesign Checkout Screen FamiApp - UI Mobile App",
+      category: "ui",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["Figma","Adobe Illustrator","Adobe Photoshop"],
+      // demoUrl: "#",
+      // repoUrl: "Gobojongsoang.id",
+    },
+    {
+      id: "investra",
+      title: " Investra Financial Intelligence Platform - UI Website",
+      category: "ui",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["Figma","Adobe Illustrator","Adobe Photoshop"],
+      // demoUrl: "#",
+      // repoUrl: "Gobojongsoang.id",
+    },
+    {
+      id: "temanibu",
+      title: "Teman Ibu Freelance Job Marketplace - UI Mobile App",
+      category: "ui",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["Figma","Adobe Illustrator","Adobe Photoshop"],
+      // demoUrl: "#",
+      // repoUrl: "Gobojongsoang.id",
+    },
+    {
+      id: "redesignipb",
+      title: "Redesign IPB University Website",
+      category: "web",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["Html","CSS","Javascript"],  
+      // demoUrl: "#",
+      // repoUrl: "Gobojongsoang.id",
+    },
+      
   ]
 
   const filteredItems = filter === "all" ? portfolioItems : portfolioItems.filter((item) => item.category === filter)
