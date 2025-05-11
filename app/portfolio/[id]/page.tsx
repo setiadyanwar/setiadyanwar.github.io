@@ -129,8 +129,8 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                         : "hover:border border-indigo-300 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/10"
                     }`}
                   >
-                    {/* Text - adjust width based on whether there's an image */}
-                    <div className={step.image ? "md:w-1/2" : "w-full"}>
+                    {/* Text - adjust width based on whether there's a valid image */}
+                    <div className={step.image && step.image.trim() !== "" ? "md:w-1/2" : "w-full"}>
                       <div className="flex items-center mb-2">
                         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-400 mr-3">
                           {index + 1}
@@ -139,8 +139,8 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                       </div>
                       <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
                     </div>
-                    {/* Optional image */}
-                    {step.image && (
+                    {/* Optional image - only render if step.image is a valid non-empty string */}
+                    {step.image && step.image.trim() !== "" ? (
                       <div className="md:w-1/2">
                         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                           <Image
@@ -151,7 +151,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                           />
                         </div>
                       </div>
-                    )}
+                    ) : null}
                   </motion.div>
                 </div>
               ))}
