@@ -51,73 +51,118 @@ export const portfolioItems = [
   },
   {
     id: "upala",
-    title: "Upala Company Profile Website",
+    title: "Upala Company Profile & CRM Website",
     category: "web",
     image: "/portfolio/web/upala.png?height=400&width=600",
     additionalImages: [
       "/portfolio/web/upala-2.png?height=180&width=320",
       "/portfolio/web/upala-3.png?height=180&width=320",
     ],
-    technologies: ["Figma", "Adobe XD", "Illustrator"],
+    technologies: ["Tailwind", "Figma", "Laravel", "HTML/CSS", "MySQL"],
     description:
-      "A comprehensive UI/UX design for a travel application that helps users discover destinations, plan itineraries, and book accommodations.",
-    role: "UI/UX Designer responsible for user research, wireframing, prototyping, and creating the final design system.",
+      "A comprehensive company profile and CRM web solution for Upala Coffee & Eatery in Jatiwaringin, Bekasi. The platform showcases the brand story, menu highlights, and provides an admin dashboard for customer management and order tracking.",
+    role:
+      "Frontend Developer & UI/UX Designer responsible for implementing UI templates and designing interactive prototypes for the company profile and CRM dashboards.",
     challenges:
-      "Creating an intuitive navigation system that accommodates a large amount of content without overwhelming the user. I conducted multiple user testing sessions to refine the information architecture.",
-    // demoUrl: "https://figma.com/example",
-    // repoUrl: null,
+      "Organizing extensive menu and organizational information into a cohesive profile site, ensuring intuitive CRM workflows for admins, and maintaining responsive performance across devices.",
+    demoUrl: "#",
+    repoUrl: "#",
     projectSteps: [
       {
-        title: "User Research & Personas",
+        title: "Analysis & User Research",
         description:
-          "Conducted user interviews and surveys to gather insights on user needs and preferences. Created user personas to guide design decisions.",
+          "Conducted stakeholder interviews with cafe owners and staff to understand business needs, mapped user journeys for both customers and admins.",
         image: null,
       },
       {
-        title: "Wireframing & Prototyping",
+        title: "Wireframing & UI Prototyping",
         description:
-          "Developed low-fidelity wireframes to outline the app's structure. Created high-fidelity prototypes for usability testing.",
+          "Created low- and high-fidelity wireframes for the company profile pages and admin CRM dashboards in Figma, iterated based on feedback.",
         image: null,
       },
       {
-        title: "Design System & Handoff",
+        title: "Development & Implementation",
         description:
-          "Created a comprehensive design system including typography, color palette, and UI components. Collaborated with developers for a smooth handoff.",
+          "Built responsive front-end templates in Laravel Blade and integrated TailwindCSS, then developed core CRM functions including user management and order processing.",
+        image: null,
+      },
+      {
+        title: "Testing & Iteration",
+        description:
+          "Conducted usability tests with cafe staff, gathered feedback on CRM usability, and refined interfaces to improve efficiency and clarity.",
+        image: null,
+      },
+      {
+        title: "Handoff & Deployment",
+        description:
+          "Compiled comprehensive documentation and style guides, and collaborated with back-end developers to deploy the solution on production servers.",
         image: null,
       },
     ],
   },
   {
     id: "freezemart",
-    title: "Freezemart - E-commerce Frozen food Website",
-    category: "mobile",
+    title: "Freezemart - E-commerce Frozen Food Website with Recommendation System",
+    category: "web",
     image: "/portfolio/web/freezemart.png?height=400&width=600",
-    // additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
-    technologies: ["Flutter", "Firebase", "Google Fit API"],
+    technologies: [
+      "Laravel",
+      "PHP",
+      "Blade",
+      "MySQL",
+      "Livewire",
+      "TailwindCSS",
+      "HTML/CSS",
+      "JavaScript",
+      "Python",
+      "Flask",
+      "TF-IDF",
+      "Xendit",
+    ],
+    // Project Description
     description:
-      "A cross-platform mobile application that helps users track their workouts, set fitness goals, and monitor their progress over time.",
-    role: "Mobile Developer responsible for building the app using Flutter and integrating with fitness tracking APIs.",
+      "Freezemart is a frozen food e-commerce platform featuring a content-based recommendation system powered by TF-IDF and Cosine Similarity, and integrated with Xendit payment gateway for seamless in-app transactions.",
+    role:
+      "Full-Stack Developer responsible for implementing the frontend UI, backend logic, integrating the recommendation algorithm, and configuring Xendit payment gateway to enable secure online payments.",
     challenges:
-      "Ensuring accurate data synchronization between the app and external fitness tracking services. I implemented a robust caching mechanism to handle offline usage.",
-    demoUrl: "freezemart.osk.dom.my.id",
+      "Designing and integrating a performant recommendation system, ensuring real-time product suggestions without impacting page load times, maintaining consistency across the Laravel and Flask components, and implementing a secure payment flow via Xendit.",
+    demoUrl: "https://freezemart.osk.dom.my.id",
     repoUrl: "https://github.com/setiadyanwar/freezemart",
     projectSteps: [
       {
-        title: "User Research & Planning",
+        title: "User Research & Data Collection",
         description:
-          "Conducted user interviews to understand pain points in fitness tracking. Created user personas and defined key features.",
+          "Gathered user preferences and historical purchase data, cleaned and preprocessed datasets for the recommendation algorithm.",
         image: null,
       },
       {
-        title: "Wireframing & Prototyping",
+        title: "System Architecture & Planning",
         description:
-          "Developed wireframes and interactive prototypes using Figma. Conducted usability testing to validate design decisions.",
+          "Outlined the full-stack architecture, defined data flow between Laravel frontend, Flask recommendation API, and Xendit payment service, and planned database schemas.",
         image: null,
       },
       {
-        title: "Development & Testing",
+        title: "Recommendation Engine Development",
         description:
-          "Built the app using Flutter, integrating with Firebase for backend services. Conducted extensive testing on multiple devices.",
+          "Implemented TF-IDF vectorization and Cosine Similarity matching in Python, deployed as a Flask microservice for product suggestions.",
+        image: null,
+      },
+      {
+        title: "Payment Integration & Frontend Development",
+        description:
+          "Integrated Xendit payment gateway into the Laravel frontend, handled payment callbacks, and built responsive UI components in Blade and TailwindCSS for checkout flow.",
+        image: null,
+      },
+      {
+        title: "Testing & Optimization",
+        description:
+          "Conducted unit and integration tests for recommendation accuracy and payment flow, optimized query performance and caching strategies to minimize latency.",
+        image: null,
+      },
+      {
+        title: "Deployment & Maintenance",
+        description:
+          "Deployed application on a Linux server, configured CI/CD pipelines, monitored system performance and payment logs, and iterated based on user feedback.",
         image: null,
       },
     ],
@@ -872,36 +917,51 @@ export const portfolioItems = [
     title: "Redesign IPB University Website",
     category: "web",
     image: "/portfolio/web/ipbredesign.png?height=400&width=600",
-    // additionalImages: ["/portfolio/web/redesignipb-1.png?height=180&width=320", "/portfolio/web/redesignipb-2.png?height=180&width=320"],
     technologies: ["HTML", "CSS", "JavaScript"],
+    // Case Study Description
     description:
-      "Redesign of IPB University official website focusing on improved navigation, responsive design, and updated branding.",
-    role: "Frontend Developer and Designer implementing new UI/UX strategy.",
+      "This project is a UI/UX case study for the redesign of the official IPB University website. The new design emphasizes improved navigation, responsive layouts, and a refreshed visual identity to enhance user engagement and accessibility.",
+    role:
+      "Web Designer responsible for creating the UI redesign strategy, developing wireframes, high-fidelity mockups, and interactive prototypes to deliver a modern, user-centered interface.",
     challenges:
-      "Migrating legacy content to modern layouts and ensuring cross-browser compatibility.",
+      "Migrating legacy content to a modern layout while ensuring cross-browser compatibility, maintaining brand consistency, and improving usability across all devices.",
     demoUrl: "#",
     repoUrl: "#",
     projectSteps: [
       {
         title: "Content Audit",
-        description: "Reviewed existing pages and identified key user tasks.",
-        image: null,
-        // image: "/placeholder.svg?height=300&width=400",
-      },
-      {
-        title: "Design System",
-        description: "Established style guide and component library in Figma.",
-        image: null,
-        // image: "/placeholder.svg?height=300&width=400",
-      },
-      {
-        title: "Development",
-        description: "Built responsive templates with HTML, CSS, and JS.",
+        description:
+          "Reviewed existing site pages to identify key user tasks, outdated content, and areas for improved information hierarchy.",
         image: null,
       },
       {
-        title: "Testing & Launch",
-        description: "Tested across devices and deployed updated site.",
+        title: "Design System Creation",
+        description:
+          "Established a comprehensive style guide and component library in Figma, including color schemes, typography, and UI elements that reflect IPB’s brand identity.",
+        image: null,
+      },
+      {
+        title: "Wireframing & Prototyping",
+        description:
+          "Developed low- and high-fidelity wireframes for the homepage, academic sections, news, events, and contact pages, then built interactive prototypes for stakeholder review.",
+        image: null,
+      },
+      {
+        title: "Responsive Development Mockups",
+        description:
+          "Created responsive visual mockups showcasing desktop, tablet, and mobile breakpoints to ensure a seamless experience across devices.",
+        image: null,
+      },
+      {
+        title: "Usability Testing & Iteration",
+        description:
+          "Conducted usability tests with students and staff, gathered feedback on navigation and content clarity, and iterated designs to address pain points.",
+        image: null,
+      },
+      {
+        title: "Handoff & Documentation",
+        description:
+          "Compiled detailed handoff documentation, including redlines and interaction specs, and collaborated with developers to facilitate accurate implementation.",
         image: null,
       },
     ],
@@ -911,52 +971,94 @@ export const portfolioItems = [
     title: "BEM KM IPB – Organization Profile Website",
     category: "ui",
     image: "/portfolio/uiux/bemkm.png?height=400&width=600",
-    // additionalImages: [
-    //   "/portfolio/uiux/bemkmipb-1.png?height=180&width=320",
-    //   "/portfolio/ui/bemkmipb-2.png?height=180&width=320",
-    // ],
-    technologies: ["Figma", "Adobe XD", "Illustrator"],
+    technologies: ["Figma", "Adobe XD", "Illustrator","Zeplin"],
     description:
-      "A clean and modern UI design for the official website of BEM KM IPB, showcasing the student executive board’s mission, vision, organizational structure, news updates, event galleries, and contact information.",
-    role: "UI/UX Designer responsible for user research, wireframing, high-fidelity mockups, and prototyping to ensure an intuitive and accessible interface.",
+      "A UI/UX project for the BEM KM IPB 2024 organizational profile website, showcasing the student executive board's mission, vision, structure, news, events, and contact information with a clean and modern interface.",
+    role:
+      "UI/UX Designer responsible for conducting initial analysis and user research, designing wireframes and high-fidelity mockups, building interactive prototypes, and ensuring a user-centered, accessible, and visually consistent design.",
     challenges:
-      "Balancing the presentation of dense organizational information with a clean layout, ensuring responsiveness across devices, and reflecting the IPB brand guidelines.",
-    // demoUrl: "https://bemkm.ipb.ac.id",
-    // repoUrl: "https://github.com/username/bemkm-ipb-website-ui",
+      "Balancing dense informational content with a clean layout, ensuring mobile responsiveness, and aligning closely with IPB's branding guidelines.",
     projectSteps: [
       {
-        title: "User Research & Persona Definition",
+        title: "Analysis & User Research",
         description:
-          "Conducted interviews and surveys with students to identify key information needs and usage patterns, then defined primary user personas.",
-        // image: "/portfolio/ui/bemkm-ipb-step1.png?height=300&width=400"
+          "Conducted stakeholder interviews and surveys to understand organizational goals and user needs, and created user personas to guide design decisions.",
+        image: null,
       },
       {
         title: "Wireframing & Information Architecture",
         description:
-          "Mapped out site structure and sketched low-fidelity wireframes for homepage, profile, news, events, and contact pages in Figma.",
+          "Mapped out the site's structure and designed low-fidelity wireframes for homepage, profile sections, news, events, and contact pages to optimize content flow.",
         image: null,
-          // image: "/portfolio/ui/bemkm-ipb-step2.png?height=300&width=400"
       },
       {
         title: "High-Fidelity UI Design",
         description:
-          "Created polished mockups in Adobe XD, applying IPB color palette and typography to maintain brand consistency.",
+          "Developed polished mockups in Adobe XD, applying IPB's color palette, typography standards, and visual identity to maintain brand consistency.",
         image: null,
-        // image: "/portfolio/ui/bemkm-ipb-step3.png?height=300&width=400"
       },
       {
         title: "Interactive Prototyping & Usability Testing",
         description:
-          "Built clickable prototype in Figma, ran usability sessions with 10+ students, and iterated on navigation and content hierarchy.",
+          "Built interactive prototypes, conducted usability tests with student representatives, and iterated designs based on feedback to improve navigation and clarity.",
         image: null,
-        // image: "/portfolio/ui/bemkm-ipb-step4.png?height=300&width=400"
       },
       {
         title: "Design Handoff & Documentation",
         description:
-          "Prepared design specs and redlines in Zeplin for developers, documented style guide and component library for consistent implementation.",
+          "Prepared detailed design specifications, redlines, and style guides in Zeplin/Figma, and collaborated with the development team to ensure accurate implementation.",
         image: null,
-        // image: "/portfolio/ui/bemkm-ipb-step5.png?height=300&width=400"
+      },
+    ],
+  },
+  {
+    id: "uvan",
+    title: "Uvan E-Commerce Shoes Store - UI Website",
+    category: "ui",
+    image: "/portfolio/uiux/Uvan.png?height=400&width=600",
+    technologies: ["Figma", "Adobe XD", "Illustrator"],
+    description:
+      "Uvan is a fictional brand created as a UI/UX case study for a shoes e-commerce website. The Uvan site features a sleek, modern, and clean design with immersive micro-animations, delivering an intuitive and engaging online shopping experience.",
+    role:
+      "UI/UX Designer responsible for conducting user research, developing wireframes, crafting high-fidelity mockups, building interactive prototypes, and defining micro-animation specifications to produce a modern, simple, clean, and engaging design.",
+    challenges:
+      "Balancing a minimalist layout with immersive animations, ensuring smooth performance across devices, and maintaining visual consistency in line with the brand identity.",
+    projectSteps: [
+      {
+        title: "User Research & Competitive Analysis",
+        description:
+          "Conducted surveys and interviews with target users and analyzed leading shoes e-commerce websites to establish best practices and user expectations.",
+        image: null,
+      },
+      {
+        title: "Wireframing & Information Architecture",
+        description:
+          "Created low-fidelity wireframes for the homepage, product listings, product details, cart, and checkout to structure an intuitive navigation flow.",
+        image: null,
+      },
+      {
+        title: "High-Fidelity UI Design",
+        description:
+          "Designed high-fidelity mockups in Figma, applying a clean color palette and clear typography, and integrated hover effects and page-transition animations for an immersive feel.",
+        image: null,
+      },
+      {
+        title: "Interactive Prototyping & Usability Testing",
+        description:
+          "Built interactive prototypes with micro-interactions in Figma, conducted usability testing sessions, and iterated animation timing based on user feedback.",
+        image: null,
+      },
+      {
+        title: "Animation Implementation & Performance Tuning",
+        description:
+          "Prepared detailed animation specs for developers, optimized Lottie and CSS animations for performance, and ensured smooth transitions without compromising page load times.",
+        image: null,
+      },
+      {
+        title: "Design Handoff & Documentation",
+        description:
+          "Delivered comprehensive design documentation, animation guidelines, and a component library via Zeplin and Figma, and collaborated closely with developers to ensure a pixel-perfect implementation.",
+        image: null,
       },
     ],
   },
