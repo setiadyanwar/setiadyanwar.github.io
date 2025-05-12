@@ -439,11 +439,11 @@ export const portfolioItems = [
     id: "skilpath",
     title: "Skillpath AI Learning App - UI Mobile App",
     category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/skilpath-1.png?height=180&width=320",
-      "/portfolio/ui/skilpath-2.png?height=180&width=320",
-    ],
+    image: "/portfolio/uiux/skillpath.png?height=400&width=600",
+    // additionalImages: [
+    //   "/portfolio/ui/skilpath-1.png?height=180&width=320",
+    //   "/portfolio/ui/skilpath-2.png?height=180&width=320",
+    // ],
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Skillpath is a mobile UI concept for an AI-powered learning platform. Entry won 1st place in the UI/UX Competition Vocational Of Champions at UNS.",
@@ -483,11 +483,11 @@ export const portfolioItems = [
     id: "skillify",
     title: "Skillify E-Course App - UI Mobile App",
     category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/skillify-1.png?height=180&width=320",
-      "/portfolio/ui/skillify-2.png?height=180&width=320",
-    ],
+    image: "/portfolio/uiux/skillify.png?height=400&width=600",
+    // additionalImages: [
+    //   "/portfolio/ui/skillify-1.png?height=180&width=320",
+    //   "/portfolio/ui/skillify-2.png?height=180&width=320",
+    // ],
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Skillify is a conceptual e-course mobile UI that won 2nd place in the Smart IT Competition UI/UX Design category.",
