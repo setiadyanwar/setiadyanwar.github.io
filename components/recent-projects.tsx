@@ -1,16 +1,16 @@
 "use client"
-
-import { motion } from "framer-motion"
 import Link from "next/link"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, ExternalLink, Github } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { portfolioItems } from "@/lib/data"
+import PortfolioCard from "@/components/portfolio-card"
 
 export default function RecentProjects() {
-  // Get the 3 most recent projects
-  const recentProjects = [...portfolioItems].slice(0, 3)
+  // Get the specific 3 most recent projects by ID
+  const recentProjectIds = ["kreavoks", "studylens", "freezemart"]
+  const recentProjects = recentProjectIds
+    .map((id) => portfolioItems.find((item) => item.id === id))
+    .filter((project) => project !== undefined) as typeof portfolioItems
 
   return (
     <section className="py-16 bg-gray-50 dark:bg-gray-900/50 rounded-3xl">
@@ -25,81 +25,23 @@ export default function RecentProjects() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {recentProjects.map((project, index) => (
-            <motion.div
+            <PortfolioCard
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.1 * index }}
-              className="h-full"
-            >
-              <Card className="overflow-hidden h-full glassmorphism hover:shadow-lg transition-all duration-300">
-                <div className="relative group h-48 overflow-hidden">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <div className="flex space-x-3">
-                      {project.demoUrl && (
-                        <a
-                          href={project.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors"
-                        >
-                          <ExternalLink className="h-5 w-5 text-white" />
-                        </a>
-                      )}
-                      {project.repoUrl && (
-                        <a
-                          href={project.repoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors"
-                        >
-                          <Github className="h-5 w-5 text-white" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold mb-2 text-indigo dark:text-indigo-light">
-                    {project.title}
-                  </h3>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech, idx) => (
-                      <Badge key={idx} variant="secondary" className="bg-indigo-light/10 dark:bg-indigo/20">
-                        {tech}
-                      </Badge>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800">
-                        +{project.technologies.length - 3}
-                      </Badge>
-                    )}
-                  </div>
-
-                  <Link
-                    href={`/portfolio/${project.id}`}
-                    className="inline-flex items-center text-indigo dark:text-indigo-light hover:text-indigo-dark dark:hover:text-indigo transition-colors"
-                  >
-                    View Details
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </div>
-              </Card>
-            </motion.div>
+              id={project.id}
+              title={project.title}
+              category={project.category}
+              image={project.image}
+              technologies={project.technologies}
+              demoUrl={project.demoUrl}
+              repoUrl={project.repoUrl}
+              delay={index}
+            />
           ))}
         </div>
 
         <div className="text-center">
-          <Button asChild className="bg-indigo-500 hover:bg-indigo-dark">
-            <Link href="/portfolio" className=" text-indigo-500 inline-flex items-center">
+          <Button asChild className="bg-indigo-600 hover:bg-indigo-700 text-white">
+            <Link href="/portfolio" className="inline-flex items-center">
               View All Projects
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

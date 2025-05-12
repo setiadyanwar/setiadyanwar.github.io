@@ -10,13 +10,6 @@ export default function PortfolioSection() {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6
 
-  const categories = [
-    { id: "all", name: "All" },
-    { id: "web", name: "Web Development" },
-    { id: "mobile", name: "Mobile Apps" },
-    { id: "ui", name: "UI/UX Design" },
-  ]
-
   // Sample portfolio items (would be replaced with actual projects)
   const portfolioItems = [
     {
@@ -30,10 +23,10 @@ export default function PortfolioSection() {
     },
     {
       id: "studylens",
-      title: "Studylens - Ai Education Website",
+      title: "Studylens - Ai for Learning Website",
       category: "web",
       image: "/portfolio/web/studylens.png?height=400&width=600",
-      technologies: ["Flask", "Tensorflow", "tailwind","opencv","yolov8","pytorch","python"],
+      technologies: ["Flask", "Tensorflow", "tailwind", "opencv", "yolov8", "pytorch", "python"],
       //demoUrl: "#",
       repoUrl: "https://github.com/egagaluh28/studylens",
     },
@@ -42,9 +35,31 @@ export default function PortfolioSection() {
       title: "Freezemart - E-commerce Frozen food Website with Recommendation System",
       category: "web",
       image: "/portfolio/web/freezemart.png?height=400&width=600",
-      technologies: ["Laravel", "PHP","Xendit", "Blade", "MySQL","Livewire","TailwindCSS","HTML/CSS","Javascript","python","Flask","TDF-IDF"],
+      technologies: [
+        "Laravel",
+        "PHP",
+        "Xendit",
+        "Blade",
+        "MySQL",
+        "Livewire",
+        "TailwindCSS",
+        "HTML/CSS",
+        "Javascript",
+        "python",
+        "Flask",
+        "TDF-IDF",
+      ],
       demoUrl: "freezemart.osk.dom.my.id",
       repoUrl: "https://github.com/setiadyanwar/freezemart",
+    },
+    {
+      id: "nexaid",
+      title: "Nexaid - Dashboard Website",
+      category: "web",
+      image: "/portfolio/web/nexaid.png?height=400&width=600",
+      technologies: ["React", "Typescript", "Laravel", "TailwindCSS"],
+      demoUrl: "nexaid.osk.dom.my.id",
+      repoUrl: "https://github.com/setiadyanwar/Nexaid",
     },
     {
       id: "upala",
@@ -60,25 +75,16 @@ export default function PortfolioSection() {
       title: "Nusoundtara - Ticket Booking Website",
       category: "web",
       image: "/portfolio/web/Nusoundtara.png?height=400&width=600",
-      technologies: ["HTML/CSS", "Javascript", "PHP", "MySQL","Laravel"],
+      technologies: ["HTML/CSS", "Javascript", "PHP", "MySQL", "Laravel"],
       demoUrl: "#",
       repoUrl: "#",
-    },
-    {
-      id: "nexaid",
-      title: "Nexaid - Dashboard Website",
-      category: "web",
-      image: "/portfolio/web/nexaid.png?height=400&width=600",
-      technologies: ["React", "Typescript", "Laravel", "TailwindCSS"],
-      demoUrl: "nexaid.osk.dom.my.id",
-      repoUrl: "https://github.com/setiadyanwar/Nexaid", 
     },
     {
       id: "bemkmipb",
       title: "BEM KM IPB – Organization Profile Website",
       category: "ui",
       image: "/portfolio/uiux/bemkm.png?height=400&width=600",
-      technologies: ["Figma","Adobe Photoshop","Adobe Illustrator","Zeplin"],  
+      technologies: ["Figma", "Adobe Photoshop", "Adobe Illustrator", "Zeplin"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
     },
@@ -89,14 +95,14 @@ export default function PortfolioSection() {
       image: "/portfolio/mobile/butchery.png?height=400&width=600",
       technologies: ["Java", "MongoDB", "Figma", "XML", "Android Studio"],
       demoUrl: "https://www.mediafire.com/file/xqutrpgkgvbbewy/Butchery.apk/file",
-      repoUrl: "https://github.com/setiadyanwar/ButcheryApp", 
+      repoUrl: "https://github.com/setiadyanwar/ButcheryApp",
     },
-     {
+    {
       id: "ecotainment",
       title: "Ecotainment E-Commerce Plant - Mobile App",
       category: "mobile",
       image: "/portfolio/mobile/ecotainment.png?height=400&width=600",
-      technologies: ["Kotlin", "Firebase", "Laravel","Figma", "XML", "Android Studio"],
+      technologies: ["Kotlin", "Firebase", "Laravel", "Figma", "XML", "Android Studio"],
       // demoUrl: "#",
       // repoUrl: "https://github.com/egagaluh28/studylens",
     },
@@ -159,7 +165,7 @@ export default function PortfolioSection() {
       title: "SwiftCare Crowdfunding Platform - Mobile App",
       category: "mobile",
       image: "/portfolio/mobile/swiftcare.png?height=400&width=600",
-      technologies: ["Kotlin", "Firebase", "Chat-GPT API","XML", "Android Studio"],
+      technologies: ["Kotlin", "Firebase", "Chat-GPT API", "XML", "Android Studio"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
     },
@@ -177,7 +183,7 @@ export default function PortfolioSection() {
       title: "Agridation 2023 - Competition Website",
       category: "web",
       image: "/portfolio/web/Agridation.png?height=400&width=600",
-      technologies: ["Figma", "Laravel", "TailwindCSS","HTML/CSS","MySQL"],
+      technologies: ["Figma", "Laravel", "TailwindCSS", "HTML/CSS", "MySQL"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
     },
@@ -186,16 +192,16 @@ export default function PortfolioSection() {
       title: "Dashboard Pembimbing.id - Academic Mentoring Platform",
       category: "ui",
       image: "/placeholder.svg?height=400&width=600",
-      technologies: ["Figma","Adobe Illustrator","Adobe Photoshop"],
+      technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
-    },  
+    },
     {
       id: "famiapp",
       title: "Redesign Checkout Screen FamiApp - UI Mobile App",
       category: "ui",
       image: "/placeholder.svg?height=400&width=600",
-      technologies: ["Figma","Adobe Illustrator","Adobe Photoshop"],
+      technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
     },
@@ -204,7 +210,7 @@ export default function PortfolioSection() {
       title: " Investra Financial Intelligence Platform - UI Website",
       category: "ui",
       image: "/placeholder.svg?height=400&width=600",
-      technologies: ["Figma","Adobe Illustrator","Adobe Photoshop"],
+      technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
     },
@@ -213,7 +219,7 @@ export default function PortfolioSection() {
       title: "Teman Ibu Freelance Job Marketplace - UI Mobile App",
       category: "ui",
       image: "/placeholder.svg?height=400&width=600",
-      technologies: ["Figma","Adobe Illustrator","Adobe Photoshop"],
+      technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
     },
@@ -222,11 +228,25 @@ export default function PortfolioSection() {
       title: "Redesign IPB University Website",
       category: "web",
       image: "/portfolio/web/ipbredesign.png?height=400&width=600",
-      technologies: ["Html","CSS","Javascript"],  
+      technologies: ["Html", "CSS", "Javascript"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",
     },
-      
+  ]
+
+  // Calculate counts for each category
+  const categoryCounts = {
+    all: portfolioItems.length,
+    web: portfolioItems.filter((item) => item.category === "web").length,
+    mobile: portfolioItems.filter((item) => item.category === "mobile").length,
+    ui: portfolioItems.filter((item) => item.category === "ui").length,
+  }
+
+  const categories = [
+    { id: "all", name: "All" },
+    { id: "web", name: "Web Development" },
+    { id: "mobile", name: "Mobile Apps" },
+    { id: "ui", name: "UI/UX Design" },
   ]
 
   const filteredItems = filter === "all" ? portfolioItems : portfolioItems.filter((item) => item.category === filter)
@@ -268,7 +288,18 @@ export default function PortfolioSection() {
                     : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
-                {category.name}
+                <span className="flex items-center">
+                  {category.name}
+                  <span
+                    className={`ml-2 px-1.5 py-0.5 text-xs rounded-full ${
+                      filter === category.id
+                        ? "bg-white/20 text-white"
+                        : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                    }`}
+                  >
+                    {categoryCounts[category.id as keyof typeof categoryCounts]}
+                  </span>
+                </span>
               </button>
             ))}
           </div>

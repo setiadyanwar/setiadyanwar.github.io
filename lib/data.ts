@@ -169,7 +169,7 @@ export const portfolioItems = [
   },
   {
     id: "studylens",
-    title: "Studylens - Ai Education Website",
+    title: "Studylens - Ai for Learning Website",
     category: "web",
     image: "/portfolio/web/studylens.png?height=400&width=600",
     //additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
