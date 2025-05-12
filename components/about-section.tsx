@@ -1,10 +1,33 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import { CheckCircle } from "lucide-react"
+import { CheckCircle, X } from "lucide-react"
+
+interface ImageInfo {
+  src: string
+  alt: string
+  title: string
+  description: string
+}
 
 export default function AboutSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<ImageInfo | null>(null)
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isModalOpen])
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -16,6 +39,38 @@ export default function AboutSection() {
     "Responsive & Accessible Interfaces",
     "Performance Optimization",
   ]
+
+  const images: ImageInfo[] = [
+    {
+      src: "/sertifikat/skk sample.png?height=160&width=96",
+      alt: "BNSP Certification",
+      title: "BNSP Certification",
+      description:
+        "Professional certification from the National Professional Certification Agency (BNSP) validating my expertise in web development and design.",
+    },
+    {
+      src: "/placeholder.svg?height=128&width=128",
+      alt: "Additional photo 1",
+      title: "Project Showcase",
+      description: "Working on a collaborative project with my team, focusing on user experience and interface design.",
+    },
+    {
+      src: "/placeholder.svg?height=128&width=128",
+      alt: "Additional photo 2",
+      title: "Design Workshop",
+      description:
+        "Participating in a design thinking workshop to enhance problem-solving skills and creative approaches.",
+    },
+  ]
+
+  const openModal = (image: ImageInfo) => {
+    setSelectedImage(image)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
 
   return (
     <section id="about" className="py-16">
@@ -30,16 +85,11 @@ export default function AboutSection() {
             className="relative"
           >
             {/* Main photo container */}
-            <div className="relative h-[400px] w-full max-w-[500px] overflow-hidden rounded-lg mx-auto">
+            <div className="relative h-[500px] w-full max-w-[500px] overflow-hidden rounded-lg mx-auto">
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-orange-500/20 blur-xl" />
               <div className="absolute inset-0 glassmorphism rounded-lg" />
               <div className="absolute inset-2 rounded-lg overflow-hidden">
-                <Image
-                  src="/setiady.png"
-                  alt="About Setiady Ibrahim Anwar"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
+                <Image src="/setiady.png" alt="About Setiady Ibrahim Anwar" fill style={{ objectFit: "cover" }} />
               </div>
 
               {/* Certification photo overlapping front */}
@@ -48,26 +98,31 @@ export default function AboutSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.8 }}
-                className="absolute bottom-4 right-4 w-40 h-56 rounded-lg overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg rotate-6 z-10"
+                className="absolute bottom-4 right-4 w-40 h-56 rounded-lg overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg rotate-6 z-10 cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => openModal(images[0])}
               >
                 <Image
-                  src="/sertifikat/skk sample.png?height=160&width=96"
-                  alt="BNSP Certification"
+                  src={images[0].src || "/placeholder.svg"}
+                  alt={images[0].alt}
                   fill
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: "cover" }}
                 />
               </motion.div>
             </div>
 
             {/* Additional photos container aligned left */}
             <div className="flex space-x-4 mt-6 justify-start max-w-[500px] mx-auto">
-              {[1, 2].map((item) => (
-                <div key={item} className="relative w-32 h-32 rounded-lg overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg">
+              {[1, 2].map((item, index) => (
+                <div
+                  key={item}
+                  className="relative w-32 h-32 rounded-lg overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg cursor-pointer hover:scale-105 transition-transform"
+                  onClick={() => openModal(images[index + 1])}
+                >
                   <Image
-                    src="/placeholder.svg?height=128&width=128"
-                    alt={`Additional photo ${item}`}
+                    src={images[index + 1].src || "/placeholder.svg"}
+                    alt={images[index + 1].alt}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: "cover" }}
                   />
                 </div>
               ))}
@@ -86,6 +141,8 @@ export default function AboutSection() {
             variants={fadeIn}
             className="space-y-6"
           >
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Setiady Ibrahim Anwar</h2>
+
             <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
               Frontend Developer & UI/UX Designer
             </h3>
@@ -115,6 +172,49 @@ export default function AboutSection() {
           </motion.div>
         </div>
       </div>
+
+      {/* Custom Image Modal */}
+      <AnimatePresence>
+        {isModalOpen && selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            onClick={closeModal}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative bg-white dark:bg-gray-900 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{selectedImage.title}</h3>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">{selectedImage.description}</p>
+              </div>
+
+              <div className="relative w-full h-[60vh] bg-gray-100 dark:bg-gray-800">
+                <Image
+                  src={selectedImage.src || "/placeholder.svg"}
+                  alt={selectedImage.alt}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 p-1 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Close modal"
+              >
+                <X className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

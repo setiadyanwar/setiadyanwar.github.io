@@ -17,29 +17,32 @@ export default function TechStackSection() {
   ]
 
   const technologies = [
-    { name: "HTML", icon: "html5.svg", category: "frontend" },
-    { name: "CSS", icon: "css3.svg", category: "frontend" },
-    { name: "JavaScript", icon: "javascript.svg", category: "frontend" },
-    { name: "React", icon: "react.svg", category: "frontend" },
-    { name: "Vue", icon: "vue.svg", category: "frontend" },
-    { name: "TailwindCSS", icon: "tailwindcss.svg", category: "frontend" },
-    { name: "Bootstrap", icon: "bootstrap.svg", category: "frontend" },
-    { name: "Laravel", icon: "laravel.svg", category: "backend" },
-    { name: "PHP", icon: "php.svg", category: "backend" },
-    { name: "Node.js", icon: "nodejs.svg", category: "backend" },
-    { name: "Express", icon: "express.svg", category: "backend" },
-    { name: "MySQL", icon: "mysql.svg", category: "database" },
-    { name: "MongoDB", icon: "mongodb.svg", category: "database" },
-    { name: "PostgreSQL", icon: "postgresql.svg", category: "database" },
-    { name: "Firebase", icon: "firebase.svg", category: "database" },
-    { name: "Flutter", icon: "flutter.svg", category: "mobile" },
-    { name: "React Native", icon: "react.svg", category: "mobile" },
-    { name: "Figma", icon: "figma.svg", category: "design" },
-    { name: "Adobe XD", icon: "adobexd.svg", category: "design" },
-    { name: "Photoshop", icon: "photoshop.svg", category: "design" },
-    { name: "Illustrator", icon: "illustrator.svg", category: "design" },
-    { name: "After Effects", icon: "aftereffects.svg", category: "design" },
-    { name: "Premiere Pro", icon: "premierepro.svg", category: "design" },
+    { name: "HTML", icon: "tech/html.svg", category: "frontend" },
+    { name: "CSS", icon: "tech/css.svg", category: "frontend" },
+    { name: "JavaScript", icon: "tech/javascript.svg", category: "frontend" },
+    { name: "React", icon: "tech/react.svg", category: "frontend" },
+    { name: "Vue", icon: "tech/vue.svg", category: "frontend" },
+    { name: "Next.js", icon: "tech/next-js.svg", category: "frontend" },
+    { name: "Tailwind CSS", icon: "tech/tailwind.svg", category: "frontend" },
+    { name: "Bootstrap", icon: "tech/bootstrap.svg", category: "frontend" },
+    { name: "Laravel", icon: "tech/laravel.svg", category: "backend" },
+    { name: "PHP", icon: "tech/php.svg", category: "backend" },
+    // { name: "Node.js", icon: "nodejs.svg", category: "backend" },
+    // { name: "Express", icon: "express.svg", category: "backend" },
+    { name: "MySQL", icon: "tech/mysql.svg", category: "database" },
+    { name: "MongoDB", icon: "tech/mongodb.svg", category: "database" },
+    { name: "PostgreSQL", icon: "tech/postgresql.svg", category: "database" },
+    { name: "Firebase", icon: "tech/firebase.svg", category: "database" },
+    { name: "Flutter", icon: "tech/flutter.svg", category: "mobile" },
+    { name: "Java", icon: "tech/java.svg", category: "mobile" },
+    { name: "Kotlin", icon: "tech/kotlin.svg", category: "mobile" },
+    // { name: "React Native", icon: "react.svg", category: "mobile" },
+    { name: "Figma", icon: "tech/figma.svg", category: "design" },
+    { name: "Adobe XD", icon: "tech/adobexd.svg", category: "design" },
+    { name: "Photoshop", icon: "tech/photoshop.svg", category: "design" },
+    { name: "Illustrator", icon: "tech/illustrator.svg", category: "design" },
+    { name: "After Effects", icon: "tech/aftereffect.svg", category: "design" },
+    { name: "Premiere Pro", icon: "tech/premier.svg", category: "design" },
   ]
 
   const filteredTechnologies =
@@ -72,22 +75,22 @@ export default function TechStackSection() {
           transition={{ duration: 0.5 }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
         >
-          {filteredTechnologies.map((tech, index) => (
-            <motion.div
-              key={tech.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.05 * index }}
-              className="h-full"
-            >
-              <Card className="h-full glassmorphism hover:shadow-md transition-all duration-300 flex flex-col items-center justify-center p-4 text-center">
-                <div className="w-12 h-12 mb-3 flex items-center justify-center">
-                  <img src={`/placeholder.svg?height=48&width=48`} alt={tech.name} className="max-w-full max-h-full" />
-                </div>
-                <span className="text-sm font-medium">{tech.name}</span>
-              </Card>
-            </motion.div>
-          ))}
+        {filteredTechnologies.map((tech, index) => (
+          <motion.div
+            key={tech.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.05 * index }}
+            className="h-full"
+          >
+            <Card className="h-full glassmorphism hover:shadow-md transition-all duration-300 flex flex-col items-start justify-center p-4 text-center">
+              <div className="w-12 h-12 mb-3 flex items-center justify-center">
+                <img src={`/${tech.icon}`} alt={tech.name} className="max-w-full max-h-full" />
+              </div>
+              <span className="text-sm font-medium">{tech.name}</span>
+            </Card>
+          </motion.div>
+        ))}
         </motion.div>
       </div>
     </section>
