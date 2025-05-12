@@ -75,7 +75,7 @@ export default function PortfolioSection() {
     },
     {
       id: "bemkmipb",
-      title: "Redesign IPB University Website",
+      title: "BEM KM IPB – Organization Profile Website",
       category: "ui",
       image: "/portfolio/uiux/bemkm.png?height=400&width=600",
       technologies: ["Figma","Adobe Photoshop","Adobe Illustrator","Zeplin"],  
