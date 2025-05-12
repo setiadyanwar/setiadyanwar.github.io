@@ -198,7 +198,7 @@ export default function PortfolioSection() {
     },
     {
       id: "famiapp",
-      title: "Redesign Checkout Screen FamiApp - UI Mobile App",
+      title: "FamiApp Redesign Checkout Flow - UI Mobile App",
       category: "ui",
       image: "/placeholder.svg?height=400&width=600",
       technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],

@@ -1068,7 +1068,7 @@ export const portfolioItems = [
 export const workExperiences = [
   {
     title: "Web Developer Programmer (Internship)",
-    company: "Eduwork",
+    company: "Eduwork | PT Sinergi Insan Andalan",
     logo: "/experience/eduwork.png?height=40&width=40",
     period: "Apr 2025 – Present",
     description:
@@ -1164,8 +1164,8 @@ export const educationExperiences = [
   },
   {
     title: "Web Development Bootcamp",
-    company: "Code Academy",
-    logo: "/placeholder.svg?height=40&width=40",
+    company: "Dicoding",
+    logo: "/experience/dicoding.png?height=40&width=40",
     period: "2020",
     description:
       "Completed an intensive bootcamp focused on React, Node.js, and modern web practices.",
@@ -1183,7 +1183,7 @@ export const organizationExperiences = [
   {
     title: "Core Team Product Development & UX",
     company: "Google Developer Group on Campus (IPB University)",
-    logo: "/placeholder.svg?height=40&width=40",
+    logo: "/experience/gdsc.png?height=40&width=40",
     period: "Dec 2024 – Present",
     description:
       "Conducted workshops and mentoring on UI/UX and no-code programming, managed social media, and fostered active community engagement.",
@@ -1202,7 +1202,7 @@ export const organizationExperiences = [
   {
     title: "Mentor UI/UX Designer",
     company: "HIMAVO MICRO IT",
-    logo: "/placeholder.svg?height=40&width=40",
+    logo: "/experience/microit.png?height=40&width=40",
     period: "Jan 2024 – Sept 2024",
     description:
       "Mentored 30+ students in UI/UX, conducted design training, tool setup, and guided them through hands-on projects.",
@@ -1216,7 +1216,7 @@ export const organizationExperiences = [
   {
     title: "Head of Event Company Visit 2024",
     company: "HIMAVO MICRO IT",
-    logo: "/placeholder.svg?height=40&width=40",
+    logo: "/experience/microit.png?height=40&width=40",
     period: "May 2024 - Jul 2024",
     description:
       "Led event planning and coordination for company visits involving 75 students, engaging stakeholders, and managing budgets.",
@@ -1235,7 +1235,7 @@ export const organizationExperiences = [
   {
     title: "Web Developer & UI/UX",
     company: "AGRIDATION",
-    logo: "/placeholder.svg?height=40&width=40",
+    logo: "/experience/agridation-logo.png?height=40&width=40",
     period: "Jan 2024 – Present",
     description:
       "Designed and developed an informational website and payment portal for competitions, increasing engagement and performance.",
