@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Github, Linkedin, Twitter, Mail } from "lucide-react"
+import { Github, Linkedin, Instagram, Mail } from "lucide-react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -15,28 +15,28 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <Link
-                href="https://github.com"
+                href="https://github.com/setiadyanwar"
                 className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/setiadyanwar"
                 className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
               <Link
-                href="https://twitter.com"
+                href="https://instagram.com/setiadyanwarr"
                 className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
+                <Instagram className="h-5 w-5" />
+                <span className="sr-only">Instagram</span>
               </Link>
               <Link
-                href="mailto:contact@example.com"
+                href="mailto:setiadyanwar@gmail.com"
                 className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
                 <Mail className="h-5 w-5" />
@@ -50,7 +50,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="#about"
+                  href="/about"
                   className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
                   About Me
@@ -58,15 +58,15 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#skills"
+                  href="/experience"
                   className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
-                  Skills
+                  Experience
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#portfolio"
+                  href="/portfolio"
                   className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
                   Portfolio
@@ -74,7 +74,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
                   Contact
@@ -85,9 +85,9 @@ export default function Footer() {
 
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Contact</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">Jakarta, Indonesia</p>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">contact@example.com</p>
-            <p className="text-gray-600 dark:text-gray-400">+62 123 456 7890</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-2">Tangerang, Indonesia</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-2">setiadyanwar@gmail.com</p>
+            <p className="text-gray-600 dark:text-gray-400">+629662007938</p>
           </div>
         </div>
 
