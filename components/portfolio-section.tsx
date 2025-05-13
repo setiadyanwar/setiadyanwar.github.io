@@ -137,7 +137,7 @@ export default function PortfolioSection() {
       id: "gobojongsoang",
       title: "Gobojongsoang.id Reporting Platform - UI Website",
       category: "ui",
-      image: "/portfolio/uiux/Gobojongsoang.png?height=400&width=600",
+      image: "/portfolio/uiux/GObojongsoang.png?height=400&width=600",
       technologies: ["Figma", "Adobe XD", "Illustrator"],
       // demoUrl: "#",
       // repoUrl: "Gobojongsoang.id",

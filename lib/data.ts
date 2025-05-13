@@ -523,7 +523,7 @@ export const portfolioItems = [
     id: "gobojongsoang",
     title: "Gobojongsoang.id Reporting Platform - UI Website",
     category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/portfolio/uiux/GObojongsoang.png?height=400&width=600",
     // additionalImages: [
     //   "/portfolio/ui/gobojongsoang-1.png?height=180&width=320",
     //   "/portfolio/ui/gobojongsoang-2.png?height=180&width=320",
@@ -662,7 +662,7 @@ export const portfolioItems = [
     id: "hotelid",
     title: "Hotel.id Booking Hotel - UI Website",
     category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/portfolio/uiux/hotelid.png?height=400&width=600",
     // additionalImages: [
     //   "/portfolio/ui/hotelid-1.png?height=180&width=320",
     //   "/portfolio/ui/hotelid-2.png?height=180&width=320",
