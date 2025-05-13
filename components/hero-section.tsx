@@ -245,12 +245,9 @@ export default function HeroSection() {
             >
               <TypeAnimation
                 sequence={[
-                  "UI/UX Designer specialist",
-                  1000,
-                  "Frontend Web Developer",
-                  1000,
-                  "UI/UX Design and Frontend Web Developer specialist with over 2 years of experience focusing on User Interface and User Experience.",
-                  1000,
+                  "BNSP-Certified Web Programmer", 1000,
+                  "Frontend Developer & UI/UX Enthusiast", 1000,
+                  "Web Programmer with BNSP Certification and over 2 years of experience in Frontend Development and UI/UX Design", 1000
                 ]}
                 wrapper="p"
                 speed={50}

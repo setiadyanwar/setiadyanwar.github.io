@@ -144,11 +144,11 @@ export default function AboutSection() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Setiady Ibrahim Anwar</h2>
 
             <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-              Frontend Developer & UI/UX Designer
+              Web Developer & UI/UX Designer
             </h3>
 
             <p className="text-gray-700 dark:text-gray-300">
-              I'm a passionate Frontend Developer and UI/UX Designer with a keen eye for detail and a commitment to
+              I'm a passionate Web Developer specialize in frontend developer and UI/UX Designer with a keen eye for detail and a commitment to
               creating exceptional user experiences. With expertise in modern web technologies, I specialize in building
               responsive, accessible, and visually appealing interfaces that balance aesthetics with functionality.
             </p>

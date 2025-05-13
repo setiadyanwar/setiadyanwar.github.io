@@ -268,10 +268,10 @@ export const portfolioItems = [
     title: "Nexaid - Dashboard Website",
     category: "web",
     image: "/portfolio/web/nexaid.png?height=400&width=600",
-    additionalImages: [
-      "/placeholder.svg?height=180&width=320",
-      "/placeholder.svg?height=180&width=320",
-    ],
+    // additionalImages: [
+    //   "/placeholder.svg?height=180&width=320",
+    //   "/placeholder.svg?height=180&width=320",
+    // ],
     technologies: ["React", "Typescript", "Laravel", "TailwindCSS"],
     description:
       "Nexaid is a web-based dashboard designed for managing electronic products efficiently. Built with React, TypeScript, Laravel, and TailwindCSS, it provides an intuitive interface for inventory management, stock tracking, and product data visualization. With a modern UI and smooth user interactions, Nexaid enables businesses to streamline product organization while maintaining a responsive and scalable system.",
@@ -500,22 +500,22 @@ export const portfolioItems = [
       {
         title: "User Research",
         description: "Gathered insights on e-learning UX standards.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Prototype Design",
         description: "Built clickable prototypes in Figma.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Visual Polish",
         description: "Applied branding and iconography in Illustrator.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
       {
         title: "Competition Submission",
         description: "Presented to judges resulting in 2nd place.",
-        image: "/placeholder.svg?height=300&width=400",
+        image: null,
       },
     ],
   },
@@ -524,10 +524,10 @@ export const portfolioItems = [
     title: "Gobojongsoang.id Reporting Platform - UI Website",
     category: "ui",
     image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/gobojongsoang-1.png?height=180&width=320",
-      "/portfolio/ui/gobojongsoang-2.png?height=180&width=320",
-    ],
+    // additionalImages: [
+    //   "/portfolio/ui/gobojongsoang-1.png?height=180&width=320",
+    //   "/portfolio/ui/gobojongsoang-2.png?height=180&width=320",
+    // ],
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Gobojongsoang.id is a community reporting platform built in collaboration with Bandung city government to allow citizens to submit feedback and complaints.",
@@ -613,11 +613,11 @@ export const portfolioItems = [
     id: "transmate",
     title: "Transmate - AR Transit Platform",
     category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/transmate-1.png?height=180&width=320",
-      "/portfolio/ui/transmate-2.png?height=180&width=320",
-    ],
+    image: "/portfolio/uiux/Transmate.png?height=400&width=600",
+    // additionalImages: [
+    //   "/portfolio/ui/transmate-1.png?height=180&width=320",
+    //   "/portfolio/ui/transmate-2.png?height=180&width=320",
+    // ],
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Transmate integrates AR features to enhance the Transjakarta transit experience by overlaying directions, station information, and live arrival times through the mobile camera view.",
@@ -663,17 +663,17 @@ export const portfolioItems = [
     title: "Hotel.id Booking Hotel - UI Website",
     category: "ui",
     image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/hotelid-1.png?height=180&width=320",
-      "/portfolio/ui/hotelid-2.png?height=180&width=320",
-    ],
+    // additionalImages: [
+    //   "/portfolio/ui/hotelid-1.png?height=180&width=320",
+    //   "/portfolio/ui/hotelid-2.png?height=180&width=320",
+    // ],
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Hotel.id is a UI concept for a hotel booking website offering search, filtering, and booking management for users.",
     role: "UI/UX Designer responsible for designing booking flows and responsive web layouts.",
     challenges:
       "Creating a seamless multi-step booking process and optimizing for mobile and desktop views.",
-    demoUrl: "#",
+    // demoUrl: "#",
     repoUrl: "#",
     projectSteps: [
       {
@@ -706,10 +706,10 @@ export const portfolioItems = [
     title: "SwiftCare Crowdfunding Platform - Mobile App",
     category: "mobile",
     image: "/portfolio/mobile/swiftcare.png?height=400&width=600",
-    additionalImages: [
-      "/portfolio/mobile/swiftcare-1.png?height=180&width=320",
-      "/portfolio/mobile/swiftcare-2.png?height=180&width=320",
-    ],
+    // additionalImages: [
+    //   "/portfolio/mobile/swiftcare-1.png?height=180&width=320",
+    //   "/portfolio/mobile/swiftcare-2.png?height=180&width=320",
+    // ],
     technologies: [
       "Kotlin",
       "Firebase",
@@ -794,19 +794,19 @@ export const portfolioItems = [
     id: "pembimbingid",
     title: "Dashboard Pembimbing.id - Academic Mentoring Platform",
     category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/pembimbingid-1.png?height=180&width=320",
-      "/portfolio/ui/pembimbingid-2.png?height=180&width=320",
-    ],
+    image: "/portfolio/uiux/Pembimbing.id.png?height=400&width=600",
+    // additionalImages: [
+    //   "/portfolio/ui/pembimbingid-1.png?height=180&width=320",
+    //   "/portfolio/ui/pembimbingid-2.png?height=180&width=320",
+    // ],
     technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
     description:
       "Pembimbing.id dashboard UI supports academic mentors in assigning tasks, tracking progress, and communications with mentees.",
     role: "UI/UX Designer creating mentor and mentee interface screens.",
     challenges:
       "Balancing administrative features with user-friendly communication tools.",
-    demoUrl: "#",
-    repoUrl: "#",
+    demoUrl: "https://pembimbing.kawankerja.id/",
+    repoUrl: "https://www.linkedin.com/posts/setiadyanwar_uiux-redesign-for-pembimbingid-dashboard-activity-7250038967906025474-raVw?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
     projectSteps: [
       {
         title: "Stakeholder Interviews",
@@ -831,87 +831,87 @@ export const portfolioItems = [
       },
     ],
   },
-  {
-    id: "investra",
-    title: "Investra Financial Intelligence Platform - UI Website",
-    category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/investra-1.png?height=180&width=320",
-      "/portfolio/ui/investra-2.png?height=180&width=320",
-    ],
-    technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
-    description:
-      "Investra is a UI concept for a financial intelligence dashboard offering market data, analytics, and investment tracking.",
-    role: "UI/UX Designer responsible for dashboard layout and data visualization components.",
-    challenges:
-      "Visualizing complex financial data clearly and ensuring responsiveness.",
-    demoUrl: "#",
-    repoUrl: "#",
-    projectSteps: [
-      {
-        title: "Market Research",
-        description: "Researched financial dashboard standards and user needs.",
-        image: null,
-      },
-      {
-        title: "Dashboard Wireframes",
-        description: "Created low-fi layouts for charts and tables.",
-        image: null,
-      },
-      {
-        title: "Visual Design",
-        description: "Designed chart components and UI kit in Figma.",
-        image: null,
-      },
-      {
-        title: "Prototype Testing",
-        description: "Validated interactions and readability with test users.",
-        image: null,
-      },
-    ],
-  },
-  {
-    id: "temanibu",
-    title: "Teman Ibu Freelance Job Marketplace - UI Mobile App",
-    category: "ui",
-    image: "/placeholder.svg?height=400&width=600",
-    additionalImages: [
-      "/portfolio/ui/temanibu-1.png?height=180&width=320",
-      "/portfolio/ui/temanibu-2.png?height=180&width=320",
-    ],
-    technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
-    description:
-      "Teman Ibu is a mobile marketplace UI for freelance child care and household support services.",
-    role: "UI/UX Designer crafting service listing and booking interfaces.",
-    challenges:
-      "Ensuring trust and clarity in service descriptions and booking flows.",
-    demoUrl: "#",
-    repoUrl: "#",
-    projectSteps: [
-      {
-        title: "User Interviews",
-        description: "Understood parent needs and care provider expectations.",
-        image: null,
-      },
-      {
-        title: "Flow Mapping",
-        description: "Mapped service discovery to booking confirmation steps.",
-        image: null,
-      },
-      {
-        title: "UI Prototyping",
-        description: "Designed key screens in Figma and Photoshop.",
-        image: null,
-      },
-      {
-        title: "Usability Testing",
-        description:
-          "Tested with users to refine trust signals and ease of booking.",
-        image: null,
-      },
-    ],
-  },
+  // {
+  //   id: "investra",
+  //   title: "Investra Financial Intelligence Platform - UI Website",
+  //   category: "ui",
+  //   image: "/placeholder.svg?height=400&width=600",
+  //   additionalImages: [
+  //     "/portfolio/ui/investra-1.png?height=180&width=320",
+  //     "/portfolio/ui/investra-2.png?height=180&width=320",
+  //   ],
+  //   technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
+  //   description:
+  //     "Investra is a UI concept for a financial intelligence dashboard offering market data, analytics, and investment tracking.",
+  //   role: "UI/UX Designer responsible for dashboard layout and data visualization components.",
+  //   challenges:
+  //     "Visualizing complex financial data clearly and ensuring responsiveness.",
+  //   demoUrl: "#",
+  //   repoUrl: "#",
+  //   projectSteps: [
+  //     {
+  //       title: "Market Research",
+  //       description: "Researched financial dashboard standards and user needs.",
+  //       image: null,
+  //     },
+  //     {
+  //       title: "Dashboard Wireframes",
+  //       description: "Created low-fi layouts for charts and tables.",
+  //       image: null,
+  //     },
+  //     {
+  //       title: "Visual Design",
+  //       description: "Designed chart components and UI kit in Figma.",
+  //       image: null,
+  //     },
+  //     {
+  //       title: "Prototype Testing",
+  //       description: "Validated interactions and readability with test users.",
+  //       image: null,
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: "temanibu",
+  //   title: "Teman Ibu Freelance Job Marketplace - UI Mobile App",
+  //   category: "ui",
+  //   image: "/placeholder.svg?height=400&width=600",
+  //   additionalImages: [
+  //     "/portfolio/ui/temanibu-1.png?height=180&width=320",
+  //     "/portfolio/ui/temanibu-2.png?height=180&width=320",
+  //   ],
+  //   technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
+  //   description:
+  //     "Teman Ibu is a mobile marketplace UI for freelance child care and household support services.",
+  //   role: "UI/UX Designer crafting service listing and booking interfaces.",
+  //   challenges:
+  //     "Ensuring trust and clarity in service descriptions and booking flows.",
+  //   demoUrl: "#",
+  //   repoUrl: "#",
+  //   projectSteps: [
+  //     {
+  //       title: "User Interviews",
+  //       description: "Understood parent needs and care provider expectations.",
+  //       image: null,
+  //     },
+  //     {
+  //       title: "Flow Mapping",
+  //       description: "Mapped service discovery to booking confirmation steps.",
+  //       image: null,
+  //     },
+  //     {
+  //       title: "UI Prototyping",
+  //       description: "Designed key screens in Figma and Photoshop.",
+  //       image: null,
+  //     },
+  //     {
+  //       title: "Usability Testing",
+  //       description:
+  //         "Tested with users to refine trust signals and ease of booking.",
+  //       image: null,
+  //     },
+  //   ],
+  // },
   {
     id: "redesignipb",
     title: "Redesign IPB University Website",
@@ -1062,6 +1062,108 @@ export const portfolioItems = [
       },
     ],
   },
+  {
+      id: "famiapp",
+      title: "FamiApp – Checkout Flow Redesign (Mobile UI)",
+      category: "ui",
+      image: "/portfolio/uiux/FamiApp.png?height=400&width=600",
+      // additionalImages: [
+      //   "/portfolio/uiux/FamiApp-1.png?height=180&width=320",
+      //   "/portfolio/uiux/FamiApp-2.png?height=180&width=320",
+      //   "/portfolio/uiux/FamiApp-3.png?height=180&width=320"
+      // ],
+      technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
+      description:
+        "A comprehensive UI/UX redesign of the FamiApp mobile application, focusing on enhancing the checkout and pickup order experience. The project aimed to streamline the user journey, address usability issues, and align the interface with modern design standards.",
+      role:
+        "UI/UX Designer responsible for conducting user research, creating wireframes and high-fidelity mockups, and developing interactive prototypes to improve the checkout flow.",
+      challenges:
+        "Identifying and resolving pain points in the existing checkout process, such as complex stock checking procedures and lack of clear notifications, while ensuring a user-friendly and efficient interface.",
+      repoUrl:
+        "https://www.linkedin.com/posts/setiadyanwar_study-case-to-redesign-the-checkout-screen-activity-7221889939687268352-4JNc?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
+      projectSteps: [
+        {
+          title: "User Research & Pain Point Analysis",
+          description:
+            "Conducted interviews and analyzed user reviews to identify key issues in the existing checkout flow, such as repetitive stock checks and inadequate order notifications.",
+          image: null,
+        },
+        {
+          title: "Competitive Analysis",
+          description:
+            "Studied similar applications like GoFood, Kopi Kenangan, and Fore to understand best practices in checkout processes and identify opportunities for improvement.",
+          image: null,
+        },
+        {
+          title: "Wireframing & User Flow Redesign",
+          description:
+            "Developed low-fidelity wireframes and restructured the user flow to simplify the checkout process, allowing users to select a store first and view available products accordingly.",
+          image: null,
+        },
+        {
+          title: "High-Fidelity Mockups & Design System",
+          description:
+            "Created detailed UI designs and established a design system to ensure consistency across the application, incorporating brand colors, typography, and components.",
+          image: null,
+        },
+        {
+          title: "Interactive Prototyping & Usability Testing",
+          description:
+            "Built interactive prototypes and conducted usability testing sessions to gather feedback and iterate on the design, enhancing user satisfaction and efficiency.",
+          image: null,
+        }
+      ]
+  },
+  {
+    id: "wingspos",
+    title: "WingsPOS – Point of Sale Web Application",
+    category: "web",
+    image: "/portfolio/web/wingspos.png?height=400&width=600",
+    additionalImages: [
+      "/portfolio/web/wingspos-1.png?height=180&width=320",
+    ],
+    technologies: ["Laravel", "TailwindCSS", "MySQL", "HTML/CSS", "JavaScript"],
+    description:
+      "WingsPOS is a web-based Point of Sale (POS) system developed for Ayam Geprek Indonesia to streamline sales, inventory, and order management across multiple outlets. The application offers real-time transaction processing, role-based access control, and comprehensive reporting features.",
+    role:
+      "Full-Stack Developer responsible for designing the database schema, developing backend APIs with Laravel, implementing responsive frontend interfaces using TailwindCSS, and deploying the application to a live server.",
+    challenges:
+      "Integrating real-time inventory updates across multiple branches, ensuring secure authentication and authorization for different user roles (admin, cashier), and optimizing the system for high-volume transaction processing.",
+    demoUrl: "https://ayamgeprek.id/",
+    repoUrl: "https://github.com/setiadyanwar/wingspos",
+    projectSteps: [
+      {
+        title: "Requirement Gathering & System Design",
+        description:
+          "Collaborated with stakeholders to identify key functionalities such as sales processing, inventory tracking, and user management. Designed the system architecture and database schema to accommodate multi-branch operations.",
+        image: null,
+      },
+      {
+        title: "Backend Development with Laravel",
+        description:
+          "Developed RESTful APIs for handling products, orders, users, and reports. Implemented authentication and authorization mechanisms to manage access control for different user roles.",
+        image: null,
+      },
+      {
+        title: "Frontend Implementation with TailwindCSS",
+        description:
+          "Built responsive user interfaces for the dashboard, sales, and inventory modules using TailwindCSS. Ensured compatibility across various devices and screen sizes.",
+        image: null,
+      },
+      {
+        title: "Testing & Quality Assurance",
+        description:
+          "Conducted unit and integration testing to ensure system reliability. Performed user acceptance testing (UAT) with actual users to gather feedback and make necessary improvements.",
+        image: null,
+      },
+      {
+        title: "Deployment & Maintenance",
+        description:
+          "Deployed the application to a production server, configured domain settings, and set up SSL certificates. Provided ongoing maintenance and updates based on user feedback and changing business needs.",
+        image: null,
+      }
+    ]
+  },
 ];
 
 // Work experience data
@@ -1163,19 +1265,19 @@ export const educationExperiences = [
     ],
   },
   {
-    title: "Web Development Bootcamp",
+    title: "Fundamental Web Programming Course",
     company: "Dicoding",
     logo: "/experience/dicoding.png?height=40&width=40",
-    period: "2020",
+    period: "2024",
     description:
-      "Completed an intensive bootcamp focused on React, Node.js, and modern web practices.",
-    skills: ["JavaScript", "React", "Node.js", "MongoDB"],
+      "Completed a foundational course focusing on the basics of web development using HTML and CSS.",
+    skills: ["HTML", "CSS", "Javascript", "Responsive Design", "Web Development"],
     details: [
-      "Built multiple full-stack applications using MERN stack",
-      "Learned best practices in web development and deployment",
-      "Collaborated on group projects to enhance teamwork skills",
+      "Learned semantic HTML structure and responsive design principles",
+      "Built simple static websites as study cases",
+      "Gained understanding of fundamental web development concepts"
     ],
-  },
+  }
 ];
 
 // Organization experience data
