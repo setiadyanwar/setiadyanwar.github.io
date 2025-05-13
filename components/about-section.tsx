@@ -49,17 +49,17 @@ export default function AboutSection() {
         "Professional certification from the National Professional Certification Agency (BNSP) validating my expertise in web development and design.",
     },
     {
-      src: "/placeholder.svg?height=128&width=128",
-      alt: "Additional photo 1",
-      title: "Project Showcase",
-      description: "Working on a collaborative project with my team, focusing on user experience and interface design.",
+      src: "/sertifikat/google.png?height=128&width=128",
+      alt: "ux sertif",
+      title: "Foundations of User Experience (UX) Design",
+      description:  "Gained a solid foundation in UX design principles, conducted user research through interviews, surveys, and usability studies, applied the design thinking framework to solve complex problems, and created wireframes and interactive prototypes to visualize and validate design ideas.",
     },
     {
-      src: "/placeholder.svg?height=128&width=128",
-      alt: "Additional photo 2",
-      title: "Design Workshop",
+      src: "/sertifikat/sertif-dicoding.png?height=128&width=128",
+      alt: "dicoding",
+      title: "Fundamentals of Web Development",
       description:
-        "Participating in a design thinking workshop to enhance problem-solving skills and creative approaches.",
+        "Completed a comprehensive course on web development fundamentals, covering HTML, CSS, and JavaScript.",
     },
   ]
 

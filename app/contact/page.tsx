@@ -25,9 +25,24 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission logic here
-    console.log(formData)
-    alert("Thank you for your message! I'll get back to you soon.")
+
+    // Nomor WhatsApp (format internasional tanpa tanda +, misal '628962007938')
+    const phone = "628962007938"
+
+    // Bangun teks pesan
+    const text = `Contact Form Submission:
+    Name: ${formData.name}
+    Email: ${formData.email}
+    Subject: ${formData.subject}
+    Message: ${formData.message}`
+
+    // Encode teks
+    const encoded = encodeURIComponent(text)
+
+    // Buka WhatsApp chat
+    window.open(`https://wa.me/${phone}?text=${encoded}`, "_blank")
+
+    // Reset form
     setFormData({ name: "", email: "", subject: "", message: "" })
   }
 
@@ -54,7 +69,7 @@ export default function ContactPage() {
                 <Mail className="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-4 mt-1" />
                 <div>
                   <h3 className="font-medium text-gray-900 dark:text-gray-100">Email</h3>
-                  <p className="text-gray-600 dark:text-gray-400">contact@example.com</p>
+                  <p className="text-gray-600 dark:text-gray-400">setiadyanwar@gmail.com</p>
                 </div>
               </div>
 
@@ -62,7 +77,7 @@ export default function ContactPage() {
                 <Phone className="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-4 mt-1" />
                 <div>
                   <h3 className="font-medium text-gray-900 dark:text-gray-100">Phone</h3>
-                  <p className="text-gray-600 dark:text-gray-400">+62 123 456 7890</p>
+                  <p className="text-gray-600 dark:text-gray-400">+62 8966 2007 938</p>
                 </div>
               </div>
 
@@ -70,7 +85,7 @@ export default function ContactPage() {
                 <MapPin className="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-4 mt-1" />
                 <div>
                   <h3 className="font-medium text-gray-900 dark:text-gray-100">Location</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Jakarta, Indonesia</p>
+                  <p className="text-gray-600 dark:text-gray-400">Tangerang, Indonesia</p>
                 </div>
               </div>
             </div>
