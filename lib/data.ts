@@ -14,7 +14,7 @@ export const portfolioItems = [
     role: "Lead Frontend Developer and UI/UX Designer responsible for the entire website from concept to implementation.",
     challenges:
       "Combining three distinct goals branding, education, and service sales—into a single unified experience without overwhelming the user. I applied a modular design approach using atomic components and consistent layout grids, Flexbox, enabling scalable and maintainable development. By focusing on clarity, navigation flow, and performance (lazy loading, optimized images), we delivered a platform that feels cohesive and efficient across all devices.",
-    demoUrl: "kreavoks.my.id",
+    demoUrl: "https://kreavoks.my.id",
     // repoUrl: "https://github.com/example",
     projectSteps: [
       {
