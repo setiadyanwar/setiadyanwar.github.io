@@ -87,7 +87,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Contact</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-2">Tangerang, Indonesia</p>
             <p className="text-gray-600 dark:text-gray-400 mb-2">setiadyanwar@gmail.com</p>
-            <p className="text-gray-600 dark:text-gray-400">+629662007938</p>
+            <p className="text-gray-600 dark:text-gray-400">+6289662007938</p>
           </div>
         </div>
 
