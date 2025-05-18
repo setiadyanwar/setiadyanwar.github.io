@@ -297,7 +297,7 @@ export default function HeroSection() {
                 size="lg"
                 className="border-indigo-300 dark:border-indigo-800 rounded-full px-8 relative overflow-hidden group"
               >
-                <Link href="#cv">
+                <Link href="/cv/cv_setiady.pdf">
                   <span className="relative z-10 group-hover:text-white dark:group-hover:text-white transition-colors duration-300">
                     My CV
                   </span>

@@ -85,7 +85,11 @@ export default function TechStackSection() {
           >
             <Card className="h-full glassmorphism hover:shadow-md transition-all duration-300 flex flex-col items-start justify-center p-4 text-center">
               <div className="w-12 h-12 mb-3 flex items-center justify-center">
-                <img src={`/${tech.icon}`} alt={tech.name} className="max-w-full max-h-full" />
+                <img
+                  src={`/${tech.icon}`}
+                  alt={tech.name}
+                  className={`max-w-full max-h-full ${tech.name === "Next.js" ? "dark:filter dark:invert" : ""}`}
+                />
               </div>
               <span className="text-sm font-medium">{tech.name}</span>
             </Card>

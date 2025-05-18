@@ -209,7 +209,7 @@ export default function SkillsShowcase() {
                   <img
                     src={skill.icon}
                     alt={skill.name}
-                    className="w-10 h-10 md:w-12 md:h-12"
+                    className={`w-10 h-10 md:w-12 md:h-12 ${skill.icon === "Next.js" ? "dark:filter dark:invert" : ""}`}
                     style={{ transform: `scale(${skill.size})` }}
                   />
                 </motion.div>
