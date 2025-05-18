@@ -104,7 +104,7 @@ export default function HeroSection() {
               </motion.div>
 
               <motion.div
-                className="absolute top-1/2 right-24 transform -translate-y-1/2 w-16 h-16 dark:bg-gray-800 rounded-full flex items-center justify-center"
+                className="absolute top-1/2 right-24 transform -translate-y-1/2 w-16 h-16 flex items-center justify-center"
                 animate={{ x: [0, 5, 0], rotate: [0, 10, 0] }}
                 transition={{
                   duration: 4,
@@ -453,7 +453,7 @@ export default function HeroSection() {
               </motion.div>
 
               <motion.div
-                className="absolute top-1/3 -right-6 w-24 h-24 dark:bg-gray-800 rounded-full flex items-center justify-center"
+                className="absolute top-1/3 -right-6 w-24 h-24 flex items-center justify-center"
                 animate={{ y: [0, -20, 0, 20, 0] }}
                 transition={{
                   duration: 4,
