@@ -278,7 +278,7 @@ export const portfolioItems = [
     role: "Web Developer responsible for building a responsive and interactive dashboard for managing electronic products.",
     challenges:
       "Optimizing performance, integrating frontend and backend efficiently, ensuring scalable UI, managing state effectively, and maintaining data security.",
-    demoUrl: "nexaid.osk.dom.my.id",
+    demoUrl: "https://nexaid.osk.dom.my.id",
     repoUrl: "https://github.com/setiadyanwar/Nexaid",
     projectSteps: [
       {
