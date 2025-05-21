@@ -11,7 +11,7 @@ export const portfolioItems = [
     technologies: ["React", "Laravel", "TailwindCSS"],
     description:
       "Kreavoks is a multi-purpose platform built to support personal branding, deliver e-learning content, and attract clients for custom software development services. Designed to empower digital talents, Kreavoks also aims to open job opportunities for mentors by connecting them with students and companies in need of guidance, training, or development services. The platform includes a service showcase, a mentorship recruitment form, an LMS feature, and a booking system.",
-    role: "Lead Frontend Developer and UI/UX Designer responsible for the entire website from concept to implementation.",
+    role: "Lead Developer and Fullstack Web Developer responsible for the entire website from concept to implementation.",
     challenges:
       "Combining three distinct goals branding, education, and service sales—into a single unified experience without overwhelming the user. I applied a modular design approach using atomic components and consistent layout grids, Flexbox, enabling scalable and maintainable development. By focusing on clarity, navigation flow, and performance (lazy loading, optimized images), we delivered a platform that feels cohesive and efficient across all devices.",
     demoUrl: "https://kreavoks.my.id",
