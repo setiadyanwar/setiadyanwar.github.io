@@ -8,7 +8,7 @@ export const portfolioItems = [
       "/portfolio/web/kreavoks-1.png?height=180&width=320",
       "/portfolio/web/kreavoks-2.png?height=180&width=320",
     ],
-    technologies: ["React", "Laravel", "TailwindCSS"],
+    technologies: ["React", "Laravel", "TailwindCSS","Typescript", "MySQL"],
     description:
       "Kreavoks is a multi-purpose platform built to support personal branding, deliver e-learning content, and attract clients for custom software development services. Designed to empower digital talents, Kreavoks also aims to open job opportunities for mentors by connecting them with students and companies in need of guidance, training, or development services. The platform includes a service showcase, a mentorship recruitment form, an LMS feature, and a booking system.",
     role: "Lead Developer and Fullstack Web Developer responsible for the entire website from concept to implementation.",
