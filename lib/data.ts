@@ -8,7 +8,7 @@ export const portfolioItems = [
       "/portfolio/web/kreavoks-1.png?height=180&width=320",
       "/portfolio/web/kreavoks-2.png?height=180&width=320",
     ],
-    technologies: ["React", "Laravel", "TailwindCSS","Typescript", "MySQL"],
+    technologies: ["React", "Laravel", "TailwindCSS", "Typescript", "MySQL"],
     description:
       "Kreavoks is a multi-purpose platform built to support personal branding, deliver e-learning content, and attract clients for custom software development services. Designed to empower digital talents, Kreavoks also aims to open job opportunities for mentors by connecting them with students and companies in need of guidance, training, or development services. The platform includes a service showcase, a mentorship recruitment form, an LMS feature, and a booking system.",
     role: "Lead Developer and Fullstack Web Developer responsible for the entire website from concept to implementation.",
@@ -50,6 +50,57 @@ export const portfolioItems = [
     ],
   },
   {
+    id: "nobarin",
+    title: "Nobarin Movie Streaming Platform",
+    category: "web",
+    image: "/portfolio/web/nobar.png?height=400&width=600",
+    additionalImages: [
+      "/portfolio/web/nobarin-1.png?height=180&width=320",
+      "/portfolio/web/nobarin-2.png?height=180&width=320",
+    ],
+    technologies: ["Vue.js", "Pinia", "TailwindCSS", "TMDB API", "Vite"],
+    description:
+      "Nobarin is a modern movie browsing and streaming platform built using Vue.js. It fetches real-time data from the TMDB API and allows users to explore movie details, manage their favorite movies, and experience a responsive, engaging UI. Designed with a focus on smooth navigation and scalability, the platform supports dynamic routing and modular components.",
+    role: "Fullstack Developer handling frontend design, API integration, and routing logic.",
+    challenges:
+      "Integrating dynamic movie data from TMDB, managing application state using Pinia, and ensuring responsive UI across devices while maintaining clean code structure. A special focus was given to UX flow between movie browsing, details, and favorites page.",
+    demoUrl: "https://nobarin-phi.vercel.app/", // ← ganti dengan URL demo asli jika ada
+    // repoUrl: "https://github.com/username/nobarin", // ← opsional jika ingin mencantumkan
+    projectSteps: [
+      {
+        title: "Requirement Gathering & Planning",
+        description:
+          "Planning features such as movie search, favorites, and detail view using data from TMDB API.",
+        image: null,
+      },
+      {
+        title: "UI Design & Component Setup",
+        description:
+          "Designing the interface using TailwindCSS and building reusable Vue components for navbar, cards, etc.",
+        image: null,
+      },
+      {
+        title: "State Management & Routing",
+        description:
+          "Implementing Vue Router for page navigation and Pinia for centralized state handling.",
+        image: null,
+      },
+      {
+        title: "API Integration",
+        description:
+          "Fetching movie data from TMDB and dynamically rendering movie cards and detail pages.",
+        image: null,
+      },
+      {
+        title: "Testing & Deployment",
+        description:
+          "Testing responsiveness, fixing routing bugs, and deploying the app with performance optimization.",
+        image: null,
+      },
+    ],
+  },
+
+  {
     id: "upala",
     title: "Upala Company Profile & CRM Website",
     category: "web",
@@ -61,8 +112,7 @@ export const portfolioItems = [
     technologies: ["Tailwind", "Figma", "Laravel", "HTML/CSS", "MySQL"],
     description:
       "A comprehensive company profile and CRM web solution for Upala Coffee & Eatery in Jatiwaringin, Bekasi. The platform showcases the brand story, menu highlights, and provides an admin dashboard for customer management and order tracking.",
-    role:
-      "Frontend Developer & UI/UX Designer responsible for implementing UI templates and designing interactive prototypes for the company profile and CRM dashboards.",
+    role: "Frontend Developer & UI/UX Designer responsible for implementing UI templates and designing interactive prototypes for the company profile and CRM dashboards.",
     challenges:
       "Organizing extensive menu and organizational information into a cohesive profile site, ensuring intuitive CRM workflows for admins, and maintaining responsive performance across devices.",
     demoUrl: "#",
@@ -102,7 +152,8 @@ export const portfolioItems = [
   },
   {
     id: "freezemart",
-    title: "Freezemart - E-commerce Frozen Food Website with Recommendation System",
+    title:
+      "Freezemart - E-commerce Frozen Food Website with Recommendation System",
     category: "web",
     image: "/portfolio/web/freezemart.png?height=400&width=600",
     technologies: [
@@ -122,8 +173,7 @@ export const portfolioItems = [
     // Project Description
     description:
       "Freezemart is a frozen food e-commerce platform featuring a content-based recommendation system powered by TF-IDF and Cosine Similarity, and integrated with Xendit payment gateway for seamless in-app transactions.",
-    role:
-      "Full-Stack Developer responsible for implementing the frontend UI, backend logic, integrating the recommendation algorithm, and configuring Xendit payment gateway to enable secure online payments.",
+    role: "Full-Stack Developer responsible for implementing the frontend UI, backend logic, integrating the recommendation algorithm, and configuring Xendit payment gateway to enable secure online payments.",
     challenges:
       "Designing and integrating a performant recommendation system, ensuring real-time product suggestions without impacting page load times, maintaining consistency across the Laravel and Flask components, and implementing a secure payment flow via Xendit.",
     demoUrl: "https://freezemart.osk.dom.my.id",
@@ -806,7 +856,8 @@ export const portfolioItems = [
     challenges:
       "Balancing administrative features with user-friendly communication tools.",
     demoUrl: "https://pembimbing.kawankerja.id/",
-    repoUrl: "https://www.linkedin.com/posts/setiadyanwar_uiux-redesign-for-pembimbingid-dashboard-activity-7250038967906025474-raVw?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
+    repoUrl:
+      "https://www.linkedin.com/posts/setiadyanwar_uiux-redesign-for-pembimbingid-dashboard-activity-7250038967906025474-raVw?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
     projectSteps: [
       {
         title: "Stakeholder Interviews",
@@ -921,8 +972,7 @@ export const portfolioItems = [
     // Case Study Description
     description:
       "This project is a UI/UX case study for the redesign of the official IPB University website. The new design emphasizes improved navigation, responsive layouts, and a refreshed visual identity to enhance user engagement and accessibility.",
-    role:
-      "Web Designer responsible for creating the UI redesign strategy, developing wireframes, high-fidelity mockups, and interactive prototypes to deliver a modern, user-centered interface.",
+    role: "Web Designer responsible for creating the UI redesign strategy, developing wireframes, high-fidelity mockups, and interactive prototypes to deliver a modern, user-centered interface.",
     challenges:
       "Migrating legacy content to a modern layout while ensuring cross-browser compatibility, maintaining brand consistency, and improving usability across all devices.",
     demoUrl: "#",
@@ -971,11 +1021,10 @@ export const portfolioItems = [
     title: "BEM KM IPB – Organization Profile Website",
     category: "ui",
     image: "/portfolio/uiux/bemkm.png?height=400&width=600",
-    technologies: ["Figma", "Adobe XD", "Illustrator","Zeplin"],
+    technologies: ["Figma", "Adobe XD", "Illustrator", "Zeplin"],
     description:
       "A UI/UX project for the BEM KM IPB 2024 organizational profile website, showcasing the student executive board's mission, vision, structure, news, events, and contact information with a clean and modern interface.",
-    role:
-      "UI/UX Designer responsible for conducting initial analysis and user research, designing wireframes and high-fidelity mockups, building interactive prototypes, and ensuring a user-centered, accessible, and visually consistent design.",
+    role: "UI/UX Designer responsible for conducting initial analysis and user research, designing wireframes and high-fidelity mockups, building interactive prototypes, and ensuring a user-centered, accessible, and visually consistent design.",
     challenges:
       "Balancing dense informational content with a clean layout, ensuring mobile responsiveness, and aligning closely with IPB's branding guidelines.",
     projectSteps: [
@@ -1019,8 +1068,7 @@ export const portfolioItems = [
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Uvan is a fictional brand created as a UI/UX case study for a shoes e-commerce website. The Uvan site features a sleek, modern, and clean design with immersive micro-animations, delivering an intuitive and engaging online shopping experience.",
-    role:
-      "UI/UX Designer responsible for conducting user research, developing wireframes, crafting high-fidelity mockups, building interactive prototypes, and defining micro-animation specifications to produce a modern, simple, clean, and engaging design.",
+    role: "UI/UX Designer responsible for conducting user research, developing wireframes, crafting high-fidelity mockups, building interactive prototypes, and defining micro-animation specifications to produce a modern, simple, clean, and engaging design.",
     challenges:
       "Balancing a minimalist layout with immersive animations, ensuring smooth performance across devices, and maintaining visual consistency in line with the brand identity.",
     projectSteps: [
@@ -1063,70 +1111,66 @@ export const portfolioItems = [
     ],
   },
   {
-      id: "famiapp",
-      title: "FamiApp – Checkout Flow Redesign (Mobile UI)",
-      category: "ui",
-      image: "/portfolio/uiux/FamiApp.png?height=400&width=600",
-      // additionalImages: [
-      //   "/portfolio/uiux/FamiApp-1.png?height=180&width=320",
-      //   "/portfolio/uiux/FamiApp-2.png?height=180&width=320",
-      //   "/portfolio/uiux/FamiApp-3.png?height=180&width=320"
-      // ],
-      technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
-      description:
-        "A comprehensive UI/UX redesign of the FamiApp mobile application, focusing on enhancing the checkout and pickup order experience. The project aimed to streamline the user journey, address usability issues, and align the interface with modern design standards.",
-      role:
-        "UI/UX Designer responsible for conducting user research, creating wireframes and high-fidelity mockups, and developing interactive prototypes to improve the checkout flow.",
-      challenges:
-        "Identifying and resolving pain points in the existing checkout process, such as complex stock checking procedures and lack of clear notifications, while ensuring a user-friendly and efficient interface.",
-      repoUrl:
-        "https://www.linkedin.com/posts/setiadyanwar_study-case-to-redesign-the-checkout-screen-activity-7221889939687268352-4JNc?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
-      projectSteps: [
-        {
-          title: "User Research & Pain Point Analysis",
-          description:
-            "Conducted interviews and analyzed user reviews to identify key issues in the existing checkout flow, such as repetitive stock checks and inadequate order notifications.",
-          image: null,
-        },
-        {
-          title: "Competitive Analysis",
-          description:
-            "Studied similar applications like GoFood, Kopi Kenangan, and Fore to understand best practices in checkout processes and identify opportunities for improvement.",
-          image: null,
-        },
-        {
-          title: "Wireframing & User Flow Redesign",
-          description:
-            "Developed low-fidelity wireframes and restructured the user flow to simplify the checkout process, allowing users to select a store first and view available products accordingly.",
-          image: null,
-        },
-        {
-          title: "High-Fidelity Mockups & Design System",
-          description:
-            "Created detailed UI designs and established a design system to ensure consistency across the application, incorporating brand colors, typography, and components.",
-          image: null,
-        },
-        {
-          title: "Interactive Prototyping & Usability Testing",
-          description:
-            "Built interactive prototypes and conducted usability testing sessions to gather feedback and iterate on the design, enhancing user satisfaction and efficiency.",
-          image: null,
-        }
-      ]
+    id: "famiapp",
+    title: "FamiApp – Checkout Flow Redesign (Mobile UI)",
+    category: "ui",
+    image: "/portfolio/uiux/FamiApp.png?height=400&width=600",
+    // additionalImages: [
+    //   "/portfolio/uiux/FamiApp-1.png?height=180&width=320",
+    //   "/portfolio/uiux/FamiApp-2.png?height=180&width=320",
+    //   "/portfolio/uiux/FamiApp-3.png?height=180&width=320"
+    // ],
+    technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
+    description:
+      "A comprehensive UI/UX redesign of the FamiApp mobile application, focusing on enhancing the checkout and pickup order experience. The project aimed to streamline the user journey, address usability issues, and align the interface with modern design standards.",
+    role: "UI/UX Designer responsible for conducting user research, creating wireframes and high-fidelity mockups, and developing interactive prototypes to improve the checkout flow.",
+    challenges:
+      "Identifying and resolving pain points in the existing checkout process, such as complex stock checking procedures and lack of clear notifications, while ensuring a user-friendly and efficient interface.",
+    repoUrl:
+      "https://www.linkedin.com/posts/setiadyanwar_study-case-to-redesign-the-checkout-screen-activity-7221889939687268352-4JNc?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
+    projectSteps: [
+      {
+        title: "User Research & Pain Point Analysis",
+        description:
+          "Conducted interviews and analyzed user reviews to identify key issues in the existing checkout flow, such as repetitive stock checks and inadequate order notifications.",
+        image: null,
+      },
+      {
+        title: "Competitive Analysis",
+        description:
+          "Studied similar applications like GoFood, Kopi Kenangan, and Fore to understand best practices in checkout processes and identify opportunities for improvement.",
+        image: null,
+      },
+      {
+        title: "Wireframing & User Flow Redesign",
+        description:
+          "Developed low-fidelity wireframes and restructured the user flow to simplify the checkout process, allowing users to select a store first and view available products accordingly.",
+        image: null,
+      },
+      {
+        title: "High-Fidelity Mockups & Design System",
+        description:
+          "Created detailed UI designs and established a design system to ensure consistency across the application, incorporating brand colors, typography, and components.",
+        image: null,
+      },
+      {
+        title: "Interactive Prototyping & Usability Testing",
+        description:
+          "Built interactive prototypes and conducted usability testing sessions to gather feedback and iterate on the design, enhancing user satisfaction and efficiency.",
+        image: null,
+      },
+    ],
   },
   {
     id: "wingspos",
     title: "WingsPOS – Point of Sale Web Application",
     category: "web",
     image: "/portfolio/web/wingspos.png?height=400&width=600",
-    additionalImages: [
-      "/portfolio/web/wingspos-1.png?height=180&width=320",
-    ],
+    additionalImages: ["/portfolio/web/wingspos-1.png?height=180&width=320"],
     technologies: ["Laravel", "TailwindCSS", "MySQL", "HTML/CSS", "JavaScript"],
     description:
       "WingsPOS is a web-based Point of Sale (POS) system developed for Ayam Geprek Indonesia to streamline sales, inventory, and order management across multiple outlets. The application offers real-time transaction processing, role-based access control, and comprehensive reporting features.",
-    role:
-      "Full-Stack Developer responsible for designing the database schema, developing backend APIs with Laravel, implementing responsive frontend interfaces using TailwindCSS, and deploying the application to a live server.",
+    role: "Full-Stack Developer responsible for designing the database schema, developing backend APIs with Laravel, implementing responsive frontend interfaces using TailwindCSS, and deploying the application to a live server.",
     challenges:
       "Integrating real-time inventory updates across multiple branches, ensuring secure authentication and authorization for different user roles (admin, cashier), and optimizing the system for high-volume transaction processing.",
     demoUrl: "https://ayamgeprek.id/",
@@ -1161,8 +1205,8 @@ export const portfolioItems = [
         description:
           "Deployed the application to a production server, configured domain settings, and set up SSL certificates. Provided ongoing maintenance and updates based on user feedback and changing business needs.",
         image: null,
-      }
-    ]
+      },
+    ],
   },
 ];
 
@@ -1271,13 +1315,19 @@ export const educationExperiences = [
     period: "2024",
     description:
       "Completed a foundational course focusing on the basics of web development using HTML and CSS.",
-    skills: ["HTML", "CSS", "Javascript", "Responsive Design", "Web Development"],
+    skills: [
+      "HTML",
+      "CSS",
+      "Javascript",
+      "Responsive Design",
+      "Web Development",
+    ],
     details: [
       "Learned semantic HTML structure and responsive design principles",
       "Built simple static websites as study cases",
-      "Gained understanding of fundamental web development concepts"
+      "Gained understanding of fundamental web development concepts",
     ],
-  }
+  },
 ];
 
 // Organization experience data

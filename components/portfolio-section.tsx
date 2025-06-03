@@ -13,12 +13,21 @@ export default function PortfolioSection() {
   // Sample portfolio items (would be replaced with actual projects)
   const portfolioItems = [
     {
+      id: "nobarin",
+      title: "Nobarin Movie Streaming Platform",
+      category: "web",
+      image: "/portfolio/web/nobar.png?height=400&width=600",
+      technologies: ["Vue.js", "Pinia", "TailwindCSS", "TMDB API", "Vite"],
+      demoUrl: "https://nobarin-phi.vercel.app/",
+      // repoUrl: "#",
+    },
+    {
       id: "kreavoks",
       title: "Agency & E-learning Website",
       category: "web",
       image: "/portfolio/web/kreavoks.png?height=400&width=600",
       technologies: ["React", "Next.js", "TailwindCSS"],
-      demoUrl: "kreavoks.my.id",
+      demoUrl: "https://kreavoks.my.id",
       // repoUrl: "#",
     },
     {
