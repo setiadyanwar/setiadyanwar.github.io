@@ -54,10 +54,10 @@ export const portfolioItems = [
     title: "Nobarin Movie Streaming Platform",
     category: "web",
     image: "/portfolio/web/nobar.png?height=400&width=600",
-    additionalImages: [
-      "/portfolio/web/nobarin-1.png?height=180&width=320",
-      "/portfolio/web/nobarin-2.png?height=180&width=320",
-    ],
+    // additionalImages: [
+    //   "/portfolio/web/nobarin-1.png?height=180&width=320",
+    //   "/portfolio/web/nobarin-2.png?height=180&width=320",
+    // ],
     technologies: ["Vue.js", "Pinia", "TailwindCSS", "TMDB API", "Vite"],
     description:
       "Nobarin is a modern movie browsing and streaming platform built using Vue.js. It fetches real-time data from the TMDB API and allows users to explore movie details, manage their favorite movies, and experience a responsive, engaging UI. Designed with a focus on smooth navigation and scalability, the platform supports dynamic routing and modular components.",
