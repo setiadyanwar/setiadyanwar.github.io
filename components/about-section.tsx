@@ -10,6 +10,7 @@ interface ImageInfo {
   alt: string
   title: string
   description: string
+  thumbnail?: string
 }
 
 export default function AboutSection() {
@@ -42,11 +43,12 @@ export default function AboutSection() {
 
   const images: ImageInfo[] = [
     {
-      src: "/sertifikat/skk sample.png?height=160&width=96",
+      src: "/sertifikat/Web Developer - Setiady Ibrahim Anwar.pdf",
       alt: "BNSP Certification",
       title: "BNSP Certification",
       description:
         "Professional certification from the National Professional Certification Agency (BNSP) validating my expertise in web development and design.",
+      thumbnail: "/sertifikat/bnsp-setiady.png"
     },
     {
       src: "/sertifikat/google.png?height=128&width=128",
@@ -102,7 +104,7 @@ export default function AboutSection() {
                 onClick={() => openModal(images[0])}
               >
                 <Image
-                  src={images[0].src || "/placeholder.svg"}
+                  src={images[0].thumbnail || images[0].src || "/placeholder.svg"}
                   alt={images[0].alt}
                   fill
                   style={{ objectFit: "cover" }}
@@ -187,7 +189,7 @@ export default function AboutSection() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-white dark:bg-gray-900 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-hidden"
+              className="relative bg-white dark:bg-gray-900 rounded-lg max-w-4xl w-full max-h-[95vh] overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="p-6">
@@ -195,13 +197,41 @@ export default function AboutSection() {
                 <p className="mt-2 text-gray-600 dark:text-gray-400">{selectedImage.description}</p>
               </div>
 
-              <div className="relative w-full h-[60vh] bg-gray-100 dark:bg-gray-800">
-                <Image
-                  src={selectedImage.src || "/placeholder.svg"}
-                  alt={selectedImage.alt}
-                  fill
-                  className="object-contain"
-                />
+              <div className="relative w-full h-[70vh] bg-gray-100 dark:bg-gray-800">
+                {selectedImage.src.endsWith('.pdf') ? (
+                  <div className="w-full h-full flex flex-col">
+                    <div className="flex-1 bg-white">
+                      <iframe
+                        src={`${selectedImage.src}#view=FitH&toolbar=1&navpanes=1&scrollbar=1`}
+                        className="w-full h-full border-0 rounded"
+                        title="PDF Preview"
+                        onError={() => console.log('PDF iframe failed to load')}
+                        allow="fullscreen"
+                      />
+                    </div>
+                    <div className="p-3 bg-gray-50 dark:bg-gray-800 border-t flex justify-between items-center">
+                      <div className="text-sm text-gray-600 dark:text-gray-400">
+                        Use the toolbar above to navigate through pages
+                      </div>
+                      <a 
+                        href={selectedImage.src} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors inline-flex items-center gap-2"
+                      >
+                        <span>📄</span>
+                        Open in New Tab
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <Image
+                    src={selectedImage.src || "/placeholder.svg"}
+                    alt={selectedImage.alt}
+                    fill
+                    className="object-contain"
+                  />
+                )}
               </div>
 
               <button

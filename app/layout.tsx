@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+// @ts-ignore - allow side-effect global css import (no types)
 import "./globals.css"
 import { ThemeProvider } from "../components/theme-provider"
 import Header from "@/components/header"

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 7000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -21,6 +21,7 @@
     "portfolio-website": "file:",
     "react": "^18",
     "react-dom": "^18",
+    "react-pdf": "^10.2.0",
     "react-type-animation": "^3.2.0",
     "rimraf": "^6.0.1",
     "tailwind-merge": "^2.0.0",
