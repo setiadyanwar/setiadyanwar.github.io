@@ -1,13 +1,35 @@
 "use client"
 
 import { motion } from "framer-motion"
-import type { LucideIcon } from "lucide-react"
+import { 
+  User, 
+  Code, 
+  Users, 
+  Award, 
+  ImageIcon, 
+  Briefcase, 
+  MessageSquare, 
+  Monitor 
+} from "lucide-react"
 import { cn } from "@/lib/utils"
+
+const iconMap = {
+  User,
+  Code,
+  Users,
+  Award,
+  ImageIcon,
+  Briefcase,
+  MessageSquare,
+  Monitor,
+}
+
+type IconName = keyof typeof iconMap
 
 interface EnhancedSectionHeaderProps {
   title: string
   subtitle?: string
-  icon?: LucideIcon
+  iconName?: IconName
   emoji?: string
   align?: "left" | "center" | "right"
   className?: string
@@ -18,13 +40,14 @@ interface EnhancedSectionHeaderProps {
 export default function EnhancedSectionHeader({
   title,
   subtitle,
-  icon: Icon,
+  iconName,
   emoji,
   align = "center",
   className,
   iconClassName,
   animated = true,
 }: EnhancedSectionHeaderProps) {
+  const Icon = iconName ? iconMap[iconName] : null
   const alignmentClasses = {
     left: "text-left items-start",
     center: "text-center items-center",

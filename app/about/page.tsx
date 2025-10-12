@@ -1,9 +1,22 @@
-"use client"
 import { User, Code, Users } from "lucide-react"
 import AboutSection from "@/components/about-section"
 import TechStackSection from "@/components/tech-stack-section"
 import EnhancedSectionHeader from "@/components/enhanced-section-header"
 import PageHeaderContainer from "@/components/page-header-container"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About Me",
+  description: "Learn about my journey as a BNSP-certified Frontend Developer & UI/UX Designer. Discover my skills, experience, and the technologies I use.",
+  alternates: {
+    canonical: "https://setiadyanwar.github.io/about",
+  },
+  openGraph: {
+    title: "About Me | Setiady Ibrahim Anwar",
+    description: "Learn about my journey as a BNSP-certified Frontend Developer & UI/UX Designer. Discover my skills, experience, and the technologies I use.",
+    url: "https://setiadyanwar.github.io/about",
+  },
+}
 
 export default function AboutPage() {
   return (
@@ -12,7 +25,7 @@ export default function AboutPage() {
         <EnhancedSectionHeader
           title="About Me"
           subtitle="Get to know more about my journey, skills, and passion for creating amazing digital experiences"
-          icon={User}
+          iconName="User"
         />
       </PageHeaderContainer>
 
@@ -22,7 +35,7 @@ export default function AboutPage() {
         <EnhancedSectionHeader
           title="Tech Stack"
           subtitle="The technologies and tools I use to bring ideas to life"
-          icon={Code}
+          iconName="Code"
         />
         <TechStackSection />
       </div>

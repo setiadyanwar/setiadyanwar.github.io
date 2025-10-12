@@ -2,6 +2,7 @@ export const siteConfig = {
   name: "Setiady Ibrahim Anwar Portfolio",
   description: "BNSP-Certified Frontend Developer & UI/UX Designer with 2+ years experience. Founder of Kreavoks Digital Agency.",
   url: "https://setiadyanwar.github.io",
+  vercelUrl: "https://setiadyanwar-github-io.vercel.app", // URL Vercel yang akan di-noindex
   ogImage: "https://setiadyanwar.github.io/setiady.png",
   author: "Setiady Ibrahim Anwar",
   email: "setiadyanwar@gmail.com",

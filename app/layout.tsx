@@ -8,15 +8,20 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import AnimatedCursor from "@/components/animated-cursor"
 import { personJsonLd, websiteJsonLd, organizationJsonLd } from "@/lib/structured-data"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://setiadyanwar.github.io"),
   title: {
     default: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
     template: "%s | Setiady Ibrahim Anwar"
   },
   description: "BNSP-Certified Web Developer & UI/UX Designer with 2+ years experience. Founder of Kreavoks Digital Agency. Expert in React, Next.js, Vue, Laravel, and modern web technologies.",
+  alternates: {
+    canonical: "https://setiadyanwar.github.io",
+  },
   keywords: [
     "Frontend Developer",
     "UI/UX Designer", 
@@ -110,6 +115,7 @@ export default function RootLayout({
             <main className="flex-grow">{children}</main>
             <Footer />
           </div>
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

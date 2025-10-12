@@ -91,7 +91,13 @@ export default function AboutSection() {
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-orange-500/20 blur-xl" />
               <div className="absolute inset-0 glassmorphism rounded-lg" />
               <div className="absolute inset-2 rounded-lg overflow-hidden">
-                <Image src="/setiady.png" alt="About Setiady Ibrahim Anwar" fill style={{ objectFit: "cover" }} />
+                <Image 
+                  src="/setiady.png" 
+                  alt="About Setiady Ibrahim Anwar" 
+                  fill 
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  style={{ objectFit: "cover" }} 
+                />
               </div>
 
               {/* Certification photo overlapping front */}
