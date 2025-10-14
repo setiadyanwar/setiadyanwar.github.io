@@ -86,59 +86,72 @@ export default function AboutSection() {
             variants={fadeIn}
             className="relative"
           >
-            {/* Main photo container */}
-            <div className="relative h-[500px] w-full max-w-[500px] overflow-hidden rounded-lg mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-orange-500/20 blur-xl" />
-              <div className="absolute inset-0 glassmorphism rounded-lg" />
-              <div className="absolute inset-2 rounded-lg overflow-hidden">
-                <Image 
-                  src="/setiady.png" 
-                  alt="About Setiady Ibrahim Anwar" 
-                  fill 
-                  sizes="(max-width: 768px) 100vw, 500px"
-                  style={{ objectFit: "cover" }} 
-                />
-              </div>
+            {/* Main photo container - full width rectangular design */}
+            <div 
+              className="relative h-[340px] w-full rounded-r-2xl"
+              style={{ 
+                marginLeft: 'calc(-50vw + 50%)', // Full width ke kiri - mentok ke edge kiri viewport
+                width: '65vw', // Lebar 65% viewport - lebih panjang ke kanan
+              }}
+            >
+              {/* Background gradient with photo and text inside */}
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-r-3xl overflow-hidden">
+                {/* Text overlay behind photo */}
+                <div className="absolute inset-0 flex items-center justify-start pl-4 sm:pl-24 md:pl-56 lg:pl-40 xl:pl-56 2xl:pl-72">
+                  <div className="text-8xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-gray-300 dark:text-gray-700 opacity-30 select-none">
+                    <span className="block">WEB</span>
+                    <span className="block">DEVELOPER</span>
+                  </div>
+                </div>
 
-              {/* Certification photo overlapping front */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                className="absolute bottom-4 right-4 w-40 h-56 rounded-lg overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg rotate-6 z-10 cursor-pointer hover:scale-105 transition-transform"
-                onClick={() => openModal(images[0])}
-              >
-                <Image
-                  src={images[0].thumbnail || images[0].src || "/placeholder.svg"}
-                  alt={images[0].alt}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </motion.div>
+                {/* Photo container */}
+                <div className="absolute inset-0 flex items-center justify-end">
+                  <div 
+                    className="relative grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
+                    style={{
+                      width: '83%', // w-5/6 equivalent - adjust this value (50% to 100%)
+                      height: '83%', // h-5/6 equivalent - adjust this value (50% to 100%)
+                      marginTop: '-5rem', // mt-2 equivalent - adjust this value (-2rem to 2rem)
+                      marginLeft: '0rem', // ml equivalent - adjust this value (-2rem to 2rem)
+                      transform: 'scale(2.0)', // adjust this value (0.5 to 2.0)
+                    }}
+                  >
+                    <Image 
+                      src="/setiady2.png" 
+                      alt="About Setiady Ibrahim Anwar" 
+                      fill 
+                      sizes="(max-width: 768px) 100vw, 3500px"
+                      style={{ 
+                        objectFit: "contain", // change to "cover" or "fill" if needed
+                        objectPosition: "center" // change to "left", "right", "top", "bottom" if needed
+                      }} 
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Additional photos container aligned left */}
-            <div className="flex space-x-4 mt-6 justify-start max-w-[500px] mx-auto">
-              {[1, 2].map((item, index) => (
-                <div
-                  key={item}
-                  className="relative w-32 h-32 rounded-lg overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg cursor-pointer hover:scale-105 transition-transform"
-                  onClick={() => openModal(images[index + 1])}
+            {/* All certification photos - horizontal layout below photo container */}
+            <div className="flex space-x-4 mt-6 justify-center">
+              {images.map((image, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.6 + (index * 0.2) }}
+                  className="relative w-24 h-24 rounded-xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg cursor-pointer hover:scale-105 transition-all duration-300 hover:-translate-y-1"
+                  onClick={() => openModal(image)}
                 >
                   <Image
-                    src={images[index + 1].src || "/placeholder.svg"}
-                    alt={images[index + 1].alt}
+                    src={image.thumbnail || image.src || "/placeholder.svg"}
+                    alt={image.alt}
                     fill
                     style={{ objectFit: "cover" }}
                   />
-                </div>
+                </motion.div>
               ))}
             </div>
-
-            {/* Decorative elements */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border-4 border-dashed border-indigo-400 dark:border-indigo-600 opacity-50" />
-            <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full border-4 border-dashed border-orange-400 dark:border-orange-600 opacity-50" />
           </motion.div>
 
           <motion.div
