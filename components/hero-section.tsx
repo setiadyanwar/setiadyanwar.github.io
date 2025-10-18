@@ -367,7 +367,7 @@ Saya tertarik untuk berdiskusi tentang:
 
 Mohon informasi lebih lanjut. Terima kasih!`;
                           const encodedMessage = encodeURIComponent(message);
-                          window.open(`https://wa.me/6281234567890?text=${encodedMessage}`, '_blank');
+                          window.open(`https://wa.me/6289662007938?text=${encodedMessage}`, '_blank');
                           setIsContactOpen(false);
                         }}
                         className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group"
