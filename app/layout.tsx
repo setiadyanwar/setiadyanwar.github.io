@@ -200,12 +200,12 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: "DXLJIHtf2lA-k7BqNIrR8kw-_fF2GJmPZSSG5E85Wu0",
-    other: {
-      "msvalidate.01": "35DBB23E6006B598582733FEDD095DA0",
+    verification: {
+      google: "J5btm8Fw3rlW-Xrq2Q77PUQhEZXXdaG_8Tmx9TOV4rQ",
+      other: {
+        "msvalidate.01": "35DBB23E6006B598582733FEDD095DA0",
+      },
     },
-  },
 }
 
 export default function RootLayout({
@@ -216,7 +216,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="DXLJIHtf2lA-k7BqNIrR8kw-_fF2GJmPZSSG5E85Wu0" />
+        <meta name="google-site-verification" content="J5btm8Fw3rlW-Xrq2Q77PUQhEZXXdaG_8Tmx9TOV4rQ" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
