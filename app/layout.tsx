@@ -13,14 +13,14 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://setiadyanwar.github.io"),
+  metadataBase: new URL("https://setiadyanwar.vercel.app"),
   title: {
     default: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
     template: "%s | Setiady Ibrahim Anwar"
   },
   description: "Professional Frontend Developer & UI/UX Designer from Indonesia. BNSP-Certified with 2+ years experience building modern web applications. Expert in React, Next.js, Vue.js, Laravel, TypeScript, and Tailwind CSS. Founder of Kreavoks Digital Agency. Available for freelance projects and full-time opportunities.",
   alternates: {
-    canonical: "https://setiadyanwar.github.io",
+    canonical: "https://setiadyanwar.vercel.app",
   },
   keywords: [
     // Primary Skills
@@ -170,7 +170,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://setiadyanwar.github.io",
+    url: "https://setiadyanwar.vercel.app",
     siteName: "Setiady Ibrahim Anwar Portfolio",
     title: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
     description: "Professional Frontend Developer & UI/UX Designer from Indonesia. BNSP-Certified with 2+ years experience building modern web applications. Expert in React, Next.js, Vue.js, Laravel, TypeScript, and Tailwind CSS.",

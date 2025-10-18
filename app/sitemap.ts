@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { portfolioItems } from '@/lib/data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://setiadyanwar.github.io'
+  const baseUrl = 'https://setiadyanwar.vercel.app'
   
   // Static pages
   const staticPages = [
