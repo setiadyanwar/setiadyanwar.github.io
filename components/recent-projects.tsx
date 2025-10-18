@@ -17,7 +17,6 @@ export default function RecentProjects() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-2">Recent Projects</h2>
-          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Check out my latest work and creative endeavors
           </p>
@@ -40,9 +39,9 @@ export default function RecentProjects() {
         </div>
 
         <div className="text-center">
-          <Button asChild className="bg-indigo-600 hover:bg-indigo-700 text-white">
+          <Button asChild className="bg-indigo-600 hover:bg-indigo-700 text-white btn-splash">
             <Link href="/portfolio" className="inline-flex items-center">
-              View All Projects
+              <span>View All Projects</span>
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

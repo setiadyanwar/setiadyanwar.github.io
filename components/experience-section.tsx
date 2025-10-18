@@ -69,7 +69,7 @@ export default function ExperienceSection() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className={`relative mb-12 md:mb-16 ${
-                index % 2 === 0 ? "md:pr-12 md:text-left md:ml-auto md:mr-1/2" : "md:pl-12 md:ml-1/2"
+                index % 2 === 0 ? "md:pr-12 md:text-left md:ml-auto md:mr-6" : "md:pl-12 md:ml-6"
               }`}
             >
               {/* Timeline dot */}

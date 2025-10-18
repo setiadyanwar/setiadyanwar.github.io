@@ -59,6 +59,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 
@@ -111,4 +112,45 @@
 
 .animate-spin-slow-reverse {
   animation: spin-slow-reverse 15s linear infinite;
+}
+
+/* Button Splash Effect - Like Tiket.com */
+.btn-splash {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-splash::before {
+  content: '';
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fbbf24; /* yellow-400 */
+  border-radius: 50%;
+  transition: all 0.4s ease-out;
+  z-index: 0;
+}
+
+.btn-splash:hover::before {
+  bottom: 0;
+  border-radius: 0;
+}
+
+.btn-splash span,
+.btn-splash > *,
+.btn-splash a,
+.btn-splash a > * {
+  position: relative;
+  z-index: 1;
+  transition: color 0.4s ease-out;
+}
+
+/* Ensure text is visible on yellow background */
+.btn-splash:hover span,
+.btn-splash:hover > *,
+.btn-splash:hover a,
+.btn-splash:hover a > * {
+  color: #1e40af !important; /* indigo-800 */
 }

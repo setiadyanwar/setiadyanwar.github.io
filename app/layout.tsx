@@ -112,7 +112,7 @@ export default function RootLayout({
           <div className="min-h-screen flex flex-col">
             <AnimatedCursor />
             <Header />
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow pt-0 md:pt-16">{children}</main>
             <Footer />
           </div>
           <SpeedInsights />

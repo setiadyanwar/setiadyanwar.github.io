@@ -61,7 +61,6 @@ export default function ClientsLogoSection() {
           className="text-center mb-8"
         >
           <h2 className="text-3xl font-bold mb-2">Collaborating with Industry Leaders</h2>
-          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
         </motion.div>
 
         <div className="relative overflow-hidden">

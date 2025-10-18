@@ -57,16 +57,16 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
           </div>
           <div className="flex flex-wrap gap-4 pt-4">
             {portfolio.demoUrl && (
-              <Button asChild className="bg-indigo-600 hover:bg-indigo-700">
+              <Button asChild className="bg-indigo-600 hover:bg-indigo-700 btn-splash">
                 <a href={portfolio.demoUrl} target="_blank" rel="noopener noreferrer">
-                  View Live Demo
+                  <span>View Live Demo</span>
                 </a>
               </Button>
             )}
             {portfolio.repoUrl && (
-              <Button variant="outline" asChild className="border-indigo-300 dark:border-indigo-800">
+              <Button variant="outline" asChild className="border-indigo-300 dark:border-indigo-800 btn-splash">
                 <a href={portfolio.repoUrl} target="_blank" rel="noopener noreferrer">
-                  View Repository
+                  <span>View Repository</span>
                 </a>
               </Button>
             )}

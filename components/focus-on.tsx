@@ -11,78 +11,121 @@ export default function FocusOn() {
     setIsClient(true)
   }, [])
 
-  if (!isClient) return null // Bisa juga diganti skeleton/loading
+  if (!isClient) return null
 
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   }
 
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: 30 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      } 
+    },
   }
 
   const services = [
     {
       title: "Frontend Development",
-      description: "Creating responsive, accessible, and performant web applications with modern technologies.",
-      icon: <Code className="w-10 h-10 mb-4 text-indigo-500 dark:text-indigo-400" />,
-      gradient: "from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-900/20",
-      border: "border-indigo-200 dark:border-indigo-800/30",
+      description: "Modern, responsive web applications built with cutting-edge technologies and best practices.",
+      icon: <Code className="w-6 h-6" />,
+      color: "text-blue-600 dark:text-blue-400",
+      hoverBg: "hover:bg-blue-50/80 dark:hover:bg-blue-950/30",
+      hoverBorder: "hover:border-blue-200/60 dark:hover:border-blue-800/40",
+      iconHoverBg: "group-hover:bg-blue-100/80 dark:group-hover:bg-blue-900/40",
     },
     {
       title: "UI/UX Design",
-      description: "Designing intuitive and beautiful user interfaces with a focus on user experience.",
-      icon: <Palette className="w-10 h-10 mb-4 text-orange-500 dark:text-orange-400" />,
-      gradient: "from-orange-50 to-orange-100 dark:from-orange-950/30 dark:to-orange-900/20",
-      border: "border-orange-200 dark:border-orange-800/30",
+      description: "Intuitive interfaces designed with precision, focusing on user experience and accessibility.",
+      icon: <Palette className="w-6 h-6" />,
+      color: "text-orange-600 dark:text-orange-400",
+      hoverBg: "hover:bg-orange-50/80 dark:hover:bg-orange-950/30",
+      hoverBorder: "hover:border-orange-200/60 dark:hover:border-orange-800/40",
+      iconHoverBg: "group-hover:bg-orange-100/80 dark:group-hover:bg-orange-900/40",
     },
     {
       title: "Web Development",
-      description: "Building digital solutions with creative and innovative approaches.",
-      icon: <Globe className="w-10 h-10 mb-4 text-gray-700 dark:text-gray-300" />,
-      gradient: "from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/30",
-      border: "border-gray-200 dark:border-gray-700/30",
+      description: "End-to-end digital solutions crafted with creativity and technical excellence.",
+      icon: <Globe className="w-6 h-6" />,
+      color: "text-gray-600 dark:text-gray-400",
+      hoverBg: "hover:bg-gray-50/80 dark:hover:bg-gray-800/30",
+      hoverBorder: "hover:border-gray-300/60 dark:hover:border-gray-600/40",
+      iconHoverBg: "group-hover:bg-gray-200/80 dark:group-hover:bg-gray-700/40",
     },
   ]
 
   return (
-    <div className="container mx-auto px-4 py-14">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-2">Specialist Service</h2>
-        <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
-        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Need a hand with your project? I offer services to help you achieve your goals.
-        </p>
+    <section id="services" className="py-20 md:py-28">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 md:mb-20"
+        >
+          <h2 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 mb-4">
+            Specialist Services
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Professional solutions tailored to bring your digital vision to life
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12"
+        >
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              variants={item}
+              whileHover={{ 
+                y: -8, 
+                transition: { 
+                  duration: 0.3,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                } 
+              }}
+              className="group relative"
+            >
+              <div className={`relative p-8 md:p-10 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-800/50 rounded-2xl transition-all duration-500 ${service.hoverBg} ${service.hoverBorder} hover:shadow-xl hover:shadow-gray-200/20 dark:hover:shadow-black/20`}>
+                {/* Icon */}
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100/80 dark:bg-gray-800/80 mb-6 group-hover:scale-110 ${service.iconHoverBg} transition-all duration-300 ${service.color}`}>
+                  {service.icon}
+                </div>
+
+                {/* Content */}
+                <div className="space-y-4">
+                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-gray-100 tracking-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base">
+                    {service.description}
+                  </p>
+                </div>
+
+                {/* Subtle accent line */}
+                <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center"
-      >
-        {services.map((service, index) => (
-          <motion.div
-            key={index}
-            variants={item}
-            whileHover={{ y: -10, transition: { duration: 0.3 } }}
-            className={`p-8 rounded-xl bg-gradient-to-br ${service.gradient} border ${service.border} transition-all duration-300 hover:shadow-lg`}
-          >
-            <div className="flex flex-col items-center">
-              {service.icon}
-              <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">{service.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300">{service.description}</p>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
+    </section>
   )
 }

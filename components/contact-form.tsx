@@ -142,9 +142,9 @@ export default function ContactForm() {
               />
             </div>
 
-            <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700">
+            <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 btn-splash">
               <Send className="h-4 w-4 mr-2" />
-              Send Message
+              <span>Send Message</span>
             </Button>
           </form>
         </CardContent>

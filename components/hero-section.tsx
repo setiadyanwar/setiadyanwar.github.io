@@ -4,12 +4,33 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Download, Code, Palette, Monitor, MapPin } from "lucide-react";
+import { Download, Code, Palette, Monitor, MapPin, MessageCircle, Mail, X } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
+import { useState, useEffect, useRef } from "react";
 
 export default function HeroSection() {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (contactRef.current && !contactRef.current.contains(event.target as Node)) {
+        setIsContactOpen(false);
+      }
+    };
+
+    if (isContactOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isContactOpen]);
+
   return (
-    <section className="relative min-h-screen flex items-center pt-16 bg-white dark:bg-black">
+    <section className="relative min-h-screen flex items-center bg-white dark:bg-black">
       {/* Clean Apple-style background */}
       <div className="absolute inset-0 bg-white dark:bg-black"></div>
       
@@ -290,25 +311,116 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="flex flex-wrap gap-4 justify-center md:justify-start"
             >
-              <Button
-                asChild
-                className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-8 shadow-sm"
-                variant="default"
-                size="lg"
-              >
-                <Link href="/portfolio">
-                  Explore Me
-                </Link>
-              </Button>
+              {/* Combined Explore & Contact Button */}
+              <div className="relative" ref={contactRef}>
+                <div className="flex bg-gray-100 dark:bg-gray-800 rounded-full p-1 shadow-sm gap-1">
+                  {/* Explore Button */}
+                  <Button
+                    asChild
+                    className="rounded-full px-8 py-3 font-medium transition-all duration-200 bg-indigo-600 text-white hover:text-indigo-600 btn-splash"
+                    size="lg"
+                  >
+                    <Link href="/portfolio" className="flex items-center gap-2">
+                      <span>Explore My Work</span>
+                      <motion.div
+                        animate={{ x: [0, 4, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        →
+                      </motion.div>
+                    </Link>
+                  </Button>
+
+                  {/* Contact Button - Icon Only */}
+                  <Button
+                    onClick={() => setIsContactOpen(!isContactOpen)}
+                    className={`rounded-full px-6 py-3 transition-all duration-200 btn-splash ${
+                      isContactOpen 
+                        ? 'bg-indigo-200 text-indigo-700 border-2 border-indigo-700 hover:text-indigo-800' 
+                        : 'bg-transparent text-gray-700 dark:text-gray-300 hover:text-indigo-600'
+                    }`}
+                    size="lg"
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                  </Button>
+                </div>
+
+                {/* Contact Dropdown */}
+                {isContactOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 mt-1 md:mt-2 w-48 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
+                  >
+                    <div className="py-2">
+                      <button
+                        onClick={() => {
+                          const message = `Halo Setiady! 👋
+
+Saya tertarik untuk berdiskusi tentang:
+• Project collaboration
+• Job opportunities  
+• Consultation services
+• Other inquiries
+
+Mohon informasi lebih lanjut. Terima kasih!`;
+                          const encodedMessage = encodeURIComponent(message);
+                          window.open(`https://wa.me/6281234567890?text=${encodedMessage}`, '_blank');
+                          setIsContactOpen(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group"
+                      >
+                        <MessageCircle className="w-4 h-4 text-green-500 group-hover:text-green-600 dark:group-hover:text-green-400" />
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">WhatsApp</span>
+                      </button>
+                      
+                      <div className="h-px bg-gray-100 dark:bg-gray-800 mx-2"></div>
+                      
+                      <button
+                        onClick={() => {
+                          const subject = 'Collaboration Inquiry - Portfolio Website';
+                          const body = `Dear Setiady,
+
+I hope this email finds you well. I came across your portfolio website and I'm interested in discussing:
+
+• Potential collaboration opportunities
+• Job openings in your company
+• Consultation services you offer
+• Other business inquiries
+
+I would appreciate the opportunity to connect and learn more about your services.
+
+Best regards,
+[Your Name]
+[Your Company/Organization]
+[Your Contact Information]`;
+                          const encodedSubject = encodeURIComponent(subject);
+                          const encodedBody = encodeURIComponent(body);
+                          window.location.href = `mailto:setiadyanwar@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+                          setIsContactOpen(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group"
+                      >
+                        <Mail className="w-4 h-4 text-blue-500 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Email</span>
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* CV Download Button */}
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 rounded-full px-8 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
+                className="border-2 border-indigo-600 dark:border-indigo-500 text-gray-800 dark:text-gray-200 hover:text-indigo-800 rounded-full px-8 py-3 font-medium transition-all duration-200 group btn-splash"
               >
-                <Link href="/cv/cv_setiady.pdf">
-                  My CV
-                  <Download className="ml-2 h-4 w-4" />
+                <Link href="/cv/cv_setiady.pdf" className="flex items-center gap-2">
+                  <Download className="h-5 w-5 group-hover:animate-bounce" />
+                  <span>Download CV</span>
                 </Link>
               </Button>
             </motion.div>

@@ -129,17 +129,10 @@ export default function EnhancedSectionHeader({
             </motion.div>
           )}
 
-          {/* Title with animated underline */}
+          {/* Title */}
           <motion.div variants={animated ? itemVariants : undefined} className="relative">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2 relative inline-block">
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">
               {title}
-              <motion.div
-                className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-indigo-400 to-indigo-600 rounded-full"
-                initial={animated ? { width: 0 } : undefined}
-                whileInView={animated ? { width: "100%" } : undefined}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              />
             </h2>
           </motion.div>
 

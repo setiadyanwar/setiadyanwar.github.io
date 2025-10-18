@@ -173,8 +173,6 @@ export default function SkillsShowcase() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">Technologies I Use</h2>
-          <div className="w-20 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-4"></div>
-          <div className="w-20 h-1 bg-indigo dark:bg-indigo-light mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             The frameworks, tools, and languages I frequently work with to build powerful digital experiences.
           </p>
@@ -222,9 +220,9 @@ export default function SkillsShowcase() {
         </div>
 
         <div className="text-center">
-          <Button asChild className="bg-indigo-500 hover:bg-indigo-dark">
-            <Link href="/about#skills" className=" text-white inline-flex items-center">
-              View All Skills
+          <Button asChild className="bg-indigo-500 hover:bg-indigo-700 text-white btn-splash">
+            <Link href="/about#skills" className="inline-flex items-center">
+              <span>View All Skills</span>
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
