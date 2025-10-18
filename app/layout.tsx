@@ -201,7 +201,7 @@ export const metadata: Metadata = {
     },
   },
     verification: {
-      google: "DXLJIHtf2lA-k7BqNIrR8kw-_fF2GJmPZSSG5E85Wu0",
+      google: "zgAl9x48b6aAPic1QagBGN37SGoYzCkm2HUivLgUf74",
       other: {
         "msvalidate.01": "35DBB23E6006B598582733FEDD095DA0",
       },
@@ -216,7 +216,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="DXLJIHtf2lA-k7BqNIrR8kw-_fF2GJmPZSSG5E85Wu0" />
+        <meta name="google-site-verification" content="zgAl9x48b6aAPic1QagBGN37SGoYzCkm2HUivLgUf74" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
