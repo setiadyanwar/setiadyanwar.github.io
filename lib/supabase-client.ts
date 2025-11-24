@@ -1,16 +1,34 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClient, type SupabaseClient } from "@supabase/supabase-js"
 
-const supabaseUrl = process.env.SUPABASE_URL
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.SUPABASE_ANON_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-if (!supabaseUrl || !supabaseServiceRoleKey) {
-  throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY environment variables")
+let cachedClient: SupabaseClient | null = null
+
+export function getSupabaseServerClient(): SupabaseClient | null {
+  if (cachedClient) {
+    return cachedClient
+  }
+
+  if (!supabaseUrl || !supabaseKey) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        "Supabase environment variables are missing. API routes depending on Supabase will return fallback responses."
+      )
+    }
+    return null
+  }
+
+  cachedClient = createClient(supabaseUrl, supabaseKey, {
+    auth: {
+      persistSession: false,
+    },
+  })
+
+  return cachedClient
 }
-
-export const supabaseServerClient = createClient(supabaseUrl, supabaseServiceRoleKey, {
-  auth: {
-    persistSession: false,
-  },
-})
 
 

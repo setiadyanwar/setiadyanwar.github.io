@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { LinkItem } from "@/lib/links-data"
-import { supabaseServerClient } from "@/lib/supabase-client"
+import { getSupabaseServerClient } from "@/lib/supabase-client"
 
 const LINKS_TABLE = "links"
 
@@ -35,7 +35,13 @@ const mapToDb = (link: LinkItem) => ({
 // GET - Read all links
 export async function GET() {
   try {
-    const { data, error } = await supabaseServerClient
+    const supabase = getSupabaseServerClient()
+
+    if (!supabase) {
+      return NextResponse.json([])
+    }
+
+    const { data, error } = await supabase
       .from(LINKS_TABLE)
       .select("*")
       .order("section_order", { ascending: true })
@@ -64,7 +70,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { error } = await supabaseServerClient.from(LINKS_TABLE).insert(mapToDb(newLink))
+    const supabase = getSupabaseServerClient()
+
+    if (!supabase) {
+      return NextResponse.json(
+        { error: "Supabase client is not configured" },
+        { status: 500 }
+      )
+    }
+
+    const { error } = await supabase.from(LINKS_TABLE).insert(mapToDb(newLink))
 
     if (error) {
       if (error.code === "23505") {
@@ -89,7 +104,16 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Link ID is required" }, { status: 400 })
     }
 
-    const { error } = await supabaseServerClient
+    const supabase = getSupabaseServerClient()
+
+    if (!supabase) {
+      return NextResponse.json(
+        { error: "Supabase client is not configured" },
+        { status: 500 }
+      )
+    }
+
+    const { error } = await supabase
       .from(LINKS_TABLE)
       .update(mapToDb(updatedLink))
       .eq("id", updatedLink.id)
@@ -115,7 +139,16 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "Link ID is required" }, { status: 400 })
     }
 
-    const { error } = await supabaseServerClient.from(LINKS_TABLE).delete().eq("id", id)
+    const supabase = getSupabaseServerClient()
+
+    if (!supabase) {
+      return NextResponse.json(
+        { error: "Supabase client is not configured" },
+        { status: 500 }
+      )
+    }
+
+    const { error } = await supabase.from(LINKS_TABLE).delete().eq("id", id)
 
     if (error) {
       throw error
