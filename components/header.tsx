@@ -52,6 +52,14 @@ export default function Header() {
       category: "Navigation",
       description: "View my projects and work"
     },
+    {
+      name: "ESS API Contract",
+      href: "/ess-api",
+      icon: "Code",
+      keywords: ["api", "ess", "sigma", "documentation", "laravel", "contract", "endpoint", "specification"],
+      category: "Documentation",
+      description: "Full ESS-Sigma Laravel API contract"
+    },
     { 
       name: "Experience", 
       href: "/experience", 
