@@ -10,6 +10,8 @@ const mapFromDb = (row: any): LinkItem => ({
   url: row.url,
   icon: row.icon,
   section: row.section,
+  sectionOrder: row.section_order ?? 0,
+  linkOrder: row.link_order ?? 0,
   preview: {
     text: row.preview_text || "",
     domain: row.preview_domain || "",
@@ -23,6 +25,8 @@ const mapToDb = (link: LinkItem) => ({
   url: link.url,
   icon: link.icon,
   section: link.section,
+  section_order: link.sectionOrder ?? 0,
+  link_order: link.linkOrder ?? 0,
   preview_text: link.preview?.text || "",
   preview_domain: link.preview?.domain || "",
   preview_image: link.preview?.image || "",
@@ -34,8 +38,8 @@ export async function GET() {
     const { data, error } = await supabaseServerClient
       .from(LINKS_TABLE)
       .select("*")
-      .order("section", { ascending: true })
-      .order("title", { ascending: true })
+      .order("section_order", { ascending: true })
+      .order("link_order", { ascending: true })
 
     if (error) {
       throw error
