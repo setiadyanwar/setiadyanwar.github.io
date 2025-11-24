@@ -1,131 +1,126 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
-import { LinkItem } from '@/lib/links-data';
+import { NextRequest, NextResponse } from "next/server"
+import { LinkItem } from "@/lib/links-data"
+import { supabaseServerClient } from "@/lib/supabase-client"
 
-const dataFilePath = path.join(process.cwd(), 'public', 'data', 'links.json');
+const LINKS_TABLE = "links"
+
+const mapFromDb = (row: any): LinkItem => ({
+  id: row.id,
+  title: row.title,
+  url: row.url,
+  icon: row.icon,
+  section: row.section,
+  preview: {
+    text: row.preview_text || "",
+    domain: row.preview_domain || "",
+    image: row.preview_image || "",
+  },
+})
+
+const mapToDb = (link: LinkItem) => ({
+  id: link.id,
+  title: link.title,
+  url: link.url,
+  icon: link.icon,
+  section: link.section,
+  preview_text: link.preview?.text || "",
+  preview_domain: link.preview?.domain || "",
+  preview_image: link.preview?.image || "",
+})
 
 // GET - Read all links
 export async function GET() {
   try {
-    const fileContents = await fs.readFile(dataFilePath, 'utf8');
-    const links = JSON.parse(fileContents);
-    return NextResponse.json(links);
+    const { data, error } = await supabaseServerClient
+      .from(LINKS_TABLE)
+      .select("*")
+      .order("section", { ascending: true })
+      .order("title", { ascending: true })
+
+    if (error) {
+      throw error
+    }
+
+    return NextResponse.json((data || []).map(mapFromDb))
   } catch (error) {
-    console.error('Error reading links:', error);
-    return NextResponse.json({ error: 'Failed to read links' }, { status: 500 });
+    console.error("Error reading links:", error)
+    return NextResponse.json({ error: "Failed to read links" }, { status: 500 })
   }
 }
 
 // POST - Create new link
 export async function POST(request: NextRequest) {
   try {
-    const newLink: LinkItem = await request.json();
-    
-    // Validate required fields
+    const newLink: LinkItem = await request.json()
+
     if (!newLink.id || !newLink.title || !newLink.url) {
       return NextResponse.json(
-        { error: 'Missing required fields: id, title, url' },
+        { error: "Missing required fields: id, title, url" },
         { status: 400 }
-      );
+      )
     }
 
-    // Read existing links
-    const fileContents = await fs.readFile(dataFilePath, 'utf8');
-    const links: LinkItem[] = JSON.parse(fileContents);
+    const { error } = await supabaseServerClient.from(LINKS_TABLE).insert(mapToDb(newLink))
 
-    // Check if ID already exists
-    if (links.some(link => link.id === newLink.id)) {
-      return NextResponse.json(
-        { error: 'Link with this ID already exists' },
-        { status: 400 }
-      );
+    if (error) {
+      if (error.code === "23505") {
+        return NextResponse.json({ error: "Link with this ID already exists" }, { status: 400 })
+      }
+      throw error
     }
 
-    // Add new link
-    links.push(newLink);
-
-    // Write back to file
-    await fs.writeFile(dataFilePath, JSON.stringify(links, null, 2), 'utf8');
-
-    return NextResponse.json({ success: true, link: newLink });
+    return NextResponse.json({ success: true, link: newLink })
   } catch (error) {
-    console.error('Error creating link:', error);
-    return NextResponse.json({ error: 'Failed to create link' }, { status: 500 });
+    console.error("Error creating link:", error)
+    return NextResponse.json({ error: "Failed to create link" }, { status: 500 })
   }
 }
 
 // PUT - Update existing link
 export async function PUT(request: NextRequest) {
   try {
-    const updatedLink: LinkItem = await request.json();
-    
+    const updatedLink: LinkItem = await request.json()
+
     if (!updatedLink.id) {
-      return NextResponse.json(
-        { error: 'Link ID is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Link ID is required" }, { status: 400 })
     }
 
-    // Read existing links
-    const fileContents = await fs.readFile(dataFilePath, 'utf8');
-    const links: LinkItem[] = JSON.parse(fileContents);
+    const { error } = await supabaseServerClient
+      .from(LINKS_TABLE)
+      .update(mapToDb(updatedLink))
+      .eq("id", updatedLink.id)
 
-    // Find and update link
-    const index = links.findIndex(link => link.id === updatedLink.id);
-    if (index === -1) {
-      return NextResponse.json(
-        { error: 'Link not found' },
-        { status: 404 }
-      );
+    if (error) {
+      throw error
     }
 
-    links[index] = updatedLink;
-
-    // Write back to file
-    await fs.writeFile(dataFilePath, JSON.stringify(links, null, 2), 'utf8');
-
-    return NextResponse.json({ success: true, link: updatedLink });
+    return NextResponse.json({ success: true, link: updatedLink })
   } catch (error) {
-    console.error('Error updating link:', error);
-    return NextResponse.json({ error: 'Failed to update link' }, { status: 500 });
+    console.error("Error updating link:", error)
+    return NextResponse.json({ error: "Failed to update link" }, { status: 500 })
   }
 }
 
 // DELETE - Delete link
 export async function DELETE(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get("id")
 
     if (!id) {
-      return NextResponse.json(
-        { error: 'Link ID is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Link ID is required" }, { status: 400 })
     }
 
-    // Read existing links
-    const fileContents = await fs.readFile(dataFilePath, 'utf8');
-    const links: LinkItem[] = JSON.parse(fileContents);
+    const { error } = await supabaseServerClient.from(LINKS_TABLE).delete().eq("id", id)
 
-    // Filter out the link to delete
-    const filteredLinks = links.filter(link => link.id !== id);
-
-    if (filteredLinks.length === links.length) {
-      return NextResponse.json(
-        { error: 'Link not found' },
-        { status: 404 }
-      );
+    if (error) {
+      throw error
     }
 
-    // Write back to file
-    await fs.writeFile(dataFilePath, JSON.stringify(filteredLinks, null, 2), 'utf8');
-
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Error deleting link:', error);
-    return NextResponse.json({ error: 'Failed to delete link' }, { status: 500 });
+    console.error("Error deleting link:", error)
+    return NextResponse.json({ error: "Failed to delete link" }, { status: 500 })
   }
 }
 

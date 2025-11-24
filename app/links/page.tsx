@@ -82,7 +82,7 @@ export default function LinksPage() {
     setIsModalOpen(true);
   };
 
-  const handleAdd = () => {
+  const handleAdd = (defaultSection = "") => {
     setIsAdding(true);
     setEditingId(null);
     setFormData({
@@ -90,7 +90,7 @@ export default function LinksPage() {
       title: "",
       url: "",
       icon: "globe",
-      section: "",
+      section: defaultSection,
       preview: { text: "", domain: "", image: "" },
     });
     setIsModalOpen(true);
@@ -155,19 +155,14 @@ export default function LinksPage() {
   };
 
   const handleSaveNewSection = () => {
-    if (!newSectionName.trim()) {
+    const trimmedName = newSectionName.trim();
+    if (!trimmedName) {
       alert("Nama section tidak boleh kosong!");
       return;
     }
-    // Set section name in form data and open add link modal
-    setFormData({
-      ...formData,
-      section: newSectionName.trim(),
-    });
     setIsAddingSection(false);
     setNewSectionName("");
-    // Auto open add link modal
-    handleAdd();
+    handleAdd(trimmedName);
   };
 
   const handleSave = async () => {
@@ -257,12 +252,12 @@ export default function LinksPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Semua link penting untuk semester 7
           </p>
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
             <Button
               onClick={() => setEditMode(!editMode)}
               variant={editMode ? "default" : "outline"}
               size="sm"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 justify-center"
             >
               <Edit2 className="w-4 h-4" />
               {editMode ? "Mode View" : "Mode Edit"}
@@ -272,7 +267,7 @@ export default function LinksPage() {
                 <Button
                   onClick={handleAdd}
                   size="sm"
-                  className="flex items-center gap-2"
+                className="flex items-center gap-2 justify-center"
                   disabled={isAdding || editingId !== null || isModalOpen}
                 >
                   <Plus className="w-4 h-4" />
@@ -282,7 +277,7 @@ export default function LinksPage() {
                   onClick={handleAddSection}
                   size="sm"
                   variant="outline"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 justify-center"
                   disabled={isAddingSection}
                 >
                   <Plus className="w-4 h-4" />

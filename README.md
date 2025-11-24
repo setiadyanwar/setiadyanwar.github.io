@@ -20,6 +20,33 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Variables
+
+Create an `.env.local` (or copy `env.example`) with the following values:
+
+```
+SUPABASE_URL=your-supabase-project-url
+SUPABASE_ANON_KEY=public-anon-key
+SUPABASE_SERVICE_ROLE_KEY=service-role-key
+```
+
+The `SERVICE_ROLE_KEY` is required on the server (API routes) for insert/update/delete operations. Never expose it to the browser.
+
+## Database Setup
+
+Create a `links` table in Supabase with these columns:
+
+| Column           | Type | Notes                    |
+| ---------------- | ---- | ------------------------ |
+| `id`             | text | primary key              |
+| `title`          | text |                          |
+| `url`            | text |                          |
+| `icon`           | text | optional                 |
+| `section`        | text | optional group label     |
+| `preview_text`   | text | optional preview content |
+| `preview_domain` | text | optional preview domain  |
+| `preview_image`  | text | optional image URL       |
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
