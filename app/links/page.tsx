@@ -259,7 +259,7 @@ export default function LinksPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Semua link penting untuk semester 7
           </p>
-          <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <Button
               onClick={() => setEditMode(!editMode)}
               variant={editMode ? "default" : "outline"}
@@ -292,23 +292,22 @@ export default function LinksPage() {
                     Tambah Section
                   </Button>
                 </div>
-                <div className="relative sm:hidden">
+                <div className="relative flex items-center gap-2 sm:hidden">
                   <Button
                     onClick={() => setMobileActionsOpen((prev) => !prev)}
                     variant="outline"
                     size="sm"
-                    className="flex items-center gap-2 justify-center"
+                    className="flex items-center justify-center w-10 h-10 p-0"
                   >
                     <MoreHorizontal className="w-4 h-4" />
-                    Menu
                   </Button>
                   <AnimatePresence>
                     {mobileActionsOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -4 }}
-                        className="absolute right-0 mt-2 w-48 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg z-10"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-48 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg z-10"
                       >
                         <button
                           onClick={() => {
