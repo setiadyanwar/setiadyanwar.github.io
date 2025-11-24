@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, Palette, Linkedin, Instagram, BookOpen, Code, FileText, Video, Globe, Edit2, Trash2, Plus, Save, X } from "lucide-react";
+import { ExternalLink, Github, Palette, Linkedin, Instagram, BookOpen, Code, FileText, Video, Globe, Edit2, Trash2, Plus, Save, X, MoreHorizontal } from "lucide-react";
 import { LinkItem } from "@/lib/links-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -52,11 +52,18 @@ export default function LinksPage() {
     preview: { text: "", domain: "", image: "" },
   });
   const [saving, setSaving] = useState(false);
+  const [mobileActionsOpen, setMobileActionsOpen] = useState(false);
 
   // Fetch links from API
   useEffect(() => {
     fetchLinks();
   }, []);
+
+  useEffect(() => {
+    if (!editMode) {
+      setMobileActionsOpen(false);
+    }
+  }, [editMode]);
 
   const fetchLinks = async () => {
     try {
@@ -264,25 +271,70 @@ export default function LinksPage() {
             </Button>
             {editMode && (
               <>
-                <Button
-                  onClick={handleAdd}
-                  size="sm"
-                className="flex items-center gap-2 justify-center"
-                  disabled={isAdding || editingId !== null || isModalOpen}
-                >
-                  <Plus className="w-4 h-4" />
-                  Tambah Link
-                </Button>
-                <Button
-                  onClick={handleAddSection}
-                  size="sm"
-                  variant="outline"
-                  className="flex items-center gap-2 justify-center"
-                  disabled={isAddingSection}
-                >
-                  <Plus className="w-4 h-4" />
-                  Tambah Section
-                </Button>
+                <div className="hidden sm:flex items-center gap-2">
+                  <Button
+                    onClick={() => handleAdd()}
+                    size="sm"
+                    className="flex items-center gap-2 justify-center"
+                    disabled={isAdding || editingId !== null || isModalOpen}
+                  >
+                    <Plus className="w-4 h-4" />
+                    Tambah Link
+                  </Button>
+                  <Button
+                    onClick={handleAddSection}
+                    size="sm"
+                    variant="outline"
+                    className="flex items-center gap-2 justify-center"
+                    disabled={isAddingSection}
+                  >
+                    <Plus className="w-4 h-4" />
+                    Tambah Section
+                  </Button>
+                </div>
+                <div className="relative sm:hidden">
+                  <Button
+                    onClick={() => setMobileActionsOpen((prev) => !prev)}
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2 justify-center"
+                  >
+                    <MoreHorizontal className="w-4 h-4" />
+                    Menu
+                  </Button>
+                  <AnimatePresence>
+                    {mobileActionsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        className="absolute right-0 mt-2 w-48 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg z-10"
+                      >
+                        <button
+                          onClick={() => {
+                            setMobileActionsOpen(false)
+                            handleAdd()
+                          }}
+                          disabled={isAdding || editingId !== null || isModalOpen}
+                          className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50"
+                        >
+                          Tambah Link
+                        </button>
+                        <div className="border-t border-gray-200 dark:border-gray-800" />
+                        <button
+                          onClick={() => {
+                            setMobileActionsOpen(false)
+                            handleAddSection()
+                          }}
+                          disabled={isAddingSection}
+                          className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50"
+                        >
+                          Tambah Section
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </>
             )}
           </div>
@@ -630,7 +682,7 @@ export default function LinksPage() {
         {!loading && linksData.length === 0 && (
           <div className="text-center py-12">
             <p className="text-gray-600 dark:text-gray-400 mb-4">Belum ada links.</p>
-            <Button onClick={handleAdd} className="flex items-center gap-2 mx-auto">
+            <Button onClick={() => handleAdd()} className="flex items-center gap-2 mx-auto">
               <Plus className="w-4 h-4" />
               Tambah Link Pertama
             </Button>
