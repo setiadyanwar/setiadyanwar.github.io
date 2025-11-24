@@ -6,8 +6,15 @@ import { motion } from "framer-motion"
 export default function AnimatedCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [cursorVariant, setCursorVariant] = useState("default")
+  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768)
+    }
+    handleResize()
+    window.addEventListener("resize", handleResize)
+
     const mouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX,
@@ -31,6 +38,7 @@ export default function AnimatedCursor() {
     })
 
     return () => {
+      window.removeEventListener("resize", handleResize)
       window.removeEventListener("mousemove", mouseMove)
       interactiveElements.forEach((el) => {
         el.removeEventListener("mouseenter", handleMouseEnter)
@@ -66,10 +74,7 @@ export default function AnimatedCursor() {
     },
   }
 
-  // Only show on desktop
-  if (typeof window !== "undefined" && window.innerWidth < 768) {
-    return null
-  }
+  if (!isDesktop) return null
 
   return (
     <motion.div
