@@ -181,7 +181,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
         </div>
 
                 {/* Main Image */}
-                <div className="relative w-full">
+                <div className="relative w-full" data-cursor-view="true">
                   <div className="relative w-full rounded-2xl overflow-hidden">
                     <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                       <Image

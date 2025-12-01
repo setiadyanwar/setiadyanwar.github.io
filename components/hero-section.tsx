@@ -11,6 +11,8 @@ import { useState, useEffect, useRef } from "react";
 export default function HeroSection() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const contactRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const eyeRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -28,6 +30,30 @@ export default function HeroSection() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isContactOpen]);
+
+  // Track mouse position for eye following
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (eyeRef.current) {
+        const rect = eyeRef.current.getBoundingClientRect();
+        const eyeCenterX = rect.left + rect.width / 2;
+        const eyeCenterY = rect.top + rect.height / 2;
+        
+        const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
+        const distance = Math.min(8, Math.sqrt(Math.pow(e.clientX - eyeCenterX, 2) + Math.pow(e.clientY - eyeCenterY, 2)) / 10);
+        
+        setMousePosition({
+          x: Math.cos(angle) * distance,
+          y: Math.sin(angle) * distance,
+        });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center bg-white dark:bg-black">
@@ -256,8 +282,82 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-2xl text-gray-500 dark:text-gray-400 mb-2 text-center md:text-left"
+              className="text-2xl text-gray-500 dark:text-gray-400 mb-2 text-center md:text-left flex items-center gap-3"
             >
+              {/* Eyes that follow cursor */}
+              <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+                {/* First Eye */}
+                <div
+                  ref={eyeRef}
+                  className="relative w-6 h-6"
+                >
+                  {/* Eye outline */}
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-gray-400 dark:text-gray-500"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      fill="none"
+                    />
+                  </svg>
+                  {/* Pupil that follows cursor */}
+                  <motion.div
+                    className="absolute top-1/2 left-1/2 w-2 h-2 bg-gray-700 dark:bg-gray-300 rounded-full"
+                    style={{
+                      x: mousePosition.x - 4,
+                      y: mousePosition.y - 4,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
+                  />
+                </div>
+                {/* Second Eye */}
+                <div className="relative w-6 h-6">
+                  {/* Eye outline */}
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-gray-400 dark:text-gray-500"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      fill="none"
+                    />
+                  </svg>
+                  {/* Pupil that follows cursor */}
+                  <motion.div
+                    className="absolute top-1/2 left-1/2 w-2 h-2 bg-gray-700 dark:bg-gray-300 rounded-full"
+                    style={{
+                      x: mousePosition.x - 4,
+                      y: mousePosition.y - 4,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
+                  />
+                </div>
+              </div>
               Hello I'm
             </motion.h2>
 

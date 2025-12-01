@@ -70,7 +70,7 @@ export default function AdditionalImagesGallery({ images, title }: AdditionalIma
   return (
     <>
       {/* Additional Images - Horizontal layout below main image */}
-      <div className="flex items-center gap-3 mt-4">
+      <div className="flex items-center gap-3 mt-4" data-cursor-view="true">
         {visibleImages.map((img, idx) => (
           <div
             key={idx}

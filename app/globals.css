@@ -57,6 +57,13 @@
   * {
     @apply border-border;
   }
+  /* Hide default cursor when custom cursor is active */
+  @media (min-width: 768px) {
+    * {
+      cursor: none !important;
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
