@@ -1,8 +1,26 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Github, Linkedin, Instagram, Mail } from "lucide-react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const titles = ["FRONTEND", "UI/UX DESIGNER", "WEB DEVELOPER"]
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible(false)
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % titles.length)
+        setIsVisible(true)
+      }, 500) // Wait for fade out before changing text
+    }, 3000) // Change every 3 seconds
+
+    return () => clearInterval(interval)
+  }, [titles.length])
 
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 mt-16">
@@ -101,8 +119,12 @@ export default function Footer() {
 
         {/* Large typography as requested */}
         <div className="mt-12 overflow-hidden">
-          <h2 className="text-[120px] md:text-[180px] font-bold text-gray-100 dark:text-gray-800 leading-none text-center select-none">
-            FRONTEND
+          <h2
+            className={`text-[80px] sm:text-[100px] md:text-[140px] lg:text-[180px] font-bold text-gray-100 dark:text-gray-800 leading-none text-center select-none transition-opacity duration-500 whitespace-nowrap ${
+              isVisible ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {titles[currentIndex]}
           </h2>
         </div>
       </div>

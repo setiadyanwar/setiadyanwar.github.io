@@ -2,6 +2,8 @@ export const portfolioItems = [
   {
     id: "kreavoks",
     title: "Kreavoks E-learning & Agency Website",
+    date: "July - August 2024",
+    subtitle: "Discovery-led project re-designing subscription experience for new user behaviour patterns.",
     category: "web",
     image: "/portfolio/web/kreavoks.png?height=400&width=600",
     additionalImages: [
@@ -11,7 +13,12 @@ export const portfolioItems = [
     technologies: ["React", "Laravel", "TailwindCSS", "Typescript", "MySQL"],
     description:
       "Kreavoks is a multi-purpose platform built to support personal branding, deliver e-learning content, and attract clients for custom software development services. Designed to empower digital talents, Kreavoks also aims to open job opportunities for mentors by connecting them with students and companies in need of guidance, training, or development services. The platform includes a service showcase, a mentorship recruitment form, an LMS feature, and a booking system.",
-    role: "Lead Developer and Fullstack Web Developer responsible for the entire website from concept to implementation.",
+    role: "Lead Developer and Fullstack Web Developer",
+    responsibilities: [
+      "Entire website development from concept to implementation",
+      "Frontend and backend architecture design",
+      "Feature implementation and optimization"
+    ],
     challenges:
       "Combining three distinct goals branding, education, and service sales—into a single unified experience without overwhelming the user. I applied a modular design approach using atomic components and consistent layout grids, Flexbox, enabling scalable and maintainable development. By focusing on clarity, navigation flow, and performance (lazy loading, optimized images), we delivered a platform that feels cohesive and efficient across all devices.",
     demoUrl: "https://kreavoks.my.id",
@@ -52,6 +59,8 @@ export const portfolioItems = [
   {
     id: "nobarin",
     title: "Nobarin Movie Streaming Platform",
+    date: "June - July 2024",
+    subtitle: "Modern movie browsing platform with real-time data integration and responsive design.",
     category: "web",
     image: "/portfolio/web/nobar.png?height=400&width=600",
     // additionalImages: [
@@ -103,6 +112,8 @@ export const portfolioItems = [
   {
     id: "upala",
     title: "Upala Company Profile & CRM Website",
+    date: "May - June 2024",
+    subtitle: "Comprehensive company profile and CRM solution for coffee shop management.",
     category: "web",
     image: "/portfolio/web/upala.png?height=400&width=600",
     additionalImages: [
@@ -112,7 +123,12 @@ export const portfolioItems = [
     technologies: ["Tailwind", "Figma", "Laravel", "HTML/CSS", "MySQL"],
     description:
       "A comprehensive company profile and CRM web solution for Upala Coffee & Eatery in Jatiwaringin, Bekasi. The platform showcases the brand story, menu highlights, and provides an admin dashboard for customer management and order tracking.",
-    role: "Frontend Developer & UI/UX Designer responsible for implementing UI templates and designing interactive prototypes for the company profile and CRM dashboards.",
+    role: "Frontend Developer & UI/UX Designer",
+    responsibilities: [
+      "Implementing UI templates",
+      "Designing interactive prototypes",
+      "Creating company profile and CRM dashboard designs"
+    ],
     challenges:
       "Organizing extensive menu and organizational information into a cohesive profile site, ensuring intuitive CRM workflows for admins, and maintaining responsive performance across devices.",
     demoUrl: "#",
@@ -154,6 +170,8 @@ export const portfolioItems = [
     id: "freezemart",
     title:
       "Freezemart - E-commerce Frozen Food Website with Recommendation System",
+    date: "March - May 2024",
+    subtitle: "E-commerce platform with AI-powered recommendation system and secure payment integration.",
     category: "web",
     image: "/portfolio/web/freezemart.png?height=400&width=600",
     technologies: [
@@ -173,7 +191,13 @@ export const portfolioItems = [
     // Project Description
     description:
       "Freezemart is a frozen food e-commerce platform featuring a content-based recommendation system powered by TF-IDF and Cosine Similarity, and integrated with Xendit payment gateway for seamless in-app transactions.",
-    role: "Full-Stack Developer responsible for implementing the frontend UI, backend logic, integrating the recommendation algorithm, and configuring Xendit payment gateway to enable secure online payments.",
+    role: "Full-Stack Developer",
+    responsibilities: [
+      "Implementing the frontend UI",
+      "Developing backend logic",
+      "Integrating the recommendation algorithm",
+      "Configuring Xendit payment gateway for secure online payments"
+    ],
     challenges:
       "Designing and integrating a performant recommendation system, ensuring real-time product suggestions without impacting page load times, maintaining consistency across the Laravel and Flask components, and implementing a secure payment flow via Xendit.",
     demoUrl: "https://freezemart.osk.dom.my.id",
@@ -220,6 +244,8 @@ export const portfolioItems = [
   {
     id: "studylens",
     title: "Studylens - Ai for Learning Website",
+    date: "January - February 2024",
+    subtitle: "AI-powered learning platform with focus tracking and personalized study recommendations.",
     category: "web",
     image: "/portfolio/web/studylens.png?height=400&width=600",
     //additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
@@ -234,7 +260,13 @@ export const portfolioItems = [
     ],
     description:
       "StudyLens is an AI-powered platform designed to help students maintain focus during self-study sessions. Using head movement tracking, the application detects distractions and provides real-time feedback, allowing students to understand their learning patterns and stay engaged. By analyzing study behavior and offering personalized recommendations, StudyLens supports users in building disciplined and productive study habits through intelligent assistance.",
-    role: "Web Developer.",
+    role: "Full-Stack Developer & AI/ML Engineer",
+    responsibilities: [
+      "Developing AI models (CNN & LSTM)",
+      "Implementing computer vision with OpenCV",
+      "Building the Flask backend",
+      "Creating the frontend interface with TailwindCSS"
+    ],
     challenges:
       "As a Web Developer, the main challenges include designing a responsive and interactive UI, ensuring efficient data processing, and optimizing AI integration for a seamless user experience.",
     //demoUrl: "https://example.com/dashboard",
@@ -275,40 +307,48 @@ export const portfolioItems = [
   {
     id: "nusoundtara",
     title: "Nusoundtara - Ticket Booking Website",
+    date: "November - December 2023",
+    subtitle: "Web-based ticket booking platform with user management and booking system.",
     category: "web",
     image: "/portfolio/web/Nusoundtara.png?height=400&width=600",
     // additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
     technologies: ["HTML/CSS", "Javascript", "PHP", "MySQL", "Laravel"],
     description:
-      "A social networking application with real-time messaging, user profiles, and content sharing capabilities. Features include push notifications, media uploads, and social interactions.",
-    role: "Full-stack Developer responsible for both the mobile frontend and backend API development.",
+      "Nusoundtara is a web-based ticket booking platform built with Laravel. The platform allows users to browse events, book tickets, and manage their bookings. Features include user authentication, event management, ticket reservation system, and payment processing.",
+    role: "Full-Stack Developer",
+    responsibilities: [
+      "Developing Laravel backend",
+      "Implementing database design with MySQL",
+      "Building frontend interface with HTML/CSS/JavaScript",
+      "Integrating booking and payment systems"
+    ],
     challenges:
-      "Implementing real-time features like messaging and notifications while maintaining app performance. I used Socket.io for real-time communication and optimized the data flow.",
+      "Designing an efficient booking system that handles concurrent ticket reservations, ensuring data consistency in the database, implementing secure payment processing, and creating an intuitive user interface for browsing and booking events.",
     // demoUrl: "https://example.com/social",
     // repoUrl: "https://github.com/example",
     projectSteps: [
       {
-        title: "Data Analysis & Planning",
+        title: "Requirement Analysis & Planning",
         description:
-          "Analyzed the data structure and identified key metrics to visualize. Created a dashboard layout plan with stakeholders.",
+          "Analyzed ticket booking requirements, defined user flows for event browsing and ticket reservation, and planned the database schema for events, tickets, and user management.",
         image: null,
       },
       {
-        title: "UI/UX Design",
+        title: "Database Design & Backend Development",
         description:
-          "Designed an intuitive dashboard interface with a focus on data clarity and user experience. Created mockups for approval.",
+          "Designed MySQL database schema for events, tickets, users, and bookings. Developed Laravel backend with RESTful APIs for event management, ticket reservation, and payment processing.",
         image: null,
       },
       {
-        title: "Chart Implementation",
+        title: "Frontend Development",
         description:
-          "Implemented various chart types using Chart.js to visualize different data sets. Optimized for performance and interactivity.",
+          "Built responsive frontend interface using HTML/CSS/JavaScript for event browsing, ticket selection, booking process, and user dashboard for managing bookings.",
         image: null,
       },
       {
-        title: "Real-time Data Integration",
+        title: "Payment Integration & Testing",
         description:
-          "Integrated with Firebase to provide real-time data updates. Implemented filtering and export capabilities for enhanced usability.",
+          "Integrated payment gateway for secure transactions, implemented booking confirmation system, and conducted testing to ensure smooth user experience and data consistency.",
         image: null,
       },
     ],
@@ -316,6 +356,8 @@ export const portfolioItems = [
   {
     id: "nexaid",
     title: "Nexaid - Dashboard Website",
+    date: "September - October 2024",
+    subtitle: "Web-based dashboard for efficient electronic product inventory and stock management.",
     category: "web",
     image: "/portfolio/web/nexaid.png?height=400&width=600",
     // additionalImages: [
@@ -325,7 +367,12 @@ export const portfolioItems = [
     technologies: ["React", "Typescript", "Laravel", "TailwindCSS"],
     description:
       "Nexaid is a web-based dashboard designed for managing electronic products efficiently. Built with React, TypeScript, Laravel, and TailwindCSS, it provides an intuitive interface for inventory management, stock tracking, and product data visualization. With a modern UI and smooth user interactions, Nexaid enables businesses to streamline product organization while maintaining a responsive and scalable system.",
-    role: "Web Developer responsible for building a responsive and interactive dashboard for managing electronic products.",
+    role: "Web Developer",
+    responsibilities: [
+      "Building responsive and interactive dashboard",
+      "Managing electronic products interface",
+      "Frontend and backend integration"
+    ],
     challenges:
       "Optimizing performance, integrating frontend and backend efficiently, ensuring scalable UI, managing state effectively, and maintaining data security.",
     demoUrl: "https://nexaid.osk.dom.my.id",
@@ -376,6 +423,8 @@ export const portfolioItems = [
   {
     id: "butchery",
     title: "Burchery - E-Commerce Meat Website",
+    date: "August - September 2024",
+    subtitle: "Mobile e-commerce application for ordering fresh meat products with real-time inventory.",
     category: "mobile",
     image: "/portfolio/mobile/butchery.png?height=400&width=600",
     // additionalImages: [
@@ -385,7 +434,12 @@ export const portfolioItems = [
     technologies: ["Java", "MongoDB", "Figma", "XML", "Android Studio"],
     description:
       "Burchery is a mobile e-commerce application for ordering fresh meat products. Designed with user-friendly navigation and real-time inventory updates, it ensures customers can browse, select, and purchase premium cuts straight from their device.",
-    role: "Mobile Developer responsible for implementing core shopping flows, cart management, and secure payment integration.",
+    role: "Mobile Developer",
+    responsibilities: [
+      "Implementing core shopping flows",
+      "Cart management system",
+      "Secure payment integration"
+    ],
     challenges:
       "Ensuring data synchronization between client and server, optimizing list rendering for large catalogs, and integrating secure payment gateways within native Android.",
     demoUrl: "#",
@@ -426,6 +480,8 @@ export const portfolioItems = [
   {
     id: "ecotainment",
     title: "Ecotainment E-Commerce Plant - Mobile App",
+    date: "July - August 2024",
+    subtitle: "Mobile commerce platform for plants and green products with in-app chat support.",
     category: "mobile",
     image: "/portfolio/mobile/ecotainment.png?height=400&width=600",
     // additionalImages: [
@@ -488,6 +544,8 @@ export const portfolioItems = [
   {
     id: "skilpath",
     title: "Skillpath AI Learning App - UI Mobile App",
+    date: "March 2024",
+    subtitle: "AI-powered learning platform UI concept that won 1st place in UI/UX Competition.",
     category: "ui",
     image: "/portfolio/uiux/skillpath.png?height=400&width=600",
     // additionalImages: [
@@ -532,6 +590,8 @@ export const portfolioItems = [
   {
     id: "skillify",
     title: "Skillify E-Course App - UI Mobile App",
+    date: "February 2024",
+    subtitle: "Conceptual e-course mobile UI that won 2nd place in Smart IT Competition.",
     category: "ui",
     image: "/portfolio/uiux/skillify.png?height=400&width=600",
     // additionalImages: [
@@ -572,6 +632,8 @@ export const portfolioItems = [
   {
     id: "gobojongsoang",
     title: "Gobojongsoang.id Reporting Platform - UI Website",
+    date: "January 2024",
+    subtitle: "Community reporting platform UI built in collaboration with Bandung city government.",
     category: "ui",
     image: "/portfolio/uiux/GObojongsoang.png?height=400&width=600",
     // additionalImages: [
@@ -581,7 +643,11 @@ export const portfolioItems = [
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Gobojongsoang.id is a community reporting platform built in collaboration with Bandung city government to allow citizens to submit feedback and complaints.",
-    role: "UI/UX Designer responsible for information architecture and interface design.",
+    role: "UI/UX Designer",
+    responsibilities: [
+      "Information architecture design",
+      "Interface design and prototyping"
+    ],
     challenges:
       "Ensuring accessibility for diverse users and integrating with government backend systems.",
     demoUrl: "#",
@@ -613,6 +679,8 @@ export const portfolioItems = [
   {
     id: "rescuisine",
     title: "ResCuisine - Food Waste Solution App",
+    date: "December 2023",
+    subtitle: "Conceptual mobile UI focusing on solving food waste by connecting providers with consumers.",
     category: "ui",
     image: "/portfolio/uiux/rescuisine.png?height=400&width=600",
     // additionalImages: [
@@ -622,7 +690,12 @@ export const portfolioItems = [
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "ResCuisine is a conceptual mobile UI focusing on solving food waste by connecting excess food providers with consumers. The design emphasizes ease of listing, searching, and claiming surplus meals.",
-    role: "UI/UX Designer responsible for crafting user flows, wireframes, and high-fidelity mockups.",
+    role: "UI/UX Designer",
+    responsibilities: [
+      "Crafting user flows",
+      "Creating wireframes",
+      "Designing high-fidelity mockups"
+    ],
     challenges:
       "Designing intuitive filtering and listing features while maintaining a friendly, food-centric aesthetic.",
     demoUrl: "#",
@@ -662,6 +735,8 @@ export const portfolioItems = [
   {
     id: "transmate",
     title: "Transmate - AR Transit Platform",
+    date: "November 2023",
+    subtitle: "AR-enhanced transit experience with overlay directions and live arrival times.",
     category: "ui",
     image: "/portfolio/uiux/Transmate.png?height=400&width=600",
     // additionalImages: [
@@ -671,7 +746,12 @@ export const portfolioItems = [
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Transmate integrates AR features to enhance the Transjakarta transit experience by overlaying directions, station information, and live arrival times through the mobile camera view.",
-    role: "UI/UX Designer responsible for AR interface mockups, iconography, and interaction flows.",
+    role: "UI/UX Designer",
+    responsibilities: [
+      "AR interface mockups design",
+      "Iconography creation",
+      "Interaction flows design"
+    ],
     challenges:
       "Balancing AR overlay legibility with real-world background complexity and ensuring minimal distraction for users on the move.",
     demoUrl: "#",
@@ -711,6 +791,8 @@ export const portfolioItems = [
   {
     id: "hotelid",
     title: "Hotel.id Booking Hotel - UI Website",
+    date: "October 2023",
+    subtitle: "UI concept for hotel booking website with seamless multi-step booking process.",
     category: "ui",
     image: "/portfolio/uiux/hotelid.png?height=400&width=600",
     // additionalImages: [
@@ -720,7 +802,11 @@ export const portfolioItems = [
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Hotel.id is a UI concept for a hotel booking website offering search, filtering, and booking management for users.",
-    role: "UI/UX Designer responsible for designing booking flows and responsive web layouts.",
+    role: "UI/UX Designer",
+    responsibilities: [
+      "Designing booking flows",
+      "Creating responsive web layouts"
+    ],
     challenges:
       "Creating a seamless multi-step booking process and optimizing for mobile and desktop views.",
     // demoUrl: "#",
@@ -754,6 +840,8 @@ export const portfolioItems = [
   {
     id: "swiftcare",
     title: "SwiftCare Crowdfunding Platform - Mobile App",
+    date: "September 2023",
+    subtitle: "Crowdfunding platform mobile UI for medical and social campaign donations.",
     category: "mobile",
     image: "/portfolio/mobile/swiftcare.png?height=400&width=600",
     // additionalImages: [
@@ -768,8 +856,14 @@ export const portfolioItems = [
       "Android Studio",
     ],
     description:
-      "SwiftCare is a crowdfunding platform mobile UI designed to facilitate medical and social campaign donations.",
-    role: "UI/UX Designer crafting donation flows and campaign presentation screens.",
+      "SwiftCare is a crowdfunding platform mobile application designed to facilitate medical and social campaign donations. Built with Kotlin and integrated with Firebase for real-time data and ChatGPT API for enhanced user interactions.",
+    role: "Mobile Developer & UI/UX Designer",
+    responsibilities: [
+      "Designing donation flows and campaign screens",
+      "Developing Android application with Kotlin",
+      "Integrating Firebase for backend services",
+      "Implementing ChatGPT API for user interactions"
+    ],
     challenges:
       "Balancing informational content with emotional engagement and secure transaction UI.",
     demoUrl: "#",
@@ -802,6 +896,8 @@ export const portfolioItems = [
   {
     id: "agridation",
     title: "Agridation 2023 - Competition Website",
+    date: "June - July 2023",
+    subtitle: "Competition website providing information, registration, and result announcements.",
     category: "web",
     image: "/placeholder.svg?height=400&width=600",
     additionalImages: [
@@ -843,6 +939,8 @@ export const portfolioItems = [
   {
     id: "pembimbingid",
     title: "Dashboard Pembimbing.id - Academic Mentoring Platform",
+    date: "August - September 2024",
+    subtitle: "Dashboard UI supporting academic mentors in task assignment and progress tracking.",
     category: "ui",
     image: "/portfolio/uiux/Pembimbing.id.png?height=400&width=600",
     // additionalImages: [
@@ -966,13 +1064,21 @@ export const portfolioItems = [
   {
     id: "redesignipb",
     title: "Redesign IPB University Website",
+    date: "May - June 2024",
+    subtitle: "UI/UX case study for redesigning official IPB University website with improved navigation.",
     category: "web",
     image: "/portfolio/web/ipbredesign.png?height=400&width=600",
     technologies: ["HTML", "CSS", "JavaScript"],
     // Case Study Description
     description:
       "This project is a UI/UX case study for the redesign of the official IPB University website. The new design emphasizes improved navigation, responsive layouts, and a refreshed visual identity to enhance user engagement and accessibility.",
-    role: "Web Designer responsible for creating the UI redesign strategy, developing wireframes, high-fidelity mockups, and interactive prototypes to deliver a modern, user-centered interface.",
+    role: "Web Designer",
+    responsibilities: [
+      "Creating UI redesign strategy",
+      "Developing wireframes and high-fidelity mockups",
+      "Building interactive prototypes",
+      "Delivering modern, user-centered interface design"
+    ],
     challenges:
       "Migrating legacy content to a modern layout while ensuring cross-browser compatibility, maintaining brand consistency, and improving usability across all devices.",
     demoUrl: "#",
@@ -1019,12 +1125,20 @@ export const portfolioItems = [
   {
     id: "bemkmipb",
     title: "BEM KM IPB – Organization Profile Website",
+    date: "April - May 2024",
+    subtitle: "UI/UX project for organizational profile website with clean and modern interface.",
     category: "ui",
     image: "/portfolio/uiux/bemkm.png?height=400&width=600",
     technologies: ["Figma", "Adobe XD", "Illustrator", "Zeplin"],
     description:
       "A UI/UX project for the BEM KM IPB 2024 organizational profile website, showcasing the student executive board's mission, vision, structure, news, events, and contact information with a clean and modern interface.",
-    role: "UI/UX Designer responsible for conducting initial analysis and user research, designing wireframes and high-fidelity mockups, building interactive prototypes, and ensuring a user-centered, accessible, and visually consistent design.",
+    role: "UI/UX Designer",
+    responsibilities: [
+      "Conducting initial analysis and user research",
+      "Designing wireframes and high-fidelity mockups",
+      "Building interactive prototypes",
+      "Ensuring user-centered, accessible, and visually consistent design"
+    ],
     challenges:
       "Balancing dense informational content with a clean layout, ensuring mobile responsiveness, and aligning closely with IPB's branding guidelines.",
     projectSteps: [
@@ -1063,12 +1177,20 @@ export const portfolioItems = [
   {
     id: "uvan",
     title: "Uvan E-Commerce Shoes Store - UI Website",
+    date: "March - April 2024",
+    subtitle: "Fictional brand UI/UX case study for shoes e-commerce with immersive micro-animations.",
     category: "ui",
     image: "/portfolio/uiux/Uvan.png?height=400&width=600",
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
       "Uvan is a fictional brand created as a UI/UX case study for a shoes e-commerce website. The Uvan site features a sleek, modern, and clean design with immersive micro-animations, delivering an intuitive and engaging online shopping experience.",
-    role: "UI/UX Designer responsible for conducting user research, developing wireframes, crafting high-fidelity mockups, building interactive prototypes, and defining micro-animation specifications to produce a modern, simple, clean, and engaging design.",
+    role: "UI/UX Designer",
+    responsibilities: [
+      "Conducting user research and competitive analysis",
+      "Developing wireframes and crafting high-fidelity mockups",
+      "Building interactive prototypes",
+      "Defining micro-animation specifications for modern, engaging design"
+    ],
     challenges:
       "Balancing a minimalist layout with immersive animations, ensuring smooth performance across devices, and maintaining visual consistency in line with the brand identity.",
     projectSteps: [
@@ -1113,6 +1235,8 @@ export const portfolioItems = [
   {
     id: "famiapp",
     title: "FamiApp – Checkout Flow Redesign (Mobile UI)",
+    date: "February - March 2024",
+    subtitle: "Comprehensive UI/UX redesign focusing on enhancing checkout and pickup order experience.",
     category: "ui",
     image: "/portfolio/uiux/FamiApp.png?height=400&width=600",
     // additionalImages: [
@@ -1123,7 +1247,13 @@ export const portfolioItems = [
     technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
     description:
       "A comprehensive UI/UX redesign of the FamiApp mobile application, focusing on enhancing the checkout and pickup order experience. The project aimed to streamline the user journey, address usability issues, and align the interface with modern design standards.",
-    role: "UI/UX Designer responsible for conducting user research, creating wireframes and high-fidelity mockups, and developing interactive prototypes to improve the checkout flow.",
+    role: "UI/UX Designer",
+    responsibilities: [
+      "Conducting user research and pain point analysis",
+      "Creating wireframes and high-fidelity mockups",
+      "Developing interactive prototypes",
+      "Improving checkout flow and user experience"
+    ],
     challenges:
       "Identifying and resolving pain points in the existing checkout process, such as complex stock checking procedures and lack of clear notifications, while ensuring a user-friendly and efficient interface.",
     repoUrl:
@@ -1164,13 +1294,21 @@ export const portfolioItems = [
   {
     id: "wingspos",
     title: "WingsPOS – Point of Sale Web Application",
+    date: "October - November 2024",
+    subtitle: "Web-based POS system for streamlining sales, inventory, and order management.",
     category: "web",
     image: "/portfolio/web/wingspos.png?height=400&width=600",
     additionalImages: ["/portfolio/web/wingspos-1.png?height=180&width=320"],
     technologies: ["Laravel", "TailwindCSS", "MySQL", "HTML/CSS", "JavaScript"],
     description:
       "WingsPOS is a web-based Point of Sale (POS) system developed for Ayam Geprek Indonesia to streamline sales, inventory, and order management across multiple outlets. The application offers real-time transaction processing, role-based access control, and comprehensive reporting features.",
-    role: "Full-Stack Developer responsible for designing the database schema, developing backend APIs with Laravel, implementing responsive frontend interfaces using TailwindCSS, and deploying the application to a live server.",
+    role: "Full-Stack Developer",
+    responsibilities: [
+      "Designing the database schema",
+      "Developing backend APIs with Laravel",
+      "Implementing responsive frontend interfaces using TailwindCSS",
+      "Deploying the application to a live server"
+    ],
     challenges:
       "Integrating real-time inventory updates across multiple branches, ensuring secure authentication and authorization for different user roles (admin, cashier), and optimizing the system for high-volume transaction processing.",
     demoUrl: "https://ayamgeprek.id/",

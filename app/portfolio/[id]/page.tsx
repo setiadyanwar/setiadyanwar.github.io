@@ -1,191 +1,656 @@
 "use client"
 
-import { useState } from "react"
-import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { ArrowLeft, ArrowRight, TrendingDown, TrendingUp, ThumbsUp, ThumbsDown, Frown, Smile, Meh } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { portfolioItems } from "@/lib/data"
 import { motion } from "framer-motion"
+import PortfolioBreadcrumb from "@/components/portfolio/portfolio-breadcrumb"
+import PortfolioNavigation from "@/components/portfolio/portfolio-navigation"
+import MobileNavigationToggle from "@/components/portfolio/mobile-navigation-toggle"
+import MobileNavigationSidebar from "@/components/portfolio/mobile-navigation-sidebar"
+import ProjectInfoBentoGrid from "@/components/portfolio/project-info-bento-grid"
+import AdditionalImagesGallery from "@/components/portfolio/additional-images-gallery"
+
+const sections = [
+  { id: "overview", label: "Overview" },
+  { id: "problem", label: "Problem" },
+  { id: "solution", label: "Solution" },
+  { id: "process", label: "Process" },
+  { id: "outcomes", label: "Outcomes" },
+]
 
 export default function PortfolioDetail({ params }: { params: { id: string } }) {
+  const [activeSection, setActiveSection] = useState<string>("overview")
   const [activeStep, setActiveStep] = useState<number>(0)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
+  const activeSectionRef = useRef<string>("overview")
 
   const portfolio = portfolioItems.find((item) => item.id === params.id) || portfolioItems[0]
   const currentIndex = portfolioItems.findIndex((item) => item.id === params.id)
   const prevPortfolio = currentIndex > 0 ? portfolioItems[currentIndex - 1] : null
   const nextPortfolio = currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null
 
-  return (
-    <div className="container mx-auto px-4 mt-12 py-12">
-      {/* Breadcrumb */}
-      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8">
-        <Link href="/" className="hover:text-indigo-600 dark:hover:text-indigo-400">
-          Home
-        </Link>
-        <ChevronRight className="h-4 w-4 mx-2" />
-        <Link href="/portfolio" className="hover:text-indigo-600 dark:hover:text-indigo-400">
-          Portfolio
-        </Link>
-        <ChevronRight className="h-4 w-4 mx-2" />
-        <span className="text-indigo-600 dark:text-indigo-400">{portfolio.title}</span>
-      </div>
+  useEffect(() => {
+    // Initialize active section ref
+    activeSectionRef.current = activeSection
 
-      {/* Header + Images */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div className="space-y-6">
-          <h1 className="text-4xl font-bold">{portfolio.title}</h1>
-          <div className="flex flex-wrap gap-2">
-            {portfolio.technologies.map((tech, idx) => (
-              <Badge
-                key={idx}
-                variant="outline"
-                className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800"
-              >
-                {tech}
-              </Badge>
-            ))}
-          </div>
-          <div className="prose dark:prose-invert max-w-none">
-            <h3 className="text-xl font-semibold mb-2">Project Overview</h3>
-            <p>{portfolio.description}</p>
-            <h3 className="text-xl font-semibold my-2">My Role</h3>
-            <p>{portfolio.role}</p>
-            <h3 className="text-xl font-semibold my-2">Challenges & Solutions</h3>
-            <p>{portfolio.challenges}</p>
-          </div>
-          <div className="flex flex-wrap gap-4 pt-4">
-            {portfolio.demoUrl && (
-              <Button asChild className="bg-indigo-600 hover:bg-indigo-700 btn-splash">
-                <a href={portfolio.demoUrl} target="_blank" rel="noopener noreferrer">
-                  <span>View Live Demo</span>
-                </a>
-              </Button>
-            )}
-            {portfolio.repoUrl && (
-              <Button variant="outline" asChild className="border-indigo-300 dark:border-indigo-800 btn-splash">
-                <a href={portfolio.repoUrl} target="_blank" rel="noopener noreferrer">
-                  <span>View Repository</span>
-                </a>
-              </Button>
-            )}
+    let ticking = false
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 250 // Offset for header and spacing
+          const allSections = Object.keys(sectionRefs.current)
+          let currentSection = activeSectionRef.current
+
+          // Find which section is currently in view
+          for (const sectionId of allSections) {
+            const element = sectionRefs.current[sectionId]
+            if (element) {
+              const rect = element.getBoundingClientRect()
+              const elementTop = rect.top + window.scrollY
+              const elementBottom = elementTop + rect.height
+
+              // Check if scroll position is within this section
+              if (scrollPosition >= elementTop - 100 && scrollPosition < elementBottom - 100) {
+                currentSection = sectionId
+                break
+              }
+            }
+          }
+
+          // Update active section if changed
+          if (currentSection !== activeSectionRef.current) {
+            activeSectionRef.current = currentSection
+            setActiveSection(currentSection)
+          }
+
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    // Wait a bit for refs to be set, then check
+    const timeoutId = setTimeout(() => {
+      handleScroll()
+    }, 100)
+
+    // Listen to scroll events
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      clearTimeout(timeoutId)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+
+  const scrollToSection = (sectionId: string) => {
+    const element = sectionRefs.current[sectionId]
+    if (element) {
+      const offset = 100
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      // Update active section immediately
+      activeSectionRef.current = sectionId
+      setActiveSection(sectionId)
+
+      // Close mobile menu if open
+      setIsMobileMenuOpen(false)
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      })
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-gray-950">
+      <PortfolioBreadcrumb title={portfolio.title} />
+
+      <div className="container mx-auto px-6 pb-32">
+        <MobileNavigationToggle
+          isOpen={isMobileMenuOpen}
+          onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        />
+
+        <MobileNavigationSidebar
+          sections={sections}
+          activeSection={activeSection}
+          isOpen={isMobileMenuOpen}
+          onSectionClick={scrollToSection}
+          onClose={() => setIsMobileMenuOpen(false)}
+        />
+
+        <div className="flex gap-12 lg:gap-20">
+          <PortfolioNavigation
+            sections={sections}
+            activeSection={activeSection}
+            onSectionClick={scrollToSection}
+          />
+
+          {/* Main Content */}
+          <main className="flex-1 max-w-4xl">
+            {/* Overview Section */}
+            <section
+              id="overview"
+              ref={(el) => {
+                if (el) sectionRefs.current.overview = el
+              }}
+              className="pt-4 pb-24 scroll-mt-32"
+            >
+              <div className="space-y-16">
+                {/* Hero Header */}
+                <div className="space-y-4">
+                  {/* Date */}
+                  {(portfolio as any).date && (
+                    <p className="text-sm text-gray-500 dark:text-gray-500">
+                      {(portfolio as any).date}
+                    </p>
+                  )}
+                  
+                  <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 dark:text-gray-100 leading-[1.1] tracking-tight">
+                    {portfolio.title}
+                  </h1>
+                  
+                  {/* Subtitle */}
+                  {(portfolio as any).subtitle && (
+                    <p className="text-base text-gray-500 dark:text-gray-500 leading-relaxed max-w-3xl">
+                      {(portfolio as any).subtitle}
+                    </p>
+                  )}
+                  
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2">
+                    {portfolio.technologies.map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1.5 text-xs font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
           </div>
         </div>
-        <div className="space-y-8">
-          {/* Main image */}
-          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-            <Image
-              src={portfolio.image || "/placeholder.svg"}
-              alt={portfolio.title}
-              fill
-              className="object-cover rounded-xl border border-indigo-200 dark:border-indigo-800"
+
+                {/* Main Image */}
+                <div className="relative w-full">
+                  <div className="relative w-full rounded-2xl overflow-hidden">
+                    <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                      <Image
+                        src={portfolio.image || "/placeholder.svg"}
+                        alt={portfolio.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Additional Images Gallery - Below left of main image */}
+                  {portfolio.additionalImages && portfolio.additionalImages.length > 0 && (
+                    <AdditionalImagesGallery images={portfolio.additionalImages} title={portfolio.title} />
+                  )}
+                </div>
+
+                {/* Project Overview */}
+                <div className="space-y-10">
+                  <div>
+                    <h2 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-3 tracking-wide uppercase">
+                      Project Overview
+                    </h2>
+                    <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl">
+                      {portfolio.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* User Journey Analysis */}
+                {(portfolio as any).userJourney && (
+                  <div className="bg-gray-50 dark:bg-gray-900/50 p-8 rounded-2xl space-y-8">
+                    <div>
+                      <h2 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-2 tracking-wide uppercase">
+                        {(portfolio as any).userJourney.title || "User Journey Analysis"}
+                      </h2>
+                      <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {(portfolio as any).userJourney.subtitle}
+                      </p>
+                    </div>
+
+                    {/* Journey Graph */}
+                    <div className="relative">
+                      <div className="bg-white dark:bg-gray-950 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                        {/* Y-axis labels */}
+                        <div className="absolute left-0 top-0 bottom-12 flex flex-col justify-between text-xs text-gray-500 dark:text-gray-500 pr-2">
+                          <span>+1</span>
+                          <span>0</span>
+                          <span>-1</span>
+                          <span>-2</span>
+                        </div>
+
+                        {/* Graph area */}
+                        <div className="ml-12 relative" style={{ height: "300px" }}>
+                          {/* Grid lines */}
+                          <div className="absolute inset-0 flex flex-col justify-between">
+                            {[0, 1, 2, 3].map((i) => (
+                              <div
+                                key={i}
+                                className="h-px bg-gray-200 dark:bg-gray-800"
+                                style={{ marginTop: i === 0 ? "0" : "auto", marginBottom: i === 0 ? "auto" : "0" }}
+                              />
+                            ))}
+                          </div>
+
+                          {/* Zero line */}
+                          <div className="absolute left-0 right-0 h-px bg-gray-400 dark:bg-gray-600" style={{ top: "50%" }} />
+
+                          {/* Stages and line */}
+                          <div className="relative h-full">
+                            <svg className="absolute inset-0 w-full h-full" style={{ overflow: "visible" }}>
+                              {/* Line path */}
+                              <polyline
+                                points={((portfolio as any).userJourney.stages || [])
+                                  .map(
+                                    (stage: any, idx: number) =>
+                                      `${(idx / Math.max(1, ((portfolio as any).userJourney.stages.length - 1))) * 80 + 10}%,${
+                                        50 - (stage.sentiment * 12.5)
+                                      }%`
+                                  )
+                                  .join(" ")}
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                className="text-indigo-500 dark:text-indigo-400"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+
+                            {/* Stage points */}
+                            <div className="absolute inset-0 flex justify-between items-center">
+                              {((portfolio as any).userJourney.stages || []).map((stage: any, idx: number) => {
+                                const position = (idx / Math.max(1, ((portfolio as any).userJourney.stages.length - 1))) * 80 + 10
+                                const topPosition = 50 - stage.sentiment * 12.5
+                                const IconComponent =
+                                  stage.sentiment > 0.5
+                                    ? Smile
+                                    : stage.sentiment < -0.5
+                                      ? Frown
+                                      : Meh
+
+                                return (
+                                  <div
+                                    key={idx}
+                                    className="absolute flex flex-col items-center"
+                                    style={{
+                                      left: `${position}%`,
+                                      top: `${topPosition}%`,
+                                      transform: "translate(-50%, -50%)",
+                                    }}
+                                  >
+                                    <div className="w-10 h-10 rounded-full bg-white dark:bg-gray-900 border-2 border-indigo-500 dark:border-indigo-400 flex items-center justify-center mb-2">
+                                      <IconComponent
+                                        className={`w-5 h-5 ${
+                                          stage.sentiment > 0.5
+                                            ? "text-green-500"
+                                            : stage.sentiment < -0.5
+                                              ? "text-red-500"
+                                              : "text-yellow-500"
+                                        }`}
             />
           </div>
-          {/* Additional images */}
-          <div className="grid grid-cols-2 gap-4">
-            {portfolio.additionalImages?.map((img, idx) => (
-              <div key={idx} className="relative w-full" style={{ paddingBottom: "75%" }}>
-                <Image
-                  src={img || "/placeholder.svg"}
-                  alt={`${portfolio.title} screenshot ${idx + 1}`}
-                  fill
-                  className="object-cover rounded-lg border border-indigo-200 dark:border-indigo-800"
-                />
+                                    <div className="text-center min-w-[120px]">
+                                      <p className="text-xs font-medium text-gray-900 dark:text-gray-100 mb-1">
+                                        {stage.name}
+                                      </p>
+                                      <p className="text-xs text-gray-600 dark:text-gray-400">{stage.feedback}</p>
+                                    </div>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Opportunity */}
+                    {(portfolio as any).userJourney.opportunity && (
+                      <div>
+                        <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                          <span className="font-semibold">Opportunity:</span> {(portfolio as any).userJourney.opportunity}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Solution */}
+                    {(portfolio as any).userJourney.solution && (
+                      <div className="bg-indigo-50/50 dark:bg-indigo-900/10 p-6 rounded-xl border border-indigo-100 dark:border-indigo-900/20">
+                        <h3 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-3 tracking-wide uppercase">
+                          Solution
+                        </h3>
+                        <p className="text-base text-gray-700 dark:text-gray-300 mb-4">
+                          <span className="font-medium">Before:</span> {(portfolio as any).userJourney.solution.before} →{" "}
+                          <span className="font-medium">After:</span> {(portfolio as any).userJourney.solution.after}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                          {(portfolio as any).userJourney.solution.description}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <ProjectInfoBentoGrid portfolio={portfolio as any} />
               </div>
-            ))}
+            </section>
+
+            {/* Problem Section */}
+            <section
+              id="problem"
+              ref={(el) => {
+                if (el) sectionRefs.current.problem = el
+              }}
+              className="pt-16 pb-12 scroll-mt-32"
+            >
+              <h2 className="text-sm font-semibold text-red-500 dark:text-red-400 mb-8 tracking-wide uppercase">
+                Problem
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div className="order-2 lg:order-1">
+                  <div className="bg-red-50/50 dark:bg-red-950/20 p-8 rounded-2xl border border-red-100 dark:border-red-900/20">
+                    <div className="flex items-start gap-4 mb-6">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-red-100/50 dark:bg-red-900/20 flex items-center justify-center">
+                          <TrendingDown className="w-6 h-6 text-red-500 dark:text-red-400" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                          {portfolio.challenges}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="order-1 lg:order-2">
+                  <div className="relative w-full rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800">
+                    <div className="relative w-full" style={{ paddingBottom: "75%" }}>
+                      {(portfolio as any).problemImage ? (
+                        <Image
+                          src={(portfolio as any).problemImage}
+                          alt="Problem illustration"
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center p-8">
+                            <TrendingDown className="w-16 h-16 text-red-300 dark:text-red-800 mx-auto mb-4" />
+                            <p className="text-sm text-gray-500 dark:text-gray-500">Problem Illustration</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
           </div>
         </div>
       </div>
+            </section>
 
-      {/* Project Steps with Timeline */}
-      {portfolio.projectSteps && portfolio.projectSteps.length > 0 && (
-        <div className="mt-14">
-          <h2 className="text-2xl font-bold mb-10 text-center">Project Development Process</h2>
-          <div className="relative">
-            {/* Vertical timeline line */}
-            <div className="absolute top-0 left-4 w-px h-full bg-indigo-200 dark:bg-indigo-800"></div>
+            {/* Divider */}
+            <div className="h-px bg-gray-200 dark:bg-gray-800 my-8"></div>
 
-            <div className="space-y-12">
-              {portfolio.projectSteps.map((step, index) => (
-                <div key={index} className="relative">
-                  {/* Dot outside highlight */}
-                  <div className="absolute left-2 top-6 w-4 h-4 rounded-full bg-indigo-600 z-10">
-                    <span className="absolute inset-0 rounded-full border-2 border-indigo-400 animate-ping opacity-75"></span>
-                    <span className="absolute inset-0 rounded-full border-4 border-indigo-200 animate-pulse"></span>
+            {/* Solution Section */}
+            <section
+              id="solution"
+              ref={(el) => {
+                if (el) sectionRefs.current.solution = el
+              }}
+              className="pt-12 pb-16 scroll-mt-32"
+            >
+              <h2 className="text-sm font-semibold text-indigo-500 dark:text-indigo-400 mb-8 tracking-wide uppercase">
+                Solution
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                  <div className="relative w-full rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800">
+                    <div className="relative w-full" style={{ paddingBottom: "75%" }}>
+                      {(portfolio as any).solutionImage ? (
+                        <Image
+                          src={(portfolio as any).solutionImage}
+                          alt="Solution illustration"
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center p-8">
+                            <TrendingUp className="w-16 h-16 text-indigo-300 dark:text-indigo-800 mx-auto mb-4" />
+                            <p className="text-sm text-gray-500 dark:text-gray-500">Solution Illustration</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
+                </div>
+                <div>
+                  <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-8 rounded-2xl border border-indigo-100 dark:border-indigo-900/20">
+                    <div className="flex items-start gap-4 mb-6">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-indigo-100/50 dark:bg-indigo-900/20 flex items-center justify-center">
+                          <TrendingUp className="w-6 h-6 text-indigo-500 dark:text-indigo-400" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                          {portfolio.challenges && portfolio.challenges.length > 200
+                            ? portfolio.challenges.split(".").slice(1).join(".").trim() || portfolio.challenges
+                            : "The solution involved a comprehensive approach combining technical expertise with user-centered design principles to address the challenges effectively."}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-                  {/* Content box with left margin */}
+            {/* Divider */}
+            <div className="h-px bg-gray-200 dark:bg-gray-800 my-8"></div>
+
+            {/* Process Section */}
+            {portfolio.projectSteps && portfolio.projectSteps.length > 0 && (
+              <section
+                id="process"
+                ref={(el) => {
+                if (el) sectionRefs.current.process = el
+              }}
+                className="pt-12 pb-16 scroll-mt-32"
+              >
+                <h2 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-8 tracking-wide uppercase">
+                  Process
+                </h2>
+                <div className="space-y-12">
+                  {portfolio.projectSteps.map((step, index) => (
                   <motion.div
+                      key={index}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     onViewportEnter={() => setActiveStep(index)}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: false, margin: "-100px" }}
-                    className={`ml-8 flex flex-col md:flex-row items-start gap-8 p-4 rounded-lg transition-all duration-200 
-                    ${
-                      activeStep === index
-                        ? "border-2 border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20"
-                        : "hover:border border-indigo-300 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/10"
-                    }`}
-                  >
-                    {/* Text - adjust width based on whether there's a valid image */}
-                    <div className={step.image && step.image.trim() !== "" ? "md:w-1/2" : "w-full"}>
-                      <div className="flex items-center mb-2">
-                        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-400 mr-3">
-                          {index + 1}
+                      className="space-y-4"
+                    >
+                      <div className="flex items-start gap-4">
+                        <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400 flex-shrink-0 w-8">
+                          {String(index + 1).padStart(2, "0")}
                         </span>
-                        <h3 className="text-xl font-bold">{step.title}</h3>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">
+                            {step.title}
+                          </h3>
+                          <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">{step.description}</p>
+                        </div>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
-                    </div>
-                    {/* Optional image - only render if step.image is a valid non-empty string */}
-                    {step.image && step.image.trim() !== "" ? (
-                      <div className="md:w-1/2">
+                      {step.image && step.image.trim() !== "" && (
+                        <div className="ml-14 relative w-full">
                         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                           <Image
                             src={step.image || "/placeholder.svg"}
                             alt={step.title}
                             fill
-                            className="object-cover rounded-xl border border-indigo-200 dark:border-indigo-800"
+                              className="object-cover"
                           />
                         </div>
                       </div>
-                    ) : null}
+                      )}
                   </motion.div>
+                  ))}
                 </div>
-              ))}
+              </section>
+            )}
+
+            {/* Divider */}
+            <div className="h-px bg-gray-200 dark:bg-gray-800 my-8"></div>
+
+            {/* Outcomes Section */}
+            <section
+              id="outcomes"
+              ref={(el) => {
+                if (el) sectionRefs.current.outcomes = el
+              }}
+              className="pt-12 pb-16 scroll-mt-32"
+            >
+              <h2 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-8 tracking-wide uppercase">
+                Outcomes
+              </h2>
+
+              {/* Outcomes Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {(portfolio as any).outcomes && (portfolio as any).outcomes.length > 0 ? (
+                  ((portfolio as any).outcomes as any[]).map((outcome: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className={`space-y-2.5 p-4 rounded-lg border ${
+                        outcome.type === "positive"
+                          ? "bg-indigo-50/50 dark:bg-indigo-900/10 text-indigo-500 dark:text-indigo-400 border-indigo-100/50 dark:border-indigo-800/30"
+                          : outcome.type === "negative"
+                            ? "bg-red-50/50 dark:bg-red-900/10 text-red-400 dark:text-red-400 border-red-100/50 dark:border-red-800/30"
+                            : "bg-gray-50/50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 border-gray-100 dark:border-gray-700/50"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        {outcome.type === "positive" ? (
+                          <ThumbsUp className="w-5 h-5" />
+                        ) : outcome.type === "negative" ? (
+                          <ThumbsDown className="w-5 h-5" />
+                        ) : null}
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-3xl font-bold">
+                            {outcome.type === "positive" ? "+" : outcome.type === "negative" ? "-" : ""}
+                            {outcome.value}
+                            {outcome.unit || "%"}
+                          </span>
             </div>
           </div>
+                      <h3 className="text-sm font-semibold">{outcome.title}</h3>
+                      {outcome.description && (
+                        <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{outcome.description}</p>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    {/* Default Positive Outcome */}
+                    <div className="space-y-2.5 p-4 bg-indigo-50/50 dark:bg-indigo-900/10 text-indigo-500 dark:text-indigo-400 border border-indigo-100/50 dark:border-indigo-800/30 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <ThumbsUp className="w-5 h-5" />
+                        <span className="text-3xl font-bold">+40%</span>
+                      </div>
+                      <h3 className="text-sm font-semibold">Growth in user engagement</h3>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                        by implementing user-centered design principles and optimizing the user experience flow.
+                      </p>
+                    </div>
+
+                    {/* Default Negative Outcome (Reduction) */}
+                    <div className="space-y-2.5 p-4 bg-indigo-50/50 dark:bg-indigo-900/10 text-indigo-500 dark:text-indigo-400 border border-indigo-100/50 dark:border-indigo-800/30 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <ThumbsUp className="w-5 h-5" />
+                        <span className="text-3xl font-bold">-50%</span>
+                      </div>
+                      <h3 className="text-sm font-semibold">Reduced subscription drop-off</h3>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                        by aligning subscription flow with customer habits, reducing decision making friction.
+                      </p>
+                    </div>
+
+                    {/* Default Challenge Card */}
+                    <div className="space-y-2.5 p-4 bg-red-50/50 dark:bg-red-900/10 text-red-400 dark:text-red-400 border border-red-100/50 dark:border-red-800/30 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <ThumbsDown className="w-5 h-5" />
+                        <span className="text-sm font-semibold">Challenge</span>
+                      </div>
+                      <h3 className="text-sm font-semibold">Price is still a key barrier</h3>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Reveals the challenge of introducing a premium product to a price-sensitive market.
+                      </p>
         </div>
-      )}
+                  </>
+                )}
+              </div>
+
+              {/* Next Steps */}
+              <div className="mt-12">
+                <h3 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-4 tracking-wide uppercase">
+                  Next Steps
+                </h3>
+                <div className="bg-gray-50 dark:bg-gray-900/50 p-8 rounded-2xl">
+                  <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                    This project is currently guiding ongoing improvements and shaping future development
+                  </h4>
+                  <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {(portfolio as any).nextSteps ||
+                      "The insights and recommendations from this project are being implemented to drive continuous improvement and inform future strategic decisions."}
+                  </p>
+                </div>
+              </div>
+            </section>
 
       {/* Prev / Next navigation */}
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="mt-32 pt-16 border-t border-gray-200 dark:border-gray-900 grid grid-cols-1 md:grid-cols-2 gap-8">
         {prevPortfolio && (
           <Link
             href={`/portfolio/${prevPortfolio.id}`}
-            className="group flex items-center p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
+                  className="group flex items-center py-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
           >
-            <ArrowLeft className="mr-4 h-5 w-5 text-indigo-600 dark:text-indigo-400 group-hover:-translate-x-1 transition-transform" />
+                  <ArrowLeft className="mr-4 h-5 w-5 group-hover:-translate-x-1 transition-transform" />
             <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Previous Project</p>
-              <p className="font-medium text-gray-900 dark:text-gray-100">{prevPortfolio.title}</p>
+                    <p className="text-sm mb-1">Previous Project</p>
+                    <p className="font-medium">{prevPortfolio.title}</p>
             </div>
           </Link>
         )}
         {nextPortfolio && (
           <Link
             href={`/portfolio/${nextPortfolio.id}`}
-            className="group flex items-center justify-end p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
+                  className="group flex items-center justify-end py-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
           >
             <div className="text-right">
-              <p className="text-sm text-gray-500 dark:text-gray-400">Next Project</p>
-              <p className="font-medium text-gray-900 dark:text-gray-100">{nextPortfolio.title}</p>
+                    <p className="text-sm mb-1">Next Project</p>
+                    <p className="font-medium">{nextPortfolio.title}</p>
             </div>
-            <ArrowRight className="ml-4 h-5 w-5 text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-4 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         )}
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   )
