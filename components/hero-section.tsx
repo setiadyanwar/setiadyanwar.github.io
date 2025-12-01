@@ -282,10 +282,10 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-2xl text-gray-500 dark:text-gray-400 mb-2 text-center md:text-left flex items-center gap-3"
+              className="text-2xl text-gray-500 dark:text-gray-400 mb-2 text-center md:text-left md:flex md:items-center md:gap-3"
             >
               {/* Eyes that follow cursor */}
-              <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+              <div className="flex justify-center md:justify-start items-center gap-2 flex-shrink-0 mb-2 md:mb-0">
                 {/* First Eye */}
                 <div
                   ref={eyeRef}
