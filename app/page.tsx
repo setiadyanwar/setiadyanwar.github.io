@@ -13,8 +13,8 @@ export default function Home() {
       <HeroSection />
       <ClientsLogoSection />
       <FocusOn />
-      <SkillsShowcase />
       <RecentProjects />
+      <SkillsShowcase />
       <ActivityGallery />
     </div>
   )

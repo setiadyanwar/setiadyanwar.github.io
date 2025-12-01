@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Code, Palette, Globe } from "lucide-react"
+import { SpotlightCard } from "@/components/ui/spotlight-card"
 
 export default function FocusOn() {
   const [isClient, setIsClient] = useState(false)
@@ -41,27 +42,21 @@ export default function FocusOn() {
       description: "Modern, responsive web applications built with cutting-edge technologies and best practices.",
       icon: <Code className="w-6 h-6" />,
       color: "text-blue-600 dark:text-blue-400",
-      hoverBg: "hover:bg-blue-50/80 dark:hover:bg-blue-950/30",
-      hoverBorder: "hover:border-blue-200/60 dark:hover:border-blue-800/40",
-      iconHoverBg: "group-hover:bg-blue-100/80 dark:group-hover:bg-blue-900/40",
+      spotlightColor: "59, 130, 246", // blue-500
     },
     {
       title: "UI/UX Design",
       description: "Intuitive interfaces designed with precision, focusing on user experience and accessibility.",
       icon: <Palette className="w-6 h-6" />,
       color: "text-orange-600 dark:text-orange-400",
-      hoverBg: "hover:bg-orange-50/80 dark:hover:bg-orange-950/30",
-      hoverBorder: "hover:border-orange-200/60 dark:hover:border-orange-800/40",
-      iconHoverBg: "group-hover:bg-orange-100/80 dark:group-hover:bg-orange-900/40",
+      spotlightColor: "249, 115, 22", // orange-500
     },
     {
       title: "Web Development",
       description: "End-to-end digital solutions crafted with creativity and technical excellence.",
       icon: <Globe className="w-6 h-6" />,
       color: "text-gray-600 dark:text-gray-400",
-      hoverBg: "hover:bg-gray-50/80 dark:hover:bg-gray-800/30",
-      hoverBorder: "hover:border-gray-300/60 dark:hover:border-gray-600/40",
-      iconHoverBg: "group-hover:bg-gray-200/80 dark:group-hover:bg-gray-700/40",
+      spotlightColor: "99, 102, 241", // indigo-500
     },
   ]
 
@@ -103,9 +98,12 @@ export default function FocusOn() {
               }}
               className="group relative"
             >
-              <div className={`relative p-8 md:p-10 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-800/50 rounded-2xl transition-all duration-500 ${service.hoverBg} ${service.hoverBorder} hover:shadow-xl hover:shadow-gray-200/20 dark:hover:shadow-black/20`}>
+              <SpotlightCard
+                spotlightColor={service.spotlightColor}
+                className="p-8 md:p-10 hover:shadow-xl hover:shadow-gray-200/20 dark:hover:shadow-black/20 transition-all duration-500"
+              >
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100/80 dark:bg-gray-800/80 mb-6 group-hover:scale-110 ${service.iconHoverBg} transition-all duration-300 ${service.color}`}>
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100/80 dark:bg-gray-800/80 mb-6 group-hover:scale-110 transition-all duration-300 ${service.color}`}>
                   {service.icon}
                 </div>
 
@@ -121,7 +119,7 @@ export default function FocusOn() {
 
                 {/* Subtle accent line */}
                 <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
+              </SpotlightCard>
             </motion.div>
           ))}
         </motion.div>
