@@ -299,6 +299,7 @@ export default function HeroSection() {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     className="text-gray-400 dark:text-gray-500"
+                    suppressHydrationWarning
                   >
                     <circle
                       cx="12"
@@ -333,6 +334,7 @@ export default function HeroSection() {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     className="text-gray-400 dark:text-gray-500"
+                    suppressHydrationWarning
                   >
                     <circle
                       cx="12"

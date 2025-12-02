@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { ArrowLeft, ArrowRight, TrendingDown, TrendingUp, ThumbsUp, ThumbsDown, Frown, Smile, Meh } from "lucide-react"
+import { ArrowLeft, ArrowRight, TrendingDown, TrendingUp, ThumbsUp, ThumbsDown, Frown, Smile, Meh, AlertTriangle, Sparkles } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -20,6 +20,44 @@ const sections = [
   { id: "solution", label: "Solution" },
   { id: "process", label: "Process" },
   { id: "outcomes", label: "Outcomes" },
+]
+
+const defaultProblemCards = [
+  {
+    title: "Terlalu banyak aplikasi",
+    description: "Karyawan harus menghafal begitu banyak domain sistem aplikasi.",
+  },
+  {
+    title: "Akses informasi terbatas",
+    description: "Karyawan tidak tahu bagaimana data pribadi mereka dikumpulkan/digunakan.",
+  },
+  {
+    title: "Proses administrasi lama",
+    description: "Approval dan update HR membutuhkan langkah manual yang berulang.",
+  },
+  {
+    title: "Integrasi data lemah",
+    description: "Data dari backend berbeda sering kali tidak sinkron sehingga tim HR kesulitan membuat laporan.",
+  },
+]
+
+const defaultSolutionCards = [
+  {
+    title: "Dashboard terpadu",
+    description: "Menggabungkan modul HR kritikal ke satu tampilan responsif.",
+  },
+  {
+    title: "Automasi formulir",
+    description: "Menyederhanakan flow cuti & reimbursement dengan validasi real-time.",
+  },
+  {
+    title: "Optimasi performa Nuxt",
+    description: "Caching komponen berat dan lazy loading untuk akses cepat.",
+  },
+  {
+    title: "Integrasi API seragam",
+    description: "Menyatukan layanan backend melalui layer service agar data konsisten.",
+  },
 ]
 
 export default function PortfolioDetail({ params }: { params: { id: string } }) {
@@ -110,6 +148,18 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
       })
     }
   }
+
+  const problemCards = ((portfolio as any).problemCards && (portfolio as any).problemCards.length > 0
+    ? (portfolio as any).problemCards
+    : defaultProblemCards) as any[]
+  const solutionCards = ((portfolio as any).solutionCards && (portfolio as any).solutionCards.length > 0
+    ? (portfolio as any).solutionCards
+    : defaultSolutionCards) as any[]
+
+  const displayProblemCards =
+    problemCards.length >= 4 ? problemCards : [...problemCards, ...problemCards].slice(0, 4)
+  const displaySolutionCards =
+    solutionCards.length >= 4 ? solutionCards : [...solutionCards, ...solutionCards].slice(0, 4)
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
@@ -359,48 +409,81 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
               }}
               className="pt-16 pb-12 scroll-mt-32"
             >
-              <h2 className="text-sm font-semibold text-red-500 dark:text-red-400 mb-8 tracking-wide uppercase">
-                Problem
-              </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div className="order-2 lg:order-1">
-                  <div className="bg-red-50/50 dark:bg-red-950/20 p-8 rounded-2xl border border-red-100 dark:border-red-900/20">
-                    <div className="flex items-start gap-4 mb-6">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-full bg-red-100/50 dark:bg-red-900/20 flex items-center justify-center">
-                          <TrendingDown className="w-6 h-6 text-red-500 dark:text-red-400" />
-                        </div>
+              <div className="rounded-3xl bg-white dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
+                <div className="p-4 sm:p-6 lg:p-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                    {/* Image - Mobile: top, Desktop: left */}
+                    <div className="order-1 lg:order-1">
+                      <div
+                        className="relative h-full w-full rounded-[32px] bg-gray-100 dark:bg-gray-900 overflow-hidden"
+                        style={{ minHeight: "260px" }}
+                      >
+                        {(portfolio as any).problemImage ? (
+                          <Image
+                            src={(portfolio as any).problemImage}
+                            alt="Problem illustration"
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-center p-8">
+                              <TrendingDown className="w-16 h-16 text-red-300 dark:text-red-800 mx-auto mb-4" />
+                              <p className="text-sm text-gray-500 dark:text-gray-500">Problem Illustration</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      <div className="flex-1">
-                        <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                          {portfolio.challenges}
+                    </div>
+
+                    {/* Content - Mobile: bottom, Desktop: right */}
+                    <div className="order-2 lg:order-2 space-y-6">
+                      <div className="space-y-4">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-red-50 dark:bg-red-900/20 px-4 py-1.5">
+                          <AlertTriangle className="w-4 h-4 text-red-500 dark:text-red-400" />
+                          <span className="text-xs font-semibold tracking-[0.14em] text-red-500 dark:text-red-400 uppercase">
+                            Problem
+                          </span>
+                        </div>
+
+                        {/* Main Description */}
+                        <p className="text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
+                          {(portfolio as any).problemDescription || portfolio.challenges}
                         </p>
                       </div>
+
+                      {/* Detail Cards */}
+                      <div className="relative">
+                        <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                          {displayProblemCards.map((card: any, index: number) => (
+                            <div
+                              key={index}
+                              className="rounded-2xl bg-gray-50 dark:bg-gray-900/60 border border-gray-200/70 dark:border-gray-800 px-5 py-4 flex flex-col justify-between min-h-[120px] min-w-[210px] snap-start"
+                            >
+                              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1.5">
+                                {card.title}
+                              </h3>
+                              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                                {card.description}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Scroll fade masks */}
+                        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white dark:from-gray-950 via-white/70 dark:via-gray-950/60 to-transparent rounded-l-[32px] z-10" />
+                        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white dark:from-gray-950 via-white/70 dark:via-gray-950/60 to-transparent rounded-r-[32px] z-10" />
+                      </div>
+
+                      {(portfolio as any).problemSource && (
+                        <p className="pt-2 text-[11px] text-gray-400">
+                          source: {(portfolio as any).problemSource}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
-                <div className="order-1 lg:order-2">
-                  <div className="relative w-full rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800">
-                    <div className="relative w-full" style={{ paddingBottom: "75%" }}>
-                      {(portfolio as any).problemImage ? (
-                        <Image
-                          src={(portfolio as any).problemImage}
-                          alt="Problem illustration"
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center p-8">
-                            <TrendingDown className="w-16 h-16 text-red-300 dark:text-red-800 mx-auto mb-4" />
-                            <p className="text-sm text-gray-500 dark:text-gray-500">Problem Illustration</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-          </div>
-        </div>
-      </div>
+              </div>
             </section>
 
             {/* Divider */}
@@ -414,45 +497,79 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
               }}
               className="pt-12 pb-16 scroll-mt-32"
             >
-              <h2 className="text-sm font-semibold text-indigo-500 dark:text-indigo-400 mb-8 tracking-wide uppercase">
-                Solution
-              </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="relative w-full rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800">
-                    <div className="relative w-full" style={{ paddingBottom: "75%" }}>
-                      {(portfolio as any).solutionImage ? (
-                        <Image
-                          src={(portfolio as any).solutionImage}
-                          alt="Solution illustration"
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center p-8">
-                            <TrendingUp className="w-16 h-16 text-indigo-300 dark:text-indigo-800 mx-auto mb-4" />
-                            <p className="text-sm text-gray-500 dark:text-gray-500">Solution Illustration</p>
-                          </div>
+              <div className="rounded-3xl bg-white dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
+                <div className="p-4 sm:p-6 lg:p-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                    {/* Content - Mobile: top, Desktop: left */}
+                    <div className="order-2 lg:order-1 space-y-6">
+                      <div className="space-y-4">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 dark:bg-indigo-900/20 px-4 py-1.5">
+                          <Sparkles className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
+                          <span className="text-xs font-semibold tracking-[0.14em] text-indigo-500 dark:text-indigo-400 uppercase">
+                            Solution
+                          </span>
                         </div>
+
+                        {/* Main Description */}
+                        <p className="text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
+                          {(portfolio as any).solutionDescription ||
+                            (portfolio.challenges && portfolio.challenges.length > 200
+                              ? portfolio.challenges.split(".").slice(1).join(".").trim() || portfolio.challenges
+                              : "The solution involved a comprehensive approach combining technical expertise with user-centered design principles to address the challenges effectively.")}
+                        </p>
+                      </div>
+
+                      {/* Detail Cards */}
+                      <div className="relative">
+                        <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                          {displaySolutionCards.map((card: any, index: number) => (
+                            <div
+                              key={index}
+                              className="rounded-2xl bg-gray-50 dark:bg-gray-900/60 border border-gray-200/70 dark:border-gray-800 px-5 py-4 flex flex-col justify-between min-h-[120px] min-w-[210px] snap-start"
+                            >
+                              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1.5">
+                                {card.title}
+                              </h3>
+                              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                                {card.description}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Scroll fade masks */}
+                        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white dark:from-gray-950 via-white/70 dark:via-gray-950/60 to-transparent rounded-l-[32px] z-10" />
+                        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white dark:from-gray-950 via-white/70 dark:via-gray-950/60 to-transparent rounded-r-[32px] z-10" />
+                      </div>
+
+                      {(portfolio as any).solutionSource && (
+                        <p className="pt-2 text-[11px] text-gray-400">
+                          source: {(portfolio as any).solutionSource}
+                        </p>
                       )}
                     </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-8 rounded-2xl border border-indigo-100 dark:border-indigo-900/20">
-                    <div className="flex items-start gap-4 mb-6">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-full bg-indigo-100/50 dark:bg-indigo-900/20 flex items-center justify-center">
-                          <TrendingUp className="w-6 h-6 text-indigo-500 dark:text-indigo-400" />
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                          {portfolio.challenges && portfolio.challenges.length > 200
-                            ? portfolio.challenges.split(".").slice(1).join(".").trim() || portfolio.challenges
-                            : "The solution involved a comprehensive approach combining technical expertise with user-centered design principles to address the challenges effectively."}
-                        </p>
+
+                    {/* Image - Mobile: bottom, Desktop: right */}
+                    <div className="order-1 lg:order-2">
+                      <div
+                        className="relative h-full w-full rounded-[32px] bg-gray-100 dark:bg-gray-900 overflow-hidden"
+                        style={{ minHeight: "260px" }}
+                      >
+                        {(portfolio as any).solutionImage ? (
+                          <Image
+                            src={(portfolio as any).solutionImage}
+                            alt="Solution illustration"
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-center p-8">
+                              <TrendingUp className="w-16 h-16 text-purple-300 dark:text-purple-800 mx-auto mb-4" />
+                              <p className="text-sm text-gray-500 dark:text-gray-500">Solution Illustration</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -533,7 +650,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
               {/* Outcomes Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 {(portfolio as any).outcomes && (portfolio as any).outcomes.length > 0 ? (
-                  ((portfolio as any).outcomes as any[]).map((outcome: any, idx: number) => (
+                  ((portfolio as any).outcomes as any[]).slice(0, 3).map((outcome: any, idx: number) => (
                     <div
                       key={idx}
                       className={`space-y-2.5 p-4 rounded-lg border ${

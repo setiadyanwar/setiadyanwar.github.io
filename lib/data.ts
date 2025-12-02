@@ -2,7 +2,7 @@ export const portfolioItems = [
   {
     id: "kreavoks",
     title: "Kreavoks E-learning & Agency Website",
-    date: "July - August 2024",
+    date: "July - Present",
     subtitle: "Discovery-led project re-designing subscription experience for new user behaviour patterns.",
     category: "web",
     image: "/portfolio/web/kreavoks.png?height=400&width=600",
@@ -23,12 +23,97 @@ export const portfolioItems = [
       "Combining three distinct goals branding, education, and service sales—into a single unified experience without overwhelming the user. I applied a modular design approach using atomic components and consistent layout grids, Flexbox, enabling scalable and maintainable development. By focusing on clarity, navigation flow, and performance (lazy loading, optimized images), we delivered a platform that feels cohesive and efficient across all devices.",
     demoUrl: "https://kreavoks.my.id",
     // repoUrl: "https://github.com/example",
+    problemImage:
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "The team needed a single platform that could handle branding, e-learning, and service sales without confusing different user types. Before Kreavoks, mentor onboarding, course purchases, and custom project requests were scattered across multiple inconsistent forms and channels.",
+    problemCards: [
+      {
+        title: "Fragmented user journey",
+        description:
+          "Prospective mentors, students, and clients had to jump between several pages and external forms just to complete a single task.",
+      },
+      {
+        title: "Hard-to-maintain content",
+        description:
+          "Course content, service pages, and branding assets were managed manually, making updates slow and error-prone.",
+      },
+      {
+        title: "Unclear conversion funnel",
+        description:
+          "There was no clear path from landing page visit to service booking, so campaign performance and lead quality were difficult to measure.",
+      },
+      {
+        title: "Limited scalability",
+        description:
+          "The previous website structure was not modular enough to add new programs, mentors, or service types quickly as the business grew.",
+      },
+    ],
+    solutionDescription:
+      "I designed Kreavoks as a unified platform with three clear paths: personal branding, e-learning, and custom software services. Using an atomic design approach and consistent grid layout, each path feels connected while still focusing on the needs of its primary audience.",
+    solutionCards: [
+      {
+        title: "Reworked information architecture",
+        description:
+          "Restructured navigation into three main journeys (Learn, Become a Mentor, and Hire Agency) with clear calls-to-action at every step.",
+      },
+      {
+        title: "Integrated LMS and booking",
+        description:
+          "Built LMS modules and service booking forms into a single experience so users never have to switch platforms mid-flow.",
+      },
+      {
+        title: "Reusable UI components",
+        description:
+          "Created reusable card, section, and layout components with TailwindCSS, allowing new classes and services to be added through configuration rather than redesign.",
+      },
+      {
+        title: "Performance-focused implementation",
+        description:
+          "Implemented lazy loading, image optimization, and a scalable code structure to keep future marketing campaigns fast and reliable.",
+      },
+    ],
+    status: "ongoing",
     impact: [
       "100% of mentors successfully onboarded to the platform",
       "~45% increase in course completion rates",
       "Reduced platform navigation time by 30%",
       "Improved user satisfaction score to 4.8/5.0"
     ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 45,
+        unit: "%",
+        title: "Higher course completion",
+        description: "Clearer flows and integrated LMS modules increased course completion rates across flagship programs.",
+      },
+      {
+        type: "negative",
+        value: 30,
+        unit: "%",
+        title: "Faster navigation time",
+        description: "A unified information architecture reduced the time it takes users to reach key actions such as enrolling or booking.",
+      },
+      {
+        type: "positive",
+        value: 100,
+        unit: "%",
+        title: "Mentor onboarding coverage",
+        description: "All active mentors were successfully onboarded to the new platform with a consistent onboarding experience.",
+      },
+      {
+        type: "positive",
+        value: 4.8,
+        unit: "/5.0",
+        title: "User satisfaction score",
+        description: "Students and mentors rated the new Kreavoks experience highly for clarity, speed, and visual design.",
+      },
+    ],
+    nextSteps:
+      "Continue refining learning paths based on analytics, introduce more mentor-centric tooling, and extend the booking flow to support cohort-based programs.",
     projectSteps: [
       {
         title: "Market Research & Planning ",
@@ -65,7 +150,7 @@ export const portfolioItems = [
   {
     id: "nobarin",
     title: "Nobarin Movie Streaming Platform",
-    date: "June - July 2024",
+    date: "June 2025",
     subtitle: "Modern movie browsing platform with real-time data integration and responsive design.",
     category: "web",
     image: "/portfolio/web/nobar.png?height=400&width=600",
@@ -81,12 +166,97 @@ export const portfolioItems = [
       "Integrating dynamic movie data from TMDB, managing application state using Pinia, and ensuring responsive UI across devices while maintaining clean code structure. A special focus was given to UX flow between movie browsing, details, and favorites page.",
     demoUrl: "https://nobarin-phi.vercel.app/", // ← ganti dengan URL demo asli jika ada
     // repoUrl: "https://github.com/username/nobarin", // ← opsional jika ingin mencantumkan
+    problemImage:
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Movie enthusiasts struggled to find relevant titles and continue exploring because information was scattered across multiple sites and many catalog UIs felt heavy and cluttered.",
+    problemCards: [
+      {
+        title: "Scattered movie data",
+        description:
+          "Users had to open several different websites just to see a synopsis, ratings, and recommendations for a single movie.",
+      },
+      {
+        title: "Confusing catalog UI",
+        description:
+          "Without a clear card structure, it was hard to distinguish popular titles, new releases, and personal favorites at a glance.",
+      },
+      {
+        title: "Slow browsing experience",
+        description:
+          "Dynamic data fetching and suboptimal state management made the browsing experience feel slow and unresponsive.",
+      },
+      {
+        title: "No central favorites",
+        description:
+          "Users lacked a single place to store and revisit movies they were interested in, so discovery rarely turned into re-engagement.",
+      },
+    ],
+    solutionDescription:
+      "Nobarin brings movie browsing, title details, and favorites into one light, responsive experience built with Vue, Pinia, and TailwindCSS. I focused the design on consistent movie cards, clear filters, and smooth transitions between browsing and detail views.",
+    solutionCards: [
+      {
+        title: "TMDB API integration",
+        description:
+          "Fetched live movie data from TMDB and mapped it into modular Vue components for listings and detail pages.",
+      },
+      {
+        title: "Centralized state with Pinia",
+        description:
+          "Centralized movie data and favorites management in a single Pinia store so navigation between pages feels instant.",
+      },
+      {
+        title: "Responsive card design",
+        description:
+          "Redesigned movie cards with a clear visual hierarchy: poster, title, rating, and primary action, optimized for both mobile and desktop.",
+      },
+      {
+        title: "Structured routing",
+        description:
+          "Used dynamic routing for detail pages and categories, making it straightforward to add new discovery sections in the future.",
+      },
+    ],
+    status: "completed",
     impact: [
       "~60% increase in movie discovery engagement",
       "Reduced app load time by 40% with optimized state management",
       "95% user retention rate for favorites feature",
       "Achieved 4.7/5.0 app store rating"
     ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 60,
+        unit: "%",
+        title: "Increase in discovery engagement",
+        description: "More users explored additional titles per session thanks to clearer navigation and movie recommendations.",
+      },
+      {
+        type: "positive",
+        value: 40,
+        unit: "%",
+        title: "Faster load times",
+        description: "Optimized state management and API usage reduced perceived load time across key pages.",
+      },
+      {
+        type: "positive",
+        value: 95,
+        unit: "%",
+        title: "Favorites feature retention",
+        description: "The favorites system encouraged users to return and continue watching movies they had saved earlier.",
+      },
+      {
+        type: "positive",
+        value: 4.7,
+        unit: "/5.0",
+        title: "User rating",
+        description: "Users rated the overall experience highly for responsiveness and ease of finding relevant movies.",
+      },
+    ],
+    nextSteps:
+      "Iterate on personalization by experimenting with watchlists and genre-based recommendations while monitoring performance closely.",
     projectSteps: [
       {
         title: "Requirement Gathering & Planning",
@@ -145,12 +315,97 @@ export const portfolioItems = [
       "Organizing extensive menu and organizational information into a cohesive profile site, ensuring intuitive CRM workflows for admins, and maintaining responsive performance across devices.",
     demoUrl: "#",
     repoUrl: "#",
+    problemImage:
+      "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Upala needed a single website that could tell the brand story, showcase the menu, and help admins manage customer relationships without overloading visitors with information.",
+    problemCards: [
+      {
+        title: "Scattered brand information",
+        description:
+          "The brand story, menu, and promos were not structured into a narrative that new visitors could easily follow.",
+      },
+      {
+        title: "Manual admin workflow",
+        description:
+          "Customer and order data were still recorded manually, increasing the risk of errors and slowing down daily operations.",
+      },
+      {
+        title: "Inconsistent responsiveness",
+        description:
+          "Admin and customer-facing views did not behave consistently across devices, especially on smaller screens.",
+      },
+      {
+        title: "Lack of a design system",
+        description:
+          "There was no design system tying together profile pages and CRM dashboards, leading to visual inconsistency.",
+      },
+    ],
+    solutionDescription:
+      "I designed Upala as a balance between a warm, story-driven company profile and a functional CRM interface. With a consistent design language, admins can work efficiently while visitors still get a clear sense of the brand.",
+    solutionCards: [
+      {
+        title: "Clear navigation structure",
+        description:
+          "Separated navigation paths for guests (brand, menu, location) and admins (CRM, reports) so each audience sees the information they need first.",
+      },
+      {
+        title: "Responsive Laravel templates",
+        description:
+          "Built extensible Blade templates that stay responsive across all modules and screen sizes.",
+      },
+      {
+        title: "Focused CRM dashboard",
+        description:
+          "Designed the CRM dashboard around the metrics staff use most often: customer data, order history, and key insights.",
+      },
+      {
+        title: "Lightweight design system",
+        description:
+          "Established a small but clear design system (colors, typography, components) so future pages stay aligned with the Upala brand.",
+      },
+    ],
+    status: "completed",
     impact: [
       "100% of cafe menu items successfully digitized",
       "~35% reduction in order processing time",
       "Improved customer satisfaction by 40%",
       "Reduced manual admin work by 50%"
     ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 35,
+        unit: "%",
+        title: "Faster order processing",
+        description: "Digitized menus and CRM workflows shortened the end-to-end order process for staff.",
+      },
+      {
+        type: "positive",
+        value: 40,
+        unit: "%",
+        title: "Higher customer satisfaction",
+        description: "A clearer brand story and smoother ordering experience increased overall customer satisfaction scores.",
+      },
+      {
+        type: "positive",
+        value: 50,
+        unit: "%",
+        title: "Less manual admin work",
+        description: "Centralized customer records and order history reduced repetitive manual administration tasks.",
+      },
+      {
+        type: "positive",
+        value: 100,
+        unit: "%",
+        title: "Menu digitization",
+        description: "All cafe menu items were successfully documented in the system with consistent visuals and pricing.",
+      },
+    ],
+    nextSteps:
+      "Expand the CRM reporting module and connect the website to loyalty programs so Upala can run targeted campaigns for repeat customers.",
     projectSteps: [
       {
         title: "Analysis & User Research",
@@ -220,12 +475,97 @@ export const portfolioItems = [
       "Designing and integrating a performant recommendation system, ensuring real-time product suggestions without impacting page load times, maintaining consistency across the Laravel and Flask components, and implementing a secure payment flow via Xendit.",
     demoUrl: "https://freezemart.osk.dom.my.id",
     repoUrl: "https://github.com/setiadyanwar/freezemart",
+    problemImage:
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "The frozen food business wanted to sell products online while serving relevant product recommendations, but the previous system could not provide personalized suggestions and checkout still relied on separate payment flows.",
+    problemCards: [
+      {
+        title: "Static product catalog",
+        description:
+          "Recommendations did not adapt to user behaviour, limiting opportunities for cross-sell and up-sell.",
+      },
+      {
+        title: "Disconnected checkout flow",
+        description:
+          "Customers had to switch to external payment channels, increasing the chance of abandoned carts.",
+      },
+      {
+        title: "Separate technology stacks",
+        description:
+          "The recommendation engine and e-commerce stack lived in different services that needed careful orchestration.",
+      },
+      {
+        title: "Recommendation performance",
+        description:
+          "The algorithm had to be fast enough to feel real-time without slowing down product listing and detail pages.",
+      },
+    ],
+    solutionDescription:
+      "Freezemart combines a Laravel e-commerce frontend with a Python-based recommendation microservice. I designed the shopping flow to feel natural: browse products, see similar items, and complete payment in-app using Xendit.",
+    solutionCards: [
+      {
+        title: "TF-IDF recommendation engine",
+        description:
+          "Built a Flask microservice that calculates product similarity using TF-IDF vectors and Cosine Similarity.",
+      },
+      {
+        title: "Laravel–Flask integration",
+        description:
+          "Connected the Laravel frontend to the recommendation API so suggestions appear directly on product and cart pages.",
+      },
+      {
+        title: "Integrated Xendit checkout",
+        description:
+          "Implemented an end-to-end Xendit payment flow with secure callbacks and clear status feedback to users.",
+      },
+      {
+        title: "Familiar e-commerce UI",
+        description:
+          "Designed catalog, product detail, and checkout screens around familiar modern e-commerce patterns to reduce cognitive load.",
+      },
+    ],
+    status: "completed",
     impact: [
       "~70% improvement in product recommendation accuracy",
       "25% increase in average order value through personalization",
       "~50% reduction in cart abandonment rate",
       "Achieved 4.6/5.0 customer satisfaction rating"
     ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 70,
+        unit: "%",
+        title: "Better recommendation accuracy",
+        description: "Content-based filtering surfaced products that matched customer preferences more closely, driving more relevant clicks.",
+      },
+      {
+        type: "positive",
+        value: 25,
+        unit: "%",
+        title: "Increase in average order value",
+        description: "Upsell recommendations on product and cart pages encouraged customers to add complementary items.",
+      },
+      {
+        type: "negative",
+        value: 50,
+        unit: "%",
+        title: "Lower cart abandonment",
+        description: "A unified checkout with Xendit reduced the number of users dropping off between cart and payment confirmation.",
+      },
+      {
+        type: "positive",
+        value: 4.6,
+        unit: "/5.0",
+        title: "Customer satisfaction rating",
+        description: "Shoppers reported a smoother, more trustworthy experience with recommendations and in-app payment.",
+      },
+    ],
+    nextSteps:
+      "Experiment with hybrid recommendation strategies and add more merchandising tools for admins to curate promotional bundles.",
     projectSteps: [
       {
         title: "User Research & Data Collection",
@@ -292,15 +632,92 @@ export const portfolioItems = [
       "Creating the frontend interface with TailwindCSS"
     ],
     challenges:
-      "As a Web Developer, the main challenges include designing a responsive and interactive UI, ensuring efficient data processing, and optimizing AI integration for a seamless user experience.",
+      "Designing a responsive and interactive UI that can visualize focus data in real time, ensuring efficient processing of video streams, and optimizing AI integration so the experience still feels smooth for students on consumer hardware.",
     //demoUrl: "https://example.com/dashboard",
     repoUrl: "https://github.com/egagaluh28/studylens",
+    problemImage:
+      "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Students often struggle to stay focused during self-study sessions because they receive little feedback on their actual behavior. Before StudyLens, there was no easy way to visualize when and how they got distracted, and existing productivity tools rarely connected directly to real, observable actions.",
+    problemCards: [
+      {
+        title: "Invisible distraction patterns",
+        description:
+          "Students had no clear view of when they lost focus during a session, making it hard to change their study habits.",
+      },
+      {
+        title: "Complex AI workflows",
+        description:
+          "Combining head tracking, video processing, and deep learning in one app risked creating a slow, fragile experience.",
+      },
+      {
+        title: "Challenging UI for data",
+        description:
+          "Presenting focus metrics and history in a way that is understandable and motivating for students required careful UI design.",
+      },
+      {
+        title: "Hardware constraints",
+        description:
+          "The system needed to run on typical laptops without requiring expensive GPUs or complex setup steps.",
+      },
+    ],
+    solutionDescription:
+      "StudyLens uses computer vision and deep learning to track student focus in real time, then turns that information into clear visual feedback and recommendations. I implemented the AI pipeline and front-end so that students can see when they were distracted, understand why, and adjust their study behavior over time.",
+    solutionCards: [
+      {
+        title: "Head tracking pipeline",
+        description:
+          "Implemented a CNN + LSTM pipeline that detects head positions and movement patterns, distinguishing focused vs. distracted behavior.",
+      },
+      {
+        title: "Real-time feedback UI",
+        description:
+          "Designed a Tailwind-based interface that visualizes focus levels over time with simple charts and session summaries.",
+      },
+      {
+        title: "Optimized video processing",
+        description:
+          "Used OpenCV preprocessing and model optimizations to keep latency low while processing camera input.",
+      },
+      {
+        title: "Actionable recommendations",
+        description:
+          "Summarized each session into easy-to-read insights and tips so students know exactly what to improve next.",
+      },
+    ],
     impact: [
       "~65% improvement in student focus detection accuracy",
       "Average study session duration increased by 40%",
       "~80% of users reported improved study habits",
       "Achieved 4.8/5.0 user satisfaction rating"
     ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 65,
+        unit: "%",
+        title: "Better focus detection",
+        description: "AI models significantly improved the accuracy of detecting when students were actually focused vs. distracted.",
+      },
+      {
+        type: "positive",
+        value: 40,
+        unit: "%",
+        title: "Longer study sessions",
+        description: "Students increased their average focused study duration after seeing visual feedback from StudyLens.",
+      },
+      {
+        type: "positive",
+        value: 80,
+        unit: "%",
+        title: "Users reporting better habits",
+        description: "Most users reported improved self-discipline and awareness of their study patterns after using the app.",
+      },
+    ],
+    nextSteps:
+      "Explore mobile-friendly versions of the experience, refine the recommendation engine, and experiment with gamification elements to keep students engaged.",
     projectSteps: [
       {
         title: "Data Collection & Preprocessing",
@@ -356,12 +773,89 @@ export const portfolioItems = [
       "Designing an efficient booking system that handles concurrent ticket reservations, ensuring data consistency in the database, implementing secure payment processing, and creating an intuitive user interface for browsing and booking events.",
     // demoUrl: "https://example.com/social",
     // repoUrl: "https://github.com/example",
+    problemImage:
+      "https://images.unsplash.com/photo-1518895949257-7621c3c786d4?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Event organizers and attendees needed a reliable way to browse events and book tickets, but existing flows were slow, fragmented, and prone to overbooking issues. Manual confirmation steps and unclear availability information frustrated both users and admins.",
+    problemCards: [
+      {
+        title: "Unclear ticket availability",
+        description:
+          "Users could not easily see how many tickets were left or whether a booking had actually been confirmed.",
+      },
+      {
+        title: "Slow booking experience",
+        description:
+          "Multiple page reloads and poorly structured forms made the booking process feel long and error-prone.",
+      },
+      {
+        title: "Data consistency risks",
+        description:
+          "Concurrent reservations against the same event could cause conflicts or inconsistent records in the database.",
+      },
+      {
+        title: "Hard-to-manage events",
+        description:
+          "Admins lacked a unified interface to create events, monitor bookings, and handle refunds or changes.",
+      },
+    ],
+    solutionDescription:
+      "Nusoundtara centralizes event discovery and ticket booking into a Laravel-based platform with a clear user flow and robust backend. I focused on reliable reservation logic, intuitive browsing, and a dashboard that makes life easier for event organizers.",
+    solutionCards: [
+      {
+        title: "Structured event catalog",
+        description:
+          "Designed a browsing interface where users can filter, search, and inspect event details before booking.",
+      },
+      {
+        title: "Robust reservation logic",
+        description:
+          "Implemented database-safe booking workflows to handle concurrent reservations and avoid double-booking.",
+      },
+      {
+        title: "Streamlined booking UI",
+        description:
+          "Built a responsive multi-step booking form with clear feedback, reducing friction on both mobile and desktop.",
+      },
+      {
+        title: "Admin tools for organizers",
+        description:
+          "Provided admin views for managing events, tracking bookings, and monitoring system health.",
+      },
+    ],
     impact: [
       "Successfully processed 1000+ ticket bookings",
       "~45% reduction in booking time per transaction",
       "99.5% system uptime during peak event periods",
       "Improved user satisfaction to 4.5/5.0"
     ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 45,
+        unit: "%",
+        title: "Faster bookings",
+        description: "The streamlined flow reduced the average time to complete a ticket purchase.",
+      },
+      {
+        type: "positive",
+        value: 99.5,
+        unit: "% uptime",
+        title: "High availability",
+        description: "The system remained stable during peak event periods with minimal downtime.",
+      },
+      {
+        type: "positive",
+        value: 4.5,
+        unit: "/5.0",
+        title: "User satisfaction",
+        description: "Attendees reported higher satisfaction with the new booking experience.",
+      },
+    ],
+    nextSteps:
+      "Introduce richer analytics for organizers, add support for promo codes and tiered pricing, and explore integrations with popular payment gateways.",
     projectSteps: [
       {
         title: "Requirement Analysis & Planning",
@@ -411,6 +905,59 @@ export const portfolioItems = [
     ],
     challenges:
       "Optimizing performance, integrating frontend and backend efficiently, ensuring scalable UI, managing state effectively, and maintaining data security.",
+    problemImage:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "The client needed a single dashboard that could keep inventory accurate across many SKUs and locations, but previous tools were fragmented, slow, and difficult to trust. Staff had to combine spreadsheets, manual stock checks, and inconsistent systems just to answer basic questions like what to reorder and where products were stored.",
+    problemCards: [
+      {
+        title: "Fragmented inventory views",
+        description:
+          "Stock data lived in separate spreadsheets and systems, making it hard to see an accurate, up-to-date picture of inventory.",
+      },
+      {
+        title: "Slow product lookup",
+        description:
+          "Searching for a specific product or category took too many clicks and manual filters, slowing down day-to-day operations.",
+      },
+      {
+        title: "Error‑prone updates",
+        description:
+          "Manual edits to stock levels and product details increased the risk of discrepancies between what the system showed and what was physically available.",
+      },
+      {
+        title: "Limited analytics",
+        description:
+          "Existing tools lacked clear visualizations for trends such as fast‑moving items, low stock, and products at risk of overstocking.",
+      },
+    ],
+    solutionDescription:
+      "Nexaid centralizes product and stock data into one React- and Laravel-based dashboard with clear, visual insights. I focused the UX on fast search, consistent tables and cards, and a layout that surfaces the most important status information first.",
+    solutionCards: [
+      {
+        title: "Unified inventory dashboard",
+        description:
+          "Designed a single interface that combines product data, stock levels, and key alerts so staff can make decisions without switching tools.",
+      },
+      {
+        title: "Fast lookup & filtering",
+        description:
+          "Implemented searchable tables and reusable filters, enabling users to find products by name, category, or stock status in seconds.",
+      },
+      {
+        title: "Reliable data sync",
+        description:
+          "Connected the React frontend to Laravel APIs with structured DTOs and validation to reduce inconsistent updates and race conditions.",
+      },
+      {
+        title: "Action‑oriented visualizations",
+        description:
+          "Used charts and badges to highlight low stock, overstock, and inactive products so teams can prioritize what to fix first.",
+      },
+    ],
+    status: "completed",
     demoUrl: "https://nexaid.osk.dom.my.id",
     repoUrl: "https://github.com/setiadyanwar/Nexaid",
     impact: [
@@ -418,6 +965,40 @@ export const portfolioItems = [
       "Reduced product lookup time by 60%",
       "~30% decrease in inventory discrepancies",
       "Achieved 4.7/5.0 user satisfaction rating"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 55,
+        unit: "%",
+        title: "Higher inventory management efficiency",
+        description:
+          "Centralizing stock data and improving UI flows helped staff complete core tasks in significantly less time.",
+      },
+      {
+        type: "positive",
+        value: 60,
+        unit: "%",
+        title: "Faster product lookup",
+        description:
+          "Improved search and filtering reduced the time needed to find item details and stock positions.",
+      },
+      {
+        type: "positive",
+        value: 30,
+        unit: "%",
+        title: "Fewer inventory discrepancies",
+        description:
+          "More reliable update flows and clearer data presentation reduced mismatches between system records and physical stock.",
+      },
+      {
+        type: "positive",
+        value: 4.7,
+        unit: "/5.0",
+        title: "User satisfaction",
+        description:
+          "Operational teams rated the dashboard highly for clarity, responsiveness, and ease of daily use.",
+      },
     ],
     projectSteps: [
       {
@@ -459,7 +1040,7 @@ export const portfolioItems = [
   {
     id: "ess",
     title: "Employee Self Service Portal",
-    date: "October - November 2024",
+    date: "Jun - December 2025",
     subtitle:
       "Modern employee self service web portal for leave, attendance, and profile management with responsive dashboard.",
     category: "web",
@@ -476,6 +1057,59 @@ export const portfolioItems = [
     ],
     challenges:
       "Aligning UI/UX design with existing corporate design system, handling complex form flows for HR processes, and optimizing Nuxt 3 pages for fast load times while consuming multiple backend services.",
+    problemImage:
+      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Before the new ESS portal, employees had to interact with multiple legacy systems and manual spreadsheets just to request leave, check attendance, or update personal data. HR teams spent significant time answering repetitive questions and reconciling data coming from different sources with inconsistent layouts.",
+    problemCards: [
+      {
+        title: "Scattered HR touchpoints",
+        description:
+          "Leave requests, attendance records, and personal information updates were spread across several tools and manual processes.",
+      },
+      {
+        title: "Complex form flows",
+        description:
+          "Existing forms were long, not optimized for everyday internal users, and did not clearly surface validation or error states.",
+      },
+      {
+        title: "Inconsistent UI with design system",
+        description:
+          "Previous screens drifted away from Telkomsigma’s corporate design system, creating a fragmented internal experience.",
+      },
+      {
+        title: "Performance across services",
+        description:
+          "ESS pages needed to consume multiple backend services at once, but older implementations led to slow initial loads and clunky interactions.",
+      },
+    ],
+    solutionDescription:
+      "The redesigned ESS portal unifies key HR activities into a single, Nuxt 3–powered experience that feels consistent with Telkomsigma’s corporate design system. I focused on simplifying HR flows into clear steps, improving visual hierarchy, and ensuring the interface stays fast even when aggregating data from multiple backend services.",
+    solutionCards: [
+      {
+        title: "Unified HR entry point",
+        description:
+          "Combined leave, attendance, and profile updates into one responsive portal so employees no longer need to jump between tools.",
+      },
+      {
+        title: "Guided form experiences",
+        description:
+          "Redesigned forms with step-by-step flows, inline validation, and clear feedback states tailored for internal HR use cases.",
+      },
+      {
+        title: "Aligned with design system",
+        description:
+          "Created reusable Nuxt components based on Telkomsigma’s design tokens to keep typography, spacing, and color usage consistent.",
+      },
+      {
+        title: "Nuxt 3 performance tuning",
+        description:
+          "Optimized data fetching and page structure so ESS pages remain fast while consuming multiple backend APIs.",
+      },
+    ],
+    status: "ongoing",
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -484,6 +1118,42 @@ export const portfolioItems = [
       "Decreased support tickets related to HR information by ~30%",
       "Improved internal user satisfaction score to 4.7/5.0 for the new ESS interface",
     ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 40,
+        unit: "%",
+        title: "Reduced manual HR processing",
+        description:
+          "Automated flows for leave and attendance reduced the amount of repetitive work handled by HR teams.",
+      },
+      {
+        type: "positive",
+        value: 85,
+        unit: "%",
+        title: "High ESS adoption",
+        description:
+          "Most employees quickly adopted the new portal thanks to clearer navigation and better alignment with their daily tasks.",
+      },
+      {
+        type: "positive",
+        value: 30,
+        unit: "%",
+        title: "Fewer HR support tickets",
+        description:
+          "Centralized information and more transparent status views lowered the number of HR-related questions submitted by employees.",
+      },
+      {
+        type: "positive",
+        value: 4.7,
+        unit: "/5.0",
+        title: "Internal satisfaction",
+        description:
+          "Employees rated the new ESS interface as significantly more intuitive and visually consistent with other corporate tools.",
+      },
+    ],
+    nextSteps:
+      "Extend ESS modules to cover more HR services, refine analytics for HR teams, and continue tuning performance as usage grows.",
     projectSteps: [
       {
         title: "Requirement & Flow Mapping",
@@ -533,6 +1203,59 @@ export const portfolioItems = [
     ],
     challenges:
       "Ensuring data synchronization between client and server, optimizing list rendering for large catalogs, and integrating secure payment gateways within native Android.",
+    problemImage:
+      "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1606312619349-6f107ce228f2?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Local customers wanted an easy way to order fresh meat from their phones, but existing channels were fragmented across chats, calls, and outdated catalog images. Store staff struggled to keep availability, pricing, and order status in sync across those channels.",
+    problemCards: [
+      {
+        title: "Manual ordering channels",
+        description:
+          "Orders came through chat and phone with no single system to capture items, quantities, and customer details cleanly.",
+      },
+      {
+        title: "Out-of-date inventory",
+        description:
+          "Catalog images and stock information quickly went stale, leading to confusion when certain cuts were no longer available.",
+      },
+      {
+        title: "Slow checkout experience",
+        description:
+          "Customers had to wait for manual confirmations on price, stock, and delivery options before an order could be finalized.",
+      },
+      {
+        title: "Limited mobile experience",
+        description:
+          "There was no dedicated app optimized for browsing categories, comparing cuts, and tracking orders on the go.",
+      },
+    ],
+    solutionDescription:
+      "Burchery turns meat ordering into a guided mobile shopping experience, with clear categories, real-time inventory, and a structured checkout. I designed and implemented the core flows so customers can discover products, manage their cart, and pay confidently from a single app.",
+    solutionCards: [
+      {
+        title: "Structured product catalog",
+        description:
+          "Organized meat products into categories with consistent cards, pricing, and images that are easy to scan on small screens.",
+      },
+      {
+        title: "Real-time inventory hooks",
+        description:
+          "Connected the app to a backend that keeps stock levels up to date, reducing the risk of selling unavailable items.",
+      },
+      {
+        title: "Guided checkout flow",
+        description:
+          "Implemented a multi-step checkout that clearly surfaces address, payment, and order summary to reduce mistakes and drop-offs.",
+      },
+      {
+        title: "Secure payment integration",
+        description:
+          "Integrated secure payment methods within the app so customers can complete purchases without switching channels.",
+      },
+    ],
+    status: "completed",
     demoUrl: "#",
     repoUrl: "https://github.com/setiadyanwar/ButcheryApp",
     impact: [
@@ -540,6 +1263,40 @@ export const portfolioItems = [
       "Average order value increased by 35%",
       "~80% user retention rate after first purchase",
       "Achieved 4.6/5.0 app store rating"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 50,
+        unit: "%",
+        title: "More mobile adoption",
+        description:
+          "A dedicated shopping app encouraged more customers to download and adopt Burchery as their primary ordering channel.",
+      },
+      {
+        type: "positive",
+        value: 35,
+        unit: "%",
+        title: "Higher average order value",
+        description:
+          "Clear product grouping and cross-sell opportunities increased the typical basket size per transaction.",
+      },
+      {
+        type: "positive",
+        value: 80,
+        unit: "%",
+        title: "Strong retention after first purchase",
+        description:
+          "Smooth first-time experiences and reliable delivery encouraged customers to return for subsequent orders.",
+      },
+      {
+        type: "positive",
+        value: 4.6,
+        unit: "/5.0",
+        title: "App store rating",
+        description:
+          "Users rated the app highly for clarity of UI, speed, and reliability of order processing.",
+      },
     ],
     projectSteps: [
       {
@@ -598,6 +1355,59 @@ export const portfolioItems = [
     role: "Lead Android Developer overseeing shopping cart, real-time chat, and offline support.",
     challenges:
       "Implementing Firebase real-time chat, handling large image uploads for plant galleries, and providing offline browsing capabilities.",
+    problemImage:
+      "https://images.unsplash.com/photo-1483794344563-d27a8d18014e?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "PT Godong Ijo Asri wanted to reach more customers digitally, but existing sales channels could not showcase plant details clearly or answer questions in real time. Customers often abandoned purchases because they were unsure about plant care, stock availability, or shipping conditions.",
+    problemCards: [
+      {
+        title: "Limited online presence",
+        description:
+          "Product information was scattered and not optimized for mobile users who wanted to browse plants on their phones.",
+      },
+      {
+        title: "No real-time support",
+        description:
+          "Customers had no direct, in-app way to ask questions about plant care or suitability, lowering confidence to buy.",
+      },
+      {
+        title: "Heavy media content",
+        description:
+          "Large plant images and galleries risked slowing the app down if not handled carefully.",
+      },
+      {
+        title: "Connectivity constraints",
+        description:
+          "Users in areas with unstable internet needed the app to still feel responsive even when offline or on a weak connection.",
+      },
+    ],
+    solutionDescription:
+      "Ecotainment packages plant discovery, education, and conversation into a single Kotlin-based mobile app. I focused on lightweight UI patterns, efficient media handling, and a Firebase-powered chat so users can get answers and place orders in one place.",
+    solutionCards: [
+      {
+        title: "Plant-focused catalog UI",
+        description:
+          "Designed a visual catalog with clear photos, tags, and care highlights so users can quickly understand each plant.",
+      },
+      {
+        title: "Realtime chat support",
+        description:
+          "Integrated Firebase chat to connect customers with support staff for product questions and recommendations.",
+      },
+      {
+        title: "Optimized image handling",
+        description:
+          "Implemented image compression and lazy loading strategies to keep galleries fast even on slower networks.",
+      },
+      {
+        title: "Offline-friendly browsing",
+        description:
+          "Cached key product and care information so returning users can still browse core content without a perfect network.",
+      },
+    ],
+    status: "completed",
     // demoUrl: "#",
     // repoUrl: "#",
     impact: [
@@ -605,6 +1415,40 @@ export const portfolioItems = [
       "Average session duration increased by 50%",
       "~40% improvement in customer support response time",
       "Achieved 4.7/5.0 app store rating"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 75,
+        unit: "%",
+        title: "Higher engagement via chat",
+        description:
+          "Realtime chat made it easier for customers to ask questions and stay in the app longer.",
+      },
+      {
+        type: "positive",
+        value: 50,
+        unit: "%",
+        title: "Longer sessions",
+        description:
+          "Rich plant content, tips, and conversation led to more time spent exploring the catalog.",
+      },
+      {
+        type: "positive",
+        value: 40,
+        unit: "%",
+        title: "Faster support response",
+        description:
+          "Centralized in-app messaging reduced the friction and delays of answering customer questions.",
+      },
+      {
+        type: "positive",
+        value: 4.7,
+        unit: "/5.0",
+        title: "App rating",
+        description:
+          "Customers rated the experience highly for visual design, responsiveness, and convenience.",
+      },
     ],
     projectSteps: [
       {
@@ -661,6 +1505,58 @@ export const portfolioItems = [
     role: "UI/UX Designer and prototype developer for competition submission.",
     challenges:
       "Designing intuitive AI-assisted study flows and ensuring visual clarity under competition constraints.",
+    problemImage:
+      "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Many learning apps overload students with content and features but provide little guidance on what to do next. The competition brief highlighted the need for an AI-driven experience that could feel smart without confusing users or hiding important controls.",
+    problemCards: [
+      {
+        title: "Unclear learning paths",
+        description:
+          "Students often do not know which lesson to take next or how daily tasks connect to their long-term goals.",
+      },
+      {
+        title: "Overwhelming interfaces",
+        description:
+          "Existing learning products frequently present too many options at once, making it hard to focus.",
+      },
+      {
+        title: "Limited personalization",
+        description:
+          "Generic course recommendations ignore each learner’s pace, preferences, and current performance.",
+      },
+      {
+        title: "Low motivation feedback",
+        description:
+          "Progress indicators and AI suggestions are sometimes hidden or unclear, reducing motivation to continue.",
+      },
+    ],
+    solutionDescription:
+      "Skillpath proposes an AI-first mobile interface that keeps learners focused on one clear next step at a time. I designed the flows so that recommendations, progress, and tasks are always visible but never overwhelming.",
+    solutionCards: [
+      {
+        title: "AI-guided home screen",
+        description:
+          "Surfaced a single primary recommendation on the home screen with supporting tasks, reducing choice paralysis.",
+      },
+      {
+        title: "Progress‑aware navigation",
+        description:
+          "Linked modules and exercises visually to the learner’s current goal so they understand why each task matters.",
+      },
+      {
+        title: "Minimal but expressive UI",
+        description:
+          "Used clear typography, spacing, and iconography to highlight key actions while keeping the interface calm.",
+      },
+      {
+        title: "Feedback‑rich micro‑interactions",
+        description:
+          "Added subtle transitions and status changes that acknowledge learner progress without becoming distracting.",
+      },
+    ],
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -668,6 +1564,40 @@ export const portfolioItems = [
       "~90% positive feedback from competition judges",
       "Design concept adopted by potential investors",
       "Showcased at 3 design conferences"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 90,
+        unit: "%",
+        title: "Positive jury feedback",
+        description:
+          "Judges highlighted the balance between strong visual identity and clear, AI-driven learning flows.",
+      },
+      {
+        type: "positive",
+        value: 1,
+        unit: "st place",
+        title: "Competition result",
+        description:
+          "The concept won first place, validating the UX decisions and overall direction of the design.",
+      },
+      {
+        type: "positive",
+        value: 3,
+        unit: "events",
+        title: "Conference showcases",
+        description:
+          "Being presented at several events increased visibility and opened doors for further collaboration.",
+      },
+      {
+        type: "positive",
+        value: 1,
+        unit: "concept",
+        title: "Investor interest",
+        description:
+          "The concept attracted early conversations with potential partners exploring AI-powered learning products.",
+      },
     ],
     projectSteps: [
       {
@@ -713,6 +1643,58 @@ export const portfolioItems = [
     role: "UI/UX Designer creating interactive course modules and navigation flows.",
     challenges:
       "Balancing visual appeal with instructional clarity and interactive elements.",
+    problemImage:
+      "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1522204502588-4e2293f89387?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "A lot of e-course apps feel cluttered or generic, which makes it hard for learners to stay motivated and track their progress. The challenge was to propose an interface that is visually engaging while still keeping course structure and lesson content easy to digest.",
+    problemCards: [
+      {
+        title: "Generic course layout",
+        description:
+          "Many platforms display course lists in the same way, without emphasizing what’s most relevant to a learner.",
+      },
+      {
+        title: "Weak hierarchy",
+        description:
+          "Important elements like progress, deadlines, and active modules can get lost in a dense layout.",
+      },
+      {
+        title: "Limited guidance",
+        description:
+          "Learners are often unsure which lesson or quiz they should prioritize based on their current state.",
+      },
+      {
+        title: "Flat visual feedback",
+        description:
+          "Existing UIs sometimes fail to celebrate milestones, making long-term engagement harder.",
+      },
+    ],
+    solutionDescription:
+      "Skillify reimagines the e-course experience with a card-based structure and clear visual hierarchy that always highlights what learners should do next. I designed the flows and components so that navigation, content, and progress stay tightly connected.",
+    solutionCards: [
+      {
+        title: "Prioritized course cards",
+        description:
+          "Presented key information like progress, difficulty, and upcoming lessons directly on course cards.",
+      },
+      {
+        title: "Guided module flows",
+        description:
+          "Structured lessons into predictable steps—overview, content, practice, recap—so users feel oriented at every stage.",
+      },
+      {
+        title: "Visual progress emphasis",
+        description:
+          "Used progress bars and badges consistently to indicate completion and encourage small wins.",
+      },
+      {
+        title: "Competition‑ready visuals",
+        description:
+          "Balanced brand elements, illustration, and whitespace to fit within competition constraints while remaining production‑ready.",
+      },
+    ],
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -720,6 +1702,40 @@ export const portfolioItems = [
       "~85% positive feedback from competition judges",
       "Design received interest from 5+ educational startups",
       "Featured in design portfolio showcase"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 2,
+        unit: "nd place",
+        title: "Competition achievement",
+        description:
+          "The concept earned second place, highlighting strength in both UX and visual design.",
+      },
+      {
+        type: "positive",
+        value: 85,
+        unit: "%",
+        title: "Positive jury feedback",
+        description:
+          "Judges appreciated how the UI balanced aesthetics with clear learning flows and content structure.",
+      },
+      {
+        type: "positive",
+        value: 5,
+        unit: "+",
+        title: "Interested startups",
+        description:
+          "Multiple education startups expressed interest in exploring the design directions used in Skillify.",
+      },
+      {
+        type: "positive",
+        value: 1,
+        unit: "showcase",
+        title: "Portfolio visibility",
+        description:
+          "The case study strengthened the overall design portfolio and served as a reference for later client work.",
+      },
     ],
     projectSteps: [
       {
@@ -765,6 +1781,58 @@ export const portfolioItems = [
     ],
     challenges:
       "Ensuring accessibility for diverse users and integrating with government backend systems.",
+    problemImage:
+      "https://images.unsplash.com/photo-1444201983204-c43cbd584d93?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Bandung citizens needed a simple way to report local issues and track responses, but existing channels were fragmented across phone calls, messaging apps, and offline paperwork. This made it easy for reports to be lost and hard for people to feel heard.",
+    problemCards: [
+      {
+        title: "Scattered reporting channels",
+        description:
+          "Complaints and feedback came through many informal channels, making it difficult to track and prioritize.",
+      },
+      {
+        title: "Accessibility gaps",
+        description:
+          "Interfaces were not always optimized for older devices, different literacy levels, or assistive technologies.",
+      },
+      {
+        title: "Low transparency",
+        description:
+          "Citizens often did not know whether their report had been received, assigned, or resolved.",
+      },
+      {
+        title: "Complex backend constraints",
+        description:
+          "UI workflows needed to respect how government back-office systems and processes already worked.",
+      },
+    ],
+    solutionDescription:
+      "Gobojongsoang.id’s UI focuses on making it fast and reassuring to submit a report while still fitting into government workflows. I designed the information architecture and interface so that both first-time and returning users can understand where they are in the reporting process.",
+    solutionCards: [
+      {
+        title: "Step-by-step reporting flow",
+        description:
+          "Broke report submission into guided steps with clear labels and helper text to reduce mistakes.",
+      },
+      {
+        title: "Accessible layouts",
+        description:
+          "Used strong contrast, readable typography, and predictable layouts so the interface remains usable across devices.",
+      },
+      {
+        title: "Status visibility",
+        description:
+          "Introduced clear states for submitted, in-progress, and resolved reports so citizens can see what happens after submission.",
+      },
+      {
+        title: "Modular components",
+        description:
+          "Designed reusable UI blocks that are easy for developers to connect to evolving government backends.",
+      },
+    ],
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -772,6 +1840,40 @@ export const portfolioItems = [
       "~1000+ community reports submitted in first month",
       "~95% government response rate to reports",
       "Improved civic engagement by 60%"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 1000,
+        unit: "+",
+        title: "Reports submitted",
+        description:
+          "A higher volume of incoming reports showed that citizens found the new interface approachable and trustworthy.",
+      },
+      {
+        type: "positive",
+        value: 95,
+        unit: "%",
+        title: "Government response rate",
+        description:
+          "Better structure and tracking made it easier for agencies to respond to and close more reports.",
+      },
+      {
+        type: "positive",
+        value: 60,
+        unit: "%",
+        title: "Civic engagement uplift",
+        description:
+          "The platform contributed to a measurable increase in citizen participation in local problem-solving.",
+      },
+      {
+        type: "positive",
+        value: 1,
+        unit: "deployment",
+        title: "Successful public launch",
+        description:
+          "The UI design was implemented and used in a live context by Bandung residents and officials.",
+      },
     ],
     projectSteps: [
       {
@@ -819,6 +1921,58 @@ export const portfolioItems = [
     ],
     challenges:
       "Designing intuitive filtering and listing features while maintaining a friendly, food-centric aesthetic.",
+    problemImage:
+      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Food waste happens partly because people and organizations do not have an easy, attractive interface for listing and discovering surplus food in time. Many existing tools either feel too transactional or make it hard to trust the quality and safety of the food offered.",
+    problemCards: [
+      {
+        title: "Hard-to-discover surplus food",
+        description:
+          "People who needed extra meals could not easily find what was available nearby, when it was available.",
+      },
+      {
+        title: "Clunky listing flows",
+        description:
+          "Providers had to fill long, unintuitive forms to list items, reducing their willingness to contribute regularly.",
+      },
+      {
+        title: "Low trust in quality",
+        description:
+          "Without clear visual cues and metadata, users struggled to judge whether an item was safe and suitable.",
+      },
+      {
+        title: "Unclear impact feedback",
+        description:
+          "Most apps did not show users how much food they helped save, lowering long‑term motivation.",
+      },
+    ],
+    solutionDescription:
+      "ResCuisine’s UI focuses on making food-saving feel simple, positive, and transparent. I designed flows and components so that listing surplus items is quick, and discovering nearby meals feels safe and rewarding.",
+    solutionCards: [
+      {
+        title: "Friendly listing interface",
+        description:
+          "Created concise listing forms with clear previews so providers can add items in just a few steps.",
+      },
+      {
+        title: "Impact‑aware browsing",
+        description:
+          "Surfaced key details like expiry time, distance, and portions to help users decide quickly.",
+      },
+      {
+        title: "Trust-building visuals",
+        description:
+          "Used imagery, labels, and status tags to communicate freshness and handling instructions.",
+      },
+      {
+        title: "Impact feedback",
+        description:
+          "Included patterns for showing how many meals have been saved, supporting the app’s sustainability story.",
+      },
+    ],
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -826,6 +1980,40 @@ export const portfolioItems = [
       "~70% user engagement rate with listing feature",
       "Attracted interest from 3 sustainability NGOs",
       "Received positive media coverage in 2 publications"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 500,
+        unit: "+",
+        title: "Items saved",
+        description:
+          "Early testing suggested the concept could meaningfully reduce food waste when adopted at scale.",
+      },
+      {
+        type: "positive",
+        value: 70,
+        unit: "%",
+        title: "Listing engagement",
+        description:
+          "A majority of active users created or interacted with listings, validating the listing and discovery flows.",
+      },
+      {
+        type: "positive",
+        value: 3,
+        unit: "NGOs",
+        title: "Partner interest",
+        description:
+          "Sustainability organizations showed interest in collaborating around the ResCuisine concept.",
+      },
+      {
+        type: "positive",
+        value: 2,
+        unit: "features",
+        title: "Media visibility",
+        description:
+          "Positive coverage helped position the case study as a credible exploration of food-waste solutions.",
+      },
     ],
     projectSteps: [
       {
@@ -881,6 +2069,58 @@ export const portfolioItems = [
     ],
     challenges:
       "Balancing AR overlay legibility with real-world background complexity and ensuring minimal distraction for users on the move.",
+    problemImage:
+      "https://images.unsplash.com/photo-1515717276801-2b66f3edc5c0?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1509587584298-0f3b3a2e3f55?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Transit riders often struggle to orient themselves in stations and along routes, especially when signage is confusing or crowded. AR navigation can help, but if not carefully designed it can become more distracting than helpful.",
+    problemCards: [
+      {
+        title: "Confusing wayfinding",
+        description:
+          "Users can get lost when transferring lines or finding the right exit in complex stations.",
+      },
+      {
+        title: "Noisy visual environment",
+        description:
+          "Bus stops and stations are visually busy, which can make AR overlays hard to read if not designed with strong contrast.",
+      },
+      {
+        title: "Safety concerns",
+        description:
+          "Overly intrusive AR UI might draw attention away from surroundings and create unsafe situations.",
+      },
+      {
+        title: "Data density challenges",
+        description:
+          "Live arrival times, route names, and directions all compete for attention in a limited viewport.",
+      },
+    ],
+    solutionDescription:
+      "Transmate’s UI concept uses restrained AR overlays that prioritize legibility, safety, and quick orientation. I structured the visual language so information appears exactly where it is needed without covering too much of the real-world scene.",
+    solutionCards: [
+      {
+        title: "Clear AR labeling",
+        description:
+          "Designed overlays with strong contrast, simple shapes, and minimal text for fast comprehension.",
+      },
+      {
+        title: "Context-aware prompts",
+        description:
+          "Placed navigation hints close to relevant physical elements, like exits or platforms, while leaving most of the camera view unobstructed.",
+      },
+      {
+        title: "Safety-conscious hierarchy",
+        description:
+          "Kept critical safety information and directional arrows prominent, while secondary data remains smaller and peripheral.",
+      },
+      {
+        title: "Consistent iconography",
+        description:
+          "Created a compact icon set that remains recognizable even when layered over busy backgrounds.",
+      },
+    ],
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -888,6 +2128,40 @@ export const portfolioItems = [
       "~80% user interest in AR navigation feature",
       "Prototype showcased at 2 tech conferences",
       "Received recognition from AR/VR design community"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 80,
+        unit: "%",
+        title: "User interest in AR",
+        description:
+          "Testing and feedback indicated strong demand for AR-assisted navigation in urban transit.",
+      },
+      {
+        type: "positive",
+        value: 2,
+        unit: "events",
+        title: "Conference showcases",
+        description:
+          "Presenting the prototype at conferences generated additional feedback and validation from designers and technologists.",
+      },
+      {
+        type: "positive",
+        value: 1,
+        unit: "stakeholder group",
+        title: "Transjakarta validation",
+        description:
+          "Stakeholders acknowledged the concept as a promising direction for future rider experiences.",
+      },
+      {
+        type: "positive",
+        value: 1,
+        unit: "community",
+        title: "AR/VR recognition",
+        description:
+          "The project gained recognition within AR/VR design circles for its focus on usability and safety.",
+      },
     ],
     projectSteps: [
       {
@@ -942,6 +2216,58 @@ export const portfolioItems = [
     ],
     challenges:
       "Creating a seamless multi-step booking process and optimizing for mobile and desktop views.",
+    problemImage:
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Hotel booking flows are often fragmented across multiple pages with inconsistent feedback, causing users to abandon their reservations. The challenge was to design a concept that felt trustworthy, fast, and clear on both mobile and desktop.",
+    problemCards: [
+      {
+        title: "High abandonment in checkout",
+        description:
+          "Users frequently drop off when asked for too much information in unclear steps.",
+      },
+      {
+        title: "Inconsistent responsiveness",
+        description:
+          "Some hotel booking sites prioritize desktop, leaving mobile users with cramped or broken layouts.",
+      },
+      {
+        title: "Weak comparison tools",
+        description:
+          "It can be difficult to compare room types, prices, and benefits at a glance.",
+      },
+      {
+        title: "Unclear confirmation states",
+        description:
+          "Users are sometimes unsure whether a booking is tentative or confirmed, leading to support tickets.",
+      },
+    ],
+    solutionDescription:
+      "Hotel.id proposes a smooth, multi-step booking UI where each stage focuses on one decision at a time. I structured layouts, forms, and feedback messages so users always know where they are in the journey and what happens next.",
+    solutionCards: [
+      {
+        title: "Guided stepper flow",
+        description:
+          "Introduced a persistent stepper that clearly shows search, selection, details, payment, and confirmation.",
+      },
+      {
+        title: "Responsive card layouts",
+        description:
+          "Designed room and hotel cards that scale gracefully from mobile to desktop while preserving key information.",
+      },
+      {
+        title: "Comparison-friendly design",
+        description:
+          "Used aligned grids and iconography to make amenities and price differences easy to compare.",
+      },
+      {
+        title: "Strong confirmation states",
+        description:
+          "Included clear confirmation screens and follow-up actions so users feel confident after booking.",
+      },
+    ],
     // demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -949,6 +2275,40 @@ export const portfolioItems = [
       "Average booking completion time reduced by 50%",
       "~92% user satisfaction with booking flow",
       "Received positive feedback from hotel partners"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 75,
+        unit: "%",
+        title: "Lower abandonment",
+        description:
+          "The redesigned flow concept significantly reduced the number of users leaving mid-booking in testing scenarios.",
+      },
+      {
+        type: "positive",
+        value: 50,
+        unit: "%",
+        title: "Faster completion",
+        description:
+          "Streamlined steps and clearer forms shortened the time needed to complete a booking.",
+      },
+      {
+        type: "positive",
+        value: 92,
+        unit: "%",
+        title: "User satisfaction",
+        description:
+          "Participants in usability sessions rated the new flow highly for clarity and ease of use.",
+      },
+      {
+        type: "positive",
+        value: 1,
+        unit: "concept",
+        title: "Partner validation",
+        description:
+          "Positive reactions from hotel stakeholders indicated the design direction aligned with business goals.",
+      },
     ],
     projectSteps: [
       {
@@ -1005,6 +2365,58 @@ export const portfolioItems = [
     ],
     challenges:
       "Balancing informational content with emotional engagement and secure transaction UI.",
+    problemImage:
+      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1519996529931-28324d5a630e?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Donors wanted to support medical and social campaigns from their phones, but existing experiences often felt confusing or untrustworthy. Key information like how funds are used, campaign urgency, and donation impact was not always clear.",
+    problemCards: [
+      {
+        title: "Low trust in campaigns",
+        description:
+          "Sparse campaign details and inconsistent visuals made it harder for donors to feel confident in giving.",
+      },
+      {
+        title: "Fragmented donation flows",
+        description:
+          "Multiple steps and redirects increased friction, especially on mobile devices.",
+      },
+      {
+        title: "Weak progress feedback",
+        description:
+          "Donors had limited visibility into how far a campaign was from its target or what previous donations had achieved.",
+      },
+      {
+        title: "Limited conversational support",
+        description:
+          "Donors could not easily ask questions or receive guidance tailored to their concerns.",
+      },
+    ],
+    solutionDescription:
+      "SwiftCare’s UI combines clear storytelling for each campaign with a streamlined donation flow and conversational assistance. I designed the app so donors can understand a case quickly, donate in a few taps, and feel connected to the impact of their contributions.",
+    solutionCards: [
+      {
+        title: "Impact-focused campaign cards",
+        description:
+          "Highlighted key facts—goal amount, progress, urgency, and story summary—on each campaign card.",
+      },
+      {
+        title: "Simplified donation steps",
+        description:
+          "Reduced donation into concise screens with clear input fields, payment options, and confirmation states.",
+      },
+      {
+        title: "Realtime campaign updates",
+        description:
+          "Designed components to display progress bars and recent activity so donors see campaigns move in real time.",
+      },
+      {
+        title: "ChatGPT-powered helper",
+        description:
+          "Integrated conversational UI patterns so users can ask questions about campaigns, payment options, or platform policies.",
+      },
+    ],
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -1012,6 +2424,40 @@ export const portfolioItems = [
       "~85% donation completion rate",
       "~1000+ active donors on platform",
       "Achieved 4.8/5.0 app store rating"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 50000,
+        unit: "USD",
+        title: "Funds raised",
+        description:
+          "Early fundraising results demonstrated that the flow and storytelling could drive meaningful donations.",
+      },
+      {
+        type: "positive",
+        value: 85,
+        unit: "%",
+        title: "Donation completion rate",
+        description:
+          "Most users who started donating finished the process, indicating the UI reduced friction and confusion.",
+      },
+      {
+        type: "positive",
+        value: 1000,
+        unit: "+",
+        title: "Active donors",
+        description:
+          "A growing base of repeat donors validated the value of the experience over time.",
+      },
+      {
+        type: "positive",
+        value: 4.8,
+        unit: "/5.0",
+        title: "App rating",
+        description:
+          "High satisfaction scores reflected trust in the platform and clarity of the donation experience.",
+      },
     ],
     projectSteps: [
       {
@@ -1055,6 +2501,58 @@ export const portfolioItems = [
     role: "Full-stack Developer and Designer integrating front-end UI with Laravel backend.",
     challenges:
       "Synchronizing dynamic registration data and creating engaging event presentation.",
+    problemImage:
+      "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Agridation needed a central place where participants could learn about competitions, register, and see results. Older approaches relied heavily on manual forms, messaging apps, and static posters, which were hard to keep accurate as details changed.",
+    problemCards: [
+      {
+        title: "Manual registration",
+        description:
+          "Participants often registered through spreadsheets and messaging apps, creating data inconsistencies.",
+      },
+      {
+        title: "Outdated information",
+        description:
+          "Event details and schedules were not always synchronized across channels, confusing participants.",
+      },
+      {
+        title: "Lack of transparency",
+        description:
+          "There was no single, trusted place to check announcements, timelines, and competition results.",
+      },
+      {
+        title: "Fragmented experience",
+        description:
+          "From learning about the event to submitting entries, the user journey passed through disconnected tools.",
+      },
+    ],
+    solutionDescription:
+      "The Agridation 2023 website consolidates information, registration, and result announcements into one Laravel-powered platform. I designed the flows and pages to guide students from discovery to registration and result checking without leaving the website.",
+    solutionCards: [
+      {
+        title: "Central information hub",
+        description:
+          "Created landing and detail pages that clearly explain competition tracks, rules, and schedules.",
+      },
+      {
+        title: "Online registration forms",
+        description:
+          "Implemented structured forms with validation to capture participant data reliably and reduce admin work.",
+      },
+      {
+        title: "Results and announcement views",
+        description:
+          "Designed sections where participants can quickly see winners, important notices, and follow-up actions.",
+      },
+      {
+        title: "Responsive design",
+        description:
+          "Ensured that prospective participants can register and check information comfortably from mobile devices.",
+      },
+    ],
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -1062,6 +2560,40 @@ export const portfolioItems = [
       "~95% event information accuracy",
       "Reduced registration processing time by 70%",
       "Improved event visibility by 80%"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 500,
+        unit: "+",
+        title: "Participants registered",
+        description:
+          "A large number of registrations flowed through the new platform, proving it could handle real-world usage.",
+      },
+      {
+        type: "positive",
+        value: 70,
+        unit: "%",
+        title: "Faster processing",
+        description:
+          "Automated data capture reduced the time and effort needed to verify and organize registrations.",
+      },
+      {
+        type: "positive",
+        value: 95,
+        unit: "%",
+        title: "Information accuracy",
+        description:
+          "Having a single source of truth for schedules and rules minimized miscommunication and confusion.",
+      },
+      {
+        type: "positive",
+        value: 80,
+        unit: "%",
+        title: "Higher visibility",
+        description:
+          "A more professional online presence helped attract more participants and partners to the event.",
+      },
     ],
     projectSteps: [
       {
@@ -1104,6 +2636,58 @@ export const portfolioItems = [
     role: "UI/UX Designer creating mentor and mentee interface screens.",
     challenges:
       "Balancing administrative features with user-friendly communication tools.",
+    problemImage:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Mentors on Pembimbing.id needed to manage many students, tasks, and feedback loops, but older dashboard designs were cluttered and hard to navigate. Important information like upcoming deadlines, active mentees, and task status was buried in dense tables.",
+    problemCards: [
+      {
+        title: "Overloaded dashboards",
+        description:
+          "Too many widgets and tables on a single screen made it difficult to focus on what mattered most.",
+      },
+      {
+        title: "Unclear priorities",
+        description:
+          "Mentors struggled to see which mentees or tasks should be handled first.",
+      },
+      {
+        title: "Fragmented communication",
+        description:
+          "Messaging and task tracking were not visually synchronized, causing context switching.",
+      },
+      {
+        title: "Inconsistent visual language",
+        description:
+          "Lack of a unified design system led to different screen sections feeling disconnected.",
+      },
+    ],
+    solutionDescription:
+      "The redesigned Pembimbing.id dashboard focuses on clarity and mentor productivity. I restructured layouts and components so that mentors can quickly scan mentee status, upcoming tasks, and communication threads in one place.",
+    solutionCards: [
+      {
+        title: "Prioritized dashboard widgets",
+        description:
+          "Grouped KPIs, upcoming tasks, and important mentee updates at the top of the screen.",
+      },
+      {
+        title: "Task-first layouts",
+        description:
+          "Designed task lists with filters and state indicators so mentors can triage efficiently.",
+      },
+      {
+        title: "Aligned communication panels",
+        description:
+          "Connected message threads visually with the mentees and tasks they relate to.",
+      },
+      {
+        title: "Coherent UI system",
+        description:
+          "Introduced consistent spacing, typography, and color usage across the entire dashboard.",
+      },
+    ],
     demoUrl: "https://pembimbing.kawankerja.id/",
     repoUrl:
       "https://www.linkedin.com/posts/setiadyanwar_uiux-redesign-for-pembimbingid-dashboard-activity-7250038967906025474-raVw?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
@@ -1112,6 +2696,40 @@ export const portfolioItems = [
       "Reduced mentee communication time by 40%",
       "~90% mentor satisfaction with new interface",
       "Increased platform usage by 55%"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 65,
+        unit: "%",
+        title: "Task management efficiency",
+        description:
+          "Mentors reported being able to assign and track tasks more quickly thanks to a clearer layout.",
+      },
+      {
+        type: "positive",
+        value: 40,
+        unit: "%",
+        title: "Faster communication",
+        description:
+          "Better alignment between messaging and tasks shortened the time needed to respond to mentees.",
+      },
+      {
+        type: "positive",
+        value: 90,
+        unit: "%",
+        title: "Mentor satisfaction",
+        description:
+          "Survey feedback showed strong approval for the new dashboard experience.",
+      },
+      {
+        type: "positive",
+        value: 55,
+        unit: "%",
+        title: "Increased platform usage",
+        description:
+          "Mentors used the platform more frequently after the redesign, indicating higher perceived value.",
+      },
     ],
     projectSteps: [
       {
@@ -1238,6 +2856,58 @@ export const portfolioItems = [
     ],
     challenges:
       "Migrating legacy content to a modern layout while ensuring cross-browser compatibility, maintaining brand consistency, and improving usability across all devices.",
+    problemImage:
+      "https://images.unsplash.com/photo-1504704911898-68304a7d2807?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "The existing IPB University website contained years of content and complex navigation that made it difficult for prospective students, staff, and the public to find what they needed. Information architecture had grown organically, resulting in deep menus and inconsistent page layouts.",
+    problemCards: [
+      {
+        title: "Overgrown navigation",
+        description:
+          "Menu structures were deep and inconsistent, forcing users to guess where key information might live.",
+      },
+      {
+        title: "Legacy visual design",
+        description:
+          "Outdated styling made the site feel less trustworthy and harder to scan on modern devices.",
+      },
+      {
+        title: "Content overload",
+        description:
+          "Important announcements and calls-to-action competed with older, less relevant content on key pages.",
+      },
+      {
+        title: "Limited responsiveness",
+        description:
+          "The layout was not consistently optimized for mobile, where a significant portion of users now browse.",
+      },
+    ],
+    solutionDescription:
+      "The redesign concept for IPB University focuses on a cleaner information hierarchy, modern visual identity, and responsive layouts that adapt gracefully across devices. I treated the project as a case study, defining patterns that could scale as content grows.",
+    solutionCards: [
+      {
+        title: "Simplified navigation model",
+        description:
+          "Grouped content into clearer top-level categories so users can quickly orient themselves.",
+      },
+      {
+        title: "Modern visual language",
+        description:
+          "Refreshed typography, color, and spacing while staying true to IPB’s institutional identity.",
+      },
+      {
+        title: "Content‑first layouts",
+        description:
+          "Designed templates that highlight important content types like news, events, and academic programs.",
+      },
+      {
+        title: "Responsive grids",
+        description:
+          "Used flexible grid systems to keep the site usable and attractive from mobile up to large desktops.",
+      },
+    ],
     demoUrl: "#",
     repoUrl: "#",
     impact: [
@@ -1245,6 +2915,40 @@ export const portfolioItems = [
       "Reduced page load time by 55%",
       "~85% positive feedback from user testing",
       "Increased website traffic by 40%"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 70,
+        unit: "%",
+        title: "Navigation efficiency",
+        description:
+          "User testing indicated that people could reach key destinations faster with the new structure.",
+      },
+      {
+        type: "positive",
+        value: 55,
+        unit: "%",
+        title: "Faster load time",
+        description:
+          "Lighter layouts and better content prioritization translated into quicker perceived loading.",
+      },
+      {
+        type: "positive",
+        value: 85,
+        unit: "%",
+        title: "Positive test feedback",
+        description:
+          "Students and staff responded positively to the refreshed look and clearer page hierarchy.",
+      },
+      {
+        type: "positive",
+        value: 40,
+        unit: "%",
+        title: "Traffic uplift",
+        description:
+          "Improved clarity and usability were associated with higher overall engagement with the site.",
+      },
     ],
     projectSteps: [
       {
@@ -1304,11 +3008,97 @@ export const portfolioItems = [
     ],
     challenges:
       "Balancing dense informational content with a clean layout, ensuring mobile responsiveness, and aligning closely with IPB's branding guidelines.",
+    problemImage:
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "BEM KM IPB needed a modern web presence that could showcase organizational structure, programs, and news without overwhelming visitors. Legacy layouts tended to cram too much content into each page and did not prioritize mobile viewing.",
+    problemCards: [
+      {
+        title: "Information overload",
+        description:
+          "Visitors faced long, dense pages without clear grouping or hierarchy, making content hard to skim.",
+      },
+      {
+        title: "Weak mobile experience",
+        description:
+          "Some sections did not adapt well to smaller screens, hurting accessibility for students browsing on phones.",
+      },
+      {
+        title: "Inconsistent branding",
+        description:
+          "Not all sections reflected the same interpretation of IPB and BEM KM visual guidelines.",
+      },
+      {
+        title: "Limited storytelling",
+        description:
+          "The previous structure made it difficult to communicate the organization’s mission and current initiatives clearly.",
+      },
+    ],
+    solutionDescription:
+      "The new BEM KM IPB website UI concept focuses on structured content blocks, strong visual hierarchy, and mobile-first layouts. I aimed to make it easy for students to understand what BEM does, how to get involved, and where to find the latest updates.",
+    solutionCards: [
+      {
+        title: "Sectioned page layouts",
+        description:
+          "Divided content into clear sections for vision, mission, structure, programs, and news.",
+      },
+      {
+        title: "Mobile-first grid system",
+        description:
+          "Designed components that stack cleanly on small screens without losing context or readability.",
+      },
+      {
+        title: "Brand-aligned visuals",
+        description:
+          "Applied IPB’s colors and typography consistently while giving BEM KM its own recognizable identity.",
+      },
+      {
+        title: "Call-to-action emphasis",
+        description:
+          "Highlighted key actions such as contact, registration, and event participation with clear buttons and placements.",
+      },
+    ],
     impact: [
       "~80% improvement in information accessibility",
       "Mobile traffic increased by 65%",
       "~88% user satisfaction with new design",
       "Reduced bounce rate by 45%"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 80,
+        unit: "%",
+        title: "Easier information access",
+        description:
+          "Students reported needing fewer clicks to reach core content like organizational information and news.",
+      },
+      {
+        type: "positive",
+        value: 65,
+        unit: "%",
+        title: "Higher mobile traffic",
+        description:
+          "Mobile users engaged more with the site after layouts were optimized for smaller screens.",
+      },
+      {
+        type: "positive",
+        value: 88,
+        unit: "%",
+        title: "Design satisfaction",
+        description:
+          "Surveys showed strong approval of the new visual style and navigation.",
+      },
+      {
+        type: "positive",
+        value: 45,
+        unit: "%",
+        title: "Lower bounce rate",
+        description:
+          "Clearer landing experiences encouraged visitors to explore more pages instead of leaving quickly.",
+      },
     ],
     projectSteps: [
       {
@@ -1362,11 +3152,97 @@ export const portfolioItems = [
     ],
     challenges:
       "Balancing a minimalist layout with immersive animations, ensuring smooth performance across devices, and maintaining visual consistency in line with the brand identity.",
+    problemImage:
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Modern e-commerce brands want to stand out visually without sacrificing usability or performance. Many shoe store sites either feel too heavy with animations or too generic, making it harder for users to stay engaged.",
+    problemCards: [
+      {
+        title: "Generic product presentation",
+        description:
+          "Standard grids and carousels often fail to create a memorable brand impression.",
+      },
+      {
+        title: "Heavy animations",
+        description:
+          "Aggressive motion and effects can make pages feel slow, especially on lower-powered devices.",
+      },
+      {
+        title: "Inconsistent micro-interactions",
+        description:
+          "Hover states, transitions, and other small details are sometimes designed ad hoc, leading to an inconsistent feel.",
+      },
+      {
+        title: "Mobile performance",
+        description:
+          "Visually rich designs sometimes do not translate well to mobile networks and hardware.",
+      },
+    ],
+    solutionDescription:
+      "Uvan explores how a fictional shoe brand can use carefully tuned micro-animations and a minimalist layout to create an immersive yet performant shopping experience. I designed flows, components, and animation specs that keep focus on the products.",
+    solutionCards: [
+      {
+        title: "Hero storytelling",
+        description:
+          "Built a product-focused hero section that combines imagery, typography, and motion to draw users in.",
+      },
+      {
+        title: "Animation design system",
+        description:
+          "Defined reusable motion patterns—durations, easings, and triggers—for hovers, transitions, and scroll effects.",
+      },
+      {
+        title: "Clean product grids",
+        description:
+          "Used whitespace and alignment to ensure images and key information remain easy to compare.",
+      },
+      {
+        title: "Performance-aware assets",
+        description:
+          "Considered asset sizes and motion complexity so the concept could be implemented without sacrificing speed.",
+      },
+    ],
     impact: [
       "~90% positive feedback from design community",
       "Design featured in 3 design publications",
       "~75% user engagement with micro-animations",
       "Received interest from 5+ e-commerce brands"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 90,
+        unit: "%",
+        title: "Design community feedback",
+        description:
+          "Peers praised the balance between expressive visuals and practical layout decisions.",
+      },
+      {
+        type: "positive",
+        value: 3,
+        unit: "publications",
+        title: "Featured work",
+        description:
+          "Coverage in multiple design outlets helped increase visibility of the case study.",
+      },
+      {
+        type: "positive",
+        value: 75,
+        unit: "%",
+        title: "Micro-animation engagement",
+        description:
+          "Usability sessions showed that users noticed and appreciated subtle animations without feeling distracted.",
+      },
+      {
+        type: "positive",
+        value: 5,
+        unit: "+",
+        title: "Brand interest",
+        description:
+          "Several e-commerce brands expressed interest in applying similar UI and motion principles.",
+      },
     ],
     projectSteps: [
       {
@@ -1431,6 +3307,58 @@ export const portfolioItems = [
     ],
     challenges:
       "Identifying and resolving pain points in the existing checkout process, such as complex stock checking procedures and lack of clear notifications, while ensuring a user-friendly and efficient interface.",
+    problemImage:
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1523287562758-66c7fc58967a?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "FamiApp’s previous checkout experience forced users to repeatedly check stock availability and store options, causing frustration and abandoned orders. Notifications and status messages were also unclear, so users were not always sure if an order had been placed successfully.",
+    problemCards: [
+      {
+        title: "Repetitive stock checks",
+        description:
+          "Users needed to manually confirm whether items were available at their chosen store.",
+      },
+      {
+        title: "Store selection friction",
+        description:
+          "The flow for picking a store and seeing relevant products was not streamlined.",
+      },
+      {
+        title: "Weak notification design",
+        description:
+          "Order success, failure, and changes were not communicated clearly in the interface.",
+      },
+      {
+        title: "High abandonment",
+        description:
+          "Pain points across these steps contributed to a high checkout drop-off rate.",
+      },
+    ],
+    solutionDescription:
+      "The redesigned FamiApp checkout flow starts with store selection, then surfaces only available items and provides clearer status messages throughout. I focused on simplifying each step, clarifying system feedback, and aligning the UI with best practices from comparable apps.",
+    solutionCards: [
+      {
+        title: "Store-first journey",
+        description:
+          "Reordered the flow so users choose a store before seeing products, reducing later stock conflicts.",
+      },
+      {
+        title: "Availability-aware catalog",
+        description:
+          "Designed product lists that indicate availability and potential substitutions upfront.",
+      },
+      {
+        title: "Notification patterns",
+        description:
+          "Standardized success, error, and pending states with consistent colors and layouts.",
+      },
+      {
+        title: "Benchmark-informed UX",
+        description:
+          "Borrowed proven interaction patterns from popular food and beverage apps while adapting them to FamiApp’s context.",
+      },
+    ],
     repoUrl:
       "https://www.linkedin.com/posts/setiadyanwar_study-case-to-redesign-the-checkout-screen-activity-7221889939687268352-4JNc?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
     impact: [
@@ -1438,6 +3366,40 @@ export const portfolioItems = [
       "Average checkout time reduced by 45%",
       "~85% user satisfaction with new flow",
       "Increased conversion rate by 35%"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 60,
+        unit: "%",
+        title: "Lower abandonment",
+        description:
+          "The new flow concept significantly reduced the number of users exiting before completing payment.",
+      },
+      {
+        type: "positive",
+        value: 45,
+        unit: "%",
+        title: "Faster checkout",
+        description:
+          "By removing redundant checks and simplifying screens, users took less time to place an order.",
+      },
+      {
+        type: "positive",
+        value: 35,
+        unit: "%",
+        title: "Higher conversion",
+        description:
+          "More initiated carts turned into successful orders after the redesign.",
+      },
+      {
+        type: "positive",
+        value: 85,
+        unit: "%",
+        title: "User satisfaction",
+        description:
+          "Surveyed users rated the new flows as clearer and more comfortable to use.",
+      },
     ],
     projectSteps: [
       {
@@ -1492,6 +3454,58 @@ export const portfolioItems = [
     ],
     challenges:
       "Integrating real-time inventory updates across multiple branches, ensuring secure authentication and authorization for different user roles (admin, cashier), and optimizing the system for high-volume transaction processing.",
+    problemImage:
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
+    solutionImage:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+    problemDescription:
+      "Ayam Geprek Indonesia needed a POS system that could keep up with busy outlets and maintain accurate inventory across branches. Previous manual processes and separate systems slowed down transactions and made it hard to trust stock data.",
+    problemCards: [
+      {
+        title: "Slow, manual transactions",
+        description:
+          "Cashiers had to juggle multiple tools to process orders, which created queues during peak hours.",
+      },
+      {
+        title: "Inventory mismatches",
+        description:
+          "Stock adjustments were not always recorded consistently across branches, leading to discrepancies.",
+      },
+      {
+        title: "Weak role separation",
+        description:
+          "Older setups did not strictly separate admin and cashier permissions, increasing operational risk.",
+      },
+      {
+        title: "Limited reporting",
+        description:
+          "Decision makers lacked a consolidated view of sales and inventory data to plan effectively.",
+      },
+    ],
+    solutionDescription:
+      "WingsPOS brings transactions, inventory, and reporting into one Laravel-based web application tailored to Ayam Geprek’s workflows. I focused on structuring data models, APIs, and UI modules so cashiers can move quickly while admins still get accurate, aggregated insights.",
+    solutionCards: [
+      {
+        title: "Optimized sales module",
+        description:
+          "Designed a fast, keyboard-friendly order entry interface that reduces time per transaction.",
+      },
+      {
+        title: "Real-time stock updates",
+        description:
+          "Linked sales to inventory adjustments so each order immediately updates product availability.",
+      },
+      {
+        title: "Role-based access control",
+        description:
+          "Implemented clear separation between admin and cashier capabilities to protect sensitive operations.",
+      },
+      {
+        title: "Centralized reporting",
+        description:
+          "Built dashboards and reports that aggregate branch data for easier performance monitoring.",
+      },
+    ],
     demoUrl: "https://ayamgeprek.id/",
     repoUrl: "https://github.com/setiadyanwar/wingspos",
     impact: [
@@ -1499,6 +3513,40 @@ export const portfolioItems = [
       "Real-time inventory accuracy improved to 99.8%",
       "~50% reduction in manual data entry errors",
       "Increased transaction throughput by 70%"
+    ],
+    outcomes: [
+      {
+        type: "positive",
+        value: 80,
+        unit: "%",
+        title: "Faster transaction processing",
+        description:
+          "Cashiers could handle orders significantly more quickly, reducing queues and wait times.",
+      },
+      {
+        type: "positive",
+        value: 99.8,
+        unit: "%",
+        title: "Inventory accuracy",
+        description:
+          "Real-time updates and better data validation kept system inventory in sync with actual stock.",
+      },
+      {
+        type: "positive",
+        value: 50,
+        unit: "%",
+        title: "Fewer manual errors",
+        description:
+          "Automated calculations and structured inputs cut down on common data entry mistakes.",
+      },
+      {
+        type: "positive",
+        value: 70,
+        unit: "%",
+        title: "Higher throughput",
+        description:
+          "The system supported a greater number of transactions per hour without performance issues.",
+      },
     ],
     projectSteps: [
       {

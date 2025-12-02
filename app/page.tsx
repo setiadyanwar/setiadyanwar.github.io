@@ -1,6 +1,8 @@
 "use client"
 
-import HeroSection from "@/components/hero-section"
+import dynamic from "next/dynamic"
+
+const HeroSection = dynamic(() => import("@/components/hero-section"), { ssr: false })
 import ClientsLogoSection from "@/components/clients-logo-section"
 import SkillsShowcase from "@/components/skills-showcase"
 import RecentProjects from "@/components/recent-projects"
