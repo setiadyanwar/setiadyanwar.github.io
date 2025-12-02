@@ -1557,7 +1557,7 @@ export const workExperiences = [
     title: "Web Developer Programmer (Internship)",
     company: "Eduwork | PT Sinergi Insan Andalan",
     logo: "/experience/eduwork.png?height=40&width=40",
-    period: "Apr 2025 – Present",
+    period: "Apr 2025 – Jun 2025",
     description:
       "I contribute to the development of web applications, working on both front-end and back-end aspects. I collaborate with teams to build efficient systems, ensure optimal API integration, and enhance application performance and security.",
     skills: ["React.js", "TailwindCSS", "JavaScript", "API Integration"],
