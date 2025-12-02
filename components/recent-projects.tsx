@@ -10,8 +10,8 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 
 export default function RecentProjects() {
-  // Get the specific 3 most recent projects by ID
-  const recentProjectIds = ["kreavoks", "studylens", "freezemart"]
+  // Get the specific 3 most recent projects by ID (latest web projects)
+  const recentProjectIds = ["ess", "nexaid", "kreavoks"]
   const recentProjects = recentProjectIds
     .map((id) => portfolioItems.find((item) => item.id === id))
     .filter((project) => project !== undefined) as typeof portfolioItems

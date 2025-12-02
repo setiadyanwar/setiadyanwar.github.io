@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import PortfolioCard from "@/components/portfolio-card"
 
@@ -12,6 +12,15 @@ export default function PortfolioSection() {
 
   // Sample portfolio items (would be replaced with actual projects)
   const portfolioItems = [
+    {
+      id: "ess",
+      title: "Employee Self Service Portal",
+      category: "web",
+      image: "/portfolio/web/ESS.png?height=400&width=600",
+      technologies: ["Nuxt 3", "Vue.js", "TailwindCSS", "Pinia"],
+      demoUrl: "#",
+      repoUrl: "#",
+    },
     {
       id: "nobarin",
       title: "Nobarin Movie Streaming Platform",
@@ -323,21 +332,40 @@ export default function PortfolioSection() {
           </div>
         </div>
 
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {paginatedItems.map((item, index) => (
-            <PortfolioCard
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              category={item.category}
-              image={item.image}
-              technologies={item.technologies}
-              demoUrl={item.demoUrl}
-              repoUrl={item.repoUrl ?? undefined}
-              delay={index}
-            />
-          ))}
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`${filter}-${currentPage}`}
+            layout
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          >
+            {paginatedItems.map((item, index) => (
+              <PortfolioCard
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                category={item.category}
+                image={item.image}
+                technologies={item.technologies}
+                demoUrl={item.demoUrl}
+                repoUrl={item.repoUrl ?? undefined}
+                delay={index}
+                filterKey={filter}
+              />
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Pagination */}
         {totalPages > 1 && (

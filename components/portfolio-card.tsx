@@ -16,6 +16,7 @@ interface PortfolioCardProps {
   demoUrl?: string
   repoUrl?: string
   delay?: number
+  filterKey?: string
 }
 
 export default function PortfolioCard({
@@ -27,48 +28,29 @@ export default function PortfolioCard({
   demoUrl,
   repoUrl,
   delay = 0,
+  filterKey,
 }: PortfolioCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.3, delay: delay * 0.1 }}
+      key={`${id}-${filterKey}`}
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.4, delay: delay * 0.1, ease: "easeOut" }}
       className="h-full"
     >
-      <Card className="overflow-hidden h-full bg-white dark:bg-gray-800 border-0 shadow-md hover:shadow-xl transition-all duration-300 rounded-xl">
-        <div className="relative group h-48 overflow-hidden">
+      <Card className="group h-full bg-transparent border-0 shadow-none rounded-3xl p-0">
+        <div className="relative h-48 overflow-hidden rounded-3xl">
           <Image
             src={image || "/placeholder.svg"}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-            <div className="flex space-x-3">
-              {demoUrl && (
-                <a
-                  href={demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors"
-                >
-                  <ExternalLink className="h-5 w-5 text-white" />
-                </a>
-              )}
-              {repoUrl && (
-                <a
-                  href={repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors"
-                >
-                  <Github className="h-5 w-5 text-white" />
-                </a>
-              )}
-            </div>
-          </div>
 
           {/* Category badge */}
           <div className="absolute top-4 right-4">
@@ -76,8 +58,10 @@ export default function PortfolioCard({
           </div>
         </div>
 
-        <div className="p-5">
-          <h3 className="text-xl font-semibold mb-3 text-gray-600 dark:text-white">{title}</h3>
+        <div className="pt-4">
+          <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors group-hover:text-indigo-600">
+            {title}
+          </h3>
 
           <div className="flex flex-wrap gap-2 mb-4">
             {technologies.slice(0, 3).map((tech, idx) => (
@@ -98,10 +82,10 @@ export default function PortfolioCard({
 
           <Link
             href={`/portfolio/${id}`}
-            className="inline-flex items-center text-gray-600 dark:text-white hover:text-indigo-500 dark:hover:text-indigo-300 font-medium transition-colors group"
+            className="inline-flex items-center text-sm text-gray-600 dark:text-gray-300 font-medium"
           >
             View Details
-            <ArrowRight className="ml-1 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </div>
       </Card>

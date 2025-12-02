@@ -252,7 +252,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
 
                           {/* Stages and line */}
                           <div className="relative h-full">
-                            <svg className="absolute inset-0 w-full h-full" style={{ overflow: "visible" }}>
+                            <svg className="absolute inset-0 w-full h-full" style={{ overflow: "visible" }} suppressHydrationWarning>
                               {/* Line path */}
                               <polyline
                                 points={((portfolio as any).userJourney.stages || [])

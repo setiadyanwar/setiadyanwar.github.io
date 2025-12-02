@@ -282,7 +282,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-2xl text-gray-500 dark:text-gray-400 mb-2 text-center md:text-left md:flex md:items-center md:gap-3"
+              className="text-base md:text-lg text-gray-500 dark:text-gray-400 mb-2 text-center md:text-left md:flex md:items-center md:gap-3"
             >
               {/* Eyes that follow cursor */}
               <div className="flex justify-center md:justify-start items-center gap-2 flex-shrink-0 mb-2 md:mb-0">
@@ -358,25 +358,32 @@ export default function HeroSection() {
                   />
                 </div>
               </div>
-              Hello I'm
+              Hello, I'm Setiady
             </motion.h2>
 
             <motion.h1
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 text-center md:text-left"
+              className="text-3xl md:text-4xl lg:text-5xl font-normal text-gray-500 mb-8 text-center md:text-left leading-[1.6] max-w-3xl"
             >
-              Setiady Ibrahim <br />
-              <span className="text-indigo-600 dark:text-indigo-400">
-                Anwar
+              I solve{" "}
+              <span className="font-bold text-gray-900 dark:text-white">user problems</span>{" "}
+              through thoughtful{" "}
+              <span className="text-black dark:text-white font-bold">
+                design
+              </span>{" "}
+              and {" "}
+              <span className="text-black dark:text-white font-bold">
+              elegant code
               </span>
+              , creating digital products that matter.
             </motion.h1>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex text-center justify-center md:justify-start md:text-left mb-4 text-indigo-600 dark:text-indigo-400"
+              className="flex text-center justify-center md:justify-start md:text-left mb-4 text-gray-700 dark:text-gray-300"
             >
               <h4>Founder of Kreavoks Digital Agency | </h4>
               <img
@@ -390,7 +397,7 @@ export default function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-lg text-gray-600 dark:text-gray-300 mb-16 max-w-xl h-20 mx-auto md:mx-0 text-center md:text-left"
+              className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-xl h-20 mx-auto md:mx-0 text-center md:text-left"
             >
               <TypeAnimation
                 sequence={[
@@ -413,15 +420,15 @@ export default function HeroSection() {
             >
               {/* Combined Explore & Contact Button */}
               <div className="relative" ref={contactRef}>
-                <div className="flex bg-gray-100 dark:bg-gray-800 rounded-full p-1 shadow-sm gap-1">
+                <div className="flex bg-gray-100 dark:bg-gray-800 rounded-full p-1.5 shadow-sm gap-1">
                   {/* Explore Button */}
                   <Button
                     asChild
-                    className="rounded-full px-8 py-3 font-medium transition-all duration-200 bg-indigo-600 text-white hover:text-indigo-600 btn-splash"
+                    className="rounded-full px-4 py-6 font-medium transition-all duration-200 bg-indigo-600 text-white hover:text-indigo-600 btn-splash"
                     size="lg"
                   >
                     <Link href="/portfolio" className="flex items-center gap-2">
-                      <span>Explore My Work</span>
+                      <span>Explore Works</span>
                       <motion.div
                         animate={{ x: [0, 4, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -434,10 +441,10 @@ export default function HeroSection() {
                   {/* Contact Button - Icon Only */}
                   <Button
                     onClick={() => setIsContactOpen(!isContactOpen)}
-                    className={`rounded-full px-6 py-3 transition-all duration-200 btn-splash ${
+                    className={`rounded-full px-4 py-6 transition-all duration-200 btn-splash ${
                       isContactOpen 
-                        ? 'bg-indigo-200 text-indigo-700 border-2 border-indigo-700 hover:text-indigo-800' 
-                        : 'bg-transparent text-gray-700 dark:text-gray-300 hover:text-indigo-600'
+                        ? 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-2 border-gray-700 dark:border-gray-300 hover:text-gray-800 dark:hover:text-gray-200' 
+                        : 'bg-transparent text-gray-700 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-400'
                     }`}
                     size="lg"
                   >
@@ -516,7 +523,7 @@ Best regards,
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-2 border-indigo-600 dark:border-indigo-500 text-gray-800 dark:text-gray-200 hover:text-indigo-800 rounded-full px-8 py-3 font-medium transition-all duration-200 group btn-splash"
+                className="border-2 border-gray-600 dark:border-gray-400 text-gray-800 dark:text-gray-200 hover:text-gray-800 dark:hover:text-gray-300 rounded-full px-4 py-6 font-medium transition-all duration-200 group btn-splash"
               >
                 <Link href="/cv/cv_setiady.pdf" className="flex items-center gap-2">
                   <Download className="h-5 w-5 group-hover:animate-bounce" />

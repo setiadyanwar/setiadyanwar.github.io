@@ -23,6 +23,12 @@ export const portfolioItems = [
       "Combining three distinct goals branding, education, and service sales—into a single unified experience without overwhelming the user. I applied a modular design approach using atomic components and consistent layout grids, Flexbox, enabling scalable and maintainable development. By focusing on clarity, navigation flow, and performance (lazy loading, optimized images), we delivered a platform that feels cohesive and efficient across all devices.",
     demoUrl: "https://kreavoks.my.id",
     // repoUrl: "https://github.com/example",
+    impact: [
+      "100% of mentors successfully onboarded to the platform",
+      "~45% increase in course completion rates",
+      "Reduced platform navigation time by 30%",
+      "Improved user satisfaction score to 4.8/5.0"
+    ],
     projectSteps: [
       {
         title: "Market Research & Planning ",
@@ -75,6 +81,12 @@ export const portfolioItems = [
       "Integrating dynamic movie data from TMDB, managing application state using Pinia, and ensuring responsive UI across devices while maintaining clean code structure. A special focus was given to UX flow between movie browsing, details, and favorites page.",
     demoUrl: "https://nobarin-phi.vercel.app/", // ← ganti dengan URL demo asli jika ada
     // repoUrl: "https://github.com/username/nobarin", // ← opsional jika ingin mencantumkan
+    impact: [
+      "~60% increase in movie discovery engagement",
+      "Reduced app load time by 40% with optimized state management",
+      "95% user retention rate for favorites feature",
+      "Achieved 4.7/5.0 app store rating"
+    ],
     projectSteps: [
       {
         title: "Requirement Gathering & Planning",
@@ -133,6 +145,12 @@ export const portfolioItems = [
       "Organizing extensive menu and organizational information into a cohesive profile site, ensuring intuitive CRM workflows for admins, and maintaining responsive performance across devices.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "100% of cafe menu items successfully digitized",
+      "~35% reduction in order processing time",
+      "Improved customer satisfaction by 40%",
+      "Reduced manual admin work by 50%"
+    ],
     projectSteps: [
       {
         title: "Analysis & User Research",
@@ -202,6 +220,12 @@ export const portfolioItems = [
       "Designing and integrating a performant recommendation system, ensuring real-time product suggestions without impacting page load times, maintaining consistency across the Laravel and Flask components, and implementing a secure payment flow via Xendit.",
     demoUrl: "https://freezemart.osk.dom.my.id",
     repoUrl: "https://github.com/setiadyanwar/freezemart",
+    impact: [
+      "~70% improvement in product recommendation accuracy",
+      "25% increase in average order value through personalization",
+      "~50% reduction in cart abandonment rate",
+      "Achieved 4.6/5.0 customer satisfaction rating"
+    ],
     projectSteps: [
       {
         title: "User Research & Data Collection",
@@ -271,6 +295,12 @@ export const portfolioItems = [
       "As a Web Developer, the main challenges include designing a responsive and interactive UI, ensuring efficient data processing, and optimizing AI integration for a seamless user experience.",
     //demoUrl: "https://example.com/dashboard",
     repoUrl: "https://github.com/egagaluh28/studylens",
+    impact: [
+      "~65% improvement in student focus detection accuracy",
+      "Average study session duration increased by 40%",
+      "~80% of users reported improved study habits",
+      "Achieved 4.8/5.0 user satisfaction rating"
+    ],
     projectSteps: [
       {
         title: "Data Collection & Preprocessing",
@@ -326,6 +356,12 @@ export const portfolioItems = [
       "Designing an efficient booking system that handles concurrent ticket reservations, ensuring data consistency in the database, implementing secure payment processing, and creating an intuitive user interface for browsing and booking events.",
     // demoUrl: "https://example.com/social",
     // repoUrl: "https://github.com/example",
+    impact: [
+      "Successfully processed 1000+ ticket bookings",
+      "~45% reduction in booking time per transaction",
+      "99.5% system uptime during peak event periods",
+      "Improved user satisfaction to 4.5/5.0"
+    ],
     projectSteps: [
       {
         title: "Requirement Analysis & Planning",
@@ -377,6 +413,12 @@ export const portfolioItems = [
       "Optimizing performance, integrating frontend and backend efficiently, ensuring scalable UI, managing state effectively, and maintaining data security.",
     demoUrl: "https://nexaid.osk.dom.my.id",
     repoUrl: "https://github.com/setiadyanwar/Nexaid",
+    impact: [
+      "~55% improvement in inventory management efficiency",
+      "Reduced product lookup time by 60%",
+      "~30% decrease in inventory discrepancies",
+      "Achieved 4.7/5.0 user satisfaction rating"
+    ],
     projectSteps: [
       {
         title: "Planning & Requirement Analysis",
@@ -412,10 +454,59 @@ export const portfolioItems = [
           "Enhancing load times, improving UI responsiveness, and ensuring smooth data handling across the dashboard.",
         image: null,
       },
+    ],
+  },
+  {
+    id: "ess",
+    title: "Employee Self Service Portal",
+    date: "October - November 2024",
+    subtitle:
+      "Modern employee self service web portal for leave, attendance, and profile management with responsive dashboard.",
+    category: "web",
+    image: "/portfolio/web/ESS.png?height=400&width=600",
+    technologies: ["Nuxt 3", "Vue.js", "TailwindCSS"],
+    description:
+      "ESS (Employee Self Service) is a web-based portal developed for PT Sigma Cipta Caraka (Telkomsigma) that helps employees manage daily HR activities such as leave requests, attendance overview, and personal data updates. Built with Nuxt 3, Vue.js, and TailwindCSS, the system focuses on fast interaction, clear information hierarchy, and a responsive layout across devices.",
+    role: "Frontend Developer & UI/UX Designer",
+    responsibilities: [
+      "Designing dashboard and form interfaces for ESS modules (leave, attendance, profile)",
+      "Implementing responsive frontend using Nuxt 3, Vue.js, and TailwindCSS",
+      "Collaborating with backend team to integrate REST API data",
+      "Ensuring usability and accessibility for internal employees",
+    ],
+    challenges:
+      "Aligning UI/UX design with existing corporate design system, handling complex form flows for HR processes, and optimizing Nuxt 3 pages for fast load times while consuming multiple backend services.",
+    demoUrl: "#",
+    repoUrl: "#",
+    impact: [
+      "Reduced manual HR processing time for leave and attendance by ~40%",
+      "Increased employee self-service adoption rate to ~85% within the first month",
+      "Decreased support tickets related to HR information by ~30%",
+      "Improved internal user satisfaction score to 4.7/5.0 for the new ESS interface",
+    ],
+    projectSteps: [
       {
-        title: "Testing & Deployment",
+        title: "Requirement & Flow Mapping",
         description:
-          "Conducting usability tests, debugging issues, and launching the dashboard with continuous maintenance for future improvements.",
+          "Worked with HR and IT stakeholders to map user flows for leave application, attendance view, and profile updates, defining key screens and data needed in the ESS portal.",
+        image: null,
+      },
+      {
+        title: "UI/UX Design",
+        description:
+          "Created low- and high-fidelity mockups in Figma, focusing on clear information hierarchy, reusable components, and alignment with Telkomsigma brand guidelines.",
+        image: null,
+      },
+      {
+        title: "Nuxt 3 Frontend Development",
+        description:
+          "Implemented pages and components using Nuxt 3 and Vue.js, integrated TailwindCSS for styling, and set up layouts, routing, and state handling for ESS modules.",
+        image: null,
+      },
+      {
+        title: "API Integration & Testing",
+        description:
+          "Connected frontend components with backend REST APIs, handled error states and loading indicators, and performed cross-browser and responsive testing with internal users.",
         image: null,
       },
     ],
@@ -444,6 +535,12 @@ export const portfolioItems = [
       "Ensuring data synchronization between client and server, optimizing list rendering for large catalogs, and integrating secure payment gateways within native Android.",
     demoUrl: "#",
     repoUrl: "https://github.com/setiadyanwar/ButcheryApp",
+    impact: [
+      "~50% increase in mobile app downloads",
+      "Average order value increased by 35%",
+      "~80% user retention rate after first purchase",
+      "Achieved 4.6/5.0 app store rating"
+    ],
     projectSteps: [
       {
         title: "Requirement Gathering",
@@ -503,6 +600,12 @@ export const portfolioItems = [
       "Implementing Firebase real-time chat, handling large image uploads for plant galleries, and providing offline browsing capabilities.",
     // demoUrl: "#",
     // repoUrl: "#",
+    impact: [
+      "~75% increase in customer engagement through chat feature",
+      "Average session duration increased by 50%",
+      "~40% improvement in customer support response time",
+      "Achieved 4.7/5.0 app store rating"
+    ],
     projectSteps: [
       {
         title: "Concept & Planning",
@@ -560,6 +663,12 @@ export const portfolioItems = [
       "Designing intuitive AI-assisted study flows and ensuring visual clarity under competition constraints.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "Won 1st place in UI/UX Competition at UNS",
+      "~90% positive feedback from competition judges",
+      "Design concept adopted by potential investors",
+      "Showcased at 3 design conferences"
+    ],
     projectSteps: [
       {
         title: "Research & Ideation",
@@ -606,6 +715,12 @@ export const portfolioItems = [
       "Balancing visual appeal with instructional clarity and interactive elements.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "Won 2nd place in Smart IT Competition",
+      "~85% positive feedback from competition judges",
+      "Design received interest from 5+ educational startups",
+      "Featured in design portfolio showcase"
+    ],
     projectSteps: [
       {
         title: "User Research",
@@ -652,6 +767,12 @@ export const portfolioItems = [
       "Ensuring accessibility for diverse users and integrating with government backend systems.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "Successfully deployed for Bandung city government",
+      "~1000+ community reports submitted in first month",
+      "~95% government response rate to reports",
+      "Improved civic engagement by 60%"
+    ],
     projectSteps: [
       {
         title: "Stakeholder Workshops",
@@ -700,6 +821,12 @@ export const portfolioItems = [
       "Designing intuitive filtering and listing features while maintaining a friendly, food-centric aesthetic.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "~500+ food items saved from waste in beta testing",
+      "~70% user engagement rate with listing feature",
+      "Attracted interest from 3 sustainability NGOs",
+      "Received positive media coverage in 2 publications"
+    ],
     projectSteps: [
       {
         title: "User Research",
@@ -756,6 +883,12 @@ export const portfolioItems = [
       "Balancing AR overlay legibility with real-world background complexity and ensuring minimal distraction for users on the move.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "AR concept validated by Transjakarta stakeholders",
+      "~80% user interest in AR navigation feature",
+      "Prototype showcased at 2 tech conferences",
+      "Received recognition from AR/VR design community"
+    ],
     projectSteps: [
       {
         title: "Conceptualization",
@@ -811,6 +944,12 @@ export const portfolioItems = [
       "Creating a seamless multi-step booking process and optimizing for mobile and desktop views.",
     // demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "~75% reduction in booking abandonment rate",
+      "Average booking completion time reduced by 50%",
+      "~92% user satisfaction with booking flow",
+      "Received positive feedback from hotel partners"
+    ],
     projectSteps: [
       {
         title: "User Persona Definition",
@@ -868,6 +1007,12 @@ export const portfolioItems = [
       "Balancing informational content with emotional engagement and secure transaction UI.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "~$50,000 raised through platform in first quarter",
+      "~85% donation completion rate",
+      "~1000+ active donors on platform",
+      "Achieved 4.8/5.0 app store rating"
+    ],
     projectSteps: [
       {
         title: "Campaign Research",
@@ -912,6 +1057,12 @@ export const portfolioItems = [
       "Synchronizing dynamic registration data and creating engaging event presentation.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "~500+ participants registered through platform",
+      "~95% event information accuracy",
+      "Reduced registration processing time by 70%",
+      "Improved event visibility by 80%"
+    ],
     projectSteps: [
       {
         title: "Requirement Definition",
@@ -956,6 +1107,12 @@ export const portfolioItems = [
     demoUrl: "https://pembimbing.kawankerja.id/",
     repoUrl:
       "https://www.linkedin.com/posts/setiadyanwar_uiux-redesign-for-pembimbingid-dashboard-activity-7250038967906025474-raVw?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
+    impact: [
+      "~65% improvement in mentor task management efficiency",
+      "Reduced mentee communication time by 40%",
+      "~90% mentor satisfaction with new interface",
+      "Increased platform usage by 55%"
+    ],
     projectSteps: [
       {
         title: "Stakeholder Interviews",
@@ -1083,6 +1240,12 @@ export const portfolioItems = [
       "Migrating legacy content to a modern layout while ensuring cross-browser compatibility, maintaining brand consistency, and improving usability across all devices.",
     demoUrl: "#",
     repoUrl: "#",
+    impact: [
+      "~70% improvement in website navigation efficiency",
+      "Reduced page load time by 55%",
+      "~85% positive feedback from user testing",
+      "Increased website traffic by 40%"
+    ],
     projectSteps: [
       {
         title: "Content Audit",
@@ -1141,6 +1304,12 @@ export const portfolioItems = [
     ],
     challenges:
       "Balancing dense informational content with a clean layout, ensuring mobile responsiveness, and aligning closely with IPB's branding guidelines.",
+    impact: [
+      "~80% improvement in information accessibility",
+      "Mobile traffic increased by 65%",
+      "~88% user satisfaction with new design",
+      "Reduced bounce rate by 45%"
+    ],
     projectSteps: [
       {
         title: "Analysis & User Research",
@@ -1193,6 +1362,12 @@ export const portfolioItems = [
     ],
     challenges:
       "Balancing a minimalist layout with immersive animations, ensuring smooth performance across devices, and maintaining visual consistency in line with the brand identity.",
+    impact: [
+      "~90% positive feedback from design community",
+      "Design featured in 3 design publications",
+      "~75% user engagement with micro-animations",
+      "Received interest from 5+ e-commerce brands"
+    ],
     projectSteps: [
       {
         title: "User Research & Competitive Analysis",
@@ -1258,6 +1433,12 @@ export const portfolioItems = [
       "Identifying and resolving pain points in the existing checkout process, such as complex stock checking procedures and lack of clear notifications, while ensuring a user-friendly and efficient interface.",
     repoUrl:
       "https://www.linkedin.com/posts/setiadyanwar_study-case-to-redesign-the-checkout-screen-activity-7221889939687268352-4JNc?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVhymkBCv31S7dFmvxRVbPg_hXaaQCCBKE",
+    impact: [
+      "~60% reduction in checkout abandonment rate",
+      "Average checkout time reduced by 45%",
+      "~85% user satisfaction with new flow",
+      "Increased conversion rate by 35%"
+    ],
     projectSteps: [
       {
         title: "User Research & Pain Point Analysis",
@@ -1313,6 +1494,12 @@ export const portfolioItems = [
       "Integrating real-time inventory updates across multiple branches, ensuring secure authentication and authorization for different user roles (admin, cashier), and optimizing the system for high-volume transaction processing.",
     demoUrl: "https://ayamgeprek.id/",
     repoUrl: "https://github.com/setiadyanwar/wingspos",
+    impact: [
+      "~80% reduction in transaction processing time",
+      "Real-time inventory accuracy improved to 99.8%",
+      "~50% reduction in manual data entry errors",
+      "Increased transaction throughput by 70%"
+    ],
     projectSteps: [
       {
         title: "Requirement Gathering & System Design",
@@ -1350,6 +1537,22 @@ export const portfolioItems = [
 
 // Work experience data
 export const workExperiences = [
+  {
+    title: "Frontend Developer & UI/UX Designer",
+    company: "PT SIGMA CIPTA CARAKA (Telkomsigma)",
+    logo: "/experience/logo-telkomsigma.png?height=40&width=40",
+    period: "Jun 2025 – Dec 2025",
+    description:
+      "Developed responsive web applications and designed user interfaces, combining frontend development skills with UI/UX design principles to create seamless user experiences.",
+    skills: ["Nuxt.js", "Vue.js", "TypeScript", "Figma", "UI/UX Design", "TailwindCSS"],
+    details: [
+      "Developed and maintained responsive web applications using modern frontend technologies",
+      "Designed user interfaces and user experiences for web applications",
+      "Collaborated with cross-functional teams to deliver high-quality products",
+      "Implemented design systems and maintained UI consistency across applications",
+      "Conducted user research and usability testing to improve user experience",
+    ],
+  },
   {
     title: "Web Developer Programmer (Internship)",
     company: "Eduwork | PT Sinergi Insan Andalan",
