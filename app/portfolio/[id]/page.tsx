@@ -454,7 +454,15 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
 
                       {/* Detail Cards */}
                       <div className="relative">
-                        <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                        <div
+                          className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                          style={{
+                            WebkitMaskImage:
+                              "linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)",
+                            maskImage:
+                              "linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)",
+                          }}
+                        >
                           {displayProblemCards.map((card: any, index: number) => (
                             <div
                               key={index}
@@ -469,10 +477,6 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                             </div>
                           ))}
                         </div>
-
-                        {/* Scroll fade masks */}
-                        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white dark:from-gray-950 via-white/70 dark:via-gray-950/60 to-transparent rounded-l-[32px] z-10" />
-                        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white dark:from-gray-950 via-white/70 dark:via-gray-950/60 to-transparent rounded-r-[32px] z-10" />
                       </div>
 
                       {(portfolio as any).problemSource && (
@@ -521,7 +525,15 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
 
                       {/* Detail Cards */}
                       <div className="relative">
-                        <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                        <div
+                          className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                          style={{
+                            WebkitMaskImage:
+                              "linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)",
+                            maskImage:
+                              "linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)",
+                          }}
+                        >
                           {displaySolutionCards.map((card: any, index: number) => (
                             <div
                               key={index}
@@ -536,10 +548,6 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                             </div>
                           ))}
                         </div>
-
-                        {/* Scroll fade masks */}
-                        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white dark:from-gray-950 via-white/70 dark:via-gray-950/60 to-transparent rounded-l-[32px] z-10" />
-                        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white dark:from-gray-950 via-white/70 dark:via-gray-950/60 to-transparent rounded-r-[32px] z-10" />
                       </div>
 
                       {(portfolio as any).solutionSource && (

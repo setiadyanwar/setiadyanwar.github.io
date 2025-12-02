@@ -1042,71 +1042,72 @@ export const portfolioItems = [
     title: "Employee Self Service Portal",
     date: "Jun - December 2025",
     subtitle:
-      "Modern employee self service web portal for leave, attendance, and profile management with responsive dashboard.",
+      "Modern employee self service web portal providing a unified entry point and personal data management for employees.",
     category: "web",
     image: "/portfolio/web/ESS.png?height=400&width=600",
-    technologies: ["Nuxt 3", "Vue.js", "TailwindCSS"],
+    technologies: ["Nuxt 3", "Vue.js", "TailwindCSS", "PrimeVue", "Pinia", "Nuxt Auth"],
     description:
-      "ESS (Employee Self Service) is a web-based portal developed for PT Sigma Cipta Caraka (Telkomsigma) that helps employees manage daily HR activities such as leave requests, attendance overview, and personal data updates. Built with Nuxt 3, Vue.js, and TailwindCSS, the system focuses on fast interaction, clear information hierarchy, and a responsive layout across devices.",
+      "ESS (Employee Self Service) is a web-based portal developed for PT Sigma Cipta Caraka (Telkomsigma) that provides a single entry point to internal systems and allows employees to manage their personal data. I designed the interface from scratch and implemented the entire frontend using Nuxt 3, Vue.js, TailwindCSS, PrimeVue, Pinia, and Nuxt Auth, focusing on fast interaction, clear information hierarchy, and a responsive layout across devices.",
     role: "Frontend Developer & UI/UX Designer",
     responsibilities: [
-      "Designing dashboard and form interfaces for ESS modules (leave, attendance, profile)",
-      "Implementing responsive frontend using Nuxt 3, Vue.js, and TailwindCSS",
-      "Collaborating with backend team to integrate REST API data",
-      "Ensuring usability and accessibility for internal employees",
+      "Designing the ESS dashboard shell and profile/personal data forms from initial wireframes to high-fidelity UI",
+      "Implementing the frontend from scratch using Nuxt 3, Vue.js, TailwindCSS, and the PrimeVue component library",
+      "Setting up authentication and session handling with Nuxt Auth and managing global state with Pinia",
+      "Collaborating with the backend team to integrate REST API data and handle loading/error states for profile data",
+      "Ensuring usability and accessibility for internal employees through iterative internal testing",
     ],
     challenges:
-      "Aligning UI/UX design with existing corporate design system, handling complex form flows for HR processes, and optimizing Nuxt 3 pages for fast load times while consuming multiple backend services.",
+      "Designing the ESS portal UI from the ground up while aligning with the existing corporate design system, modelling profile and personal data flows in Nuxt 3 + PrimeVue, wiring authentication and state management with Nuxt Auth and Pinia, and keeping pages fast while consuming multiple backend services.",
     problemImage:
       "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
     solutionImage:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
     problemDescription:
-      "Before the new ESS portal, employees had to interact with multiple legacy systems and manual spreadsheets just to request leave, check attendance, or update personal data. HR teams spent significant time answering repetitive questions and reconciling data coming from different sources with inconsistent layouts.",
+      "Before the new ESS portal, employees had to jump between several internal apps just to access HR information and update personal data. Different UX patterns and tech stacks made the ecosystem confusing for users and difficult to maintain.",
     problemCards: [
       {
-        title: "Scattered HR touchpoints",
+        title: "Too many separate internal apps",
         description:
-          "Leave requests, attendance records, and personal information updates were spread across several tools and manual processes.",
+          "HR information and personal data edits were split across several portals with different URLs and logins.",
       },
       {
-        title: "Complex form flows",
+        title: "Inconsistent user experience",
         description:
-          "Existing forms were long, not optimized for everyday internal users, and did not clearly surface validation or error states.",
+          "Each app had different navigation and forms, so employees had to relearn simple tasks every time.",
       },
       {
-        title: "Inconsistent UI with design system",
+        title: "Hard to maintain and evolve",
         description:
-          "Previous screens drifted away from Telkomsigma’s corporate design system, creating a fragmented internal experience.",
+          "Many stacks and codebases made UI updates and new features slow and risky.",
       },
       {
-        title: "Performance across services",
+        title: "Limited visibility into issues",
         description:
-          "ESS pages needed to consume multiple backend services at once, but older implementations led to slow initial loads and clunky interactions.",
+          "Without a single entry point, HR and IT could not easily see where problems happened or which app to improve.",
       },
     ],
     solutionDescription:
-      "The redesigned ESS portal unifies key HR activities into a single, Nuxt 3–powered experience that feels consistent with Telkomsigma’s corporate design system. I focused on simplifying HR flows into clear steps, improving visual hierarchy, and ensuring the interface stays fast even when aggregating data from multiple backend services.",
+      "The ESS portal consolidates HR entry points and personal data management into a single Nuxt 3 microfrontends shell. I designed and built the frontend so navigation is clear, the UI follows the corporate design system, and new modules or fixes can be shipped independently through a ticketing workflow.",
     solutionCards: [
       {
         title: "Unified HR entry point",
         description:
-          "Combined leave, attendance, and profile updates into one responsive portal so employees no longer need to jump between tools.",
+          "Brings key HR links and personal data updates into one responsive portal instead of many tools.",
       },
       {
-        title: "Guided form experiences",
+        title: "Microfrontends architecture",
         description:
-          "Redesigned forms with step-by-step flows, inline validation, and clear feedback states tailored for internal HR use cases.",
+          "Uses a shell with separate microfrontends per module so teams can deploy independently while sharing design system and auth.",
       },
       {
         title: "Aligned with design system",
         description:
-          "Created reusable Nuxt components based on Telkomsigma’s design tokens to keep typography, spacing, and color usage consistent.",
+          "Relies on reusable Nuxt components based on Telkomsigma design tokens for consistent typography, spacing, and colors.",
       },
       {
-        title: "Nuxt 3 performance tuning",
+        title: "Nuxt 3 performance & ticketing integration",
         description:
-          "Optimized data fetching and page structure so ESS pages remain fast while consuming multiple backend APIs.",
+          "Optimizes data fetching, auth flows, and layouts, and links each microfrontend to internal ticketing for tracked changes.",
       },
     ],
     status: "ongoing",
