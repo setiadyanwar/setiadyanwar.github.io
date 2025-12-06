@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Briefcase, GraduationCap, Users, ChevronDown } from "lucide-react"
 import Image from "next/image"
@@ -18,8 +18,21 @@ export default function ExperienceSection() {
   const [loading, setLoading] = useState(true)
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set())
 
-  // Helper function to deduplicate experiences
-  const deduplicateExperiences = (experiences: any[]) => {
+  // Memoized toggle function for accordion
+  const toggleExpanded = useCallback((key: string) => {
+    setExpandedItems((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(key)) {
+        newSet.delete(key)
+      } else {
+        newSet.add(key)
+      }
+      return newSet
+    })
+  }, [])
+
+  // Helper function to deduplicate experiences - memoized with useCallback
+  const deduplicateExperiences = useCallback((experiences: any[]) => {
     const seen = new Set<string>()
     return experiences.filter((exp) => {
       // Create a unique key from title, company, and period
@@ -30,7 +43,7 @@ export default function ExperienceSection() {
       seen.add(key)
       return true
     })
-  }
+  }, [])
 
   useEffect(() => {
     async function fetchData() {
@@ -58,7 +71,7 @@ export default function ExperienceSection() {
       }
     }
     fetchData()
-  }, [])
+  }, [deduplicateExperiences])
 
   const tabs = [
     { id: "work", name: "Work Experience", icon: Briefcase },
@@ -137,8 +150,8 @@ export default function ExperienceSection() {
     return `${years} year${years > 1 ? "s" : ""} ${remainingMonths} month${remainingMonths > 1 ? "s" : ""}`
   }
 
-  // Helper function to group experiences by company (for nested structure)
-  const groupExperiencesByCompany = (experiences: any[]) => {
+  // Helper function to group experiences by company (for nested structure) - memoized
+  const groupExperiencesByCompany = useCallback((experiences: any[]) => {
     const grouped = new Map<string, any[]>()
     
     experiences.forEach((exp) => {
@@ -175,14 +188,17 @@ export default function ExperienceSection() {
         totalMonths: totalMonths > 0 ? totalMonths : null,
       }
     })
-  }
+  }, [])
 
-  // Get the appropriate experiences based on the active tab
-  const rawExperiences =
-    activeTab === "work" ? workExperiences : activeTab === "education" ? educationExperiences : organizationExperiences
+  // Get the appropriate experiences based on the active tab - memoized
+  const rawExperiences = useMemo(() => {
+    return activeTab === "work" ? workExperiences : activeTab === "education" ? educationExperiences : organizationExperiences
+  }, [activeTab, workExperiences, educationExperiences, organizationExperiences])
 
-  // Group by company for nested structure (applies to all tabs)
-  const groupedExperiences = groupExperiencesByCompany(rawExperiences)
+  // Group by company for nested structure (applies to all tabs) - memoized
+  const groupedExperiences = useMemo(() => {
+    return groupExperiencesByCompany(rawExperiences)
+  }, [rawExperiences, groupExperiencesByCompany])
 
   if (loading) {
     return (
@@ -293,15 +309,7 @@ export default function ExperienceSection() {
                                 className={`py-3 -ml-4 md:-ml-6 pl-[44px] md:pl-[40px] ${hasDescription ? "cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900/50 rounded transition-colors" : ""}`}
                                 onClick={() => {
                                   if (hasDescription) {
-                                    setExpandedItems((prev) => {
-                                      const newSet = new Set(prev)
-                                      if (newSet.has(uniqueKey)) {
-                                        newSet.delete(uniqueKey)
-                                      } else {
-                                        newSet.add(uniqueKey)
-                                      }
-                                      return newSet
-                                    })
+                                    toggleExpanded(uniqueKey)
                                   }
                                 }}
                               >

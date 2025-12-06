@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import PortfolioCard from "@/components/portfolio-card"
@@ -38,6 +38,41 @@ export default function PortfolioSection() {
       }
     }
     fetchData()
+  }, [])
+
+  // Memoize filtered and paginated items - must be before conditional return
+  const filteredItems = useMemo(() => {
+    if (filter === "all") return portfolioItems
+    return portfolioItems.filter((item) => item.category === filter)
+  }, [portfolioItems, filter])
+
+  const paginatedItems = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage
+    return filteredItems.slice(startIndex, startIndex + itemsPerPage)
+  }, [filteredItems, currentPage, itemsPerPage])
+
+  const totalPages = useMemo(() => {
+    return Math.ceil(filteredItems.length / itemsPerPage)
+  }, [filteredItems.length, itemsPerPage])
+
+  // Memoize category counts
+  const categoryCounts = useMemo(() => {
+    const counts: { [key: string]: number } = { all: portfolioItems.length }
+    portfolioItems.forEach((item) => {
+      counts[item.category] = (counts[item.category] || 0) + 1
+    })
+    return counts
+  }, [portfolioItems])
+
+  const handleFilterChange = useCallback((newFilter: string) => {
+    setFilter(newFilter)
+    setCurrentPage(1) // Reset to first page when filter changes
+  }, [])
+
+  const handlePageChange = useCallback((newPage: number) => {
+    setCurrentPage(newPage)
+    // Scroll to top when page changes
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
 
   if (loading) {
@@ -294,14 +329,6 @@ export default function PortfolioSection() {
     },
   ]
 
-  // Calculate counts for each category
-  const categoryCounts = {
-    all: portfolioItems.length,
-    web: portfolioItems.filter((item) => item.category === "web").length,
-    mobile: portfolioItems.filter((item) => item.category === "mobile").length,
-    ui: portfolioItems.filter((item) => item.category === "ui").length,
-  }
-
   const categories = [
     { id: "all", name: "All" },
     { id: "web", name: "Web Development" },
@@ -309,26 +336,7 @@ export default function PortfolioSection() {
     { id: "ui", name: "UI/UX Design" },
   ]
 
-  const filteredItems = filter === "all" ? portfolioItems : portfolioItems.filter((item) => item.category === filter)
-
-  // Pagination
-  const totalPages = Math.ceil(filteredItems.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const paginatedItems = filteredItems.slice(startIndex, startIndex + itemsPerPage)
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-  }
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1)
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-  }
+  // Use memoized values instead of recalculating
 
   return (
     <section id="portfolio" className="py-16">
@@ -338,10 +346,7 @@ export default function PortfolioSection() {
             {categories.map((category) => (
               <button
                 key={category.id}
-                onClick={() => {
-                  setFilter(category.id)
-                  setCurrentPage(1)
-                }}
+                onClick={() => handleFilterChange(category.id)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   filter === category.id
                     ? "bg-indigo-600 text-white"
@@ -404,7 +409,7 @@ export default function PortfolioSection() {
         {totalPages > 1 && (
           <div className="flex justify-center items-center mt-12 space-x-2">
             <button
-              onClick={handlePrevPage}
+              onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className={`p-2 rounded-full ${
                 currentPage === 1
@@ -420,10 +425,7 @@ export default function PortfolioSection() {
               {Array.from({ length: totalPages }).map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => {
-                    setCurrentPage(i + 1)
-                    window.scrollTo({ top: 0, behavior: "smooth" })
-                  }}
+                  onClick={() => handlePageChange(i + 1)}
                   className={`w-10 h-10 rounded-full flex items-center justify-center ${
                     currentPage === i + 1
                       ? "bg-indigo-600 text-white"
@@ -436,7 +438,7 @@ export default function PortfolioSection() {
             </div>
 
             <button
-              onClick={handleNextPage}
+              onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className={`p-2 rounded-full ${
                 currentPage === totalPages

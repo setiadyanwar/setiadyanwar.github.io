@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
   images: {
     remotePatterns: [
       {
@@ -9,6 +12,12 @@ const nextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60,
+  },
+  // Optimize bundle size
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
   },
   async headers() {
     return [
