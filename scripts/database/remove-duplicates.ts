@@ -34,7 +34,7 @@ async function removeDuplicates(tableName: string) {
     console.log(`📊 Total records: ${allRecords.length}`)
 
     // Group by unique key (title, company, period)
-    const seen = new Map<string, number[]>()
+    const seen = new Map<string, number>()
     const duplicates: number[] = []
 
     allRecords.forEach((record) => {

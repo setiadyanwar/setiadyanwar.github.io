@@ -72,6 +72,7 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
     if (portfolioId) {
       fetchPortfolio()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [portfolioId])
 
   useEffect(() => {
