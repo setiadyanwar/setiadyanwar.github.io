@@ -1,4 +1,4 @@
-import { siteConfig } from './site-config'
+import { siteConfig } from '../config/site-config'
 
 export function getCanonicalUrl(pathname?: string): string {
   const cleanPath = pathname?.replace(/\/$/, '') || ''

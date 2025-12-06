@@ -14,7 +14,7 @@ export async function getPortfolioItems() {
   const supabase = getSupabaseClient()
   if (!supabase) {
     // Fallback to local data if Supabase is not configured
-    const { portfolioItems } = await import("./data")
+    const { portfolioItems } = await import("../data")
     return portfolioItems
   }
 
@@ -28,7 +28,7 @@ export async function getPortfolioItems() {
       console.error("Error fetching portfolio items:", error)
     }
     // Fallback to local data
-    const { portfolioItems } = await import("./data")
+    const { portfolioItems } = await import("../data")
     return portfolioItems
   }
 
@@ -38,7 +38,7 @@ export async function getPortfolioItems() {
 export async function getPortfolioItemById(id: string) {
   const supabase = getSupabaseClient()
   if (!supabase) {
-    const { portfolioItems } = await import("./data")
+    const { portfolioItems } = await import("../data")
     return portfolioItems.find((item) => item.id === id) || null
   }
 
@@ -52,7 +52,7 @@ export async function getPortfolioItemById(id: string) {
     if (process.env.NODE_ENV !== "production") {
       console.error("Error fetching portfolio item:", error)
     }
-    const { portfolioItems } = await import("./data")
+    const { portfolioItems } = await import("../data")
     return portfolioItems.find((item) => item.id === id) || null
   }
 
@@ -63,7 +63,7 @@ export async function getPortfolioItemById(id: string) {
 export async function getWorkExperiences() {
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    const { workExperiences } = await import("./data")
+    const { workExperiences } = await import("../data")
     return workExperiences
   }
 
@@ -76,7 +76,7 @@ export async function getWorkExperiences() {
     if (process.env.NODE_ENV !== "production") {
       console.error("Error fetching work experiences:", error)
     }
-    const { workExperiences } = await import("./data")
+    const { workExperiences } = await import("../data")
     return workExperiences
   }
 
@@ -87,7 +87,7 @@ export async function getWorkExperiences() {
 export async function getEducationExperiences() {
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    const { educationExperiences } = await import("./data")
+    const { educationExperiences } = await import("../data")
     return educationExperiences
   }
 
@@ -100,7 +100,7 @@ export async function getEducationExperiences() {
     if (process.env.NODE_ENV !== "production") {
       console.error("Error fetching education experiences:", error)
     }
-    const { educationExperiences } = await import("./data")
+    const { educationExperiences } = await import("../data")
     return educationExperiences
   }
 
@@ -111,7 +111,7 @@ export async function getEducationExperiences() {
 export async function getOrganizationExperiences() {
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    const { organizationExperiences } = await import("./data")
+    const { organizationExperiences } = await import("../data")
     return organizationExperiences
   }
 
@@ -124,7 +124,7 @@ export async function getOrganizationExperiences() {
     if (process.env.NODE_ENV !== "production") {
       console.error("Error fetching organization experiences:", error)
     }
-    const { organizationExperiences } = await import("./data")
+    const { organizationExperiences } = await import("../data")
     return organizationExperiences
   }
 
@@ -135,7 +135,7 @@ export async function getOrganizationExperiences() {
 export async function getTechnologies() {
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    const { technologies } = await import("./data")
+    const { technologies } = await import("../data")
     return technologies
   }
 
@@ -148,7 +148,7 @@ export async function getTechnologies() {
     if (process.env.NODE_ENV !== "production") {
       console.error("Error fetching technologies:", error)
     }
-    const { technologies } = await import("./data")
+    const { technologies } = await import("../data")
     return technologies
   }
 

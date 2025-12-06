@@ -169,7 +169,7 @@ export default function AboutSection() {
             </h3>
 
             <p className="text-gray-700 dark:text-gray-300">
-              I'm a passionate Web Developer specialize in frontend developer and UI/UX Designer with a keen eye for detail and a commitment to
+              I&apos;m a passionate Web Developer specialize in frontend developer and UI/UX Designer with a keen eye for detail and a commitment to
               creating exceptional user experiences. With expertise in modern web technologies, I specialize in building
               responsive, accessible, and visually appealing interfaces that balance aesthetics with functionality.
             </p>

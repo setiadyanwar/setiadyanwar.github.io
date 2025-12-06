@@ -21,8 +21,6 @@ export default function AdditionalImagesGallery({ images, title }: AdditionalIma
     return img
   })
 
-  if (!normalizedImages || normalizedImages.length === 0) return null
-
   const visibleImages = normalizedImages.slice(0, 3)
   const remainingCount = normalizedImages.length - 3
 
@@ -45,7 +43,7 @@ export default function AdditionalImagesGallery({ images, title }: AdditionalIma
 
   const currentImage = normalizedImages[currentIndex]
 
-  // Keyboard navigation
+  // Keyboard navigation - must be before early return
   useEffect(() => {
     if (!isModalOpen) return
 
@@ -65,7 +63,9 @@ export default function AdditionalImagesGallery({ images, title }: AdditionalIma
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isModalOpen])
+  }, [isModalOpen, currentIndex, normalizedImages.length])
+
+  if (!normalizedImages || normalizedImages.length === 0) return null
 
   return (
     <>

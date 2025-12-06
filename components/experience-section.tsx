@@ -193,7 +193,7 @@ export default function ExperienceSection() {
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    {exp.skills.map((skill, idx) => (
+                    {exp.skills.map((skill: string, idx: number) => (
                       <Badge key={idx} variant="secondary" className="bg-indigo-100/50 dark:bg-indigo-900/20">
                         {skill}
                       </Badge>

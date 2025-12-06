@@ -718,7 +718,7 @@ export default function Header() {
                   Search anything on this website
                 </p>
                 <p className="text-xs text-gray-400 dark:text-gray-500">
-                  Try: "react", "typescript", "figma", "laravel", "agile", "bnsp", "performance"
+                  Try: &quot;react&quot;, &quot;typescript&quot;, &quot;figma&quot;, &quot;laravel&quot;, &quot;agile&quot;, &quot;bnsp&quot;, &quot;performance&quot;
                 </p>
               </div>
             )}
@@ -784,7 +784,7 @@ export default function Header() {
               <div className="border-t border-gray-200/40 dark:border-gray-700/40 p-6 text-center">
                 <Search className="h-8 w-8 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  No results found for "{searchQuery}"
+                  No results found for &quot;{searchQuery}&quot;
                 </p>
                 <p className="text-xs text-gray-400 dark:text-gray-500">
                   Try searching for skills, activities, or navigation

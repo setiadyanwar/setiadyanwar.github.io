@@ -360,7 +360,7 @@ export default function HeroSection() {
                   />
                 </div>
               </div>
-              Hello, I'm Setiady
+              Hello, I&apos;m Setiady
             </motion.h2>
 
             <motion.h1
