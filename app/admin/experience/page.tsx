@@ -160,8 +160,8 @@ export default function ExperienceManagement() {
         />
       </div>
 
-      {/* Experience List */}
-      <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+      {/* Experience List - Desktop Table */}
+      <div className="hidden md:block bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
@@ -198,6 +198,65 @@ export default function ExperienceManagement() {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Experience List - Mobile Cards */}
+      <div className="md:hidden space-y-4">
+        {filteredItems.length === 0 ? (
+          <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-12 text-center text-gray-500 dark:text-gray-400">
+            {searchQuery ? "No work experiences found" : "No work experiences yet. Create your first one!"}
+          </div>
+        ) : (
+          filteredItems.map((item) => (
+            <div key={item.id} className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-4">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-12 h-12 relative rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 flex-shrink-0">
+                  {item.logo ? (
+                    <Image
+                      src={item.logo.split("?")[0]}
+                      alt={item.company}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
+                      No Logo
+                    </div>
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-medium text-gray-900 dark:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    {item.company}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                    {item.period}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <Link
+                  href={`/admin/experience/${item.id}/edit`}
+                  className="p-2 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  title="Edit"
+                >
+                  <Edit className="w-5 h-5" />
+                </Link>
+                <button
+                  onClick={() => handleDelete(item.id)}
+                  className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                  title="Delete"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       <div className="text-sm text-gray-500 dark:text-gray-400">
