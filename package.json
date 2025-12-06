@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "migrate:supabase": "tsx scripts/database/migrate-to-supabase.ts",
+    "check:duplicates": "tsx scripts/database/check-duplicates.ts",
+    "remove:duplicates": "tsx scripts/database/remove-duplicates.ts",
     "verify:portfolio-images": "tsx scripts/verification/verify-portfolio-images.ts",
     "verify:unsplash-urls": "tsx scripts/verification/verify-unsplash-urls.ts"
   },

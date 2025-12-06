@@ -144,7 +144,7 @@ export default function AdditionalImagesGallery({ images, title }: AdditionalIma
               {/* Image */}
               <div className="relative w-full h-full max-h-[90vh] flex items-center justify-center">
                 <Image
-                  src={currentImage.url || "/placeholder.svg"}
+                  src={currentImage.url?.split("?")[0] || "/placeholder.svg"}
                   alt={`${title} screenshot ${currentIndex + 1}`}
                   width={1200}
                   height={800}

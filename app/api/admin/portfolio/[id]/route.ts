@@ -1,0 +1,116 @@
+import { NextRequest, NextResponse } from "next/server"
+import { getSupabaseServerClient } from "@/lib/supabase/client"
+
+// GET - Fetch single portfolio item
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = getSupabaseServerClient()
+    if (!supabase) {
+      return NextResponse.json({ error: "Supabase client not available" }, { status: 500 })
+    }
+
+    const { data, error } = await supabase
+      .from("portfolio_items")
+      .select("*")
+      .eq("id", params.id)
+      .single()
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    if (!data) {
+      return NextResponse.json({ error: "Portfolio item not found" }, { status: 404 })
+    }
+
+    return NextResponse.json({ data })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// PUT - Update portfolio item
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = getSupabaseServerClient()
+    if (!supabase) {
+      return NextResponse.json({ error: "Supabase client not available" }, { status: 500 })
+    }
+
+    const body = await request.json()
+
+    const { data, error } = await supabase
+      .from("portfolio_items")
+      .update({
+        title: body.title,
+        date: body.date || null,
+        subtitle: body.subtitle || null,
+        category: body.category,
+        image: body.image || null,
+        additional_images: body.additional_images || [],
+        technologies: body.technologies || [],
+        description: body.description || null,
+        role: body.role || null,
+        responsibilities: body.responsibilities || [],
+        challenges: body.challenges || null,
+        demo_url: body.demo_url || null,
+        repo_url: body.repo_url || null,
+        problem_image: body.problem_image || null,
+        solution_image: body.solution_image || null,
+        problem_description: body.problem_description || null,
+        problem_cards: body.problem_cards || [],
+        solution_description: body.solution_description || null,
+        solution_cards: body.solution_cards || [],
+        status: body.status || "draft",
+        impact: body.impact || [],
+        outcomes: body.outcomes || [],
+        next_steps: body.next_steps || null,
+        project_steps: body.project_steps || [],
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", params.id)
+      .select()
+      .single()
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({ data })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// DELETE - Delete portfolio item
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = getSupabaseServerClient()
+    if (!supabase) {
+      return NextResponse.json({ error: "Supabase client not available" }, { status: 500 })
+    }
+
+    const { error } = await supabase
+      .from("portfolio_items")
+      .delete()
+      .eq("id", params.id)
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+

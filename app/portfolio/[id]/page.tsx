@@ -361,7 +361,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                   <div className="relative w-full rounded-2xl overflow-hidden">
                     <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                       <Image
-                        src={portfolio.image || "/placeholder.svg"}
+                        src={portfolio.image?.split("?")[0] || "/placeholder.svg"}
                         alt={portfolio.title}
                         fill
                         className="object-cover"
@@ -816,10 +816,11 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                         <div className="ml-14 relative w-full">
                         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                           <Image
-                            src={step.image || "/placeholder.svg"}
+                            src={step.image.startsWith("http") ? step.image : step.image.split("?")[0]}
                             alt={step.title}
                             fill
-                              className="object-cover"
+                            className="object-cover rounded-lg"
+                            unoptimized={step.image.startsWith("http")}
                           />
                         </div>
                       </div>

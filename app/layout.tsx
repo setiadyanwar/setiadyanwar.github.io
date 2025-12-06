@@ -9,6 +9,7 @@ import Footer from "@/components/footer"
 import AnimatedCursor from "@/components/animated-cursor"
 import { personJsonLd, websiteJsonLd, organizationJsonLd } from "@/lib/utils/structured-data"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import ConditionalLayout from "@/components/conditional-layout"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -232,12 +233,12 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
-          <div className="min-h-screen flex flex-col">
-            <AnimatedCursor />
-            <Header />
-            <main className="flex-grow pt-0 md:pt-16">{children}</main>
-            <Footer />
-          </div>
+          <ConditionalLayout
+            animatedCursor={<AnimatedCursor />}
+            header={<Header />}
+            footer={<Footer />}
+            main={<main className="flex-grow pt-0 md:pt-16">{children}</main>}
+          />
           <SpeedInsights />
         </ThemeProvider>
       </body>
