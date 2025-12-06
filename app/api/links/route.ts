@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { LinkItem } from "@/lib/links-data"
-import { getSupabaseServerClient } from "@/lib/supabase-client"
+import { getSupabaseServerClient } from "@/lib/supabase/client"
 
 const LINKS_TABLE = "links"
 

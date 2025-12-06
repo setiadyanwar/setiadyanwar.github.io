@@ -55,7 +55,7 @@ export default function PageHeaderContainer({ children }: PageHeaderContainerPro
   return (
     <div
       ref={containerRef}
-      className="relative mt-8 bg-white dark:bg-gray-900 rounded-xl overflow-hidden p-2 mb-8 border border-gray-100 dark:border-gray-800"
+      className="relative mt-8 bg-[#fafafa] dark:bg-gray-900 rounded-xl overflow-hidden p-2 mb-8 border border-gray-100 dark:border-gray-800"
     >
       {/* Cursor-following gradient */}
       <div

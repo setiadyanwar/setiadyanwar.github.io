@@ -224,7 +224,7 @@ export default function AboutSection() {
                         src={`${selectedImage.src}#view=FitH&toolbar=1&navpanes=1&scrollbar=1`}
                         className="w-full h-full border-0 rounded"
                         title="PDF Preview"
-                        onError={() => console.log('PDF iframe failed to load')}
+                        onError={() => {}}
                         allow="fullscreen"
                       />
                     </div>

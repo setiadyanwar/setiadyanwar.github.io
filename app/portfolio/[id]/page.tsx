@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo } from "react"
 import { ArrowLeft, ArrowRight, TrendingDown, TrendingUp, ThumbsUp, ThumbsDown, Frown, Smile, Meh, AlertTriangle, Sparkles } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { portfolioItems } from "@/lib/data"
+import { getPortfolioItemById, getPortfolioItems } from "@/lib/supabase/data"
 import { motion } from "framer-motion"
 import PortfolioBreadcrumb from "@/components/portfolio/portfolio-breadcrumb"
 import PortfolioNavigation from "@/components/portfolio/portfolio-navigation"
@@ -13,6 +13,8 @@ import MobileNavigationToggle from "@/components/portfolio/mobile-navigation-tog
 import MobileNavigationSidebar from "@/components/portfolio/mobile-navigation-sidebar"
 import ProjectInfoBentoGrid from "@/components/portfolio/project-info-bento-grid"
 import AdditionalImagesGallery from "@/components/portfolio/additional-images-gallery"
+import PortfolioDetailSkeleton from "@/components/portfolio/portfolio-detail-skeleton"
+import { preloadCache } from "@/components/portfolio-card"
 
 const sections = [
   { id: "overview", label: "Overview" },
@@ -61,20 +63,142 @@ const defaultSolutionCards = [
 ]
 
 export default function PortfolioDetail({ params }: { params: { id: string } }) {
+  // All hooks must be called in the same order every render
+  // DO NOT add conditional hooks or hooks after conditional returns
+  
+  // State hooks
   const [activeSection, setActiveSection] = useState<string>("overview")
   const [activeStep, setActiveStep] = useState<number>(0)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [portfolio, setPortfolio] = useState<any>(null)
+  const [allPortfolioItems, setAllPortfolioItems] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [mounted, setMounted] = useState(false)
+  
+  // Ref hooks
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
   const activeSectionRef = useRef<string>("overview")
 
-  const portfolio = portfolioItems.find((item) => item.id === params.id) || portfolioItems[0]
-  const currentIndex = portfolioItems.findIndex((item) => item.id === params.id)
-  const prevPortfolio = currentIndex > 0 ? portfolioItems[currentIndex - 1] : null
-  const nextPortfolio = currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null
+  // Set mounted state after client-side hydration
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
-    // Initialize active section ref
+    async function fetchData() {
+      try {
+        // Check cache first (from preloading)
+        let item = preloadCache.get(params.id)
+        let items: any[] = []
+        
+        if (item) {
+          // Use cached data immediately
+          const transformed = {
+            ...item,
+            additionalImages: item.additional_images || [],
+            demoUrl: item.demo_url,
+            repoUrl: item.repo_url,
+            problemImage: item.problem_image || null,
+            solutionImage: item.solution_image || null,
+            problemDescription: item.problem_description,
+            problemCards: item.problem_cards || [],
+            solutionDescription: item.solution_description,
+            solutionCards: item.solution_cards || [],
+            impact: item.impact || [],
+            outcomes: item.outcomes || [],
+            nextSteps: item.next_steps,
+            projectSteps: item.project_steps || [],
+          }
+          setPortfolio(transformed)
+          setLoading(false)
+        }
+        
+        // Fetch all items and current item (if not cached)
+        const [fetchedItem, fetchedItems] = await Promise.all([
+          item ? Promise.resolve(item) : getPortfolioItemById(params.id),
+          getPortfolioItems(),
+        ])
+        
+        items = fetchedItems
+        
+        // If we didn't have cached data, process fetched data
+        if (!item && fetchedItem) {
+          // Cache the fetched data
+          preloadCache.set(params.id, fetchedItem)
+          
+          // Transform Supabase data to match component expectations
+          const transformed = {
+            ...fetchedItem,
+            additionalImages: fetchedItem.additional_images || [],
+            demoUrl: fetchedItem.demo_url,
+            repoUrl: fetchedItem.repo_url,
+            problemImage: fetchedItem.problem_image || null,
+            solutionImage: fetchedItem.solution_image || null,
+            problemDescription: fetchedItem.problem_description,
+            problemCards: fetchedItem.problem_cards || [],
+            solutionDescription: fetchedItem.solution_description,
+            solutionCards: fetchedItem.solution_cards || [],
+            impact: fetchedItem.impact || [],
+            outcomes: fetchedItem.outcomes || [],
+            nextSteps: fetchedItem.next_steps,
+            projectSteps: fetchedItem.project_steps || [],
+          }
+          
+          setPortfolio(transformed)
+        }
+        
+        setAllPortfolioItems(items)
+      } catch (error) {
+        // Silently handle errors - fallback to local data if available
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [params.id])
+
+  // Calculate navigation items - must be before conditional returns
+  const navigationData = useMemo(() => {
+    if (!portfolio) {
+      return { currentIndex: -1, prevPortfolio: null, nextPortfolio: null }
+    }
+    const idx = allPortfolioItems.findIndex((item: any) => item.id === portfolio.id)
+    return {
+      currentIndex: idx,
+      prevPortfolio: idx > 0 ? allPortfolioItems[idx - 1] : null,
+      nextPortfolio: idx < allPortfolioItems.length - 1 && idx >= 0 ? allPortfolioItems[idx + 1] : null,
+    }
+  }, [portfolio, allPortfolioItems])
+  const { currentIndex, prevPortfolio, nextPortfolio } = navigationData
+
+  // Memoize problem/solution cards - always return same structure
+  const problemSolutionData = useMemo(() => {
+    const probCards = portfolio && (portfolio as any).problemCards && (portfolio as any).problemCards.length > 0
+      ? (portfolio as any).problemCards
+      : defaultProblemCards
+    const solCards = portfolio && (portfolio as any).solutionCards && (portfolio as any).solutionCards.length > 0
+      ? (portfolio as any).solutionCards
+      : defaultSolutionCards
+
+    return {
+      problemCards: probCards,
+      solutionCards: solCards,
+      displayProblemCards: probCards.length >= 4 ? probCards : [...probCards, ...probCards].slice(0, 4),
+      displaySolutionCards: solCards.length >= 4 ? solCards : [...solCards, ...solCards].slice(0, 4),
+    }
+  }, [portfolio])
+  const { problemCards, solutionCards, displayProblemCards, displaySolutionCards } = problemSolutionData
+
+  // Scroll handler useEffect - must be before conditional returns
+  // Always call this hook, but only set up scroll listener if portfolio exists
+  useEffect(() => {
+    // Initialize active section ref (always do this)
     activeSectionRef.current = activeSection
+
+    // Only set up scroll handler if portfolio exists
+    if (!portfolio) {
+      return // No cleanup needed if portfolio doesn't exist
+    }
 
     let ticking = false
 
@@ -125,7 +249,20 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
       clearTimeout(timeoutId)
       window.removeEventListener("scroll", handleScroll)
     }
-  }, [])
+  }, [portfolio, activeSection])
+
+  // Conditional returns AFTER all hooks
+  if (loading) {
+    return <PortfolioDetailSkeleton />
+  }
+
+  if (!portfolio) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <h1 className="text-2xl font-bold">Portfolio item not found</h1>
+      </div>
+    )
+  }
 
 
   const scrollToSection = (sectionId: string) => {
@@ -149,20 +286,9 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
     }
   }
 
-  const problemCards = ((portfolio as any).problemCards && (portfolio as any).problemCards.length > 0
-    ? (portfolio as any).problemCards
-    : defaultProblemCards) as any[]
-  const solutionCards = ((portfolio as any).solutionCards && (portfolio as any).solutionCards.length > 0
-    ? (portfolio as any).solutionCards
-    : defaultSolutionCards) as any[]
-
-  const displayProblemCards =
-    problemCards.length >= 4 ? problemCards : [...problemCards, ...problemCards].slice(0, 4)
-  const displaySolutionCards =
-    solutionCards.length >= 4 ? solutionCards : [...solutionCards, ...solutionCards].slice(0, 4)
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
       <PortfolioBreadcrumb title={portfolio.title} />
 
       <div className="container mx-auto px-6 pb-32">
@@ -219,7 +345,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                   
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2">
-                    {portfolio.technologies.map((tech, idx) => (
+                    {portfolio.technologies.map((tech: string, idx: number) => (
                       <span
                         key={idx}
                         className="px-3 py-1.5 text-xs font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 rounded-full"
@@ -262,7 +388,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                 </div>
 
                 {/* User Journey Analysis */}
-                {(portfolio as any).userJourney && (
+                {mounted && (portfolio as any).userJourney && (
                   <div className="bg-gray-50 dark:bg-gray-900/50 p-8 rounded-2xl space-y-8">
                     <div>
                       <h2 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-2 tracking-wide uppercase">
@@ -302,69 +428,75 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
 
                           {/* Stages and line */}
                           <div className="relative h-full">
-                            <svg className="absolute inset-0 w-full h-full" style={{ overflow: "visible" }} suppressHydrationWarning>
-                              {/* Line path */}
-                              <polyline
-                                points={((portfolio as any).userJourney.stages || [])
-                                  .map(
-                                    (stage: any, idx: number) =>
-                                      `${(idx / Math.max(1, ((portfolio as any).userJourney.stages.length - 1))) * 80 + 10}%,${
-                                        50 - (stage.sentiment * 12.5)
-                                      }%`
-                                  )
-                                  .join(" ")}
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                className="text-indigo-500 dark:text-indigo-400"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
+                            {mounted && (
+                              <svg className="absolute inset-0 w-full h-full" style={{ overflow: "visible" }}>
+                                {/* Line path */}
+                                {((portfolio as any).userJourney.stages || []).length > 0 && (
+                                  <polyline
+                                    points={((portfolio as any).userJourney.stages || [])
+                                      .map(
+                                        (stage: any, idx: number) =>
+                                          `${(idx / Math.max(1, ((portfolio as any).userJourney.stages.length - 1))) * 80 + 10}%,${
+                                            50 - (stage.sentiment * 12.5)
+                                          }%`
+                                      )
+                                      .join(" ")}
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    className="text-indigo-500 dark:text-indigo-400"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                )}
+                              </svg>
+                            )}
 
                             {/* Stage points */}
-                            <div className="absolute inset-0 flex justify-between items-center">
-                              {((portfolio as any).userJourney.stages || []).map((stage: any, idx: number) => {
-                                const position = (idx / Math.max(1, ((portfolio as any).userJourney.stages.length - 1))) * 80 + 10
-                                const topPosition = 50 - stage.sentiment * 12.5
-                                const IconComponent =
-                                  stage.sentiment > 0.5
-                                    ? Smile
-                                    : stage.sentiment < -0.5
-                                      ? Frown
-                                      : Meh
+                            {mounted && (
+                              <div className="absolute inset-0 flex justify-between items-center">
+                                {((portfolio as any).userJourney.stages || []).map((stage: any, idx: number) => {
+                                  const position = (idx / Math.max(1, ((portfolio as any).userJourney.stages.length - 1))) * 80 + 10
+                                  const topPosition = 50 - stage.sentiment * 12.5
+                                  const IconComponent =
+                                    stage.sentiment > 0.5
+                                      ? Smile
+                                      : stage.sentiment < -0.5
+                                        ? Frown
+                                        : Meh
 
-                                return (
-                                  <div
-                                    key={idx}
-                                    className="absolute flex flex-col items-center"
-                                    style={{
-                                      left: `${position}%`,
-                                      top: `${topPosition}%`,
-                                      transform: "translate(-50%, -50%)",
-                                    }}
-                                  >
-                                    <div className="w-10 h-10 rounded-full bg-white dark:bg-gray-900 border-2 border-indigo-500 dark:border-indigo-400 flex items-center justify-center mb-2">
-                                      <IconComponent
-                                        className={`w-5 h-5 ${
-                                          stage.sentiment > 0.5
-                                            ? "text-green-500"
-                                            : stage.sentiment < -0.5
-                                              ? "text-red-500"
-                                              : "text-yellow-500"
-                                        }`}
-            />
-          </div>
-                                    <div className="text-center min-w-[120px]">
-                                      <p className="text-xs font-medium text-gray-900 dark:text-gray-100 mb-1">
-                                        {stage.name}
-                                      </p>
-                                      <p className="text-xs text-gray-600 dark:text-gray-400">{stage.feedback}</p>
+                                  return (
+                                    <div
+                                      key={idx}
+                                      className="absolute flex flex-col items-center"
+                                      style={{
+                                        left: `${position}%`,
+                                        top: `${topPosition}%`,
+                                        transform: "translate(-50%, -50%)",
+                                      }}
+                                    >
+                                      <div className="w-10 h-10 rounded-full bg-white dark:bg-gray-900 border-2 border-indigo-500 dark:border-indigo-400 flex items-center justify-center mb-2">
+                                        <IconComponent
+                                          className={`w-5 h-5 ${
+                                            stage.sentiment > 0.5
+                                              ? "text-green-500"
+                                              : stage.sentiment < -0.5
+                                                ? "text-red-500"
+                                                : "text-yellow-500"
+                                          }`}
+                                        />
+                                      </div>
+                                      <div className="text-center min-w-[120px]">
+                                        <p className="text-xs font-medium text-gray-900 dark:text-gray-100 mb-1">
+                                          {stage.name}
+                                        </p>
+                                        <p className="text-xs text-gray-600 dark:text-gray-400">{stage.feedback}</p>
+                                      </div>
                                     </div>
-                                  </div>
-                                )
-                              })}
-                            </div>
+                                  )
+                                })}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -409,7 +541,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
               }}
               className="pt-16 pb-12 scroll-mt-32"
             >
-              <div className="rounded-3xl bg-white dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
+              <div className="rounded-3xl bg-[#fafafa] dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
                 <div className="p-4 sm:p-6 lg:p-8">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                     {/* Image - Mobile: top, Desktop: left */}
@@ -419,11 +551,40 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                         style={{ minHeight: "260px" }}
                       >
                         {(portfolio as any).problemImage ? (
-                          <Image
+                          <img
                             src={(portfolio as any).problemImage}
                             alt="Problem illustration"
-                            fill
-                            className="object-cover"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            loading="lazy"
+                            crossOrigin="anonymous"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            onError={(e) => {
+                              const target = e.currentTarget as HTMLImageElement
+                              // Hide broken image and show placeholder
+                              target.style.display = 'none'
+                              // Show placeholder if not already shown
+                              const placeholder = target.parentElement?.querySelector('.image-placeholder')
+                              if (!placeholder) {
+                                const placeholderDiv = document.createElement('div')
+                                placeholderDiv.className = 'image-placeholder absolute inset-0 flex items-center justify-center'
+                                placeholderDiv.innerHTML = `
+                                  <div class="text-center p-8">
+                                    <svg class="w-16 h-16 text-red-300 dark:text-red-800 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                                    </svg>
+                                    <p class="text-sm text-gray-500 dark:text-gray-500">Problem Illustration</p>
+                                  </div>
+                                `
+                                target.parentElement?.appendChild(placeholderDiv)
+                              }
+                            }}
+                            onLoad={(e) => {
+                              // Hide placeholder if image loads successfully
+                              const placeholder = (e.currentTarget.parentElement as HTMLElement)?.querySelector('.image-placeholder')
+                              if (placeholder) {
+                                (placeholder as HTMLElement).style.display = 'none'
+                              }
+                            }}
                           />
                         ) : (
                           <div className="absolute inset-0 flex items-center justify-center">
@@ -501,7 +662,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
               }}
               className="pt-12 pb-16 scroll-mt-32"
             >
-              <div className="rounded-3xl bg-white dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
+              <div className="rounded-3xl bg-[#fafafa] dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
                 <div className="p-4 sm:p-6 lg:p-8">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                     {/* Content - Mobile: top, Desktop: left */}
@@ -564,16 +725,45 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                         style={{ minHeight: "260px" }}
                       >
                         {(portfolio as any).solutionImage ? (
-                          <Image
+                          <img
                             src={(portfolio as any).solutionImage}
                             alt="Solution illustration"
-                            fill
-                            className="object-cover"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            loading="lazy"
+                            crossOrigin="anonymous"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            onError={(e) => {
+                              const target = e.currentTarget as HTMLImageElement
+                              // Hide broken image and show placeholder
+                              target.style.display = 'none'
+                              // Show placeholder if not already shown
+                              const placeholder = target.parentElement?.querySelector('.image-placeholder')
+                              if (!placeholder) {
+                                const placeholderDiv = document.createElement('div')
+                                placeholderDiv.className = 'image-placeholder absolute inset-0 flex items-center justify-center'
+                                placeholderDiv.innerHTML = `
+                                  <div class="text-center p-8">
+                                    <svg class="w-16 h-16 text-indigo-300 dark:text-indigo-800 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <p class="text-sm text-gray-500 dark:text-gray-500">Solution Illustration</p>
+                                  </div>
+                                `
+                                target.parentElement?.appendChild(placeholderDiv)
+                              }
+                            }}
+                            onLoad={(e) => {
+                              // Hide placeholder if image loads successfully
+                              const placeholder = (e.currentTarget.parentElement as HTMLElement)?.querySelector('.image-placeholder')
+                              if (placeholder) {
+                                (placeholder as HTMLElement).style.display = 'none'
+                              }
+                            }}
                           />
                         ) : (
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="text-center p-8">
-                              <TrendingUp className="w-16 h-16 text-purple-300 dark:text-purple-800 mx-auto mb-4" />
+                              <TrendingUp className="w-16 h-16 text-indigo-300 dark:text-indigo-800 mx-auto mb-4" />
                               <p className="text-sm text-gray-500 dark:text-gray-500">Solution Illustration</p>
                             </div>
                           </div>
@@ -601,7 +791,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                   Process
                 </h2>
                 <div className="space-y-12">
-                  {portfolio.projectSteps.map((step, index) => (
+                  {portfolio.projectSteps.map((step: any, index: number) => (
                   <motion.div
                       key={index}
                     initial={{ opacity: 0, y: 30 }}

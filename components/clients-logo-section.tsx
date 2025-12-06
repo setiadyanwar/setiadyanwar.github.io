@@ -51,7 +51,7 @@ export default function ClientsLogoSection() {
   ]
 
   return (
-    <section className="py-8 bg-white dark:bg-gray-900">
+    <section className="py-8 bg-[#fafafa] dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -65,8 +65,8 @@ export default function ClientsLogoSection() {
 
         <div className="relative overflow-hidden">
           {/* Gradient overlays for smooth scroll effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-white to-transparent dark:from-gray-900 dark:to-transparent"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-white to-transparent dark:from-gray-900 dark:to-transparent"></div>
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-[#fafafa] to-transparent dark:from-gray-900 dark:to-transparent"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-[#fafafa] to-transparent dark:from-gray-900 dark:to-transparent"></div>
 
           <div
             ref={scrollRef}

@@ -16,7 +16,13 @@ export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+
+  // Set mounted state after client-side hydration
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Icon renderer function
   const getIcon = (iconName: string) => {
@@ -484,7 +490,7 @@ export default function Header() {
       )}>
         <div className={cn("transition-all duration-500 ease-in-out", isScrolled ? "container mx-auto" : "w-full")}>
           <motion.header
-            initial={{ y: -20, opacity: 0 }}
+            initial={false}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             className={cn(
@@ -493,16 +499,7 @@ export default function Header() {
                 ? "rounded-3xl bg-white/70 dark:bg-black/70 backdrop-blur-3xl backdrop-saturate-150 shadow-2xl shadow-gray-200/20 dark:shadow-black/20 border border-white/20 dark:border-white/10" 
                 : "rounded-none bg-white/5 dark:bg-black/5 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/10 dark:border-white/5"
             )}
-            style={{
-              background: isScrolled 
-                ? 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 100%)'
-                : 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
-              ...(theme === 'dark' && {
-                background: isScrolled 
-                  ? 'linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%)'
-                  : 'linear-gradient(135deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 100%)'
-              })
-            }}
+            suppressHydrationWarning
           >
             <div className={cn(
               "transition-all duration-500 ease-in-out", 
@@ -562,8 +559,10 @@ export default function Header() {
                       aria-label="Toggle theme"
                       className="h-10 w-10 rounded-2xl bg-white/90 dark:bg-black/90 backdrop-blur-xl backdrop-saturate-150 border border-gray-300/60 dark:border-gray-600/60 hover:bg-white dark:hover:bg-black transition-all shadow-lg shadow-gray-200/30 dark:shadow-black/30 text-gray-700 dark:text-gray-200"
                     >
-                      {theme === "dark" ? (
+                      {mounted && theme === "dark" ? (
                         <Sun className="h-5 w-5 text-amber-500" />
+                      ) : mounted ? (
+                        <Moon className="h-5 w-5 text-indigo-600" />
                       ) : (
                         <Moon className="h-5 w-5 text-indigo-600" />
                       )}
@@ -579,15 +578,11 @@ export default function Header() {
       {/* Mobile Header - Bottom */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
         <motion.header
-          initial={{ y: 20, opacity: 0 }}
+          initial={false}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="bg-white/80 dark:bg-black/80 backdrop-blur-3xl backdrop-saturate-150 border-t border-white/20 dark:border-white/10 shadow-2xl shadow-gray-200/20 dark:shadow-black/20"
-          style={{
-            background: theme === 'dark' 
-              ? 'linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.8) 100%)'
-              : 'linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%)'
-          }}
+          suppressHydrationWarning
         >
           <div className="px-4 py-3 safe-area-pb">
             {/* Mobile Bottom Navigation */}
@@ -657,8 +652,10 @@ export default function Header() {
                     aria-label="Toggle theme"
                     className="h-8 w-8 rounded-lg bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-gray-300/50 dark:border-gray-600/50 hover:bg-white dark:hover:bg-black transition-all shadow-md"
                   >
-                    {theme === "dark" ? (
+                    {mounted && theme === "dark" ? (
                       <Sun className="h-4 w-4 text-amber-500" />
+                    ) : mounted ? (
+                      <Moon className="h-4 w-4 text-indigo-600" />
                     ) : (
                       <Moon className="h-4 w-4 text-indigo-600" />
                     )}

@@ -1,17 +1,50 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import PortfolioCard from "@/components/portfolio-card"
+import { getPortfolioItems } from "@/lib/supabase/data"
+import PortfolioListSkeleton from "@/components/portfolio/portfolio-list-skeleton"
 
 export default function PortfolioSection() {
   const [filter, setFilter] = useState("all")
   const [currentPage, setCurrentPage] = useState(1)
+  const [portfolioItems, setPortfolioItems] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const itemsPerPage = 6
 
-  // Sample portfolio items (would be replaced with actual projects)
-  const portfolioItems = [
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getPortfolioItems()
+        // Transform data to match component expectations
+        const transformed = data.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          category: item.category,
+          image: item.image,
+          technologies: item.technologies || [],
+          demoUrl: item.demo_url,
+          repoUrl: item.repo_url,
+        }))
+        setPortfolioItems(transformed)
+      } catch (error) {
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Error fetching portfolio items:", error)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
+
+  if (loading) {
+    return <PortfolioListSkeleton />
+  }
+
+  const portfolioItemsList = [
     {
       id: "ess",
       title: "Employee Self Service Portal",

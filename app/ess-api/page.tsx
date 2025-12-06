@@ -42,7 +42,7 @@ export default async function EssApiPage() {
   }).format(updatedAt)
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black py-16 px-4">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-black py-16 px-4">
       <div className="max-w-5xl mx-auto">
         <PageHeaderContainer>
           <div className="bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-lg p-6 border border-indigo-100 dark:border-indigo-900">

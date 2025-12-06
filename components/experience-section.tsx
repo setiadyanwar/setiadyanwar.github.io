@@ -6,23 +6,42 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Briefcase, Calendar, GraduationCap, Users } from "lucide-react"
 import Image from "next/image"
+import { useEffect } from "react"
 import {
-  workExperiences as workExperiencesData,
-  educationExperiences as educationExperiencesData,
-  organizationExperiences as organizationExperiencesData,
-} from "@/lib/data"
+  getWorkExperiences,
+  getEducationExperiences,
+  getOrganizationExperiences,
+} from "@/lib/supabase/data"
 
 export default function ExperienceSection() {
   const [activeTab, setActiveTab] = useState("work")
-  const [workExperiences, setWorkExperiences] = useState(
-    workExperiencesData.map((exp) => ({ ...exp, isExpanded: false })),
-  )
-  const [educationExperiences, setEducationExperiences] = useState(
-    educationExperiencesData.map((exp) => ({ ...exp, isExpanded: false })),
-  )
-  const [organizationExperiences, setOrganizationExperiences] = useState(
-    organizationExperiencesData.map((exp) => ({ ...exp, isExpanded: false })),
-  )
+  const [workExperiences, setWorkExperiences] = useState<any[]>([])
+  const [educationExperiences, setEducationExperiences] = useState<any[]>([])
+  const [organizationExperiences, setOrganizationExperiences] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [work, education, org] = await Promise.all([
+          getWorkExperiences(),
+          getEducationExperiences(),
+          getOrganizationExperiences(),
+        ])
+        
+        setWorkExperiences(work.map((exp: any) => ({ ...exp, isExpanded: false })))
+        setEducationExperiences(education.map((exp: any) => ({ ...exp, isExpanded: false })))
+        setOrganizationExperiences(org.map((exp: any) => ({ ...exp, isExpanded: false })))
+      } catch (error) {
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Error fetching experiences:", error)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
   
 
   const tabs = [

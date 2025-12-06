@@ -463,7 +463,7 @@ export default function LinksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black py-16 px-4">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-black py-16 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

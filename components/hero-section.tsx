@@ -56,9 +56,9 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center bg-white dark:bg-black">
+    <section className="relative min-h-screen flex items-center bg-[#fafafa] dark:bg-black">
       {/* Clean Apple-style background */}
-      <div className="absolute inset-0 bg-white dark:bg-black"></div>
+      <div className="absolute inset-0 bg-[#fafafa] dark:bg-black"></div>
       
       {/* Subtle flowing background elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

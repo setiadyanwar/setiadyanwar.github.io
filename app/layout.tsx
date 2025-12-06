@@ -7,7 +7,7 @@ import { ThemeProvider } from "../components/theme-provider"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import AnimatedCursor from "@/components/animated-cursor"
-import { personJsonLd, websiteJsonLd, organizationJsonLd } from "@/lib/structured-data"
+import { personJsonLd, websiteJsonLd, organizationJsonLd } from "@/lib/utils/structured-data"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"] })
