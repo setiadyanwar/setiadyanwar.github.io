@@ -1,12 +1,9 @@
 "use client"
 
-import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from "react"
-import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Briefcase, Calendar, GraduationCap, Users } from "lucide-react"
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Briefcase, GraduationCap, Users, ChevronDown } from "lucide-react"
 import Image from "next/image"
-import { useEffect } from "react"
 import {
   getWorkExperiences,
   getEducationExperiences,
@@ -19,6 +16,21 @@ export default function ExperienceSection() {
   const [educationExperiences, setEducationExperiences] = useState<any[]>([])
   const [organizationExperiences, setOrganizationExperiences] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set())
+
+  // Helper function to deduplicate experiences
+  const deduplicateExperiences = (experiences: any[]) => {
+    const seen = new Set<string>()
+    return experiences.filter((exp) => {
+      // Create a unique key from title, company, and period
+      const key = `${exp.title || ""}-${exp.company || ""}-${exp.period || ""}`
+      if (seen.has(key)) {
+        return false
+      }
+      seen.add(key)
+      return true
+    })
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -29,9 +41,14 @@ export default function ExperienceSection() {
           getOrganizationExperiences(),
         ])
         
-        setWorkExperiences(work.map((exp: any) => ({ ...exp, isExpanded: false })))
-        setEducationExperiences(education.map((exp: any) => ({ ...exp, isExpanded: false })))
-        setOrganizationExperiences(org.map((exp: any) => ({ ...exp, isExpanded: false })))
+        // Deduplicate each array
+        const deduplicatedWork = deduplicateExperiences(work || [])
+        const deduplicatedEducation = deduplicateExperiences(education || [])
+        const deduplicatedOrg = deduplicateExperiences(org || [])
+        
+        setWorkExperiences(deduplicatedWork)
+        setEducationExperiences(deduplicatedEducation)
+        setOrganizationExperiences(deduplicatedOrg)
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
           console.error("Error fetching experiences:", error)
@@ -42,167 +59,348 @@ export default function ExperienceSection() {
     }
     fetchData()
   }, [])
-  
 
   const tabs = [
-    { id: "work", name: "Work Experience", icon: <Briefcase className="h-4 w-4 mr-2" /> },
-    { id: "education", name: "Education", icon: <GraduationCap className="h-4 w-4 mr-2" /> },
-    { id: "organization", name: "Organization", icon: <Users className="h-4 w-4 mr-2" /> },
+    { id: "work", name: "Work Experience", icon: Briefcase },
+    { id: "education", name: "Education", icon: GraduationCap },
+    { id: "organization", name: "Organization", icon: Users },
   ]
 
+  // Helper function to calculate duration in months from period string
+  const calculateDuration = (period: string): number | null => {
+    try {
+      // Parse period like "Jun 2025 – Dec 2025" or "Jan 2024 - Feb 2024" or "2021 - Present" or "2021 - 2025"
+      const parts = period.split(/[–-]/).map((p) => p.trim())
+      if (parts.length !== 2) return null
+
+      const monthNames = [
+        "jan", "feb", "mar", "apr", "may", "jun",
+        "jul", "aug", "sep", "oct", "nov", "dec"
+      ]
+
+      const parseDate = (str: string) => {
+        const trimmed = str.toLowerCase().trim()
+        const parts = trimmed.split(" ")
+        
+        // Handle format like "2021" or "2021 - Present" (year only)
+        if (parts.length === 1) {
+          const year = parseInt(parts[0])
+          if (!isNaN(year)) {
+            return { month: 0, year } // Default to January if only year
+          }
+        }
+        
+        // Handle format like "Jun 2025" or "Jan 2024"
+        if (parts.length === 2) {
+          const month = monthNames.findIndex((m) => parts[0].startsWith(m))
+          const year = parseInt(parts[1])
+          if (month !== -1 && !isNaN(year)) {
+            return { month, year }
+          }
+        }
+        
+        return null
+      }
+
+      const start = parseDate(parts[0])
+      const endStr = parts[1].toLowerCase().trim()
+      
+      // Handle "Present" case
+      if (endStr.includes("present") || endStr.includes("sekarang")) {
+        const now = new Date()
+        const end = { month: now.getMonth(), year: now.getFullYear() }
+        if (!start) return null
+        const months = (end.year - start.year) * 12 + (end.month - start.month) + 1
+        return months
+      }
+
+      const end = parseDate(parts[1])
+      if (!start || !end) return null
+
+      const months = (end.year - start.year) * 12 + (end.month - start.month) + 1
+      return months
+    } catch {
+      return null
+    }
+  }
+
+  // Helper function to format duration
+  const formatDuration = (months: number): string => {
+    if (months < 1) return "Less than 1 month"
+    if (months === 1) return "1 month"
+    if (months < 12) return `${months} months`
+    const years = Math.floor(months / 12)
+    const remainingMonths = months % 12
+    if (remainingMonths === 0) {
+      return years === 1 ? "1 year" : `${years} years`
+    }
+    return `${years} year${years > 1 ? "s" : ""} ${remainingMonths} month${remainingMonths > 1 ? "s" : ""}`
+  }
+
+  // Helper function to group experiences by company (for nested structure)
+  const groupExperiencesByCompany = (experiences: any[]) => {
+    const grouped = new Map<string, any[]>()
+    
+    experiences.forEach((exp) => {
+      const companyKey = exp.company?.toLowerCase().trim() || ""
+      if (!grouped.has(companyKey)) {
+        grouped.set(companyKey, [])
+      }
+      grouped.get(companyKey)!.push(exp)
+    })
+
+    // Convert to array and sort by first experience period
+    return Array.from(grouped.entries()).map(([companyKey, exps]) => {
+      // Sort experiences by period (most recent first)
+      const sortedExps = exps.sort((a, b) => {
+        // Simple date comparison - you might want to improve this
+        return b.period.localeCompare(a.period)
+      })
+      
+      // Calculate total duration for all roles
+      let totalMonths = 0
+      const durations = sortedExps.map((exp) => calculateDuration(exp.period))
+      const validDurations = durations.filter((d): d is number => d !== null)
+      if (validDurations.length > 0) {
+        // For multiple roles, sum up the durations
+        totalMonths = validDurations.reduce((sum, months) => sum + months, 0)
+      }
+      
+      return {
+        company: exps[0].company,
+        logo: exps[0].logo,
+        experiences: sortedExps,
+        // Calculate total duration if needed
+        totalDuration: exps.length > 1 ? `${exps.length} roles` : null,
+        totalMonths: totalMonths > 0 ? totalMonths : null,
+      }
+    })
+  }
+
   // Get the appropriate experiences based on the active tab
-  const experiences =
+  const rawExperiences =
     activeTab === "work" ? workExperiences : activeTab === "education" ? educationExperiences : organizationExperiences
 
+  // Group by company for nested structure (applies to all tabs)
+  const groupedExperiences = groupExperiencesByCompany(rawExperiences)
+
+  if (loading) {
+    return (
+      <section id="experience" className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-20 bg-gray-200 dark:bg-gray-800 rounded animate-pulse"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <section id="experience" className="py-16">
+    <section id="experience" className="py-8 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="flex justify-center mb-12">
+        {/* Tab Navigation */}
+        <div className="flex justify-center mb-6">
           <div className="flex flex-wrap gap-2 justify-center">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-colors flex items-center ${
-                  activeTab === tab.id
-                    ? "bg-indigo-600 text-white"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                }`}
-              >
-                {tab.icon}
-                {tab.name}
-              </button>
-            ))}
+            {tabs.map((tab) => {
+              const IconComponent = tab.icon
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-colors flex items-center ${
+                    activeTab === tab.id
+                      ? "bg-indigo-600 text-white"
+                      : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                  }`}
+                >
+                  <IconComponent className="h-4 w-4 mr-2" />
+                  {tab.name}
+                </button>
+              )
+            })}
           </div>
         </div>
 
-        <div className="relative max-w-3xl mx-auto">
-          {/* Vertical timeline line */}
-          <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-indigo-200 dark:bg-indigo-800/30"></div>
+        {/* Experience List - Clean Minimalist Design */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-[#fafafa] dark:bg-gray-950 rounded-2xl p-6 md:p-8 border border-gray-100 dark:border-gray-800">
+            {/* Section Title */}
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+              {activeTab === "work" ? "Experience" : activeTab === "education" ? "Education" : "Organization"}
+            </h2>
 
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className={`relative mb-12 md:mb-16 ${
-                index % 2 === 0 ? "md:pr-12 md:text-left md:ml-auto md:mr-6" : "md:pl-12 md:ml-6"
-              }`}
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 -translate-y-1/3 w-6 h-6 rounded-full bg-indigo-600 dark:bg-indigo-400 z-10">
-                {/* Pulsing stroke animation */}
-                <span className="absolute inset-0 rounded-full border-2 border-indigo-400 dark:border-indigo-300 animate-ping opacity-75"></span>
-                <span className="absolute inset-0 rounded-full border-4 border-indigo-200 dark:border-indigo-700 animate-pulse"></span>
-              </div>
-
-              <Card className="glassmorphism overflow-hidden">
-                <CardContent className="p-6">
-                  <div className="flex-row md:flex items-center justify-between mb-4">
-                    <div className="flex items-center mb-2 md:mb-0">
-                      <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 mr-3 flex-shrink-0">
-                        <Image
-                          src={exp.logo || "/placeholder.svg"}
-                          alt={exp.company}
-                          width={40}
-                          height={40}
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="group relative">
-                        <h3 className="text-xl font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-[200px] md:max-w-[300px]">
-                          {exp.title}
-                        </h3>
-                        {/* Full title on hover */}
-                        <div className="absolute left-0 top-full mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white dark:bg-gray-800 p-2 rounded-md shadow-lg z-20 max-w-xs">
-                          <p className="text-gray-800 dark:text-gray-200 text-sm">{exp.title}</p>
+            {/* Experience Items */}
+            <div className="space-y-0">
+              {/* Nested structure for all tabs */}
+              {groupedExperiences.map((group, groupIndex) => {
+                  const groupKey = `group-${group.company}-${groupIndex}`
+                  const isGroupExpanded = expandedItems.has(groupKey)
+                  
+                  return (
+                    <motion.div
+                      key={groupKey}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: groupIndex * 0.1 }}
+                      className="border-b border-gray-200 dark:border-gray-800 last:border-b-0"
+                    >
+                      {/* Company Header */}
+                      <div className="py-4">
+                        <div className="flex items-center gap-4">
+                          {/* Company Logo */}
+                          {group.logo && (
+                            <div className="w-12 h-12 rounded-lg overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex-shrink-0 flex items-center justify-center">
+                              <Image
+                                src={group.logo.split("?")[0] || "/placeholder.svg"}
+                                alt={group.company}
+                                width={48}
+                                height={48}
+                                className="object-contain p-1"
+                                unoptimized
+                              />
+                            </div>
+                          )}
+                          
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white leading-tight">
+                              {group.company}
+                            </h3>
+                            {group.totalMonths && (
+                              <p className="text-xs text-gray-500 dark:text-gray-500 mt-0.5">
+                                {formatDuration(group.totalMonths)}
+                              </p>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <Badge
-                      variant="outline"
-                      className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800 flex-shrink-0"
-                    >
-                      <Calendar className="h-3 w-3 mr-1" />
-                      {exp.period}
 
-                    </Badge>
-                  </div>
+                      {/* Roles (Nested) */}
+                      <div className="space-y-0 border-l-2 border-gray-200 dark:border-gray-800 ml-5 md:ml-6 pl-4 md:pl-6">
+                        {group.experiences.map((exp: any, roleIndex: number) => {
+                          const uniqueKey = exp.id || `${exp.title || ""}-${exp.company || ""}-${exp.period || ""}-${roleIndex}`
+                          const isExpanded = expandedItems.has(uniqueKey)
+                          const hasDescription = exp.description || (exp.details && exp.details.length > 0)
 
-                  <div className="flex items-center mb-4">
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">{exp.company}</span>
-                  </div>
+                          return (
+                            <div key={uniqueKey} className="border-b border-gray-200 dark:border-gray-800 last:border-b-0">
+                              {/* Role Content */}
+                              <div
+                                className={`py-3 -ml-4 md:-ml-6 pl-[44px] md:pl-[40px] ${hasDescription ? "cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900/50 rounded transition-colors" : ""}`}
+                                onClick={() => {
+                                  if (hasDescription) {
+                                    setExpandedItems((prev) => {
+                                      const newSet = new Set(prev)
+                                      if (newSet.has(uniqueKey)) {
+                                        newSet.delete(uniqueKey)
+                                      } else {
+                                        newSet.add(uniqueKey)
+                                      }
+                                      return newSet
+                                    })
+                                  }
+                                }}
+                              >
+                                <div className="flex items-start justify-between gap-4">
+                                  {/* Left: Role Title */}
+                                  <div className="flex-1 min-w-0">
+                                    <h4 className="text-sm md:text-base font-medium text-gray-900 dark:text-white leading-tight">
+                                      {exp.title}
+                                    </h4>
+                                  </div>
 
-                  {/* Replace the simple paragraph with an accordion */}
-                  <div className="mb-4">
-                    <motion.div initial={{ height: "auto" }} className="overflow-hidden">
-                      {/* Truncated description */}
-                      <div className="relative">
-                        <p className={`text-gray-600 dark:text-gray-400 ${!exp.isExpanded ? "line-clamp-2" : ""}`}>
-                          {exp.description}
-                        </p>
+                                  {/* Right: Period & Location + Expand Icon */}
+                                  <div className="flex items-start gap-3 flex-shrink-0">
+                                    <div className="text-right whitespace-nowrap">
+                                      <p className="text-xs md:text-sm font-medium text-gray-900 dark:text-white leading-tight">
+                                        {exp.period}
+                                      </p>
+                                      {exp.location && (
+                                        <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 leading-tight">{exp.location}</p>
+                                      )}
+                                    </div>
+                                    
+                                    {/* Expand/Collapse Icon */}
+                                    {hasDescription && (
+                                      <motion.div
+                                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="flex-shrink-0 mt-0.5"
+                                      >
+                                        <ChevronDown className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                                      </motion.div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
 
-                        {/* Additional details as bullet points - only shown when expanded */}
-                        {exp.isExpanded && exp.details && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="mt-3"
-                          >
-                            <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-2">Key Achievements:</h4>
-                            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
-                                  {exp.details.map((detail: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined, i: Key | null | undefined) => (
-                                <li key={i}>{detail}</li>
-                              ))}
-                            </ul>
-                          </motion.div>
-                        )}
+                              {/* Accordion Content for Role */}
+                              <AnimatePresence>
+                                {isExpanded && hasDescription && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="overflow-hidden"
+                                  >
+                                    <div className="pb-4 pl-4 md:pl-6 space-y-3">
+                                      {/* Description */}
+                                      {exp.description && (
+                                        <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                          {exp.description}
+                                        </p>
+                                      )}
 
-                        {/* Read more/less toggle */}
-                        <button
-                          onClick={() => {
-                            const updatedExperiences = [...experiences]
-                            updatedExperiences[index] = {
-                              ...exp,
-                              isExpanded: !exp.isExpanded,
-                            }
-                            if (activeTab === "work") {
-                              setWorkExperiences(updatedExperiences)
-                            } else if (activeTab === "education") {
-                              setEducationExperiences(updatedExperiences)
-                            } else {
-                              setOrganizationExperiences(updatedExperiences)
-                            }
-                          }}
-                          className="text-indigo-600 dark:text-indigo-400 text-sm font-medium mt-1 flex items-center hover:underline"
-                        >
-                          {exp.isExpanded ? "Read less" : "Read more"}
-                          <motion.span
-                            animate={{ rotate: exp.isExpanded ? 180 : 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="ml-1"
-                          >
-                            ↓
-                          </motion.span>
-                        </button>
+                                      {/* Details/Key Achievements */}
+                                      {exp.details && exp.details.length > 0 && (
+                                        <div>
+                                          <h5 className="text-xs font-semibold text-gray-900 dark:text-white mb-1.5">
+                                            Key Achievements:
+                                          </h5>
+                                          <ul className="list-disc list-inside space-y-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                            {exp.details.map((detail: string, idx: number) => (
+                                              <li key={idx}>{detail}</li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+
+                                      {/* Skills */}
+                                      {exp.skills && exp.skills.length > 0 && (
+                                        <div>
+                                          <h5 className="text-xs font-semibold text-gray-900 dark:text-white mb-1.5">
+                                            Skills:
+                                          </h5>
+                                          <div className="flex flex-wrap gap-1.5">
+                                            {exp.skills.map((skill: string, idx: number) => (
+                                              <span
+                                                key={idx}
+                                                className="px-2 py-0.5 text-xs font-medium bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full"
+                                              >
+                                                {skill}
+                                              </span>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          )
+                        })}
                       </div>
                     </motion.div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {exp.skills.map((skill: string, idx: number) => (
-                      <Badge key={idx} variant="secondary" className="bg-indigo-100/50 dark:bg-indigo-900/20">
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                  )
+                })}
+            </div>
+          </div>
         </div>
       </div>
     </section>
