@@ -28,6 +28,12 @@ export default function PortfolioSection() {
           demoUrl: item.demo_url,
           repoUrl: item.repo_url,
         }))
+        
+        // Debug: log first item to verify order
+        if (process.env.NODE_ENV !== "production" && transformed.length > 0) {
+          console.log("📋 Portfolio Section - First item:", transformed[0].id, transformed[0].title)
+        }
+        
         setPortfolioItems(transformed)
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {

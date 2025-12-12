@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS portfolio_items (
   outcomes JSONB DEFAULT '[]'::jsonb,
   next_steps TEXT,
   project_steps JSONB DEFAULT '[]'::jsonb,
+  display_order INTEGER DEFAULT 0,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -86,6 +87,7 @@ CREATE TABLE IF NOT EXISTS technologies (
 -- Indexes for better query performance
 CREATE INDEX IF NOT EXISTS idx_portfolio_items_category ON portfolio_items(category);
 CREATE INDEX IF NOT EXISTS idx_portfolio_items_status ON portfolio_items(status);
+CREATE INDEX IF NOT EXISTS idx_portfolio_items_display_order ON portfolio_items(display_order);
 CREATE INDEX IF NOT EXISTS idx_work_experiences_display_order ON work_experiences(display_order);
 CREATE INDEX IF NOT EXISTS idx_education_experiences_display_order ON education_experiences(display_order);
 CREATE INDEX IF NOT EXISTS idx_organization_experiences_display_order ON organization_experiences(display_order);

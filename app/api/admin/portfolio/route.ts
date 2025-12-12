@@ -12,6 +12,7 @@ export async function GET() {
     const { data, error } = await supabase
       .from("portfolio_items")
       .select("*")
+      .order("display_order", { ascending: true })
       .order("created_at", { ascending: false })
 
     if (error) {

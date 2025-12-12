@@ -73,6 +73,7 @@ async function migratePortfolioItems() {
         outcomes: (item as any).outcomes || [],
         next_steps: (item as any).nextSteps,
         project_steps: item.projectSteps || [],
+        // display_order will be set separately via update:portfolio-order script
       },
       { onConflict: "id" }
     )

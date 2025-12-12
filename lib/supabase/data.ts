@@ -21,6 +21,7 @@ export async function getPortfolioItems() {
   const { data, error } = await supabase
     .from("portfolio_items")
     .select("*")
+    .order("display_order", { ascending: true })
     .order("created_at", { ascending: false })
 
   if (error) {
@@ -30,6 +31,11 @@ export async function getPortfolioItems() {
     // Fallback to local data
     const { portfolioItems } = await import("../data")
     return portfolioItems
+  }
+
+  // Debug: log first item to verify order
+  if (process.env.NODE_ENV !== "production" && data && data.length > 0) {
+    console.log("📋 Portfolio order - First item:", data[0].id, data[0].title, "display_order:", data[0].display_order)
   }
 
   return data || []

@@ -1767,7 +1767,7 @@ export const portfolioItems = [
     date: "January 2024",
     subtitle: "Community reporting platform UI built in collaboration with Bandung city government.",
     category: "ui",
-    image: "/portfolio/uiux/GObojongsoang.png?height=400&width=600",
+    image: "/portfolio/uiux/GOBojongsoang.png?height=400&width=600",
     // additionalImages: [
     //   "/portfolio/ui/gobojongsoang-1.png?height=180&width=320",
     //   "/portfolio/ui/gobojongsoang-2.png?height=180&width=320",
@@ -2491,10 +2491,10 @@ export const portfolioItems = [
     date: "June - July 2023",
     subtitle: "Competition website providing information, registration, and result announcements.",
     category: "web",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/portfolio/web/Agridation.png?height=400&width=600",
     additionalImages: [
-      "/portfolio/web/agridation-1.png?height=180&width=320",
-      "/portfolio/web/agridation-2.png?height=180&width=320",
+      // "/portfolio/web/agridation-1.png?height=180&width=320",
+      // "/portfolio/web/agridation-2.png?height=180&width=320",
     ],
     technologies: ["Figma", "Laravel", "TailwindCSS", "HTML/CSS", "MySQL"],
     description:
