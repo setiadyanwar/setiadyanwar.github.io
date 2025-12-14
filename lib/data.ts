@@ -3634,6 +3634,23 @@ export const workExperiences = [
     ],
   },
   {
+    title: "UI/UX Designer",
+    company: "Pansus Studio",
+    logo: "/experience/logo-pansus-studio.png?height=40&width=40",
+    period: "Jan 2025 – Jun 2025",
+    description:
+      "Designed comprehensive UI/UX for Saleskuy, a mobile POS application for food delivery services, creating intuitive interfaces that improved user efficiency and transaction processing speed by 35%.",
+    skills: ["Figma", "UI/UX Design", "Mobile App Design", "Prototyping", "User Flow Design", "Design System"],
+    details: [
+      "Designed 50+ mobile screens for Saleskuy POS application, covering order management, payment processing, and delivery tracking features",
+      "Created user flows and wireframes that reduced transaction completion time by 35% through streamlined interface design",
+      "Developed design system and component library, ensuring consistency across 8+ feature modules",
+      "Conducted user research and usability testing with 30+ merchants, resulting in 25% improvement in user satisfaction scores",
+      "Collaborated with development team to ensure pixel-perfect implementation of designs, reducing design-to-development handoff time by 40%",
+      "Designed responsive layouts optimized for various mobile screen sizes, achieving 100% compatibility across tested devices",
+    ],
+  },
+  {
     title: "UI/UX Designer (Internship)",
     company: "PT Kawan Kerja Indonesia",
     logo: "/experience/kawankerja.png?height=40&width=40",
