@@ -5,11 +5,28 @@ import yaml from "js-yaml"
 
 import PageHeaderContainer from "@/components/page-header-container"
 import SwaggerViewer from "@/components/swagger-viewer"
+import { siteConfig } from "@/lib/config/site-config"
 
 export const metadata: Metadata = {
   title: "ESS-Sigma API Contract | Setiady Ibrahim Anwar",
   description:
     "Dokumentasi lengkap kontrak API ESS-Sigma versi Laravel dalam format YAML, mudah dibaca langsung dari situs ini.",
+  alternates: {
+    canonical: `${siteConfig.url}/ess-api`,
+  },
+  openGraph: {
+    title: "ESS-Sigma API Contract | Setiady Ibrahim Anwar",
+    description:
+      "Dokumentasi lengkap kontrak API ESS-Sigma versi Laravel dalam format YAML, mudah dibaca langsung dari situs ini.",
+    url: `${siteConfig.url}/ess-api`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "ESS-Sigma API Contract | Setiady Ibrahim Anwar",
+    description:
+      "Dokumentasi lengkap kontrak API ESS-Sigma versi Laravel dalam format YAML, mudah dibaca langsung dari situs ini.",
+  },
 }
 
 export const dynamic = "force-dynamic"

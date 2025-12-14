@@ -10,18 +10,19 @@ import AnimatedCursor from "@/components/animated-cursor"
 import { personJsonLd, websiteJsonLd, organizationJsonLd } from "@/lib/utils/structured-data"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import ConditionalLayout from "@/components/conditional-layout"
+import { siteConfig } from "@/lib/config/site-config"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://setiadyanwar.vercel.app"),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
     template: "%s | Setiady Ibrahim Anwar"
   },
   description: "Professional Frontend Developer & UI/UX Designer from Indonesia. BNSP-Certified with 2+ years experience building modern web applications. Expert in React, Next.js, Vue.js, Laravel, TypeScript, and Tailwind CSS. Founder of Kreavoks Digital Agency. Available for freelance projects and full-time opportunities.",
   alternates: {
-    canonical: "https://setiadyanwar.vercel.app",
+    canonical: siteConfig.url,
   },
   keywords: [
     // Primary Skills
@@ -170,8 +171,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://setiadyanwar.vercel.app",
+    locale: "id_ID",
+    url: siteConfig.url,
     siteName: "Setiady Ibrahim Anwar Portfolio",
     title: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
     description: "Professional Frontend Developer & UI/UX Designer from Indonesia. BNSP-Certified with 2+ years experience building modern web applications. Expert in React, Next.js, Vue.js, Laravel, TypeScript, and Tailwind CSS.",

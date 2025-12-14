@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
-import { portfolioItems } from '@/lib/data'
+import { siteConfig } from '@/lib/config/site-config'
+import { getPortfolioItems } from '@/lib/supabase/data'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://setiadyanwar.vercel.app'
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = siteConfig.url
   
   // Static pages
   const staticPages = [
@@ -31,14 +32,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/links`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
       url: `${baseUrl}/cv/cv_setiady.pdf`,
       lastModified: new Date(),
       changeFrequency: 'yearly' as const,
-      priority: 0.6,
+      priority: 0.5,
     },
+    // ESS-API is internal documentation, exclude from sitemap
   ]
 
-  // Dynamic portfolio pages
+  // Dynamic portfolio pages - fetch from Supabase or fallback to local data
+  const portfolioItems = await getPortfolioItems()
   const portfolioPages = portfolioItems.map((item) => ({
     url: `${baseUrl}/portfolio/${item.id}`,
     lastModified: new Date(),

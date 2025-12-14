@@ -52,7 +52,7 @@ export const websiteJsonLd = {
     '@type': 'Person',
     name: 'Setiady Ibrahim Anwar',
   },
-  inLanguage: 'en-US',
+  inLanguage: 'id',
   copyrightYear: new Date().getFullYear(),
   copyrightHolder: {
     '@type': 'Person',

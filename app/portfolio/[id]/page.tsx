@@ -15,6 +15,55 @@ import ProjectInfoBentoGrid from "@/components/portfolio/project-info-bento-grid
 import AdditionalImagesGallery from "@/components/portfolio/additional-images-gallery"
 import PortfolioDetailSkeleton from "@/components/portfolio/portfolio-detail-skeleton"
 import { preloadCache } from "@/components/portfolio-card"
+import type { Metadata } from "next"
+import { siteConfig } from "@/lib/config/site-config"
+
+// Generate metadata for portfolio detail pages (runs server-side)
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const portfolio = await getPortfolioItemById(params.id)
+  
+  if (!portfolio) {
+    return {
+      title: "Portfolio Not Found",
+      description: "The requested portfolio item could not be found.",
+    }
+  }
+
+  const title = `${portfolio.title} | Portfolio | Setiady Ibrahim Anwar`
+  const description = portfolio.subtitle || portfolio.description || `View ${portfolio.title} portfolio project by Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer.`
+  const imageUrl = portfolio.image?.split("?")[0] || siteConfig.ogImage
+  const fullImageUrl = imageUrl.startsWith("http") ? imageUrl : `${siteConfig.url}${imageUrl}`
+  const keywords = portfolio.technologies ? [...portfolio.technologies, "Portfolio", "Web Development", "UI/UX Design"] : ["Portfolio", "Web Development", "UI/UX Design"]
+
+  return {
+    title,
+    description: description.length > 160 ? description.substring(0, 157) + "..." : description,
+    keywords,
+    alternates: {
+      canonical: `${siteConfig.url}/portfolio/${params.id}`,
+    },
+    openGraph: {
+      title,
+      description: description.length > 200 ? description.substring(0, 197) + "..." : description,
+      url: `${siteConfig.url}/portfolio/${params.id}`,
+      type: "website",
+      images: [
+        {
+          url: fullImageUrl,
+          width: 1200,
+          height: 630,
+          alt: portfolio.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: description.length > 200 ? description.substring(0, 197) + "..." : description,
+      images: [fullImageUrl],
+    },
+  }
+}
 
 const sections = [
   { id: "overview", label: "Overview" },
@@ -251,6 +300,43 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
     }
   }, [portfolio, activeSection])
 
+  // Generate structured data for portfolio item (must be before conditional returns)
+  const portfolioJsonLd = useMemo(() => {
+    if (!portfolio) return null
+    
+    const imageUrl = portfolio.image?.split("?")[0] || siteConfig.ogImage
+    const fullImageUrl = imageUrl.startsWith("http") ? imageUrl : `${siteConfig.url}${imageUrl}`
+    
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: portfolio.title,
+      description: portfolio.subtitle || portfolio.description || `Portfolio project: ${portfolio.title}`,
+      image: fullImageUrl,
+      url: `${siteConfig.url}/portfolio/${portfolio.id}`,
+      author: {
+        '@type': 'Person',
+        name: 'Setiady Ibrahim Anwar',
+        url: siteConfig.url,
+      },
+      datePublished: portfolio.date || new Date().toISOString(),
+      keywords: portfolio.technologies?.join(', ') || '',
+      about: {
+        '@type': 'Thing',
+        name: portfolio.category || 'Web Development',
+      },
+      ...(portfolio.demoUrl && {
+        mainEntity: {
+          '@type': 'WebApplication',
+          name: portfolio.title,
+          url: portfolio.demoUrl,
+          applicationCategory: 'WebApplication',
+          operatingSystem: 'Any',
+        },
+      }),
+    }
+  }, [portfolio])
+
   // Conditional returns AFTER all hooks
   if (loading) {
     return <PortfolioDetailSkeleton />
@@ -286,9 +372,14 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
     }
   }
 
-
   return (
     <div className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
+      {portfolioJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioJsonLd) }}
+        />
+      )}
       <PortfolioBreadcrumb title={portfolio.title} />
 
       <div className="container mx-auto px-6 pb-32">
