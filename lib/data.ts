@@ -3647,7 +3647,6 @@ export const workExperiences = [
       "Developed design system and component library, ensuring consistency across 8+ feature modules",
       "Conducted user research and usability testing with 30+ merchants, resulting in 25% improvement in user satisfaction scores",
       "Collaborated with development team to ensure pixel-perfect implementation of designs, reducing design-to-development handoff time by 40%",
-      "Designed responsive layouts optimized for various mobile screen sizes, achieving 100% compatibility across tested devices",
     ],
   },
   {
