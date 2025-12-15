@@ -75,8 +75,8 @@ export default function AboutSection() {
   }
 
   return (
-    <section id="about" className="py-24">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-24 max-w-full overflow-x-hidden">
+      <div className="container mx-auto px-4 max-w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial="hidden"
@@ -86,19 +86,13 @@ export default function AboutSection() {
             variants={fadeIn}
             className="relative"
           >
-            {/* Main photo container - full width rectangular design */}
-            <div
-              className="relative h-[340px] w-full rounded-r-2xl"
-              style={{
-                marginLeft: 'calc(-50vw + 50%)', // Full width ke kiri - mentok ke edge kiri viewport
-                width: '65vw', // Lebar 65% viewport - lebih panjang ke kanan
-              }}
-            >
+            {/* Main photo container - responsive design */}
+            <div className="relative h-[340px] w-full rounded-2xl overflow-hidden">
               {/* Background gradient with photo and text inside */}
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-r-3xl overflow-hidden">
-                {/* Text overlay behind photo */}
-                <div className="absolute inset-0 flex items-center justify-start pl-4 sm:pl-24 md:pl-56 lg:pl-40 xl:pl-56 2xl:pl-72">
-                  <div className="text-8xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-gray-300 dark:text-gray-700 opacity-30 select-none">
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+                {/* Text overlay behind photo - hidden on mobile to prevent overflow */}
+                <div className="absolute inset-0 hidden lg:flex items-center justify-start pl-8 xl:pl-16">
+                  <div className="text-5xl xl:text-7xl font-bold text-gray-300 dark:text-gray-700 opacity-30 select-none">
                     <span className="block">WEB</span>
                     <span className="block">DEVELOPER</span>
                   </div>
@@ -109,11 +103,11 @@ export default function AboutSection() {
                   <div
                     className="relative grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
                     style={{
-                      width: '83%', // w-5/6 equivalent - adjust this value (50% to 100%)
-                      height: '83%', // h-5/6 equivalent - adjust this value (50% to 100%)
-                      marginTop: '-5rem', // mt-2 equivalent - adjust this value (-2rem to 2rem)
-                      marginLeft: '0rem', // ml equivalent - adjust this value (-2rem to 2rem)
-                      transform: 'scale(2.0)', // adjust this value (0.5 to 2.0)
+                      width: '83%',
+                      height: '83%',
+                      marginTop: '-5rem',
+                      marginLeft: '0rem',
+                      transform: 'scale(2.0)',
                     }}
                   >
                     <Image

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   keywords: [
     // Primary Skills
     "Frontend Developer",
-    "UI/UX Designer", 
+    "UI/UX Designer",
     "React Developer",
     "Next.js Developer",
     "Vue.js Developer",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "TypeScript Developer",
     "Web Developer",
     "Full Stack Developer",
-    
+
     // Technologies & Frameworks
     "React.js",
     "Next.js",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     "Firebase",
     "Git",
     "GitHub",
-    
+
     // Design & UI/UX
     "UI Design",
     "UX Design",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     "Wireframing",
     "User Experience",
     "User Interface",
-    
+
     // Location & Services
     "Web Developer Indonesia",
     "Frontend Developer Jakarta",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     "Custom Website Development",
     "E-commerce Development",
     "Portfolio Website",
-    
+
     // Personal Information & Education
     "Setiady Ibrahim Anwar",
     "Setiady Anwar",
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
     "Bogor",
     "West Java",
     "Indonesia",
-    
+
     // Certifications & Experience
     "BNSP Certified",
     "Certified Web Developer",
@@ -108,7 +108,7 @@ export const metadata: Metadata = {
     "Kreavoks Digital Agency",
     "Kreavoks",
     "Digital Agency",
-    
+
     // Industry Terms
     "Software Development",
     "Web Application",
@@ -123,7 +123,7 @@ export const metadata: Metadata = {
     "AWS",
     "Vercel",
     "Netlify",
-    
+
     // Business Keywords
     "Hire Web Developer",
     "Web Development Company",
@@ -135,7 +135,7 @@ export const metadata: Metadata = {
     "Technical Consulting",
     "Project Management",
     "Agile Development",
-    
+
     // Academic & Professional Networks
     "IPB Alumni",
     "IPB Graduate",
@@ -150,7 +150,7 @@ export const metadata: Metadata = {
     "Student Developer",
     "Campus Developer",
     "University Developer",
-    
+
     // Personal Branding
     "Setiady Portfolio",
     "Setiady Ibrahim Anwar Portfolio",
@@ -202,12 +202,12 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-    verification: {
-      google: "zgAl9x48b6aAPic1QagBGN37SGoYzCkm2HUivLgUf74",
-      other: {
-        "msvalidate.01": "35DBB23E6006B598582733FEDD095DA0",
-      },
+  verification: {
+    google: "zgAl9x48b6aAPic1QagBGN37SGoYzCkm2HUivLgUf74",
+    other: {
+      "msvalidate.01": "35DBB23E6006B598582733FEDD095DA0",
     },
+  },
 }
 
 export default function RootLayout({
@@ -232,7 +232,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           <ConditionalLayout
             animatedCursor={<AnimatedCursor />}

@@ -27,14 +27,14 @@ export default function CTASection() {
     }, [isContactOpen]);
 
     return (
-        <section className="py-24 md:py-32">
-            <div className="container mx-auto px-4">
+        <section className="py-24 md:py-32 max-w-full">
+            <div className="container mx-auto px-4 max-w-full">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="relative rounded-3xl bg-gray-100 dark:bg-gray-900 p-8 md:p-12 lg:p-16 border border-gray-200 dark:border-gray-800"
+                    className="relative rounded-3xl bg-gray-100 dark:bg-gray-900 p-8 md:p-12 lg:p-16 border border-gray-200 dark:border-gray-800 overflow-hidden"
                 >
                     {/* Decorative elements - subtle */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
@@ -105,7 +105,7 @@ export default function CTASection() {
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: 8, scale: 0.95 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
+                                        className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
                                     >
                                         <div className="py-2">
                                             <button
