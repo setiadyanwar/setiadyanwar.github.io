@@ -1,6 +1,7 @@
 import { User, Code, Users } from "lucide-react"
 import AboutSection from "@/components/about-section"
 import TechStackSection from "@/components/tech-stack-section"
+import CTASection from "@/components/cta-section"
 import EnhancedSectionHeader from "@/components/enhanced-section-header"
 import PageHeaderContainer from "@/components/page-header-container"
 import type { Metadata } from "next"
@@ -38,6 +39,11 @@ export default function AboutPage() {
           iconName="Code"
         />
         <TechStackSection />
+      </div>
+
+      {/* CTA Section */}
+      <div className="mt-20">
+        <CTASection />
       </div>
 
     </div>

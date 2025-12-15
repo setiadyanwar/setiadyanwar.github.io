@@ -54,7 +54,7 @@ export default function AboutSection() {
       src: "/sertifikat/google.png?height=128&width=128",
       alt: "ux sertif",
       title: "Foundations of User Experience (UX) Design",
-      description:  "Gained a solid foundation in UX design principles, conducted user research through interviews, surveys, and usability studies, applied the design thinking framework to solve complex problems, and created wireframes and interactive prototypes to visualize and validate design ideas.",
+      description: "Gained a solid foundation in UX design principles, conducted user research through interviews, surveys, and usability studies, applied the design thinking framework to solve complex problems, and created wireframes and interactive prototypes to visualize and validate design ideas.",
     },
     {
       src: "/sertifikat/sertif-dicoding.png?height=128&width=128",
@@ -75,7 +75,7 @@ export default function AboutSection() {
   }
 
   return (
-    <section id="about" className="py-16">
+    <section id="about" className="py-24">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -87,9 +87,9 @@ export default function AboutSection() {
             className="relative"
           >
             {/* Main photo container - full width rectangular design */}
-            <div 
+            <div
               className="relative h-[340px] w-full rounded-r-2xl"
-              style={{ 
+              style={{
                 marginLeft: 'calc(-50vw + 50%)', // Full width ke kiri - mentok ke edge kiri viewport
                 width: '65vw', // Lebar 65% viewport - lebih panjang ke kanan
               }}
@@ -106,7 +106,7 @@ export default function AboutSection() {
 
                 {/* Photo container */}
                 <div className="absolute inset-0 flex items-center justify-end">
-                  <div 
+                  <div
                     className="relative grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
                     style={{
                       width: '83%', // w-5/6 equivalent - adjust this value (50% to 100%)
@@ -116,15 +116,15 @@ export default function AboutSection() {
                       transform: 'scale(2.0)', // adjust this value (0.5 to 2.0)
                     }}
                   >
-                    <Image 
-                      src="/setiady2.png" 
-                      alt="About Setiady Ibrahim Anwar" 
-                      fill 
+                    <Image
+                      src="/setiady2.png"
+                      alt="About Setiady Ibrahim Anwar"
+                      fill
                       sizes="(max-width: 768px) 100vw, 3500px"
-                      style={{ 
+                      style={{
                         objectFit: "contain", // change to "cover" or "fill" if needed
                         objectPosition: "center" // change to "left", "right", "top", "bottom" if needed
-                      }} 
+                      }}
                     />
                   </div>
                 </div>
@@ -224,7 +224,7 @@ export default function AboutSection() {
                         src={`${selectedImage.src}#view=FitH&toolbar=1&navpanes=1&scrollbar=1`}
                         className="w-full h-full border-0 rounded"
                         title="PDF Preview"
-                        onError={() => {}}
+                        onError={() => { }}
                         allow="fullscreen"
                       />
                     </div>
@@ -232,9 +232,9 @@ export default function AboutSection() {
                       <div className="text-sm text-gray-600 dark:text-gray-400">
                         Use the toolbar above to navigate through pages
                       </div>
-                      <a 
-                        href={selectedImage.src} 
-                        target="_blank" 
+                      <a
+                        href={selectedImage.src}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors inline-flex items-center gap-2"
                       >

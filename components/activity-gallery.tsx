@@ -21,13 +21,13 @@ export default function ActivityGallery() {
       image: "/activity/gdgoc.jpg?height=300&width=500",
       date: "May 2025",
     },
-      {
-        id: 2,
-        title: "Lead Company Visit Himavo MicroIT",
-        description: "I am delighted to have succeeded in becoming the chief organizer of the Company Visit event at Himavo Micro IT which included 75 participants who took part and collaborated with PT Elang Mahkota Teknologi and Indosat Ooredoo Hutchison.",
-        image: "/activity/comvis-2.jpeg?height=300&width=500",
-        date: "July 2024",
-      },
+    {
+      id: 2,
+      title: "Lead Company Visit Himavo MicroIT",
+      description: "I am delighted to have succeeded in becoming the chief organizer of the Company Visit event at Himavo Micro IT which included 75 participants who took part and collaborated with PT Elang Mahkota Teknologi and Indosat Ooredoo Hutchison.",
+      image: "/activity/comvis-2.jpeg?height=300&width=500",
+      date: "July 2024",
+    },
     {
       id: 3,
       title: "User Experience Academy Compfest 2024",
@@ -42,7 +42,7 @@ export default function ActivityGallery() {
       image: "/activity/micro.jpg?height=300&width=500",
       date: "March 2023",
     },
-    
+
     {
       id: 5,
       title: "1st Winner UI/UX Competition Vocational Of Champions.",
@@ -51,18 +51,18 @@ export default function ActivityGallery() {
       date: "November 2024",
     },
     {
-     id: 6,
+      id: 6,
       title: "2nd Winner UI/UX Design at Smart IT Competition",
       description: "Awarded second place in the UI/UX track of the Smart IT Competition.",
       image: "/activity/sic.jpeg?height=300&width=500",
-      date: "Augustus 2024", 
+      date: "Augustus 2024",
     },
     {
-     id: 7,
+      id: 7,
       title: "Mentor UI/UX design at SMKN 4 Bogor",
       description: "Led hands-on UI/UX design workshops for vocational high school students at SMKN 4 Bogor, covering user research, wireframing, and interactive prototyping using Figma.",
       image: "/activity/mte.jpeg?height=300&width=500",
-      date: "Mei 2024", 
+      date: "Mei 2024",
     },
     {
       id: 8,
@@ -87,6 +87,9 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [isScrolling, setIsScrolling] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1280)
+  const sectionRef = useRef<HTMLDivElement>(null)
 
   // Create infinite scroll by duplicating activities
   const infiniteActivities = [...activities, ...activities, ...activities]
@@ -124,6 +127,42 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
     }
   }, [activities])
 
+  // Track scroll progress for container animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Binary state: either 0 (not visible) or 1 (visible)
+        // Snap to shrunken state when 20% of section is visible (faster trigger)
+        const progress = entry.intersectionRatio > 0.2 ? 1 : 0;
+        setScrollProgress(progress);
+      },
+      {
+        threshold: [0, 0.2], // Binary: trigger at 20% visibility
+        rootMargin: '0px 0px 0px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  // Track viewport width for responsive container calculation
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Track viewport to disable mask on mobile
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -156,13 +195,13 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
   // Reset scroll position when reaching boundaries
   const handleScroll = () => {
     if (!scrollRef.current) return
-    
+
     const container = scrollRef.current
     const itemWidth = 320 + 16
     const scrollLeft = container.scrollLeft
     const containerWidth = container.clientWidth
     const totalWidth = container.scrollWidth
-    
+
     // If scrolled to the beginning, jump to middle section
     if (scrollLeft < itemWidth) {
       container.scrollLeft = startIndex * itemWidth
@@ -214,12 +253,55 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
     }
   })()
 
+  // Calculate container padding based on scroll progress
+  // Match the exact container mx-auto px-4 width like other sections
+  // Container max-width varies by breakpoint, we need to calculate the margin
+  // For full effect: from edge (0px) to container margin + px-4 (16px)
+
+
+  // Approximate container margins at different breakpoints:
+  // Mobile: minimal margin, Desktop: significant margin to center
+  // We'll use a responsive calculation using state viewportWidth
+  const containerMaxWidth = 1280; // Tailwind's container max-width
+  const basePadding = 16; // px-4
+
+  // Calculate how much space is on each side when container is centered
+  const containerMargin = Math.max(0, (viewportWidth - containerMaxWidth) / 2);
+  const totalEdgeSpace = containerMargin + basePadding;
+
+  // Use only 50% of the edge space so background doesn't shrink too much
+  // This ensures background still covers content while giving nice shrinking effect
+  const maxShrink = Math.max(totalEdgeSpace * 0.5, basePadding); // Minimum 16px when shrunken
+
+  // Animate from 0 (full-width) to maxShrink (with proper padding)
+  const containerPadding = scrollProgress * maxShrink;
+  const borderRadius = scrollProgress * 24; // 0 to 24px
+
+  // Add dynamic padding: as background shrinks, increase content padding
+  // This prevents content from touching the background edges
+  const contentPadding = 16 + (scrollProgress * 32); // 16px to 48px
+
   return (
-    <div className="relative">
-      {/* Full-bleed dynamic background spanning the viewport width */}
-      <div className={`pointer-events-none absolute inset-y-0 left-0 right-0 w-full -z-10 bg-gradient-to-b ${gradientClass}`} />
-      
-      <div className="container mx-auto px-4 py-16">
+    <div ref={sectionRef} className="relative">
+      {/* Full-bleed dynamic background that shrinks to container */}
+      <div
+        className={`pointer-events-none absolute inset-y-0 -z-10 bg-gradient-to-b ${gradientClass} transition-all duration-300 ease-out`}
+        style={{
+          left: `${containerPadding}px`,
+          right: `${containerPadding}px`,
+          borderRadius: `${borderRadius}px`,
+        }}
+      />
+
+      <div
+        className="container mx-auto transition-all duration-300 ease-out"
+        style={{
+          paddingLeft: `${contentPadding}px`,
+          paddingRight: `${contentPadding}px`,
+          paddingTop: '64px',
+          paddingBottom: '64px',
+        }}
+      >
         {/* Section header inside gradient area */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">Activities</h2>
@@ -227,87 +309,84 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
-      {/* Left: YouTube-style horizontal carousel with fade edges */}
-        <div className="relative">
-        
-        <div 
-          ref={scrollRef}
-          className="flex overflow-x-auto scrollbar-hide gap-4 py-3 px-2 md:px-4" 
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', ...maskStyles }}
-          onScroll={handleScroll}
-        >
-          {infiniteActivities.map((item, idx) => {
-            const actualIndex = idx % activities.length
-            const isActive = actualIndex === currentIndex && idx >= startIndex && idx < startIndex + activities.length
-            
-            return (
-              <div
-                key={`${item.id}-${idx}`}
-                className={`flex-shrink-0 w-72 md:w-80 cursor-pointer transition-transform duration-300 my-1 ${
-                  isActive
-                    ? 'md:scale-[1.03]'
-                    : 'hover:md:scale-[1.02]'
-                }`}
-                onClick={() => {
-                  setCurrentIndex(actualIndex)
-                  setHighlightIndex(actualIndex)
-                }}
-              >
-              <div className="relative rounded-xl md:rounded-lg overflow-hidden shadow-lg">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className={`w-full object-cover transition-all duration-300 ${
-                    isActive ? 'h-48 md:h-52 grayscale-0' : 'h-44 md:h-48 grayscale hover:grayscale-0'
-                  }`}
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <h3 className="text-sm font-semibold line-clamp-2 mb-1">{item.title}</h3>
-                  <p className="text-xs opacity-90">{item.date}</p>
-                </div>
-                {isActive && (
-                  <div className="absolute inset-0 ring-2 ring-indigo-500 rounded-lg" />
-                )}
-                        </div>
-                        </div>
-            );
-          })}
-                    </div>
+          {/* Left: YouTube-style horizontal carousel with fade edges */}
+          <div className="relative">
 
-        {/* Scroll indicators */}
-        <div className="flex justify-center mt-2 space-x-1">
-          {Array.from({ length: Math.ceil(activities.length / 3) }).map((_, idx) => (
             <div
-              key={idx}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                Math.floor(currentIndex / 3) === idx ? 'bg-indigo-600' : 'bg-gray-300'
-              }`}
-            />
-          ))}
-        </div>
-        </div>
- 
-        {/* Right: Text-only details synced with highlight */}
-        <div className="relative">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-transparent backdrop-blur-sm p-6 md:p-8">
-            <div className="flex items-start justify-between gap-4">
-              <span className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                {current.date}
-              </span>
+              ref={scrollRef}
+              className="flex overflow-x-auto scrollbar-hide gap-4 py-3 px-2 md:px-4"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', ...maskStyles }}
+              onScroll={handleScroll}
+            >
+              {infiniteActivities.map((item, idx) => {
+                const actualIndex = idx % activities.length
+                const isActive = actualIndex === currentIndex && idx >= startIndex && idx < startIndex + activities.length
+
+                return (
+                  <div
+                    key={`${item.id}-${idx}`}
+                    className={`flex-shrink-0 w-72 md:w-80 cursor-pointer transition-transform duration-300 my-1 ${isActive
+                      ? 'md:scale-[1.03]'
+                      : 'hover:md:scale-[1.02]'
+                      }`}
+                    onClick={() => {
+                      setCurrentIndex(actualIndex)
+                      setHighlightIndex(actualIndex)
+                    }}
+                  >
+                    <div className="relative rounded-xl md:rounded-lg overflow-hidden shadow-lg">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className={`w-full object-cover transition-all duration-300 ${isActive ? 'h-48 md:h-52 grayscale-0' : 'h-44 md:h-48 grayscale hover:grayscale-0'
+                          }`}
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-3 left-3 right-3 text-white">
+                        <h3 className="text-sm font-semibold line-clamp-2 mb-1">{item.title}</h3>
+                        <p className="text-xs opacity-90">{item.date}</p>
+                      </div>
+                      {isActive && (
+                        <div className="absolute inset-0 ring-2 ring-indigo-500 rounded-lg" />
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <h3 className="mt-2 text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
-              {current.title}
-            </h3>
-            <p className="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-prose">
-              {current.description}
-            </p>
- 
-            <div className="mt-6 h-px bg-gradient-to-r from-gray-200/80 to-transparent dark:from-gray-800" />
-            {/* Pagination removed for minimal design */}
+
+            {/* Scroll indicators */}
+            <div className="flex justify-center mt-2 space-x-1">
+              {Array.from({ length: Math.ceil(activities.length / 3) }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`w-2 h-2 rounded-full transition-colors ${Math.floor(currentIndex / 3) === idx ? 'bg-indigo-600' : 'bg-gray-300'
+                    }`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+
+          {/* Right: Text-only details synced with highlight */}
+          <div className="relative">
+            <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-transparent backdrop-blur-sm p-6 md:p-8">
+              <div className="flex items-start justify-between gap-4">
+                <span className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  {current.date}
+                </span>
+              </div>
+              <h3 className="mt-2 text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+                {current.title}
+              </h3>
+              <p className="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-prose">
+                {current.description}
+              </p>
+
+              <div className="mt-6 h-px bg-gradient-to-r from-gray-200/80 to-transparent dark:from-gray-800" />
+              {/* Pagination removed for minimal design */}
+            </div>
+          </div>
         </div>
       </div>
     </div>

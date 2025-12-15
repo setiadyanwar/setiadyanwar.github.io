@@ -28,12 +28,12 @@ export default function PortfolioSection() {
           demoUrl: item.demo_url,
           repoUrl: item.repo_url,
         }))
-        
+
         // Debug: log first item to verify order
         if (process.env.NODE_ENV !== "production" && transformed.length > 0) {
           console.log("📋 Portfolio Section - First item:", transformed[0].id, transformed[0].title)
         }
-        
+
         setPortfolioItems(transformed)
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
@@ -345,28 +345,26 @@ export default function PortfolioSection() {
   // Use memoized values instead of recalculating
 
   return (
-    <section id="portfolio" className="py-16">
+    <section id="portfolio" className="py-24">
       <div className="container mx-auto px-4">
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-12">
           <div className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => handleFilterChange(category.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  filter === category.id
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${filter === category.id
                     ? "bg-indigo-600 text-white"
                     : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                }`}
+                  }`}
               >
                 <span className="flex items-center">
                   {category.name}
                   <span
-                    className={`ml-2 px-1.5 py-0.5 text-xs rounded-full ${
-                      filter === category.id
+                    className={`ml-2 px-1.5 py-0.5 text-xs rounded-full ${filter === category.id
                         ? "bg-white/20 text-white"
                         : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                    }`}
+                      }`}
                   >
                     {categoryCounts[category.id as keyof typeof categoryCounts]}
                   </span>
@@ -392,7 +390,7 @@ export default function PortfolioSection() {
                 },
               },
             }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
           >
             {paginatedItems.map((item, index) => (
               <PortfolioCard
@@ -417,11 +415,10 @@ export default function PortfolioSection() {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className={`p-2 rounded-full ${
-                currentPage === 1
+              className={`p-2 rounded-full ${currentPage === 1
                   ? "text-gray-400 cursor-not-allowed"
                   : "text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
-              }`}
+                }`}
               aria-label="Previous page"
             >
               <ChevronLeft className="h-6 w-6" />
@@ -432,11 +429,10 @@ export default function PortfolioSection() {
                 <button
                   key={i}
                   onClick={() => handlePageChange(i + 1)}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    currentPage === i + 1
+                  className={`w-10 h-10 rounded-full flex items-center justify-center ${currentPage === i + 1
                       ? "bg-indigo-600 text-white"
                       : "text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
-                  }`}
+                    }`}
                 >
                   {i + 1}
                 </button>
@@ -446,11 +442,10 @@ export default function PortfolioSection() {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className={`p-2 rounded-full ${
-                currentPage === totalPages
+              className={`p-2 rounded-full ${currentPage === totalPages
                   ? "text-gray-400 cursor-not-allowed"
                   : "text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
-              }`}
+                }`}
               aria-label="Next page"
             >
               <ChevronRight className="h-6 w-6" />

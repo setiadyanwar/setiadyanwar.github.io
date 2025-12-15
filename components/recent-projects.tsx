@@ -17,7 +17,7 @@ export default function RecentProjects() {
     .filter((project) => project !== undefined) as typeof portfolioItems
 
   return (
-    <section className="py-8 bg-gray-50 text-gray-900 dark:bg-[#05010d] dark:text-white rounded-3xl overflow-hidden">
+    <section className="py-24 bg-gray-100 text-gray-900 dark:bg-[#05010d] dark:text-white rounded-3xl overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="mb-12 grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center">
           {/* Left content */}
@@ -25,11 +25,10 @@ export default function RecentProjects() {
             <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
               Selected recent projects
               <br />
-              I&apos;ve designed and built
+              I've designed and built
             </h2>
             <p className="text-base text-gray-600 dark:text-gray-300">
-              A selection of recent projects that highlight my work across product design and front-end engineering,
-              presented in a clean, browser-like experience.
+              A selection of recent work showcasing product design and front-end engineering.
             </p>
             <ul className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
               {recentProjects.map((project) => (
