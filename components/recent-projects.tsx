@@ -25,7 +25,7 @@ export default function RecentProjects() {
             <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
               Selected recent projects
               <br />
-              I've designed and built
+              I&apos;ve designed and built
             </h2>
             <p className="text-base text-gray-600 dark:text-gray-300">
               A selection of recent work showcasing product design and front-end engineering.

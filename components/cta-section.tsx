@@ -59,7 +59,7 @@ export default function CTASection() {
                                 animation: 'shine 3s linear infinite',
                             }}
                         >
-                            Let's Work Together
+                            Let&apos;s Work Together
                         </motion.h2>
 
                         <style jsx>{`
@@ -77,7 +77,7 @@ export default function CTASection() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto"
                         >
-                            Ready to bring your ideas to life? Let's create something amazing together.
+                            Ready to bring your ideas to life? Let&apos;s create something amazing together.
                         </motion.p>
 
                         <motion.div
