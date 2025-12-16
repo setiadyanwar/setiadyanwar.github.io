@@ -419,6 +419,120 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                             </div>
                         </section>
 
+                        {/* Process Section */}
+                        <section
+                            id="process"
+                            ref={(el) => {
+                                if (el) sectionRefs.current.process = el
+                            }}
+                            className="pt-12 pb-16 scroll-mt-32"
+                        >
+                            <div className="rounded-3xl bg-[#fafafa] dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
+                                <div className="p-4 sm:p-6 lg:p-8 space-y-6">
+                                    <div className="flex items-center gap-2">
+                                        <span className="inline-flex h-2 w-2 rounded-full bg-indigo-500" />
+                                        <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-indigo-600 dark:text-indigo-400">
+                                            Process
+                                        </h3>
+                                    </div>
+
+                                    {portfolio.projectSteps && portfolio.projectSteps.length > 0 ? (
+                                        <div className="grid gap-4 md:grid-cols-2">
+                                            {portfolio.projectSteps.map((step: any, idx: number) => (
+                                                <div
+                                                    key={idx}
+                                                    className="rounded-2xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 p-5 flex gap-3"
+                                                >
+                                                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-semibold">
+                                                        {idx + 1}
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                            {step.title || `Step ${idx + 1}`}
+                                                        </p>
+                                                        {step.description && (
+                                                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                                                {step.description}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className="text-sm text-gray-600 dark:text-gray-400">Belum ada data proses.</p>
+                                    )}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Outcomes Section */}
+                        <section
+                            id="outcomes"
+                            ref={(el) => {
+                                if (el) sectionRefs.current.outcomes = el
+                            }}
+                            className="pt-6 pb-16 scroll-mt-32"
+                        >
+                            <div className="rounded-3xl bg-[#fafafa] dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
+                                <div className="p-4 sm:p-6 lg:p-8 space-y-6">
+                                    <div className="flex items-center gap-2">
+                                        <span className="inline-flex h-2 w-2 rounded-full bg-green-500" />
+                                        <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-green-600 dark:text-green-400">
+                                            Outcomes
+                                        </h3>
+                                    </div>
+
+                                    {portfolio.outcomes && portfolio.outcomes.length > 0 ? (
+                                        <div className="grid gap-4 md:grid-cols-2">
+                                            {portfolio.outcomes.map((item: any, idx: number) => (
+                                                <div
+                                                    key={idx}
+                                                    className="rounded-2xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 p-5"
+                                                >
+                                                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                        {item.title || `Outcome ${idx + 1}`}
+                                                    </p>
+                                                    {item.description && (
+                                                        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mt-1.5">
+                                                            {item.description}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className="text-sm text-gray-600 dark:text-gray-400">Belum ada data outcomes.</p>
+                                    )}
+
+                                    {portfolio.impact && portfolio.impact.length > 0 && (
+                                        <div className="grid gap-4 md:grid-cols-2">
+                                            {portfolio.impact
+                                                .filter((metric: any) => metric && (metric.label || metric.value || metric.description))
+                                                .map((metric: any, idx: number) => (
+                                                    <div
+                                                        key={idx}
+                                                        className="rounded-2xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 p-5"
+                                                    >
+                                                        <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                                                            {metric.label || `Impact ${idx + 1}`}
+                                                        </p>
+                                                        <p className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                                                            {metric.value || "-"}
+                                                        </p>
+                                                        {metric.description && (
+                                                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mt-1.5">
+                                                                {metric.description}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </section>
+
                         {/* Navigation Buttons */}
                         <div className="flex justify-between items-center pt-16 border-t border-gray-200 dark:border-gray-800">
                             {prevPortfolio ? (
