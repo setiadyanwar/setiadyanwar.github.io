@@ -32,25 +32,88 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic"
 
 async function getEssApiContract() {
-  const filePath = path.join(process.cwd(), "ess-api-contract-be-laravel.yaml")
-  const [content, stats] = await Promise.all([fs.readFile(filePath, "utf8"), fs.stat(filePath)])
+  try {
+    // Try multiple possible paths
+    const possiblePaths = [
+      path.join(process.cwd(), "docs", "ess-api-contract-be-laravel.yaml"),
+      path.join(process.cwd(), "ess-api-contract-be-laravel.yaml"),
+    ]
 
-  return {
-    content,
-    updatedAt: stats.mtime,
-    fileName: path.basename(filePath),
-    sizeInKB: (stats.size / 1024).toFixed(1),
+    let filePath: string | null = null
+    
+    // Find the first existing file
+    for (const testPath of possiblePaths) {
+      try {
+        await fs.access(testPath)
+        filePath = testPath
+        break
+      } catch {
+        continue
+      }
+    }
+
+    if (filePath) {
+      const [content, stats] = await Promise.all([fs.readFile(filePath, "utf8"), fs.stat(filePath)])
+
+      return {
+        content,
+        updatedAt: stats.mtime,
+        fileName: path.basename(filePath),
+        sizeInKB: (stats.size / 1024).toFixed(1),
+      }
+    }
+
+    // Fallback: fetch from GitHub if file not found locally
+    console.warn("ESS API contract file not found locally, trying to fetch from GitHub...")
+    try {
+      const response = await fetch(
+        "https://raw.githubusercontent.com/setiadyanwar/setiadyanwar.github.io/master/docs/ess-api-contract-be-laravel.yaml",
+        { next: { revalidate: 3600 } }
+      )
+      
+      if (!response.ok) {
+        throw new Error(`GitHub fetch failed: ${response.status}`)
+      }
+
+      const content = await response.text()
+      const sizeInKB = (content.length / 1024).toFixed(1)
+
+      return {
+        content,
+        updatedAt: new Date(),
+        fileName: "ess-api-contract-be-laravel.yaml",
+        sizeInKB,
+      }
+    } catch (fetchError) {
+      console.error("Failed to fetch ESS API contract from GitHub:", fetchError)
+      return null
+    }
+  } catch (error) {
+    console.error("Failed to read ESS API contract file:", error)
+    return null
   }
 }
 
 export default async function EssApiPage() {
-  const { content, updatedAt, fileName, sizeInKB } = await getEssApiContract()
+  let content = ""
+  let updatedAt = new Date()
+  let fileName = "ess-api-contract-be-laravel.yaml"
+  let sizeInKB = "0"
   let swaggerSpec: Record<string, unknown> | null = null
 
-  try {
-    swaggerSpec = yaml.load(content) as Record<string, unknown>
-  } catch (error) {
-    console.error("Failed to parse ESS API spec:", error)
+  const contractData = await getEssApiContract()
+  
+  if (contractData) {
+    content = contractData.content
+    updatedAt = contractData.updatedAt
+    fileName = contractData.fileName
+    sizeInKB = contractData.sizeInKB
+
+    try {
+      swaggerSpec = yaml.load(content) as Record<string, unknown>
+    } catch (error) {
+      console.error("Failed to parse ESS API spec:", error)
+    }
   }
 
   const formattedDate = new Intl.DateTimeFormat("id-ID", {
@@ -104,7 +167,12 @@ export default async function EssApiPage() {
               </div>
             </div>
             <div className="p-4 md:p-6">
-              {swaggerSpec ? (
+              {!content ? (
+                <div className="rounded-xl border border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950 p-4 text-sm text-red-800 dark:text-red-200">
+                  <p className="font-semibold mb-2">Gagal memuat file kontrak API</p>
+                  <p>File tidak dapat dibaca. Silakan coba lagi nanti atau unduh file langsung dari GitHub.</p>
+                </div>
+              ) : swaggerSpec ? (
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
                     <span className="inline-flex h-2 w-2 rounded-full bg-blue-500" />
@@ -113,7 +181,7 @@ export default async function EssApiPage() {
                   <SwaggerViewer spec={swaggerSpec} />
                 </div>
               ) : (
-                <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800">
+                <div className="rounded-xl border border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-950 p-4 text-sm text-yellow-800 dark:text-yellow-200">
                   Tidak dapat memuat preview Swagger. Silakan unduh file YAML untuk melihat detail lengkapnya.
                 </div>
               )}
