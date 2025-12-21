@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   },
 }
 
+// Revalidate every 5 minutes for fresh data
+export const revalidate = 300
+
 export default function PortfolioPage() {
   return (
     <div className="container mx-auto px-4 py-12">
