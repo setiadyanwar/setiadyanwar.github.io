@@ -20,7 +20,7 @@ export async function getPortfolioItems() {
 
   const { data, error } = await supabase
     .from("portfolio_items")
-    .select("*")
+    .select("id, title, subtitle, category, image, technologies, date, created_at, display_order")
     .order("display_order", { ascending: true })
     .order("created_at", { ascending: false })
 

@@ -8,7 +8,8 @@ import PortfolioDetailSkeleton from "@/components/portfolio/portfolio-detail-ske
 
 // ... (keep generateMetadata as is)
 
-export const dynamic = 'force-dynamic'
+// Revalidate every 5 minutes for fresh data while maintaining performance
+export const revalidate = 300
 
 export default async function PortfolioDetail({ params }: { params: { id: string } }) {
   // Fetch data server-side

@@ -468,10 +468,13 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                     className="relative w-full max-w-3xl rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-sm"
                                                     style={{ aspectRatio: "16/9" }}
                                                 >
-                                                    <img
+                                                    <Image
                                                         src={step.image}
                                                         alt={step.title || "Process image"}
-                                                        className="absolute inset-0 w-full h-full object-cover"
+                                                        fill
+                                                        className="object-cover"
+                                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+                                                        priority={idx === 0}
                                                     />
                                                 </div>
                                             )}
