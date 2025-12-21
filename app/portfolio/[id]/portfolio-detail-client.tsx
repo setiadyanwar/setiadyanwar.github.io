@@ -145,7 +145,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
         <div className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
             <PortfolioBreadcrumb title={portfolio.title} />
 
-            <div className="container mx-auto px-6 pb-32">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24 lg:pb-32">
                 <MobileNavigationToggle
                     isOpen={isMobileMenuOpen}
                     onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -159,7 +159,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                     onClose={() => setIsMobileMenuOpen(false)}
                 />
 
-                <div className="flex gap-12 lg:gap-20">
+                <div className="flex gap-6 md:gap-12 lg:gap-20">
                     <PortfolioNavigation
                         sections={sections}
                         activeSection={activeSection}
@@ -167,16 +167,16 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                     />
 
                     {/* Main Content */}
-                    <main className="flex-1 max-w-4xl">
+                    <main className="flex-1 w-full max-w-4xl">
                         {/* Overview Section */}
                         <section
                             id="overview"
                             ref={(el) => {
                                 if (el) sectionRefs.current.overview = el
                             }}
-                            className="pt-4 pb-24 scroll-mt-32"
+                            className="pt-4 pb-12 sm:pb-16 md:pb-24 scroll-mt-32"
                         >
-                            <div className="space-y-16">
+                            <div className="space-y-8 sm:space-y-12 md:space-y-16">
                                 {/* Hero Header */}
                                 <div className="space-y-4">
                                     {portfolio.date && (
@@ -185,12 +185,12 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                         </p>
                                     )}
 
-                                    <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 dark:text-gray-100 leading-[1.1] tracking-tight">
+                                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 dark:text-gray-100 leading-[1.1] tracking-tight">
                                         {portfolio.title}
                                     </h1>
 
                                     {portfolio.subtitle && (
-                                        <p className="text-base text-gray-500 dark:text-gray-500 leading-relaxed max-w-3xl">
+                                        <p className="text-sm sm:text-base text-gray-500 dark:text-gray-500 leading-relaxed max-w-3xl">
                                             {portfolio.subtitle}
                                         </p>
                                     )}
@@ -226,17 +226,17 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                 </div>
 
                                 {/* Project Overview */}
-                                <div className="space-y-10">
+                                <div className="space-y-6 sm:space-y-8 md:space-y-10">
                                     <div>
                                         <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 tracking-wide uppercase">
                                             Project Overview
                                         </h4>
                                         {portfolio.overviewHeading && (
-                                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                                            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
                                                 {portfolio.overviewHeading}
                                             </h2>
                                         )}
-                                        <div className="prose prose-lg prose-indigo dark:prose-invert max-w-3xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        <div className="prose prose-sm sm:prose-base md:prose-lg prose-indigo dark:prose-invert max-w-3xl text-gray-700 dark:text-gray-300 leading-relaxed">
                                             <ReactMarkdown
                                                 components={{
                                                     p: ({ node, ...props }) => <p className="mb-6 last:mb-0" {...props} />,
@@ -267,10 +267,10 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                     <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 tracking-wide uppercase">
                                         Challenges
                                     </h4>
-                                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
                                         {portfolio.challengesHeading || "The Challenge"}
                                     </h2>
-                                    <div className="prose prose-lg prose-indigo dark:prose-invert max-w-3xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    <div className="prose prose-sm sm:prose-base md:prose-lg prose-indigo dark:prose-invert max-w-3xl text-gray-700 dark:text-gray-300 leading-relaxed">
                                         <ReactMarkdown
                                             components={{
                                                 p: ({ node, ...props }) => <p className="mb-6 last:mb-0" {...props} />,
@@ -294,7 +294,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                         >
                             <div className="rounded-3xl bg-[#fafafa] dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
                                 <div className="p-4 sm:p-6 lg:p-8">
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
                                         <div className="order-1 lg:order-1">
                                             <div
                                                 className="relative h-full w-full rounded-[32px] bg-gray-100 dark:bg-gray-900 overflow-hidden"
@@ -324,7 +324,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                     {portfolio.problemHeading || "Problem"}
                                                 </h4>
 
-                                                <div className="text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
+                                                <div className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
                                                     <ReactMarkdown
                                                         components={{
                                                             p: ({ node, ...props }) => <p className="mb-0" {...props} />,
@@ -379,7 +379,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                     {portfolio.solutionHeading || "Solution"}
                                                 </h4>
 
-                                                <div className="text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
+                                                <div className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
                                                     <ReactMarkdown
                                                         components={{
                                                             p: ({ node, ...props }) => <p className="mb-0" {...props} />,
@@ -450,7 +450,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                     <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase mb-3">
                                         Process
                                     </h4>
-                                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+                                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 sm:mb-8">
                                         {portfolio.processHeading || "The Journey"}
                                     </h2>
                                 </div>
@@ -480,7 +480,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                             )}
 
                                             {step.description && (
-                                                <div className="prose prose-lg prose-indigo dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed">
+                                                <div className="prose prose-sm sm:prose-base md:prose-lg prose-indigo dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed">
                                                     <ReactMarkdown
                                                         components={{
                                                             p: ({ node, ...props }) => <p className="mb-6 last:mb-0" {...props} />,
