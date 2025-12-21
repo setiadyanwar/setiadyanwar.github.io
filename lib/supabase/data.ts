@@ -33,10 +33,6 @@ export async function getPortfolioItems() {
     return portfolioItems
   }
 
-  // Debug: log first item to verify order
-  if (process.env.NODE_ENV !== "production" && data && data.length > 0) {
-    console.log("📋 Portfolio order - First item:", data[0].id, data[0].title, "display_order:", data[0].display_order)
-  }
 
   return data || []
 }
@@ -52,6 +48,7 @@ export async function getPortfolioItemById(id: string) {
     .from("portfolio_items")
     .select("*")
     .eq("id", id)
+    .order("updated_at", { ascending: false })
     .single()
 
   if (error) {

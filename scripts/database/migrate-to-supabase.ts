@@ -44,7 +44,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 async function migratePortfolioItems() {
   console.log("📦 Migrating portfolio items...")
-  
+
   for (const item of portfolioItems) {
     const { error } = await supabase.from("portfolio_items").upsert(
       {
@@ -56,6 +56,12 @@ async function migratePortfolioItems() {
         image: item.image,
         additional_images: item.additionalImages || [],
         technologies: item.technologies || [],
+        overview_heading: (item as any).overviewHeading,
+        process_heading: (item as any).processHeading || "The Journey",
+        challenges_heading: (item as any).challengesHeading || "The Challenge",
+        problem_heading: (item as any).problemHeading || "Problem",
+        solution_heading: (item as any).solutionHeading || "Solution",
+        outcomes_heading: (item as any).outcomesHeading || "Outcomes",
         description: item.description,
         role: item.role,
         responsibilities: item.responsibilities || [],
@@ -84,13 +90,13 @@ async function migratePortfolioItems() {
       console.log(`✅ Migrated: ${item.title}`)
     }
   }
-  
+
   console.log(`✅ Completed migrating ${portfolioItems.length} portfolio items\n`)
 }
 
 async function migrateWorkExperiences() {
   console.log("💼 Migrating work experiences...")
-  
+
   for (let i = 0; i < workExperiences.length; i++) {
     const exp = workExperiences[i]
     const { error } = await supabase.from("work_experiences").upsert(
@@ -113,13 +119,13 @@ async function migrateWorkExperiences() {
       console.log(`✅ Migrated: ${exp.title} at ${exp.company}`)
     }
   }
-  
+
   console.log(`✅ Completed migrating ${workExperiences.length} work experiences\n`)
 }
 
 async function migrateEducationExperiences() {
   console.log("🎓 Migrating education experiences...")
-  
+
   for (let i = 0; i < educationExperiences.length; i++) {
     const exp = educationExperiences[i]
     const { error } = await supabase.from("education_experiences").upsert(
@@ -142,13 +148,13 @@ async function migrateEducationExperiences() {
       console.log(`✅ Migrated: ${exp.title} at ${exp.company}`)
     }
   }
-  
+
   console.log(`✅ Completed migrating ${educationExperiences.length} education experiences\n`)
 }
 
 async function migrateOrganizationExperiences() {
   console.log("👥 Migrating organization experiences...")
-  
+
   for (let i = 0; i < organizationExperiences.length; i++) {
     const exp = organizationExperiences[i]
     const { error } = await supabase.from("organization_experiences").upsert(
@@ -171,13 +177,13 @@ async function migrateOrganizationExperiences() {
       console.log(`✅ Migrated: ${exp.title} at ${exp.company}`)
     }
   }
-  
+
   console.log(`✅ Completed migrating ${organizationExperiences.length} organization experiences\n`)
 }
 
 async function migrateTechnologies() {
   console.log("🛠️  Migrating technologies...")
-  
+
   for (const tech of technologies) {
     const { error } = await supabase.from("technologies").upsert(
       {
@@ -193,20 +199,20 @@ async function migrateTechnologies() {
       console.log(`✅ Migrated: ${tech.name}`)
     }
   }
-  
+
   console.log(`✅ Completed migrating ${technologies.length} technologies\n`)
 }
 
 async function main() {
   console.log("🚀 Starting migration to Supabase...\n")
-  
+
   try {
     await migratePortfolioItems()
     await migrateWorkExperiences()
     await migrateEducationExperiences()
     await migrateOrganizationExperiences()
     await migrateTechnologies()
-    
+
     console.log("🎉 Migration completed successfully!")
   } catch (error) {
     console.error("❌ Migration failed:", error)

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Save, X, Plus, Trash2, Eye } from "lucide-react"
+import { Save, X, Plus, Trash2, Eye, Sparkles } from "lucide-react"
 import Link from "next/link"
 
 interface PortfolioFormData {
@@ -31,6 +31,12 @@ interface PortfolioFormData {
   outcomes: Array<{ type: string; value: number; unit: string; title: string; description: string }>
   next_steps: string
   project_steps: Array<{ title: string; description: string; image: string | null }>
+  overview_heading: string
+  process_heading: string
+  challenges_heading: string
+  problem_heading: string
+  solution_heading: string
+  outcomes_heading: string
 }
 
 const defaultFormData: PortfolioFormData = {
@@ -59,6 +65,12 @@ const defaultFormData: PortfolioFormData = {
   outcomes: [],
   next_steps: "",
   project_steps: [],
+  overview_heading: "",
+  process_heading: "",
+  challenges_heading: "",
+  problem_heading: "",
+  solution_heading: "",
+  outcomes_heading: "",
 }
 
 export default function PortfolioForm({ portfolioId }: { portfolioId?: string }) {
@@ -117,6 +129,12 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
         outcomes: data.outcomes || [],
         next_steps: data.next_steps || "",
         project_steps: data.project_steps || [],
+        overview_heading: data.overview_heading || "",
+        process_heading: data.process_heading || "",
+        challenges_heading: data.challenges_heading || "",
+        problem_heading: data.problem_heading || "",
+        solution_heading: data.solution_heading || "",
+        outcomes_heading: data.outcomes_heading || "",
       })
     } catch (error) {
       if (process.env.NODE_ENV !== "production") {
@@ -165,6 +183,45 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
     { id: "outcomes", label: "Outcomes" },
     { id: "process", label: "Process" },
   ]
+
+  // Helper to insert markdown bold syntax for highlighting
+  const insertHighlight = (elementId: string, field: keyof PortfolioFormData | 'problem_cards' | 'solution_cards', cardIdx?: number, cardField?: 'description') => {
+    const textarea = document.getElementById(elementId) as HTMLTextAreaElement
+    if (!textarea) return
+
+    const start = textarea.selectionStart
+    const end = textarea.selectionEnd
+    const text = textarea.value
+    const selectedText = text.substring(start, end)
+
+    // Toggle highlight if already highlighted, otherwise add it
+    let newText = ''
+    if (selectedText.startsWith('**') && selectedText.endsWith('**') && selectedText.length >= 4) {
+      newText = text.substring(0, start) + selectedText.substring(2, selectedText.length - 2) + text.substring(end)
+    } else {
+      newText = text.substring(0, start) + `**${selectedText}**` + text.substring(end)
+    }
+
+    // Update state based on field type
+    if (field === 'problem_cards' && typeof cardIdx === 'number' && cardField) {
+      const newCards = [...formData.problem_cards]
+      newCards[cardIdx] = { ...newCards[cardIdx], [cardField]: newText }
+      setFormData({ ...formData, problem_cards: newCards })
+    } else if (field === 'solution_cards' && typeof cardIdx === 'number' && cardField) {
+      const newCards = [...formData.solution_cards]
+      newCards[cardIdx] = { ...newCards[cardIdx], [cardField]: newText }
+      setFormData({ ...formData, solution_cards: newCards })
+    } else if (typeof field === 'string' && !cardIdx) {
+      setFormData({ ...formData, [field]: newText as any })
+    }
+
+    // Restore focus and selection (adjusted for added/removed chars)
+    setTimeout(() => {
+      textarea.focus()
+      const offset = selectedText.startsWith('**') ? -2 : 2
+      textarea.setSelectionRange(start + offset, end + offset)
+    }, 0)
+  }
 
   if (loading) {
     return (
@@ -215,11 +272,10 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${
-                  activeTab === tab.id
-                    ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
-                }`}
+                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${activeTab === tab.id
+                  ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                  }`}
               >
                 {tab.label}
               </button>
@@ -403,15 +459,41 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
           <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Description
+                Overview Heading
               </label>
+              <input
+                type="text"
+                value={formData.overview_heading}
+                onChange={(e) => setFormData({ ...formData, overview_heading: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="e.g., The Vision, Project Strategy"
+              />
+            </div>
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Description
+                </label>
+                <button
+                  type="button"
+                  onClick={() => insertHighlight('description-input', 'description')}
+                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Highlight Selection
+                </button>
+              </div>
               <textarea
+                id="description-input"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={6}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Brief description of the project..."
+                placeholder="Brief description of the project... (Select text and click Highlight to emphasize)"
               />
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Tip: You can highlight text to make it look like <strong className="bg-amber-100 dark:bg-amber-900/30 font-medium px-0.5 rounded text-gray-900 dark:text-gray-100">stabilo</strong> by selecting it and clicking the button above.
+              </p>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -472,10 +554,21 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
               </button>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Challenges
-              </label>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Challenges
+                </label>
+                <button
+                  type="button"
+                  onClick={() => insertHighlight('challenges-input', 'challenges')}
+                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Highlight Selection
+                </button>
+              </div>
               <textarea
+                id="challenges-input"
                 value={formData.challenges}
                 onChange={(e) => setFormData({ ...formData, challenges: e.target.value })}
                 rows={4}
@@ -530,194 +623,7 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                 Add Image
               </button>
             </div>
-          </div>
-        )}
 
-        {/* Problem Tab */}
-        {activeTab === "problem" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Problem Description
-              </label>
-              <textarea
-                value={formData.problem_description}
-                onChange={(e) => setFormData({ ...formData, problem_description: e.target.value })}
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Describe the problem that this project solves..."
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Problem Image URL
-              </label>
-              <input
-                type="text"
-                value={formData.problem_image}
-                onChange={(e) => setFormData({ ...formData, problem_image: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="/portfolio/web/image.png or https://images.unsplash.com/..."
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Problem Cards
-              </label>
-              <div className="space-y-4">
-                {formData.problem_cards.map((card, idx) => (
-                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
-                      <input
-                        type="text"
-                        value={card.title}
-                        onChange={(e) => {
-                          const newCards = [...formData.problem_cards]
-                          newCards[idx] = { ...card, title: e.target.value }
-                          setFormData({ ...formData, problem_cards: newCards })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Card title"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFormData({
-                            ...formData,
-                            problem_cards: formData.problem_cards.filter((_, i) => i !== idx),
-                          })
-                        }}
-                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
-                      >
-                        <Trash2 className="w-4 h-4 inline mr-2" />
-                        Remove
-                      </button>
-                    </div>
-                    <textarea
-                      value={card.description}
-                      onChange={(e) => {
-                        const newCards = [...formData.problem_cards]
-                        newCards[idx] = { ...card, description: e.target.value }
-                        setFormData({ ...formData, problem_cards: newCards })
-                      }}
-                      rows={2}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Card description"
-                    />
-                  </div>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    problem_cards: [...formData.problem_cards, { title: "", description: "" }],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Problem Card
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Solution Tab */}
-        {activeTab === "solution" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Solution Description
-              </label>
-              <textarea
-                value={formData.solution_description}
-                onChange={(e) => setFormData({ ...formData, solution_description: e.target.value })}
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Describe the solution implemented..."
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Solution Image URL
-              </label>
-              <input
-                type="text"
-                value={formData.solution_image}
-                onChange={(e) => setFormData({ ...formData, solution_image: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="/portfolio/web/image.png or https://images.unsplash.com/..."
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Solution Cards
-              </label>
-              <div className="space-y-4">
-                {formData.solution_cards.map((card, idx) => (
-                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
-                      <input
-                        type="text"
-                        value={card.title}
-                        onChange={(e) => {
-                          const newCards = [...formData.solution_cards]
-                          newCards[idx] = { ...card, title: e.target.value }
-                          setFormData({ ...formData, solution_cards: newCards })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Card title"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFormData({
-                            ...formData,
-                            solution_cards: formData.solution_cards.filter((_, i) => i !== idx),
-                          })
-                        }}
-                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
-                      >
-                        <Trash2 className="w-4 h-4 inline mr-2" />
-                        Remove
-                      </button>
-                    </div>
-                    <textarea
-                      value={card.description}
-                      onChange={(e) => {
-                        const newCards = [...formData.solution_cards]
-                        newCards[idx] = { ...card, description: e.target.value }
-                        setFormData({ ...formData, solution_cards: newCards })
-                      }}
-                      rows={2}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Card description"
-                    />
-                  </div>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    solution_cards: [...formData.solution_cards, { title: "", description: "" }],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Solution Card
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Outcomes Tab */}
-        {activeTab === "outcomes" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Impact
@@ -809,12 +715,290 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                     ],
                   })
                 }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg mb-6"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
               >
                 <Plus className="w-4 h-4" />
                 Add Impact
               </button>
             </div>
+          </div>
+        )}
+
+        {/* Challenges Tab */}
+        {activeTab === "challenges" && (
+          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Challenges Heading
+              </label>
+              <input
+                type="text"
+                value={formData.challenges_heading}
+                onChange={(e) => setFormData({ ...formData, challenges_heading: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="e.g. The Challenge"
+              />
+            </div>
+
+            <div className="relative">
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Challenges Description
+                </label>
+                <button
+                  type="button"
+                  onClick={() => insertHighlight('challenges-input', 'challenges')}
+                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Highlight Selection
+                </button>
+              </div>
+              <textarea
+                id="challenges-input"
+                value={formData.challenges}
+                onChange={(e) => setFormData({ ...formData, challenges: e.target.value })}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="Describe the challenges faced..."
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Problem Tab */}
+        {activeTab === "problem" && (
+          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem Description
+                </label>
+                <button
+                  type="button"
+                  onClick={() => insertHighlight('problem-desc-input', 'problem_description')}
+                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Highlight Selection
+                </button>
+              </div>
+              <textarea
+                id="problem-desc-input"
+                value={formData.problem_description}
+                onChange={(e) => setFormData({ ...formData, problem_description: e.target.value })}
+                rows={6}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="Describe the problem that this project solves..."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Problem Image URL
+              </label>
+              <input
+                type="text"
+                value={formData.problem_image}
+                onChange={(e) => setFormData({ ...formData, problem_image: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="/portfolio/web/image.png or https://images.unsplash.com/..."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Problem Cards
+              </label>
+              <div className="space-y-4">
+                {formData.problem_cards.map((card, idx) => (
+                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                      <input
+                        type="text"
+                        value={card.title}
+                        onChange={(e) => {
+                          const newCards = [...formData.problem_cards]
+                          newCards[idx] = { ...card, title: e.target.value }
+                          setFormData({ ...formData, problem_cards: newCards })
+                        }}
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                        placeholder="Card title"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData({
+                            ...formData,
+                            problem_cards: formData.problem_cards.filter((_, i) => i !== idx),
+                          })
+                        }}
+                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
+                      >
+                        <Trash2 className="w-4 h-4 inline mr-2" />
+                        Remove
+                      </button>
+                    </div>
+                    <textarea
+                      value={card.description}
+                      onChange={(e) => {
+                        const newCards = [...formData.problem_cards]
+                        newCards[idx] = { ...card, description: e.target.value }
+                        setFormData({ ...formData, problem_cards: newCards })
+                      }}
+                      rows={2}
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      placeholder="Card description"
+                    />
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData({
+                    ...formData,
+                    problem_cards: [...formData.problem_cards, { title: "", description: "" }],
+                  })
+                }}
+                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
+              >
+                <Plus className="w-4 h-4" />
+                Add Problem Card
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Solution Tab */}
+        {activeTab === "solution" && (
+          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Solution Heading
+              </label>
+              <input
+                type="text"
+                value={formData.solution_heading}
+                onChange={(e) => setFormData({ ...formData, solution_heading: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="e.g. A Unified Approach"
+              />
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Solution Description
+                </label>
+                <button
+                  type="button"
+                  onClick={() => insertHighlight('solution-desc-input', 'solution_description')}
+                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Highlight Selection
+                </button>
+              </div>
+              <textarea
+                id="solution-desc-input"
+                value={formData.solution_description}
+                onChange={(e) => setFormData({ ...formData, solution_description: e.target.value })}
+                rows={6}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="Describe the solution implemented..."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Solution Image URL
+              </label>
+              <input
+                type="text"
+                value={formData.solution_image}
+                onChange={(e) => setFormData({ ...formData, solution_image: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="/portfolio/web/image.png or https://images.unsplash.com/..."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Solution Cards
+              </label>
+              <div className="space-y-4">
+                {formData.solution_cards.map((card, idx) => (
+                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                      <input
+                        type="text"
+                        value={card.title}
+                        onChange={(e) => {
+                          const newCards = [...formData.solution_cards]
+                          newCards[idx] = { ...card, title: e.target.value }
+                          setFormData({ ...formData, solution_cards: newCards })
+                        }}
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                        placeholder="Card title"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData({
+                            ...formData,
+                            solution_cards: formData.solution_cards.filter((_, i) => i !== idx),
+                          })
+                        }}
+                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
+                      >
+                        <Trash2 className="w-4 h-4 inline mr-2" />
+                        Remove
+                      </button>
+                    </div>
+                    <textarea
+                      value={card.description}
+                      onChange={(e) => {
+                        const newCards = [...formData.solution_cards]
+                        newCards[idx] = { ...card, description: e.target.value }
+                        setFormData({ ...formData, solution_cards: newCards })
+                      }}
+                      rows={2}
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      placeholder="Card description"
+                    />
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData({
+                    ...formData,
+                    solution_cards: [...formData.solution_cards, { title: "", description: "" }],
+                  })
+                }}
+                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
+              >
+                <Plus className="w-4 h-4" />
+                Add Solution Card
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Outcomes Tab */}
+        {activeTab === "outcomes" && (
+          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Outcomes Heading
+              </label>
+              <input
+                type="text"
+                value={formData.outcomes_heading}
+                onChange={(e) => setFormData({ ...formData, outcomes_heading: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="e.g. Measurable Results"
+              />
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Outcomes
@@ -932,6 +1116,19 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
           <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Process Section Heading
+              </label>
+              <input
+                type="text"
+                value={formData.process_heading}
+                onChange={(e) => setFormData({ ...formData, process_heading: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="e.g. Design Process, Development Steps"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Project Steps
               </label>
               <div className="space-y-4">
@@ -974,8 +1171,8 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                         setFormData({ ...formData, project_steps: newSteps })
                       }}
                       rows={3}
-                      className="w-full mb-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Step description"
+                      className="w-full mb-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono text-sm"
+                      placeholder="Step description (Markdown supported)"
                     />
                     <div>
                       <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">

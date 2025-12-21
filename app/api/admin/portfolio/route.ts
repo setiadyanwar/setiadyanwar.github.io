@@ -74,6 +74,13 @@ export async function POST(request: NextRequest) {
         outcomes: body.outcomes || [],
         next_steps: body.next_steps || null,
         project_steps: body.project_steps || [],
+        overview_heading: body.overview_heading || null,
+        process_heading: body.process_heading || null,
+        challenges_heading: body.challenges_heading || null,
+        problem_heading: body.problem_heading || null,
+        solution_heading: body.solution_heading || null,
+        outcomes_heading: body.outcomes_heading || null,
+        updated_at: new Date().toISOString(),
       })
       .select()
       .single()

@@ -11,8 +11,9 @@ export const portfolioItems = [
       "/portfolio/web/kreavoks-2.png?height=180&width=320",
     ],
     technologies: ["React", "Laravel", "TailwindCSS", "Typescript", "MySQL"],
+    overviewHeading: "The Vision",
     description:
-      "Kreavoks is a multi-purpose platform built to support personal branding, deliver e-learning content, and attract clients for custom software development services. Designed to empower digital talents, Kreavoks also aims to open job opportunities for mentors by connecting them with students and companies in need of guidance, training, or development services. The platform includes a service showcase, a mentorship recruitment form, an LMS feature, and a booking system.",
+      "Kreavoks is a comprehensive digital ecosystem designed to **bridge the gap between education, personal branding, and professional services**. It serves three distinct user groups: students seeking mentorship, experts building their personal brand, and businesses looking for custom software solutions. By unifying these needs into a single hub, Kreavoks creates a seamless environment where learning directly translates into professional opportunity.\n\nTechnically, the platform is built for scale, featuring a **robust multi-role authentication system** and a **structured Learning Management System (LMS)**. Key capabilities include a seamless booking engine for mentorship sessions and a dynamic content management system. This architecture ensures a cohesive, efficient, and user-centric experience that empowers the entire digital creative community.",
     role: "Lead Developer and Fullstack Web Developer",
     responsibilities: [
       "Entire website development from concept to implementation",
@@ -28,7 +29,7 @@ export const portfolioItems = [
     solutionImage:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
     problemDescription:
-      "The team needed a single platform that could handle branding, e-learning, and service sales without confusing different user types. Before Kreavoks, mentor onboarding, course purchases, and custom project requests were scattered across multiple inconsistent forms and channels.",
+      "The team needed a **single platform** that could handle branding, e-learning, and service sales without confusing different user types. Before Kreavoks, mentor onboarding, course purchases, and custom project requests were **scattered across multiple inconsistent forms** and channels.",
     problemCards: [
       {
         title: "Fragmented user journey",
@@ -52,7 +53,7 @@ export const portfolioItems = [
       },
     ],
     solutionDescription:
-      "I designed Kreavoks as a unified platform with three clear paths: personal branding, e-learning, and custom software services. Using an atomic design approach and consistent grid layout, each path feels connected while still focusing on the needs of its primary audience.",
+      "I designed Kreavoks as a **unified platform** with three clear paths: personal branding, e-learning, and custom software services. Using an **atomic design approach** and consistent grid layout, each path feels connected while still focusing on the needs of its primary audience.",
     solutionCards: [
       {
         title: "Reworked information architecture",
@@ -119,31 +120,31 @@ export const portfolioItems = [
         title: "Market Research & Planning ",
         description:
           "Identifying user needs, industry trends, and strategic goals for platform development.",
-        image: null,
+        image: "/portfolio/steps/kreavoks-1.png",
       },
       {
         title: "UI/UX Design & Prototyping",
         description:
           "Creating an intuitive interface and interactive prototype to validate the design.",
-        image: null,
+        image: "/portfolio/steps/kreavoks-2.png",
       },
       {
         title: "Development & Feature Implementation",
         description:
           "Building the frontend with React, backend with Laravel, and integrating LMS and booking systems.",
-        image: null,
+        image: "/portfolio/steps/kreavoks-3.png",
       },
       {
         title: "Optimization & Testing",
         description:
           "Enhancing performance with caching and lazy loading, followed by comprehensive system testing.",
-        image: null,
+        image: "/portfolio/steps/kreavoks-4.png",
       },
       {
         title: "Deployment & Marketing",
         description:
           " Launching the website and developing digital marketing strategies to boost visibility and engagement.",
-        image: null,
+        image: "/portfolio/steps/kreavoks-5.png",
       },
     ],
   },
@@ -159,8 +160,9 @@ export const portfolioItems = [
     //   "/portfolio/web/nobarin-2.png?height=180&width=320",
     // ],
     technologies: ["Vue.js", "Pinia", "TailwindCSS", "TMDB API", "Vite"],
+    overviewHeading: "Project Strategy",
     description:
-      "Nobarin is a modern movie browsing and streaming platform built using Vue.js. It fetches real-time data from the TMDB API and allows users to explore movie details, manage their favorite movies, and experience a responsive, engaging UI. Designed with a focus on smooth navigation and scalability, the platform supports dynamic routing and modular components.",
+      "Nobarin is a modern, feature-rich movie discovery and streaming platform designed to **transform how users explore cinema**. In an era where content is abundant but scattered, Nobarin provides a centralized, intuitive interface that **aggregates real-time data from the TMDB API**, offering users instant access to trending movies, detailed synopses, cast information, and personalized recommendations.\n\nBuilt with performance and user experience in mind, the application leverages the power of **Vue.js and Pinia** for lightning-fast state management and seamless page transitions. Users can curate their own experience by managing a personal 'Favorites' list, filtering movies by genre, and accessing detailed metadata without ever facing a loading spinner.\n\nBeyond just a catalog, Nobarin focuses on engagement. The responsive design ensures a **premium experience across all devices**, from desktop monitors to mobile screens. By combining clean aesthetics with robust functionality, Nobarin serves as the ultimate companion for movie enthusiasts looking to decide what to watch next.",
     role: "Fullstack Developer handling frontend design, API integration, and routing logic.",
     challenges:
       "Integrating dynamic movie data from TMDB, managing application state using Pinia, and ensuring responsive UI across devices while maintaining clean code structure. A special focus was given to UX flow between movie browsing, details, and favorites page.",
@@ -171,7 +173,7 @@ export const portfolioItems = [
     solutionImage:
       "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1200&q=80",
     problemDescription:
-      "Movie enthusiasts struggled to find relevant titles and continue exploring because information was scattered across multiple sites and many catalog UIs felt heavy and cluttered.",
+      "Movie enthusiasts struggled to **find relevant titles** and continue exploring because information was **scattered across multiple sites** and many catalog UIs felt heavy and cluttered.",
     problemCards: [
       {
         title: "Scattered movie data",
@@ -195,7 +197,7 @@ export const portfolioItems = [
       },
     ],
     solutionDescription:
-      "Nobarin brings movie browsing, title details, and favorites into one light, responsive experience built with Vue, Pinia, and TailwindCSS. I focused the design on consistent movie cards, clear filters, and smooth transitions between browsing and detail views.",
+      "Nobarin brings **movie browsing**, title details, and favorites into one light, responsive experience built with **Vue, Pinia, and TailwindCSS**. I focused the design on **consistent movie cards**, clear filters, and smooth transitions between browsing and detail views.",
     solutionCards: [
       {
         title: "TMDB API integration",
@@ -262,31 +264,31 @@ export const portfolioItems = [
         title: "Requirement Gathering & Planning",
         description:
           "Planning features such as movie search, favorites, and detail view using data from TMDB API.",
-        image: null,
+        image: "/portfolio/steps/nobarin-1.png",
       },
       {
         title: "UI Design & Component Setup",
         description:
           "Designing the interface using TailwindCSS and building reusable Vue components for navbar, cards, etc.",
-        image: null,
+        image: "/portfolio/steps/nobarin-2.png",
       },
       {
         title: "State Management & Routing",
         description:
           "Implementing Vue Router for page navigation and Pinia for centralized state handling.",
-        image: null,
+        image: "/portfolio/steps/nobarin-3.png",
       },
       {
         title: "API Integration",
         description:
           "Fetching movie data from TMDB and dynamically rendering movie cards and detail pages.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Testing & Deployment",
         description:
           "Testing responsiveness, fixing routing bugs, and deploying the app with performance optimization.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -303,8 +305,9 @@ export const portfolioItems = [
       "/portfolio/web/upala-3.png?height=180&width=320",
     ],
     technologies: ["Tailwind", "Figma", "Laravel", "HTML/CSS", "MySQL"],
+    overviewHeading: "Business Goal",
     description:
-      "A comprehensive company profile and CRM web solution for Upala Coffee & Eatery in Jatiwaringin, Bekasi. The platform showcases the brand story, menu highlights, and provides an admin dashboard for customer management and order tracking.",
+      "Upala Coffee & Eatery required a digital presence that mirrored its physical ambition: a space that is both welcoming and professionally managed. This project delivered a dual-purpose web solution: a visually immersive company profile to attract customers, and a powerful Customer Relationship Management (CRM) system to streamline backend operations.\n\nThe company profile serves as the digital front door, featuring a carefully crafted narrative of the brand, a high-fidelity digital menu, and location information, all designed to convert site visitors into walk-in customers. The design philosophy focuses on warmth and clarity, matching the cafe's own aesthetic.\n\nBehind the scenes, the custom-built CRM dashboard empowers the management team to handle inquiries, track customer interactions, and manage orders with efficiency. By moving away from manual record-keeping to a centralized digital system, Upala has significantly reduced administrative overhead and improved its ability to serve loyal customers. This project stands as a testament to how digital transformation can elevate brick-and-mortar businesses.",
     role: "Frontend Developer & UI/UX Designer",
     responsibilities: [
       "Implementing UI templates",
@@ -411,31 +414,31 @@ export const portfolioItems = [
         title: "Analysis & User Research",
         description:
           "Conducted stakeholder interviews with cafe owners and staff to understand business needs, mapped user journeys for both customers and admins.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframing & UI Prototyping",
         description:
           "Created low- and high-fidelity wireframes for the company profile pages and admin CRM dashboards in Figma, iterated based on feedback.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Development & Implementation",
         description:
           "Built responsive front-end templates in Laravel Blade and integrated TailwindCSS, then developed core CRM functions including user management and order processing.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Testing & Iteration",
         description:
           "Conducted usability tests with cafe staff, gathered feedback on CRM usability, and refined interfaces to improve efficiency and clarity.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Handoff & Deployment",
         description:
           "Compiled comprehensive documentation and style guides, and collaborated with back-end developers to deploy the solution on production servers.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -462,8 +465,9 @@ export const portfolioItems = [
       "Xendit",
     ],
     // Project Description
+    overviewHeading: "Innovation",
     description:
-      "Freezemart is a frozen food e-commerce platform featuring a content-based recommendation system powered by TF-IDF and Cosine Similarity, and integrated with Xendit payment gateway for seamless in-app transactions.",
+      "Freezemart is an innovative e-commerce platform designed to modernize the frozen food retail industry through intelligent technology. Recognizing that customers often struggle to find relevant products in large catalogs, this project integrates a sophisticated content-based recommendation engine directly into the shopping experience.\n\nPowered by Python (Flask) with TF-IDF and Cosine Similarity algorithms, the recommendation system analyzes product attributes to suggest items that users are most likely to buy, effectively simulating a personalized shopping assistant. This AI-driven approach keeps users engaged and significantly increases average order value.\n\nOn the transactional side, Freezemart offers a frictionless checkout process integrated with Xendit, ensuring secure and instant payments. The frontend, built with Laravel and TailwindCSS, provides a smooth, app-like experience. By combining data science with robust e-commerce architecture, Freezemart solves the dual challenge of product discovery and seamless transaction flow.",
     role: "Full-Stack Developer",
     responsibilities: [
       "Implementing the frontend UI",
@@ -571,37 +575,37 @@ export const portfolioItems = [
         title: "User Research & Data Collection",
         description:
           "Gathered user preferences and historical purchase data, cleaned and preprocessed datasets for the recommendation algorithm.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "System Architecture & Planning",
         description:
           "Outlined the full-stack architecture, defined data flow between Laravel frontend, Flask recommendation API, and Xendit payment service, and planned database schemas.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Recommendation Engine Development",
         description:
           "Implemented TF-IDF vectorization and Cosine Similarity matching in Python, deployed as a Flask microservice for product suggestions.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1527474305487-b87b222841cc?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Payment Integration & Frontend Development",
         description:
           "Integrated Xendit payment gateway into the Laravel frontend, handled payment callbacks, and built responsive UI components in Blade and TailwindCSS for checkout flow.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Testing & Optimization",
         description:
           "Conducted unit and integration tests for recommendation accuracy and payment flow, optimized query performance and caching strategies to minimize latency.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Deployment & Maintenance",
         description:
           "Deployed application on a Linux server, configured CI/CD pipelines, monitored system performance and payment logs, and iterated based on user feedback.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -622,8 +626,9 @@ export const portfolioItems = [
       "pytorch",
       "python",
     ],
+    overviewHeading: "Core Concept",
     description:
-      "StudyLens is an AI-powered platform designed to help students maintain focus during self-study sessions. Using head movement tracking, the application detects distractions and provides real-time feedback, allowing students to understand their learning patterns and stay engaged. By analyzing study behavior and offering personalized recommendations, StudyLens supports users in building disciplined and productive study habits through intelligent assistance.",
+      "StudyLens is a pioneering EdTech application that leverages Artificial Intelligence to solve one of the biggest challenges in self-study: maintaining focus. By utilizing advanced computer vision and machine learning techniques, the platform acts as a smart study companion that actively monitors and encourages student engagement.\n\nThe core technology involves a real-time head pose estimation pipeline built with OpenCV and Deep Learning models (CNN & LSTM). This system detects subtle head movements to infer attention states—distinguishing between focused work, drowsiness, or distraction—without recording or storing sensitive video data. \n\nBeyond detection, StudyLens provides value through actionable insights. Students receive real-time nudges when attention drifts and access detailed analytics about their study habits over time. This feedback loop empowers learners to build better discipline and optimize their study schedules. The user interface, crafted with TailwindCSS, ensures that these complex insights are presented in a simple, motivating, and distraction-free manner.",
     role: "Full-Stack Developer & AI/ML Engineer",
     responsibilities: [
       "Developing AI models (CNN & LSTM)",
@@ -715,6 +720,13 @@ export const portfolioItems = [
         title: "Users reporting better habits",
         description: "Most users reported improved self-discipline and awareness of their study patterns after using the app.",
       },
+      {
+        type: "positive",
+        value: 4.8,
+        unit: "/5.0",
+        title: "User satisfaction",
+        description: "Students rated the experience highly for its helpfulness and ease of use in tracking study habits.",
+      },
     ],
     nextSteps:
       "Explore mobile-friendly versions of the experience, refine the recommendation engine, and experiment with gamification elements to keep students engaged.",
@@ -722,32 +734,32 @@ export const portfolioItems = [
       {
         title: "Data Collection & Preprocessing",
         description:
-          "The system gathers images of students' heads from various angles and lighting conditions. These images are processed using OpenCV to enhance quality, normalize colors, and remove noise, ensuring accurate head position detection.",
-        image: null,
+          "The system gathers images of students' heads from various angles and lighting conditions.\n\nKey preprocessing steps included:\n- **Normalization**: Adjusting lighting and contrast.\n- **Noise Reduction**: using OpenCV to remove artifacts.\n- **Augmentation**: Creating variations to robustify the model.",
+        image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Model Development (CNN & LSTM)",
         description:
           "Involves training a convolutional neural network to recognize head positions in images, followed by an LSTM model to analyze movement patterns over time and assess student focus levels.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Frontend Development & UI Design",
         description:
           "Focuses on creating an intuitive interface with Tailwind, enabling users to visualize their focus patterns and engagement levels.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Testing & Optimization",
         description:
           "Ensures high detection accuracy by evaluating the models with real user data and optimizing performance for smooth interactions.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Deployment & User Feedback",
         description:
           "Finalizes the application for public use while gathering student input to refine features and enhance the overall learning experience.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -760,8 +772,9 @@ export const portfolioItems = [
     image: "/portfolio/web/Nusoundtara.png?height=400&width=600",
     // additionalImages: ["/placeholder.svg?height=180&width=320", "/placeholder.svg?height=180&width=320"],
     technologies: ["HTML/CSS", "Javascript", "PHP", "MySQL", "Laravel"],
+    overviewHeading: "System Overview",
     description:
-      "Nusoundtara is a web-based ticket booking platform built with Laravel. The platform allows users to browse events, book tickets, and manage their bookings. Features include user authentication, event management, ticket reservation system, and payment processing.",
+      "Nusoundtara is a robust event management and ticketing platform designed to simplify the complex process of organizing and attending live events. In an industry often plagued by crashing ticket sites and confusing booking flows, Nusoundtara offers a stable, user-friendly alternative built on the solid foundation of Laravel and MySQL.\n\nThe platform serves a dual purpose: it allows event organizers to easily list upcoming concerts and manage ticket inventory, while giving users a seamless experience to browse, book, and pay for tickets. Key features include a real-time seat reservation system to prevent overbooking, secure payment processing integration, and a dedicated user dashboard for managing transaction history.\n\nFrom a technical perspective, the focus was on data integrity and concurrency handling. The backend ensures that multiple users vying for the same ticket are handled gracefully, while the frontend provides immediate feedback on availability. Nusoundtara bridges the gap between event enthusiasts and organizers with reliability and ease of use.",
     role: "Full-Stack Developer",
     responsibilities: [
       "Developing Laravel backend",
@@ -853,6 +866,13 @@ export const portfolioItems = [
         title: "User satisfaction",
         description: "Attendees reported higher satisfaction with the new booking experience.",
       },
+      {
+        type: "positive",
+        value: 1000,
+        unit: "+",
+        title: "Ticket bookings",
+        description: "The platform successfully handled a high volume of transactions during peak event periods.",
+      },
     ],
     nextSteps:
       "Introduce richer analytics for organizers, add support for promo codes and tiered pricing, and explore integrations with popular payment gateways.",
@@ -861,25 +881,25 @@ export const portfolioItems = [
         title: "Requirement Analysis & Planning",
         description:
           "Analyzed ticket booking requirements, defined user flows for event browsing and ticket reservation, and planned the database schema for events, tickets, and user management.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Database Design & Backend Development",
         description:
           "Designed MySQL database schema for events, tickets, users, and bookings. Developed Laravel backend with RESTful APIs for event management, ticket reservation, and payment processing.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Frontend Development",
         description:
           "Built responsive frontend interface using HTML/CSS/JavaScript for event browsing, ticket selection, booking process, and user dashboard for managing bookings.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Payment Integration & Testing",
         description:
           "Integrated payment gateway for secure transactions, implemented booking confirmation system, and conducted testing to ensure smooth user experience and data consistency.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -895,6 +915,7 @@ export const portfolioItems = [
     //   "/placeholder.svg?height=180&width=320",
     // ],
     technologies: ["React", "Typescript", "Laravel", "TailwindCSS"],
+    overviewHeading: "Dashboard Efficiency",
     description:
       "Nexaid is a web-based dashboard designed for managing electronic products efficiently. Built with React, TypeScript, Laravel, and TailwindCSS, it provides an intuitive interface for inventory management, stock tracking, and product data visualization. With a modern UI and smooth user interactions, Nexaid enables businesses to streamline product organization while maintaining a responsive and scalable system.",
     role: "Web Developer",
@@ -904,13 +925,13 @@ export const portfolioItems = [
       "Frontend and backend integration"
     ],
     challenges:
-      "Optimizing performance, integrating frontend and backend efficiently, ensuring scalable UI, managing state effectively, and maintaining data security.",
+      "**Optimizing performance** for large datasets, integrating frontend components with Laravel APIs efficiently, ensuring a **scalable UI architecture**, managing complex state with React hooks, and maintaining **strict data security standards**.",
     problemImage:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
     solutionImage:
       "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
     problemDescription:
-      "The client needed a single dashboard that could keep inventory accurate across many SKUs and locations, but previous tools were fragmented, slow, and difficult to trust. Staff had to combine spreadsheets, manual stock checks, and inconsistent systems just to answer basic questions like what to reorder and where products were stored.",
+      "The client needed a **single dashboard** that could keep inventory accurate across many SKUs and locations, but previous tools were fragmented, slow, and difficult to trust. Staff had to **combine spreadsheets, manual stock checks**, and inconsistent systems just to answer basic questions like what to reorder and where products were stored.",
     problemCards: [
       {
         title: "Fragmented inventory views",
@@ -934,7 +955,7 @@ export const portfolioItems = [
       },
     ],
     solutionDescription:
-      "Nexaid centralizes product and stock data into one React- and Laravel-based dashboard with clear, visual insights. I focused the UX on fast search, consistent tables and cards, and a layout that surfaces the most important status information first.",
+      "Nexaid centralizes product and stock data into one **React- and Laravel-based dashboard** with clear, visual insights. I focused the UX on **fast search, consistent tables and cards**, and a layout that surfaces the most important status information first.",
     solutionCards: [
       {
         title: "Unified inventory dashboard",
@@ -1006,34 +1027,33 @@ export const portfolioItems = [
         description:
           "Defining core features, such as inventory tracking and product management, while structuring the application’s design",
         // image: "/placeholder.svg?height=300&width=400",
-        image: null,
+        image: "https://images.unsplash.com/photo-1512314889357-e157c22f938d?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "UI/UX Design",
         description:
           "Creating a visually appealing and user-friendly interface using TailwindCSS, ensuring accessibility and clarity in navigation.",
         // image: "/placeholder.svg?height=300&width=400",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Frontend Development",
         description:
           "Developing dynamic and interactive elements using React and TypeScript, optimizing responsiveness for different devices.",
-        image:
-          "/placBuilding a dynamic and responsive user interface using React and Typescript to ensure smooth interactions.eholder.svg?height=300&width=400",
+        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Backend Implementation",
         description:
           "Using Laravel for data management, authentication, and efficient handling of product-related operations.",
         // image: "/placeholder.svg?height=300&width=400",
-        image: null,
+        image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Performance Optimization",
         description:
           "Enhancing load times, improving UI responsiveness, and ensuring smooth data handling across the dashboard.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -1046,8 +1066,9 @@ export const portfolioItems = [
     category: "web",
     image: "/portfolio/web/ESS.png?height=400&width=600",
     technologies: ["Nuxt 3", "Vue.js", "TailwindCSS", "PrimeVue", "Pinia", "Nuxt Auth"],
+    overviewHeading: "The Project Description",
     description:
-      "ESS (Employee Self Service) is a web-based portal developed for PT Sigma Cipta Caraka (Telkomsigma) that provides a single entry point to internal systems and allows employees to manage their personal data. I designed the interface from scratch and implemented the entire frontend using Nuxt 3, Vue.js, TailwindCSS, PrimeVue, Pinia, and Nuxt Auth, focusing on fast interaction, clear information hierarchy, and a responsive layout across devices.",
+      "ESS (Employee Self Service) is a **web-based portal developed for PT Sigma Cipta Caraka (Telkomsigma)** that provides a single entry point to internal systems and allows employees to manage their personal data. I designed the interface from scratch and implemented the entire frontend using **Nuxt 3, Vue.js, TailwindCSS, PrimeVue, Pinia, and Nuxt Auth**, focusing on fast interaction, clear information hierarchy, and a responsive layout across devices.",
     role: "Frontend Developer & UI/UX Designer",
     responsibilities: [
       "Designing the ESS dashboard shell and profile/personal data forms from initial wireframes to high-fidelity UI",
@@ -1057,13 +1078,13 @@ export const portfolioItems = [
       "Ensuring usability and accessibility for internal employees through iterative internal testing",
     ],
     challenges:
-      "Designing the ESS portal UI from the ground up while aligning with the existing corporate design system, modelling profile and personal data flows in Nuxt 3 + PrimeVue, wiring authentication and state management with Nuxt Auth and Pinia, and keeping pages fast while consuming multiple backend services.",
+      "**Designing the ESS portal UI from the ground up** while aligning with the existing corporate design system, modelling profile and personal data flows in **Nuxt 3 + PrimeVue**, wiring authentication and state management with **Nuxt Auth and Pinia**, and keeping pages fast while consuming multiple backend services.",
     problemImage:
       "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
     solutionImage:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
     problemDescription:
-      "Before the new ESS portal, employees had to jump between several internal apps just to access HR information and update personal data. Different UX patterns and tech stacks made the ecosystem confusing for users and difficult to maintain.",
+      "Before the new ESS portal, employees had to **jump between several internal apps** just to access HR information and update personal data. Different UX patterns and tech stacks made the ecosystem **confusing for users** and difficult to maintain.",
     problemCards: [
       {
         title: "Too many separate internal apps",
@@ -1087,7 +1108,7 @@ export const portfolioItems = [
       },
     ],
     solutionDescription:
-      "The ESS portal consolidates HR entry points and personal data management into a single Nuxt 3 microfrontends shell. I designed and built the frontend so navigation is clear, the UI follows the corporate design system, and new modules or fixes can be shipped independently through a ticketing workflow.",
+      "The ESS portal **consolidates HR entry points** and personal data management into a single **Nuxt 3 microfrontends shell**. I designed and built the frontend so navigation is clear, the **UI follows the corporate design system**, and new modules or fixes can be shipped independently through a ticketing workflow.",
     solutionCards: [
       {
         title: "Unified HR entry point",
@@ -1160,25 +1181,25 @@ export const portfolioItems = [
         title: "Requirement & Flow Mapping",
         description:
           "Worked with HR and IT stakeholders to map user flows for leave application, attendance view, and profile updates, defining key screens and data needed in the ESS portal.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "UI/UX Design",
         description:
           "Created low- and high-fidelity mockups in Figma, focusing on clear information hierarchy, reusable components, and alignment with Telkomsigma brand guidelines.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Nuxt 3 Frontend Development",
         description:
           "Implemented pages and components using Nuxt 3 and Vue.js, integrated TailwindCSS for styling, and set up layouts, routing, and state handling for ESS modules.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "API Integration & Testing",
         description:
           "Connected frontend components with backend REST APIs, handled error states and loading indicators, and performed cross-browser and responsive testing with internal users.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -1194,8 +1215,9 @@ export const portfolioItems = [
     //   "/portfolio/mobile/burchery-2.png?height=180&width=320",
     // ],
     technologies: ["Java", "MongoDB", "Figma", "XML", "Android Studio"],
+    overviewHeading: "Mobile Commerce",
     description:
-      "Burchery is a mobile e-commerce application for ordering fresh meat products. Designed with user-friendly navigation and real-time inventory updates, it ensures customers can browse, select, and purchase premium cuts straight from their device.",
+      "Burchery is a **mobile e-commerce application** for ordering fresh meat products. Designed with **user-friendly navigation and real-time inventory updates**, it ensures customers can browse, select, and purchase premium cuts straight from their device.",
     role: "Mobile Developer",
     responsibilities: [
       "Implementing core shopping flows",
@@ -1203,13 +1225,13 @@ export const portfolioItems = [
       "Secure payment integration"
     ],
     challenges:
-      "Ensuring data synchronization between client and server, optimizing list rendering for large catalogs, and integrating secure payment gateways within native Android.",
+      "Ensuring **data synchronization** between client and server, optimizing list rendering for large catalogs, and integrating **secure payment gateways** within native Android.",
     problemImage:
       "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=1200&q=80",
     solutionImage:
       "https://images.unsplash.com/photo-1606312619349-6f107ce228f2?auto=format&fit=crop&w=1200&q=80",
     problemDescription:
-      "Local customers wanted an easy way to order fresh meat from their phones, but existing channels were fragmented across chats, calls, and outdated catalog images. Store staff struggled to keep availability, pricing, and order status in sync across those channels.",
+      "Local customers wanted an **easy way to order fresh meat** from their phones, but existing channels were fragmented across chats, calls, and outdated catalog images. Store staff struggled to keep **availability, pricing, and order status in sync** across those channels.",
     problemCards: [
       {
         title: "Manual ordering channels",
@@ -1233,7 +1255,7 @@ export const portfolioItems = [
       },
     ],
     solutionDescription:
-      "Burchery turns meat ordering into a guided mobile shopping experience, with clear categories, real-time inventory, and a structured checkout. I designed and implemented the core flows so customers can discover products, manage their cart, and pay confidently from a single app.",
+      "Burchery turns meat ordering into a **guided mobile shopping experience**, with clear categories, real-time inventory, and a structured checkout. I designed and implemented the core flows so customers can **discover products, manage their cart, and pay confidently** from a single app.",
     solutionCards: [
       {
         title: "Structured product catalog",
@@ -1304,31 +1326,31 @@ export const portfolioItems = [
         title: "Requirement Gathering",
         description:
           "Collaborated with stakeholders to define product catalog structure, user flows, and payment requirements.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "UI/UX Design",
         description:
           "Created wireframes and prototypes in Figma focusing on ease of browsing and quick checkout.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "API Integration",
         description:
           "Built RESTful endpoints in Java to fetch product data and handle orders, secured with JWT.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Frontend Implementation",
         description:
           "Developed RecyclerViews for product lists and implemented XML layouts for responsive design.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Testing & Deployment",
         description:
           "Conducted unit and UI tests, fixed bugs, and published to Google Play Store.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -1348,9 +1370,9 @@ export const portfolioItems = [
       "Firebase",
       "Laravel",
       "Figma",
-      "XML",
       "Android Studio",
     ],
+    overviewHeading: "Green Commerce",
     description:
       "Ecotainment is a mobile commerce platform selling plants and green products from PT Godong Ijo Asri. It offers plant catalogs, care guides, and community tips with in-app chat support.",
     role: "Lead Android Developer overseeing shopping cart, real-time chat, and offline support.",
@@ -1456,35 +1478,35 @@ export const portfolioItems = [
         title: "Concept & Planning",
         description:
           "Gathered requirements on product range from PT Godong Ijo Asri and defined core flows.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "Design Prototyping",
         description:
           "Crafted high-fidelity screens in Figma focusing on plant catalog navigation and care guide UI.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "Backend Setup",
         description:
           "Configured Laravel endpoints for product data and integrated Firebase for chat.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "Android Development",
         description:
           "Built screens in Kotlin with Material components and integrated API and chat modules.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
         title: "User Testing",
         description:
           "Conducted beta testing with 20 users, refined navigation and performance based on feedback.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
     ],
@@ -1501,9 +1523,10 @@ export const portfolioItems = [
     //   "/portfolio/ui/skilpath-2.png?height=180&width=320",
     // ],
     technologies: ["Figma", "Adobe XD", "Illustrator"],
+    overviewHeading: "AI Learning Concept",
     description:
-      "Skillpath is a mobile UI concept for an AI-powered learning platform. Entry won 1st place in the UI/UX Competition Vocational Of Champions at UNS.",
-    role: "UI/UX Designer and prototype developer for competition submission.",
+      "Skillpath is an award-winning mobile UI concept designed to revolutionize the self-paced learning experience through AI-driven personalization. Recognized as the 1st place winner at the Vocational Of Champions UI/UX Competition (UNS), this project addresses the common problem of 'choice paralysis' in modern ed-tech.\n\nInstead of overwhelming students with endless catalogs, Skillpath uses an AI-first approach to curate a dynamic, step-by-step learning journey tailored to each user's pace and goals. The interface prioritizes clarity and focus, featuring a 'Smart Dashboard' that adapts daily based on progress.\n\nThe design system emphasizes accessibility and motivation, utilizing soft gamification elements and clear progress visualization to keep learners engaged. This concept demonstrates how artificial intelligence can be integrated into user interfaces not just as a feature, but as a core navigational guide, making complex learning curves feel intuitive and achievable.",
+    role: "Lead UI/UX Designer & Prototyper",
     challenges:
       "Designing intuitive AI-assisted study flows and ensuring visual clarity under competition constraints.",
     problemImage:
@@ -1604,26 +1627,26 @@ export const portfolioItems = [
       {
         title: "Research & Ideation",
         description: "Analyzed AI learning app trends and defined personas.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframing",
         description:
           "Sketch flows for AI-driven exercises and progress tracking.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "High-Fidelity Design",
         description:
           "Created visuals in Figma and Adobe XD, submitted for competition.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Iteration",
         description:
           "Refined based on juror feedback leading to 1st winner title.",
         // image: "/placeholder.svg?height=300&width=400",
-        image: null,
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -1742,22 +1765,22 @@ export const portfolioItems = [
       {
         title: "User Research",
         description: "Gathered insights on e-learning UX standards.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Prototype Design",
         description: "Built clickable prototypes in Figma.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Visual Polish",
         description: "Applied branding and iconography in Illustrator.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Competition Submission",
         description: "Presented to judges resulting in 2nd place.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -1881,22 +1904,22 @@ export const portfolioItems = [
         title: "Stakeholder Workshops",
         description:
           "Collaborated with Bandung officials to gather requirements.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Information Architecture",
         description: "Mapped user flows for complaint submission.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "UI Kit Creation",
         description: "Developed style guide and components in Figma.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "High-Fidelity Prototype",
         description: "Delivered interactive mockups for user testing.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -2021,30 +2044,30 @@ export const portfolioItems = [
         title: "User Research",
         description:
           "Conducted interviews with potential users to understand food waste behaviors.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1536768138723-1c7fa150d6c4?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframing",
         description:
           "Sketched main screens focusing on listing and claiming food items.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Visual Design",
         description:
           "Developed color palette and UI kit in Figma reflecting fresh and sustainable themes.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Prototyping",
         description: "Created interactive prototypes for usability testing.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Iteration",
         description:
           "Refined layouts based on test feedback to improve clarity and accessibility.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -2169,30 +2192,30 @@ export const portfolioItems = [
         title: "Conceptualization",
         description:
           "Defined AR use cases and user scenarios within Transjakarta network.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Storyboard Design",
         description:
           "Created storyboards to visualize AR interactions at bus stops.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1555529733-0e670560f7e1?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "UI Kit Development",
         description: "Designed AR icons and overlay elements in Adobe XD.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1535557597501-0feb0a933d47?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Prototype Testing",
         description:
           "Tested AR mockups using device camera feeds for alignment and readability.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1515524738708-327f6b0037a7?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Refinement",
         description:
           "Iterated on contrast and placement to ensure consistency across varying lighting conditions.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -2315,25 +2338,25 @@ export const portfolioItems = [
       {
         title: "User Persona Definition",
         description: "Identified key user personas and booking behaviors.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframe Sketching",
         description:
           "Drafted multi-step booking flow in low-fidelity wireframes.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "High-Fidelity Design",
         description:
           "Created polished screens in Figma ensuring clarity and usability.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Prototype Testing",
         description:
           "Conducted click-through tests to refine navigation and form interactions.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -2465,23 +2488,23 @@ export const portfolioItems = [
         title: "Campaign Research",
         description:
           "Reviewed crowdfunding best practices and user motivations.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Flow Design",
         description: "Mapped donation process steps and UI requirements.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "UI Mockups",
         description: "Created campaign listing and detail screens in Adobe XD.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Feedback Iteration",
         description:
           "Incorporated user feedback to refine trust indicators and ease of use.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1512428559087-560fa5ce7d02?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -2600,23 +2623,23 @@ export const portfolioItems = [
       {
         title: "Requirement Definition",
         description: "Outlined event flow, registration, and admin needs.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "UI Design",
         description: "Designed landing and dashboard pages with TailwindCSS.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Backend Development",
         description: "Implemented registration and data storage in Laravel.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Testing & Launch",
         description:
           "Performed user acceptance tests and deployed to production.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -2737,22 +2760,22 @@ export const portfolioItems = [
         title: "Stakeholder Interviews",
         description:
           "Gathered mentor requirements for task and progress tracking.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframe",
         description: "Outlined dashboard widgets and navigation in Figma.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "High-Fidelity Design",
         description: "Designed polished UI screens in Adobe Illustrator.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Prototype Feedback",
         description: "Tested with mentors and iterated on layout and features.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -2956,37 +2979,37 @@ export const portfolioItems = [
         title: "Content Audit",
         description:
           "Reviewed existing site pages to identify key user tasks, outdated content, and areas for improved information hierarchy.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Design System Creation",
         description:
           "Established a comprehensive style guide and component library in Figma, including color schemes, typography, and UI elements that reflect IPB’s brand identity.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframing & Prototyping",
         description:
           "Developed low- and high-fidelity wireframes for the homepage, academic sections, news, events, and contact pages, then built interactive prototypes for stakeholder review.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Responsive Development Mockups",
         description:
           "Created responsive visual mockups showcasing desktop, tablet, and mobile breakpoints to ensure a seamless experience across devices.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Usability Testing & Iteration",
         description:
           "Conducted usability tests with students and staff, gathered feedback on navigation and content clarity, and iterated designs to address pain points.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Handoff & Documentation",
         description:
           "Compiled detailed handoff documentation, including redlines and interaction specs, and collaborated with developers to facilitate accurate implementation.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -3106,31 +3129,31 @@ export const portfolioItems = [
         title: "Analysis & User Research",
         description:
           "Conducted stakeholder interviews and surveys to understand organizational goals and user needs, and created user personas to guide design decisions.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframing & Information Architecture",
         description:
           "Mapped out the site's structure and designed low-fidelity wireframes for homepage, profile sections, news, events, and contact pages to optimize content flow.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "High-Fidelity UI Design",
         description:
           "Developed polished mockups in Adobe XD, applying IPB's color palette, typography standards, and visual identity to maintain brand consistency.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Interactive Prototyping & Usability Testing",
         description:
           "Built interactive prototypes, conducted usability tests with student representatives, and iterated designs based on feedback to improve navigation and clarity.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1555529733-0e670560f7e1?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Design Handoff & Documentation",
         description:
           "Prepared detailed design specifications, redlines, and style guides in Zeplin/Figma, and collaborated with the development team to ensure accurate implementation.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -3250,37 +3273,37 @@ export const portfolioItems = [
         title: "User Research & Competitive Analysis",
         description:
           "Conducted surveys and interviews with target users and analyzed leading shoes e-commerce websites to establish best practices and user expectations.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframing & Information Architecture",
         description:
           "Created low-fidelity wireframes for the homepage, product listings, product details, cart, and checkout to structure an intuitive navigation flow.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "High-Fidelity UI Design",
         description:
           "Designed high-fidelity mockups in Figma, applying a clean color palette and clear typography, and integrated hover effects and page-transition animations for an immersive feel.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Interactive Prototyping & Usability Testing",
         description:
           "Built interactive prototypes with micro-interactions in Figma, conducted usability testing sessions, and iterated animation timing based on user feedback.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Animation Implementation & Performance Tuning",
         description:
           "Prepared detailed animation specs for developers, optimized Lottie and CSS animations for performance, and ensured smooth transitions without compromising page load times.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Design Handoff & Documentation",
         description:
           "Delivered comprehensive design documentation, animation guidelines, and a component library via Zeplin and Figma, and collaborated closely with developers to ensure a pixel-perfect implementation.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -3407,31 +3430,31 @@ export const portfolioItems = [
         title: "User Research & Pain Point Analysis",
         description:
           "Conducted interviews and analyzed user reviews to identify key issues in the existing checkout flow, such as repetitive stock checks and inadequate order notifications.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Competitive Analysis",
         description:
           "Studied similar applications like GoFood, Kopi Kenangan, and Fore to understand best practices in checkout processes and identify opportunities for improvement.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1512428559087-560fa5ce7d02?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Wireframing & User Flow Redesign",
         description:
           "Developed low-fidelity wireframes and restructured the user flow to simplify the checkout process, allowing users to select a store first and view available products accordingly.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "High-Fidelity Mockups & Design System",
         description:
           "Created detailed UI designs and established a design system to ensure consistency across the application, incorporating brand colors, typography, and components.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Interactive Prototyping & Usability Testing",
         description:
           "Built interactive prototypes and conducted usability testing sessions to gather feedback and iterate on the design, enhancing user satisfaction and efficiency.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },
@@ -3554,31 +3577,31 @@ export const portfolioItems = [
         title: "Requirement Gathering & System Design",
         description:
           "Collaborated with stakeholders to identify key functionalities such as sales processing, inventory tracking, and user management. Designed the system architecture and database schema to accommodate multi-branch operations.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Backend Development with Laravel",
         description:
           "Developed RESTful APIs for handling products, orders, users, and reports. Implemented authentication and authorization mechanisms to manage access control for different user roles.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Frontend Implementation with TailwindCSS",
         description:
           "Built responsive user interfaces for the dashboard, sales, and inventory modules using TailwindCSS. Ensured compatibility across various devices and screen sizes.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Testing & Quality Assurance",
         description:
           "Conducted unit and integration testing to ensure system reliability. Performed user acceptance testing (UAT) with actual users to gather feedback and make necessary improvements.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
       {
         title: "Deployment & Maintenance",
         description:
           "Deployed the application to a production server, configured domain settings, and set up SSL certificates. Provided ongoing maintenance and updates based on user feedback and changing business needs.",
-        image: null,
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
       },
     ],
   },

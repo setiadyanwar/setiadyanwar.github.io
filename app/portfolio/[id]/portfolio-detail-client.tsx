@@ -12,52 +12,19 @@ import MobileNavigationToggle from "@/components/portfolio/mobile-navigation-tog
 import MobileNavigationSidebar from "@/components/portfolio/mobile-navigation-sidebar"
 import ProjectInfoBentoGrid from "@/components/portfolio/project-info-bento-grid"
 import AdditionalImagesGallery from "@/components/portfolio/additional-images-gallery"
+import ReactMarkdown from "react-markdown"
 
 const sections = [
     { id: "overview", label: "Overview" },
+    { id: "challenges", label: "Challenges" },
     { id: "problem", label: "Problem" },
     { id: "solution", label: "Solution" },
     { id: "process", label: "Process" },
     { id: "outcomes", label: "Outcomes" },
 ]
 
-const defaultProblemCards = [
-    {
-        title: "Terlalu banyak aplikasi",
-        description: "Karyawan harus menghafal begitu banyak domain sistem aplikasi.",
-    },
-    {
-        title: "Akses informasi terbatas",
-        description: "Karyawan tidak tahu bagaimana data pribadi mereka dikumpulkan/digunakan.",
-    },
-    {
-        title: "Proses administrasi lama",
-        description: "Approval dan update HR membutuhkan langkah manual yang berulang.",
-    },
-    {
-        title: "Integrasi data lemah",
-        description: "Data dari backend berbeda sering kali tidak sinkron sehingga tim HR kesulitan membuat laporan.",
-    },
-]
-
-const defaultSolutionCards = [
-    {
-        title: "Dashboard terpadu",
-        description: "Menggabungkan modul HR kritikal ke satu tampilan responsif.",
-    },
-    {
-        title: "Automasi formulir",
-        description: "Menyederhanakan flow cuti & reimbursement dengan validasi real-time.",
-    },
-    {
-        title: "Optimasi performa Nuxt",
-        description: "Caching komponen berat dan lazy loading untuk akses cepat.",
-    },
-    {
-        title: "Integrasi API seragam",
-        description: "Menyatukan layanan backend melalui layer service agar data konsisten.",
-    },
-]
+const defaultProblemCards: any[] = []
+const defaultSolutionCards: any[] = []
 
 interface PortfolioDetailClientProps {
     portfolio: any
@@ -261,18 +228,61 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                 {/* Project Overview */}
                                 <div className="space-y-10">
                                     <div>
-                                        <h2 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-3 tracking-wide uppercase">
+                                        <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 tracking-wide uppercase">
                                             Project Overview
-                                        </h2>
-                                        <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl">
-                                            {portfolio.description}
-                                        </p>
+                                        </h4>
+                                        {portfolio.overviewHeading && (
+                                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                                                {portfolio.overviewHeading}
+                                            </h2>
+                                        )}
+                                        <div className="prose prose-lg prose-indigo dark:prose-invert max-w-3xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                                            <ReactMarkdown
+                                                components={{
+                                                    p: ({ node, ...props }) => <p className="mb-6 last:mb-0" {...props} />,
+                                                    strong: ({ node, ...props }) => <span className="bg-amber-100 dark:bg-amber-900/30 text-gray-900 dark:text-gray-100 font-medium px-0.5 rounded" {...props} />
+                                                }}
+                                            >
+                                                {portfolio.description}
+                                            </ReactMarkdown>
+                                        </div>
                                     </div>
+
+
                                 </div>
 
                                 <ProjectInfoBentoGrid portfolio={portfolio} />
                             </div>
                         </section>
+
+                        {portfolio.challenges && (
+                            <section
+                                id="challenges"
+                                ref={(el) => {
+                                    if (el) sectionRefs.current.challenges = el
+                                }}
+                                className="pt-12 pb-12 scroll-mt-32"
+                            >
+                                <div className="space-y-4">
+                                    <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 tracking-wide uppercase">
+                                        Challenges
+                                    </h4>
+                                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                                        {portfolio.challengesHeading || "The Challenge"}
+                                    </h2>
+                                    <div className="prose prose-lg prose-indigo dark:prose-invert max-w-3xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        <ReactMarkdown
+                                            components={{
+                                                p: ({ node, ...props }) => <p className="mb-6 last:mb-0" {...props} />,
+                                                strong: ({ node, ...props }) => <span className="bg-amber-100 dark:bg-amber-900/30 text-gray-900 dark:text-gray-100 font-medium px-0.5 rounded" {...props} />
+                                            }}
+                                        >
+                                            {portfolio.challenges}
+                                        </ReactMarkdown>
+                                    </div>
+                                </div>
+                            </section>
+                        )}
 
                         {/* Problem Section */}
                         <section
@@ -310,16 +320,20 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
 
                                         <div className="order-2 lg:order-2 space-y-6">
                                             <div className="space-y-4">
-                                                <div className="inline-flex items-center gap-2 rounded-full bg-red-50 dark:bg-red-900/20 px-4 py-1.5">
-                                                    <AlertTriangle className="w-4 h-4 text-red-500 dark:text-red-400" />
-                                                    <span className="text-xs font-semibold tracking-[0.14em] text-red-500 dark:text-red-400 uppercase">
-                                                        Problem
-                                                    </span>
-                                                </div>
+                                                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase">
+                                                    {portfolio.problemHeading || "Problem"}
+                                                </h4>
 
-                                                <p className="text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
-                                                    {portfolio.problemDescription || portfolio.challenges}
-                                                </p>
+                                                <div className="text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
+                                                    <ReactMarkdown
+                                                        components={{
+                                                            p: ({ node, ...props }) => <p className="mb-0" {...props} />,
+                                                            strong: ({ node, ...props }) => <span className="bg-amber-100 dark:bg-amber-900/30 text-gray-900 dark:text-gray-100 font-medium px-0.5 rounded" {...props} />
+                                                        }}
+                                                    >
+                                                        {portfolio.problemDescription || portfolio.challenges}
+                                                    </ReactMarkdown>
+                                                </div>
                                             </div>
 
                                             <div className="relative">
@@ -361,16 +375,20 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                                         <div className="order-2 lg:order-1 space-y-6">
                                             <div className="space-y-4">
-                                                <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 dark:bg-indigo-900/20 px-4 py-1.5">
-                                                    <Sparkles className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
-                                                    <span className="text-xs font-semibold tracking-[0.14em] text-indigo-500 dark:text-indigo-400 uppercase">
-                                                        Solution
-                                                    </span>
-                                                </div>
+                                                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase">
+                                                    {portfolio.solutionHeading || "Solution"}
+                                                </h4>
 
-                                                <p className="text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
-                                                    {portfolio.solutionDescription || "The solution involved a comprehensive approach combining technical expertise with user-centered design principles."}
-                                                </p>
+                                                <div className="text-base md:text-lg text-gray-800 dark:text-gray-100 leading-relaxed max-w-xl">
+                                                    <ReactMarkdown
+                                                        components={{
+                                                            p: ({ node, ...props }) => <p className="mb-0" {...props} />,
+                                                            strong: ({ node, ...props }) => <span className="bg-amber-100 dark:bg-amber-900/30 text-gray-900 dark:text-gray-100 font-medium px-0.5 rounded" {...props} />
+                                                        }}
+                                                    >
+                                                        {portfolio.solutionDescription}
+                                                    </ReactMarkdown>
+                                                </div>
                                             </div>
 
                                             <div className="relative">
@@ -427,42 +445,64 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                             }}
                             className="pt-12 pb-16 scroll-mt-32"
                         >
-                            <div className="rounded-3xl bg-[#fafafa] dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
-                                <div className="p-4 sm:p-6 lg:p-8 space-y-6">
-                                    <div className="flex items-center gap-2">
-                                        <span className="inline-flex h-2 w-2 rounded-full bg-indigo-500" />
-                                        <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-indigo-600 dark:text-indigo-400">
-                                            Process
-                                        </h3>
-                                    </div>
-
-                                    {portfolio.projectSteps && portfolio.projectSteps.length > 0 ? (
-                                        <div className="grid gap-4 md:grid-cols-2">
-                                            {portfolio.projectSteps.map((step: any, idx: number) => (
-                                                <div
-                                                    key={idx}
-                                                    className="rounded-2xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 p-5 flex gap-3"
-                                                >
-                                                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-semibold">
-                                                        {idx + 1}
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                                                            {step.title || `Step ${idx + 1}`}
-                                                        </p>
-                                                        {step.description && (
-                                                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                                                {step.description}
-                                                            </p>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <p className="text-sm text-gray-600 dark:text-gray-400">Belum ada data proses.</p>
-                                    )}
+                            <div className="space-y-12">
+                                <div>
+                                    <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase mb-3">
+                                        Process
+                                    </h4>
+                                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+                                        {portfolio.processHeading || "The Journey"}
+                                    </h2>
                                 </div>
+                                {portfolio.projectSteps && portfolio.projectSteps.length > 0 ? (
+                                    portfolio.projectSteps.map((step: any, idx: number) => (
+                                        <div key={idx} className="space-y-8">
+                                            {step.title && (
+                                                <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
+                                                    {step.title}
+                                                </h3>
+                                            )}
+
+                                            {step.image && (
+                                                <div
+                                                    className="relative w-full max-w-3xl rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-sm"
+                                                    style={{ aspectRatio: "16/9" }}
+                                                >
+                                                    <img
+                                                        src={step.image}
+                                                        alt={step.title || "Process image"}
+                                                        className="absolute inset-0 w-full h-full object-cover"
+                                                    />
+                                                </div>
+                                            )}
+
+                                            {step.description && (
+                                                <div className="prose prose-lg prose-indigo dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed">
+                                                    <ReactMarkdown
+                                                        components={{
+                                                            p: ({ node, ...props }) => <p className="mb-6 last:mb-0" {...props} />,
+                                                            ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-6 space-y-2" {...props} />,
+                                                            ol: ({ node, ...props }) => <ol className="list-decimal pl-6 mb-6 space-y-2" {...props} />,
+                                                            li: ({ node, ...props }) => <li className="pl-2" {...props} />,
+                                                            strong: ({ node, ...props }) => <span className="bg-amber-100 dark:bg-amber-900/30 text-gray-900 dark:text-gray-100 font-medium px-0.5 rounded" {...props} />,
+                                                            img: ({ node, ...props }) => (
+                                                                <div className="my-8 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800">
+                                                                    <img {...props} className="w-full h-auto" />
+                                                                </div>
+                                                            ),
+                                                        }}
+                                                    >
+                                                        {step.description}
+                                                    </ReactMarkdown>
+                                                </div>
+                                            )}
+
+                                            {/* (Image moved to top) */}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className="text-sm text-gray-600 dark:text-gray-400">Belum ada data proses.</p>
+                                )}
                             </div>
                         </section>
 
@@ -474,64 +514,51 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                             }}
                             className="pt-6 pb-16 scroll-mt-32"
                         >
-                            <div className="rounded-3xl bg-[#fafafa] dark:bg-gray-950/60 border border-gray-100 dark:border-gray-800 shadow-sm">
-                                <div className="p-4 sm:p-6 lg:p-8 space-y-6">
-                                    <div className="flex items-center gap-2">
-                                        <span className="inline-flex h-2 w-2 rounded-full bg-green-500" />
-                                        <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-green-600 dark:text-green-400">
-                                            Outcomes
-                                        </h3>
-                                    </div>
+                            <div className="space-y-6">
+                                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase">
+                                    {portfolio.outcomesHeading || "Outcomes"}
+                                </h4>
 
-                                    {portfolio.outcomes && portfolio.outcomes.length > 0 ? (
-                                        <div className="grid gap-4 md:grid-cols-2">
-                                            {portfolio.outcomes.map((item: any, idx: number) => (
-                                                <div
-                                                    key={idx}
-                                                    className="rounded-2xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 p-5"
-                                                >
-                                                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                                                        {item.title || `Outcome ${idx + 1}`}
-                                                    </p>
-                                                    {item.description && (
-                                                        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mt-1.5">
-                                                            {item.description}
-                                                        </p>
+                                <div
+                                    className="flex gap-4 overflow-x-auto pb-6 -mx-1 px-1 snap-x snap-mandatory scrollbar-hide"
+                                    style={{
+                                        maskImage: "linear-gradient(to right, black 85%, transparent 100%)",
+                                        WebkitMaskImage: "linear-gradient(to right, black 85%, transparent 100%)"
+                                    }}
+                                >
+                                    {portfolio.outcomes && portfolio.outcomes.length > 0 && (
+                                        portfolio.outcomes.map((item: any, idx: number) => (
+                                            <div
+                                                key={`outcome-${idx}`}
+                                                className="min-w-[280px] md:min-w-[320px] rounded-2xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 p-5 snap-start flex flex-col shadow-sm"
+                                            >
+                                                <p className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                                                    {(item.value || item.value === 0) && (
+                                                        <span className="text-indigo-600 dark:text-indigo-400 mr-1.5">
+                                                            {item.value}{item.unit || ""}
+                                                        </span>
                                                     )}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <p className="text-sm text-gray-600 dark:text-gray-400">Belum ada data outcomes.</p>
+                                                    {item.title || `Outcome ${idx + 1}`}
+                                                </p>
+                                                {item.description && (
+                                                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                                        {item.description}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        ))
                                     )}
 
-                                    {portfolio.impact && portfolio.impact.length > 0 && (
-                                        <div className="grid gap-4 md:grid-cols-2">
-                                            {portfolio.impact
-                                                .filter((metric: any) => metric && (metric.label || metric.value || metric.description))
-                                                .map((metric: any, idx: number) => (
-                                                    <div
-                                                        key={idx}
-                                                        className="rounded-2xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 p-5"
-                                                    >
-                                                        <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                                                            {metric.label || `Impact ${idx + 1}`}
-                                                        </p>
-                                                        <p className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-                                                            {metric.value || "-"}
-                                                        </p>
-                                                        {metric.description && (
-                                                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mt-1.5">
-                                                                {metric.description}
-                                                            </p>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                        </div>
+
+
+                                    {(!portfolio.outcomes?.length && !portfolio.impact?.length) && (
+                                        <p className="text-sm text-gray-600 dark:text-gray-400">Belum ada data outcomes.</p>
                                     )}
                                 </div>
                             </div>
                         </section>
+
+
 
                         {/* Navigation Buttons */}
                         <div className="flex justify-between items-center pt-16 border-t border-gray-200 dark:border-gray-800">
@@ -562,6 +589,6 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                     </main>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

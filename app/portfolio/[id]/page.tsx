@@ -1,55 +1,14 @@
 import { getPortfolioItemById, getPortfolioItems } from "@/lib/supabase/data"
+import { portfolioItems as localPortfolioItems } from "@/lib/data"
 import type { Metadata } from "next"
 import { siteConfig } from "@/lib/config/site-config"
 import PortfolioDetailClient from "./portfolio-detail-client"
 import PortfolioDetailSkeleton from "@/components/portfolio/portfolio-detail-skeleton"
 
-// Generate metadata for portfolio detail pages (runs server-side)
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const portfolio = await getPortfolioItemById(params.id)
-  
-  if (!portfolio) {
-    return {
-      title: "Portfolio Not Found",
-      description: "The requested portfolio item could not be found.",
-    }
-  }
 
-  const title = `${portfolio.title} | Portfolio | Setiady Ibrahim Anwar`
-  const description = portfolio.subtitle || portfolio.description || `View ${portfolio.title} portfolio project by Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer.`
-  const imageUrl = portfolio.image?.split("?")[0] || siteConfig.ogImage
-  const fullImageUrl = imageUrl.startsWith("http") ? imageUrl : `${siteConfig.url}${imageUrl}`
-  const keywords = portfolio.technologies ? [...portfolio.technologies, "Portfolio", "Web Development", "UI/UX Design"] : ["Portfolio", "Web Development", "UI/UX Design"]
+// ... (keep generateMetadata as is)
 
-  return {
-    title,
-    description: description.length > 160 ? description.substring(0, 157) + "..." : description,
-    keywords,
-    alternates: {
-      canonical: `${siteConfig.url}/portfolio/${params.id}`,
-    },
-    openGraph: {
-      title,
-      description: description.length > 200 ? description.substring(0, 197) + "..." : description,
-      url: `${siteConfig.url}/portfolio/${params.id}`,
-      type: "website",
-      images: [
-        {
-          url: fullImageUrl,
-          width: 1200,
-          height: 630,
-          alt: portfolio.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: description.length > 200 ? description.substring(0, 197) + "..." : description,
-      images: [fullImageUrl],
-    },
-  }
-}
+export const dynamic = 'force-dynamic'
 
 export default async function PortfolioDetail({ params }: { params: { id: string } }) {
   // Fetch data server-side
@@ -57,6 +16,7 @@ export default async function PortfolioDetail({ params }: { params: { id: string
     getPortfolioItemById(params.id),
     getPortfolioItems(),
   ])
+
 
   if (!portfolioItem) {
     return (
@@ -66,22 +26,37 @@ export default async function PortfolioDetail({ params }: { params: { id: string
     )
   }
 
-  // Transform data
+  // Find local fallback data to handle missing DB columns (like overviewHeading)
+  const localItem = localPortfolioItems.find(item => item.id === params.id)
+
+  // Transform data - exclude project_steps from spread to prevent override
+  const { project_steps, ...restPortfolioItem } = portfolioItem
+
   const portfolio = {
-    ...portfolioItem,
+    ...restPortfolioItem,
+    overviewHeading: portfolioItem.overview_heading || (localItem && (localItem as any).overviewHeading),
+    processHeading: portfolioItem.process_heading || (localItem && (localItem as any).processHeading),
+    challengesHeading: portfolioItem.challenges_heading || (localItem && (localItem as any).challengesHeading),
+    problemHeading: portfolioItem.problem_heading || (localItem && (localItem as any).problemHeading),
+    solutionHeading: portfolioItem.solution_heading || (localItem && (localItem as any).solutionHeading),
+    outcomesHeading: portfolioItem.outcomes_heading || (localItem && (localItem as any).outcomesHeading),
+    // Data priority: DB -> Local Fallback
+    description: portfolioItem.description || (localItem && localItem.description),
+    challenges: portfolioItem.challenges || (localItem && localItem.challenges),
     additionalImages: portfolioItem.additional_images || [],
     demoUrl: portfolioItem.demo_url,
     repoUrl: portfolioItem.repo_url,
     problemImage: portfolioItem.problem_image || null,
     solutionImage: portfolioItem.solution_image || null,
-    problemDescription: portfolioItem.problem_description,
+    problemDescription: portfolioItem.problem_description || (localItem && (localItem as any).problemDescription),
     problemCards: portfolioItem.problem_cards || [],
-    solutionDescription: portfolioItem.solution_description,
+    solutionDescription: portfolioItem.solution_description || (localItem && (localItem as any).solutionDescription),
     solutionCards: portfolioItem.solution_cards || [],
     impact: portfolioItem.impact || [],
     outcomes: portfolioItem.outcomes || [],
     nextSteps: portfolioItem.next_steps,
-    projectSteps: portfolioItem.project_steps || [],
+    // IMPORTANT: Assign projectSteps LAST to ensure it's not overridden by spread
+    projectSteps: (project_steps && project_steps.length > 0) ? project_steps : ((localItem && localItem.projectSteps) || []),
   }
 
   // Pass data to client component
