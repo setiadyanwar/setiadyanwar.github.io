@@ -12,7 +12,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import ConditionalLayout from "@/components/conditional-layout"
 import { siteConfig } from "@/lib/config/site-config"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "arial"],
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -218,6 +223,12 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
         <meta name="google-site-verification" content="zgAl9x48b6aAPic1QagBGN37SGoYzCkm2HUivLgUf74" />
         <script
           type="application/ld+json"
