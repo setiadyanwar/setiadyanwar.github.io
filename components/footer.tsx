@@ -90,14 +90,6 @@ export default function Footer() {
                   Portfolio
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-                >
-                  Contact
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -120,9 +112,8 @@ export default function Footer() {
         {/* Large typography as requested */}
         <div className="mt-12 overflow-hidden">
           <h2
-            className={`text-[80px] sm:text-[100px] md:text-[140px] lg:text-[180px] font-bold text-gray-100 dark:text-gray-800 leading-none text-center select-none transition-opacity duration-500 whitespace-nowrap ${
-              isVisible ? "opacity-100" : "opacity-0"
-            }`}
+            className={`text-[80px] sm:text-[100px] md:text-[140px] lg:text-[180px] font-bold text-gray-100 dark:text-gray-800 leading-none text-center select-none transition-opacity duration-500 whitespace-nowrap ${isVisible ? "opacity-100" : "opacity-0"
+              }`}
           >
             {titles[currentIndex]}
           </h2>
