@@ -85,7 +85,10 @@ export function deduplicateExperiences(experiences: any[]): any[] {
     const seen = new Set<string>();
     return experiences.filter((exp) => {
         // Create a unique key from title, company, and period
-        const key = `${exp.title || ""}-${exp.company || ""}-${exp.period || ""}`;
+        // Normalize strings to ensure robust deduplication (handle whitespace/case differences)
+        const normalize = (str: any) => String(str || "").toLowerCase().trim();
+        const key = `${normalize(exp.title)}-${normalize(exp.company)}-${normalize(exp.period)}`;
+
         if (seen.has(key)) {
             return false;
         }

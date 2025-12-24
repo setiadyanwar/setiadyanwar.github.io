@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Save, X, Plus, Trash2, Eye, Sparkles } from "lucide-react"
+import { Save, X, Plus, Trash2, Eye, Sparkles, LayoutGrid, List } from "lucide-react"
 import Link from "next/link"
 import ImageUploader from "@/components/admin/image-uploader"
+import MultiImageUploader from "@/components/admin/multi-image-uploader"
 
 interface PortfolioFormData {
   id: string
@@ -31,7 +32,7 @@ interface PortfolioFormData {
   impact: Array<{ type: string; value: number; unit: string; title: string; description: string }>
   outcomes: Array<{ type: string; value: number; unit: string; title: string; description: string }>
   next_steps: string
-  project_steps: Array<{ title: string; description: string; image: string | null }>
+  project_steps: Array<{ title: string; description: string; image: string | null; substeps: Array<{ title: string; description: string; images: string[] }> }>
   overview_heading: string
   process_heading: string
   challenges_heading: string
@@ -129,7 +130,24 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
         impact: data.impact || [],
         outcomes: data.outcomes || [],
         next_steps: data.next_steps || "",
-        project_steps: data.project_steps || [],
+        project_steps: (data.project_steps || []).map((step: any) => {
+          const oldSubsteps = step.substeps || step.items || step.sub_steps || step.subItems || []
+          const substeps = Array.isArray(oldSubsteps)
+            ? oldSubsteps.map((sub: any) => {
+              // If it's already an object with title, description and images, keep it
+              if (typeof sub === 'object' && sub !== null && 'title' in sub) {
+                return {
+                  title: sub.title || '',
+                  description: sub.description || '',
+                  images: sub.images || []
+                }
+              }
+              // If it's a string, convert to new format
+              return { title: sub, description: '', images: [] }
+            })
+            : []
+          return { ...step, substeps }
+        }),
         overview_heading: data.overview_heading || "",
         process_heading: data.process_heading || "",
         challenges_heading: data.challenges_heading || "",
@@ -138,9 +156,7 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
         outcomes_heading: data.outcomes_heading || "",
       })
     } catch (error) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error("Error fetching portfolio:", error)
-      }
+      console.error("Error fetching portfolio:", error)
       alert("Failed to load portfolio")
     } finally {
       setLoading(false)
@@ -177,12 +193,12 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
   }
 
   const tabs = [
-    { id: "basic", label: "Basic Info" },
-    { id: "overview", label: "Overview" },
-    { id: "problem", label: "Problem" },
-    { id: "solution", label: "Solution" },
-    { id: "outcomes", label: "Outcomes" },
-    { id: "process", label: "Process" },
+    { id: "basic", label: "Basic Info", icon: List },
+    { id: "overview", label: "Details & Overview", icon: LayoutGrid },
+    { id: "process", label: "Process & Steps", icon: List },
+    { id: "media", label: "Media & Gallery", icon: LayoutGrid },
+    { id: "case-study", label: "Case Study (Problem/Solution)", icon: Sparkles },
+    { id: "impact", label: "Impact & Outcomes", icon: LayoutGrid },
   ]
 
   // Helper to insert markdown bold syntax for highlighting
@@ -195,7 +211,6 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
     const text = textarea.value
     const selectedText = text.substring(start, end)
 
-    // Toggle highlight if already highlighted, otherwise add it
     let newText = ''
     if (selectedText.startsWith('**') && selectedText.endsWith('**') && selectedText.length >= 4) {
       newText = text.substring(0, start) + selectedText.substring(2, selectedText.length - 2) + text.substring(end)
@@ -203,7 +218,6 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
       newText = text.substring(0, start) + `**${selectedText}**` + text.substring(end)
     }
 
-    // Update state based on field type
     if (field === 'problem_cards' && typeof cardIdx === 'number' && cardField) {
       const newCards = [...formData.problem_cards]
       newCards[cardIdx] = { ...newCards[cardIdx], [cardField]: newText }
@@ -216,7 +230,6 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
       setFormData({ ...formData, [field]: newText as any })
     }
 
-    // Restore focus and selection (adjusted for added/removed chars)
     setTimeout(() => {
       textarea.focus()
       const offset = selectedText.startsWith('**') ? -2 : 2
@@ -227,20 +240,21 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="text-gray-500 dark:text-gray-400">Loading...</div>
+        <div className="text-gray-500 dark:text-gray-400 animate-pulse">Loading editor...</div>
       </div>
     )
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="max-w-6xl mx-auto space-y-8 pb-20">
+      {/* Header */}
+      <div className="sticky top-0 z-20 bg-[#fafafa]/80 dark:bg-black/80 backdrop-blur-md py-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            {portfolioId ? "Edit Portfolio" : "New Portfolio"}
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            {portfolioId ? "Edit Portfolio Item" : "Create New Project"}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            {portfolioId ? "Update portfolio details" : "Create a new portfolio item"}
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {formData.title || "Untitled Project"}
           </p>
         </div>
         <div className="flex gap-3">
@@ -248,999 +262,695 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
             <Link
               href={`/portfolio/${portfolioId}`}
               target="_blank"
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
             >
-              <Eye className="w-4 h-4" />
+              <Eye className="w-4 h-4 inline mr-2" />
               Preview
             </Link>
           )}
-          <Link
-            href="/admin/portfolio"
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          <button
+            onClick={handleSubmit}
+            disabled={saving}
+            className="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 flex items-center gap-2"
           >
-            <X className="w-4 h-4" />
-            Cancel
-          </Link>
+            {saving ? "Saving..." : <><Save className="w-4 h-4" /> Save Changes</>}
+          </button>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Tabs */}
-        <div className="border-b border-gray-200 dark:border-gray-700">
-          <div className="flex space-x-8 overflow-x-auto">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${activeTab === tab.id
-                  ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
-                  }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        {/* Navigation Tabs */}
+        <div className="flex space-x-1 p-1 bg-gray-100 dark:bg-gray-900 rounded-xl overflow-x-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 flex-1 justify-center px-4 py-3 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${activeTab === tab.id
+                ? "bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-200/50 dark:hover:bg-gray-800/50"
+                }`}
+            >
+              <tab.icon className="w-4 h-4" />
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        {/* Basic Info Tab */}
+        {/* --- BASIC INFO TAB --- */}
         {activeTab === "basic" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Title <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  ID
-                </label>
-                <input
-                  type="text"
-                  value={formData.id}
-                  onChange={(e) => setFormData({ ...formData, id: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white"
-                  placeholder="Auto-generated from title"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Subtitle
-                </label>
-                <input
-                  type="text"
-                  value={formData.subtitle}
-                  onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Category <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
-                  required
-                >
-                  <option value="web">Web Development</option>
-                  <option value="mobile">Mobile Apps</option>
-                  <option value="ui">UI/UX Design</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Date
-                </label>
-                <input
-                  type="text"
-                  value={formData.date}
-                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  placeholder="e.g., January 2024"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Status
-                </label>
-                <select
-                  value={formData.status}
-                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                >
-                  <option value="draft">Draft</option>
-                  <option value="published">Published</option>
-                </select>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="md:col-span-2 space-y-6 bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Core Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title</label>
+                  <input
+                    type="text"
+                    value={formData.title}
+                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 transition-all font-medium text-lg"
+                    placeholder="Project Title"
+                    required
+                  />
+                </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Main Image URL
-              </label>
-              <input
-                type="text"
-                value={formData.image}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="/portfolio/web/example.png or https://images.unsplash.com/..."
-              />
-            </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">ID (Slug)</label>
+                  <input
+                    type="text"
+                    value={formData.id}
+                    onChange={(e) => setFormData({ ...formData, id: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 font-mono text-sm text-gray-600 dark:text-gray-400"
+                    placeholder="project-slug"
+                  />
+                </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Technologies
-              </label>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {formData.technologies.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full text-sm"
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
+                  <select
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
                   >
-                    {tech}
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setFormData({
-                          ...formData,
-                          technologies: formData.technologies.filter((_, i) => i !== idx),
-                        })
-                      }}
-                      className="hover:text-red-600"
-                    >
-                      <X className="w-3 h-3" />
-                    </button>
-                  </span>
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Add technology"
-                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault()
-                      const value = e.currentTarget.value.trim()
-                      if (value && !formData.technologies.includes(value)) {
-                        setFormData({
-                          ...formData,
-                          technologies: [...formData.technologies, value],
-                        })
-                        e.currentTarget.value = ""
-                      }
-                    }
-                  }}
-                />
-              </div>
-            </div>
+                    <option value="web">Web Development</option>
+                    <option value="mobile">Mobile Apps</option>
+                    <option value="ui">UI/UX Design</option>
+                  </select>
+                </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Demo URL
-                </label>
-                <input
-                  type="url"
-                  value={formData.demo_url}
-                  onChange={(e) => setFormData({ ...formData, demo_url: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  placeholder="https://example.com"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Repository URL
-                </label>
-                <input
-                  type="url"
-                  value={formData.repo_url}
-                  onChange={(e) => setFormData({ ...formData, repo_url: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  placeholder="https://github.com/username/repo"
-                />
-              </div>
-            </div>
-          </div>
-        )}
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subtitle</label>
+                  <input
+                    type="text"
+                    value={formData.subtitle}
+                    onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+                    placeholder="Brief catchy description"
+                  />
+                </div>
 
-        {/* Overview Tab */}
-        {activeTab === "overview" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Overview Heading
-              </label>
-              <input
-                type="text"
-                value={formData.overview_heading}
-                onChange={(e) => setFormData({ ...formData, overview_heading: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="e.g., The Vision, Project Strategy"
-              />
-            </div>
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Description
-                </label>
-                <button
-                  type="button"
-                  onClick={() => insertHighlight('description-input', 'description')}
-                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
-                >
-                  <Sparkles className="w-3 h-3" />
-                  Highlight Selection
-                </button>
-              </div>
-              <textarea
-                id="description-input"
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Brief description of the project... (Select text and click Highlight to emphasize)"
-              />
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                Tip: You can highlight text to make it look like <strong className="bg-amber-100 dark:bg-amber-900/30 font-medium px-0.5 rounded text-gray-900 dark:text-gray-100">stabilo</strong> by selecting it and clicking the button above.
-              </p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Role
-              </label>
-              <input
-                type="text"
-                value={formData.role}
-                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="e.g., Frontend Developer & UI/UX Designer"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Responsibilities
-              </label>
-              <div className="space-y-2 mb-2">
-                {formData.responsibilities.map((resp, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={resp}
-                      onChange={(e) => {
-                        const newResp = [...formData.responsibilities]
-                        newResp[idx] = e.target.value
-                        setFormData({ ...formData, responsibilities: newResp })
-                      }}
-                      className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setFormData({
-                          ...formData,
-                          responsibilities: formData.responsibilities.filter((_, i) => i !== idx),
-                        })
-                      }}
-                      className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    responsibilities: [...formData.responsibilities, ""],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Responsibility
-              </button>
-            </div>
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Challenges
-                </label>
-                <button
-                  type="button"
-                  onClick={() => insertHighlight('challenges-input', 'challenges')}
-                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
-                >
-                  <Sparkles className="w-3 h-3" />
-                  Highlight Selection
-                </button>
-              </div>
-              <textarea
-                id="challenges-input"
-                value={formData.challenges}
-                onChange={(e) => setFormData({ ...formData, challenges: e.target.value })}
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Describe the challenges faced..."
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Additional Images
-              </label>
-              <div className="space-y-2 mb-2">
-                {formData.additional_images.map((img, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={img}
-                      onChange={(e) => {
-                        const newImgs = [...formData.additional_images]
-                        newImgs[idx] = e.target.value
-                        setFormData({ ...formData, additional_images: newImgs })
-                      }}
-                      className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="/portfolio/web/image.png or https://..."
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setFormData({
-                          ...formData,
-                          additional_images: formData.additional_images.filter((_, i) => i !== idx),
-                        })
-                      }}
-                      className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    additional_images: [...formData.additional_images, ""],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Image
-              </button>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Impact
-              </label>
-              <div className="space-y-4">
-                {formData.impact.map((impact, idx) => (
-                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
-                      <input
-                        type="text"
-                        value={impact.type}
-                        onChange={(e) => {
-                          const newImpact = [...formData.impact]
-                          newImpact[idx] = { ...impact, type: e.target.value }
-                          setFormData({ ...formData, impact: newImpact })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Type (e.g., positive)"
-                      />
-                      <input
-                        type="number"
-                        value={impact.value}
-                        onChange={(e) => {
-                          const newImpact = [...formData.impact]
-                          newImpact[idx] = { ...impact, value: parseFloat(e.target.value) || 0 }
-                          setFormData({ ...formData, impact: newImpact })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Value"
-                      />
-                      <input
-                        type="text"
-                        value={impact.unit}
-                        onChange={(e) => {
-                          const newImpact = [...formData.impact]
-                          newImpact[idx] = { ...impact, unit: e.target.value }
-                          setFormData({ ...formData, impact: newImpact })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Unit (e.g., %)"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFormData({
-                            ...formData,
-                            impact: formData.impact.filter((_, i) => i !== idx),
-                          })
-                        }}
-                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
-                      >
-                        <Trash2 className="w-4 h-4 inline mr-2" />
-                        Remove
-                      </button>
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Technologies</label>
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl border border-dashed border-gray-300 dark:border-gray-700">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {formData.technologies.map((tech, idx) => (
+                        <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-gray-700 text-indigo-700 dark:text-indigo-300 rounded-full text-sm shadow-sm border border-gray-200 dark:border-gray-600">
+                          {tech}
+                          <button
+                            type="button"
+                            onClick={() => setFormData({ ...formData, technologies: formData.technologies.filter((_, i) => i !== idx) })}
+                            className="hover:text-red-500 rounded-full p-0.5"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </span>
+                      ))}
                     </div>
                     <input
                       type="text"
-                      value={impact.title}
-                      onChange={(e) => {
-                        const newImpact = [...formData.impact]
-                        newImpact[idx] = { ...impact, title: e.target.value }
-                        setFormData({ ...formData, impact: newImpact })
+                      placeholder="Type a tech (e.g. React) and press Enter..."
+                      className="w-full px-3 py-2 bg-transparent border-none focus:ring-0 text-sm"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault()
+                          const val = e.currentTarget.value.trim()
+                          if (val && !formData.technologies.includes(val)) {
+                            setFormData({ ...formData, technologies: [...formData.technologies, val] })
+                            e.currentTarget.value = ""
+                          }
+                        }
                       }}
-                      className="w-full mb-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Title"
-                    />
-                    <textarea
-                      value={impact.description}
-                      onChange={(e) => {
-                        const newImpact = [...formData.impact]
-                        newImpact[idx] = { ...impact, description: e.target.value }
-                        setFormData({ ...formData, impact: newImpact })
-                      }}
-                      rows={2}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Description"
                     />
                   </div>
-                ))}
+                </div>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    impact: [
-                      ...formData.impact,
-                      { type: "positive", value: 0, unit: "", title: "", description: "" },
-                    ],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Impact
-              </button>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Project Cover</h3>
+                <ImageUploader
+                  label="Hero Image"
+                  storagePath={`portfolio/${formData.id}/hero-${Date.now()}.jpg`}
+                  currentImageUrl={formData.image}
+                  onUploadSuccess={(url) => setFormData({ ...formData, image: url })}
+                  onRemove={() => setFormData({ ...formData, image: "" })}
+                  helperText="Recommended size: 1200x630px"
+                />
+              </div>
+
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Status & Links</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500 uppercase mb-1">Status</label>
+                    <select
+                      value={formData.status}
+                      onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+                    >
+                      <option value="draft">Draft (Hidden)</option>
+                      <option value="published">Published (Visible)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500 uppercase mb-1">Project Date</label>
+                    <input
+                      type="text"
+                      value={formData.date}
+                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+                      placeholder="e.g. Jan 2024"
+                    />
+                  </div>
+                  <div className="pt-2 border-t border-gray-100 dark:border-gray-800"></div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500 uppercase mb-1">Demo URL</label>
+                    <input
+                      type="url"
+                      value={formData.demo_url}
+                      onChange={(e) => setFormData({ ...formData, demo_url: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
+                      placeholder="https://..."
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500 uppercase mb-1">Repo URL</label>
+                    <input
+                      type="url"
+                      value={formData.repo_url}
+                      onChange={(e) => setFormData({ ...formData, repo_url: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
+                      placeholder="https://github.com/..."
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
-        {/* Challenges Tab */}
-        {activeTab === "challenges" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Challenges Heading
-              </label>
-              <input
-                type="text"
-                value={formData.challenges_heading}
-                onChange={(e) => setFormData({ ...formData, challenges_heading: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="e.g. The Challenge"
-              />
-            </div>
-
-            <div className="relative">
-              <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Challenges Description
-                </label>
-                <button
-                  type="button"
-                  onClick={() => insertHighlight('challenges-input', 'challenges')}
-                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
-                >
-                  <Sparkles className="w-3 h-3" />
-                  Highlight Selection
-                </button>
+        {/* --- OVERVIEW TAB --- */}
+        {activeTab === "overview" && (
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800 shadow-sm space-y-8">
+            <div className="max-w-3xl mx-auto space-y-8">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Overview Heading</label>
+                <input
+                  type="text"
+                  value={formData.overview_heading}
+                  onChange={(e) => setFormData({ ...formData, overview_heading: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-lg font-semibold"
+                  placeholder="e.g. The Vision"
+                />
               </div>
-              <textarea
-                id="challenges-input"
-                value={formData.challenges}
-                onChange={(e) => setFormData({ ...formData, challenges: e.target.value })}
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Describe the challenges faced..."
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Project Description</label>
+                  <button type="button" onClick={() => insertHighlight('description-input', 'description')} className="text-xs flex items-center gap-1 text-indigo-600 font-medium"><Sparkles className="w-3 h-3" /> Highlight Text</button>
+                </div>
+                <textarea
+                  id="description-input"
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  rows={8}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 leading-relaxed"
+                  placeholder="Tell the story of the project..."
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Role</label>
+                  <input
+                    type="text"
+                    value={formData.role}
+                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+                    placeholder="e.g. Lead Developer"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Key Responsibilities</label>
+                  <div className="space-y-2">
+                    {formData.responsibilities.map((resp, idx) => (
+                      <div key={idx} className="flex gap-2">
+                        <input
+                          type="text"
+                          value={resp}
+                          onChange={(e) => {
+                            const newResp = [...formData.responsibilities]
+                            newResp[idx] = e.target.value
+                            setFormData({ ...formData, responsibilities: newResp })
+                          }}
+                          className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
+                        />
+                        <button type="button" onClick={() => setFormData({ ...formData, responsibilities: formData.responsibilities.filter((_, i) => i !== idx) })} className="text-red-500 p-2"><Trash2 className="w-4 h-4" /></button>
+                      </div>
+                    ))}
+                    <button type="button" onClick={() => setFormData({ ...formData, responsibilities: [...formData.responsibilities, ""] })} className="text-sm text-indigo-600 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add Responsibility</button>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Challenges Faced</label>
+                  <button type="button" onClick={() => insertHighlight('challenges-input', 'challenges')} className="text-xs flex items-center gap-1 text-indigo-600 font-medium"><Sparkles className="w-3 h-3" /> Highlight Text</button>
+                </div>
+                <textarea
+                  id="challenges-input"
+                  value={formData.challenges}
+                  onChange={(e) => setFormData({ ...formData, challenges: e.target.value })}
+                  rows={4}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+                  placeholder="What were the difficult parts..."
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* --- PROCESS TAB --- */}
+        {activeTab === "process" && (
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800 shadow-sm space-y-8">
+            <div className="max-w-3xl mx-auto space-y-8">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Process Heading</label>
+                <input
+                  type="text"
+                  value={formData.process_heading}
+                  onChange={(e) => setFormData({ ...formData, process_heading: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-lg font-semibold"
+                  placeholder="e.g. How We Built It"
+                />
+              </div>
+
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <label className="block text-lg font-semibold text-gray-900 dark:text-white">Project Steps</label>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, project_steps: [...formData.project_steps, { title: "", description: "", image: null, substeps: [] }] })}
+                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> Add Step
+                  </button>
+                </div>
+
+                <div className="space-y-6">
+                  {formData.project_steps.map((step, idx) => (
+                    <div key={idx} className="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 relative group">
+                      <div className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-xs font-medium text-gray-500 uppercase mb-1">Step Title</label>
+                              <input
+                                type="text"
+                                value={step.title}
+                                onChange={(e) => {
+                                  const newSteps = [...formData.project_steps]
+                                  newSteps[idx].title = e.target.value
+                                  setFormData({ ...formData, project_steps: newSteps })
+                                }}
+                                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 font-medium"
+                                placeholder="e.g. Research & Analysis"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-xs font-medium text-gray-500 uppercase mb-1">Description</label>
+                              <textarea
+                                value={step.description}
+                                onChange={(e) => {
+                                  const newSteps = [...formData.project_steps]
+                                  newSteps[idx].description = e.target.value
+                                  setFormData({ ...formData, project_steps: newSteps })
+                                }}
+                                rows={4}
+                                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
+                                placeholder="Describe what happened in this step..."
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-500 uppercase mb-1">Step Image</label>
+                            <ImageUploader
+                              label="Illustration"
+                              storagePath={`portfolio/${formData.id}/steps/step-${idx + 1}`}
+                              currentImageUrl={step.image || ""}
+                              onUploadSuccess={(url) => {
+                                const newSteps = [...formData.project_steps]
+                                newSteps[idx].image = url
+                                setFormData({ ...formData, project_steps: newSteps })
+                              }}
+                              onRemove={() => {
+                                const newSteps = [...formData.project_steps]
+                                newSteps[idx].image = null
+                                setFormData({ ...formData, project_steps: newSteps })
+                              }}
+                              className="bg-white dark:bg-gray-900 border-dashed"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Substeps Section */}
+                        <div className="bg-white dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+                          <div className="flex items-center justify-between mb-3">
+                            <label className="block text-xs font-medium text-gray-500 uppercase">Key Activities (Sub-steps)</label>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newSteps = [...formData.project_steps]
+                                const newSubsteps = [...(newSteps[idx].substeps || []), { title: "", description: "", images: [] }]
+                                newSteps[idx].substeps = newSubsteps
+                                setFormData({ ...formData, project_steps: newSteps })
+                              }}
+                              className="text-xs text-indigo-600 dark:text-indigo-400 font-medium flex items-center gap-1"
+                            >
+                              <Plus className="w-3 h-3" /> Add Activity
+                            </button>
+                          </div>
+                          <div className="space-y-4">
+                            {(step.substeps || []).map((substep, subIdx) => (
+                              <div key={subIdx} className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 relative group">
+                                <div className="space-y-3">
+                                  <div className="flex gap-2">
+                                    <input
+                                      type="text"
+                                      value={substep.title}
+                                      onChange={(e) => {
+                                        const newSteps = [...formData.project_steps]
+                                        const newSubsteps = [...(newSteps[idx].substeps || [])]
+                                        newSubsteps[subIdx] = { ...newSubsteps[subIdx], title: e.target.value }
+                                        newSteps[idx].substeps = newSubsteps
+                                        setFormData({ ...formData, project_steps: newSteps })
+                                      }}
+                                      className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-sm font-medium"
+                                      placeholder="Activity title..."
+                                    />
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        const newSteps = [...formData.project_steps]
+                                        const newSubsteps = (newSteps[idx].substeps || []).filter((_, i) => i !== subIdx)
+                                        newSteps[idx].substeps = newSubsteps
+                                        setFormData({ ...formData, project_steps: newSteps })
+                                      }}
+                                      className="text-gray-400 hover:text-red-500 p-2"
+                                    >
+                                      <Trash2 className="w-4 h-4" />
+                                    </button>
+                                  </div>
+
+                                  {/* Description for substep */}
+                                  <div>
+                                    <label className="block text-xs text-gray-500 mb-1">Description</label>
+                                    <textarea
+                                      value={substep.description || ''}
+                                      onChange={(e) => {
+                                        const newSteps = [...formData.project_steps]
+                                        const newSubsteps = [...(newSteps[idx].substeps || [])]
+                                        newSubsteps[subIdx] = { ...newSubsteps[subIdx], description: e.target.value }
+                                        newSteps[idx].substeps = newSubsteps
+                                        setFormData({ ...formData, project_steps: newSteps })
+                                      }}
+                                      rows={3}
+                                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-sm"
+                                      placeholder="Describe this activity..."
+                                    />
+                                  </div>
+
+                                  {/* Images for this substep */}
+                                  <div>
+                                    <label className="block text-xs text-gray-500 mb-2">Images</label>
+                                    <MultiImageUploader
+                                      images={substep.images || []}
+                                      onImagesChange={(newImages) => {
+                                        const newSteps = [...formData.project_steps]
+                                        const newSubsteps = [...(newSteps[idx].substeps || [])]
+                                        // Create completely new object to force re-render
+                                        newSubsteps[subIdx] = {
+                                          title: newSubsteps[subIdx].title,
+                                          description: newSubsteps[subIdx].description,
+                                          images: [...newImages] // Create new array reference
+                                        }
+                                        newSteps[idx] = {
+                                          ...newSteps[idx],
+                                          substeps: newSubsteps
+                                        }
+                                        setFormData({ ...formData, project_steps: newSteps })
+                                      }}
+                                      storagePath={`portfolio/${formData.id}/steps/step-${idx + 1}/substep-${subIdx + 1}`}
+                                      label=""
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+
+                            {(!step.substeps || step.substeps.length === 0) && (
+                              <div className="text-center py-6 text-gray-400 text-sm">
+                                No activities yet. Click "Add Activity" to start.
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newSteps = formData.project_steps.filter((_, i) => i !== idx)
+                          setFormData({ ...formData, project_steps: newSteps })
+                        }}
+                        className="absolute top-4 right-4 p-2 text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+                        title="Remove Step"
+                      >
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </div>
+                  ))}
+
+                  {formData.project_steps.length === 0 && (
+                    <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-xl border border-dashed border-gray-300 dark:border-gray-700">
+                      <p className="text-gray-500 dark:text-gray-400 mb-4">No steps added yet. Document your process!</p>
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, project_steps: [...formData.project_steps, { title: "", description: "", image: null, substeps: [] }] })}
+                        className="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors border border-indigo-200"
+                      >
+                        <Plus className="w-4 h-4 inline mr-2" /> Add First Step
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* --- MEDIA TAB --- */}
+        {activeTab === "media" && (
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800 shadow-sm space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Project Gallery</h3>
+              <MultiImageUploader
+                images={formData.additional_images}
+                onImagesChange={(newImages) => setFormData({ ...formData, additional_images: newImages })}
+                storagePath={`portfolio/${formData.id}/gallery`}
+                label="Screenshots & Visuals"
+                helperText="Upload additional screenshots to show off the project features."
               />
             </div>
           </div>
         )}
 
-        {/* Problem Tab */}
-        {activeTab === "problem" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Problem Description
-                </label>
-                <button
-                  type="button"
-                  onClick={() => insertHighlight('problem-desc-input', 'problem_description')}
-                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
-                >
-                  <Sparkles className="w-3 h-3" />
-                  Highlight Selection
-                </button>
-              </div>
+        {/* --- CASE STUDY TAB (Problem/Solution) --- */}
+        {activeTab === "case-study" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Problem Section */}
+            <div className="space-y-6 bg-red-50/50 dark:bg-red-900/10 p-6 rounded-2xl border border-red-100 dark:border-red-900/30">
+              <h3 className="text-xl font-bold text-red-800 dark:text-red-400 flex items-center gap-2">The Problem</h3>
               <textarea
-                id="problem-desc-input"
                 value={formData.problem_description}
                 onChange={(e) => setFormData({ ...formData, problem_description: e.target.value })}
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Describe the problem that this project solves..."
+                rows={4}
+                className="w-full px-4 py-3 border border-red-200 dark:border-red-900/50 rounded-lg bg-white dark:bg-gray-900"
+                placeholder="What problem were you solving?"
               />
-            </div>
-            <div>
               <ImageUploader
-                label="Problem Section Image"
+                label="Problem Illustration"
+                storagePath={`portfolio/${formData.id}/problem`}
                 currentImageUrl={formData.problem_image}
-                storagePath={`portfolio/${formData.id}/problem-${Date.now()}.jpg`}
-                onUploadSuccess={(url, path) => {
-                  setFormData({ ...formData, problem_image: url })
-                }}
-                onRemove={() => {
-                  setFormData({ ...formData, problem_image: "" })
-                }}
-                helperText="Image for problem section (recommended: 800×600px)"
+                onUploadSuccess={(url) => setFormData({ ...formData, problem_image: url })}
+                className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-dashed border-red-200"
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Problem Cards
-              </label>
+
               <div className="space-y-4">
+                <label className="font-semibold text-red-800 dark:text-red-400">Key Pain Points</label>
                 {formData.problem_cards.map((card, idx) => (
-                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
-                      <input
-                        type="text"
-                        value={card.title}
-                        onChange={(e) => {
-                          const newCards = [...formData.problem_cards]
-                          newCards[idx] = { ...card, title: e.target.value }
-                          setFormData({ ...formData, problem_cards: newCards })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Card title"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFormData({
-                            ...formData,
-                            problem_cards: formData.problem_cards.filter((_, i) => i !== idx),
-                          })
-                        }}
-                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
-                      >
-                        <Trash2 className="w-4 h-4 inline mr-2" />
-                        Remove
-                      </button>
-                    </div>
+                  <div key={idx} className="bg-white dark:bg-gray-900 p-4 rounded-xl shadow-sm border border-red-100 dark:border-red-900/30 relative group">
+                    <input
+                      type="text"
+                      value={card.title}
+                      onChange={(e) => {
+                        const newCards = [...formData.problem_cards];
+                        newCards[idx].title = e.target.value;
+                        setFormData({ ...formData, problem_cards: newCards });
+                      }}
+                      className="font-bold text-red-700 dark:text-red-400 w-full bg-transparent border-none p-0 focus:ring-0 mb-2"
+                      placeholder="Pain Point Title"
+                    />
                     <textarea
                       value={card.description}
                       onChange={(e) => {
-                        const newCards = [...formData.problem_cards]
-                        newCards[idx] = { ...card, description: e.target.value }
-                        setFormData({ ...formData, problem_cards: newCards })
+                        const newCards = [...formData.problem_cards];
+                        newCards[idx].description = e.target.value;
+                        setFormData({ ...formData, problem_cards: newCards });
                       }}
                       rows={2}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Card description"
+                      className="w-full text-sm text-gray-600 dark:text-gray-300 bg-transparent border-none p-0 focus:ring-0 resize-none"
+                      placeholder="Description..."
                     />
+                    <button type="button" onClick={() => {
+                      const newCards = formData.problem_cards.filter((_, i) => i !== idx);
+                      setFormData({ ...formData, problem_cards: newCards });
+                    }} className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:text-red-600"><X className="w-4 h-4" /></button>
                   </div>
                 ))}
+                <button type="button" onClick={() => setFormData({ ...formData, problem_cards: [...formData.problem_cards, { title: "", description: "" }] })} className="w-full py-2 border-2 border-dashed border-red-200 dark:border-red-900/50 rounded-xl text-red-600 dark:text-red-400 font-medium hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">+ Add Pain Point</button>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    problem_cards: [...formData.problem_cards, { title: "", description: "" }],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Problem Card
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Solution Tab */}
-        {activeTab === "solution" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Solution Heading
-              </label>
-              <input
-                type="text"
-                value={formData.solution_heading}
-                onChange={(e) => setFormData({ ...formData, solution_heading: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="e.g. A Unified Approach"
-              />
             </div>
 
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Solution Description
-                </label>
-                <button
-                  type="button"
-                  onClick={() => insertHighlight('solution-desc-input', 'solution_description')}
-                  className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 rounded hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
-                >
-                  <Sparkles className="w-3 h-3" />
-                  Highlight Selection
-                </button>
-              </div>
+            {/* Solution Section */}
+            <div className="space-y-6 bg-emerald-50/50 dark:bg-emerald-900/10 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/30">
+              <h3 className="text-xl font-bold text-emerald-800 dark:text-emerald-400 flex items-center gap-2">The Solution</h3>
               <textarea
-                id="solution-desc-input"
                 value={formData.solution_description}
                 onChange={(e) => setFormData({ ...formData, solution_description: e.target.value })}
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Describe the solution implemented..."
+                rows={4}
+                className="w-full px-4 py-3 border border-emerald-200 dark:border-emerald-900/50 rounded-lg bg-white dark:bg-gray-900"
+                placeholder="How did you solve it?"
               />
-            </div>
-            <div>
               <ImageUploader
-                label="Solution Section Image"
+                label="Solution Illustration"
+                storagePath={`portfolio/${formData.id}/solution`}
                 currentImageUrl={formData.solution_image}
-                storagePath={`portfolio/${formData.id}/solution-${Date.now()}.jpg`}
-                onUploadSuccess={(url, path) => {
-                  setFormData({ ...formData, solution_image: url })
-                }}
-                onRemove={() => {
-                  setFormData({ ...formData, solution_image: "" })
-                }}
-                helperText="Image for solution section (recommended: 800×600px)"
+                onUploadSuccess={(url) => setFormData({ ...formData, solution_image: url })}
+                className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-dashed border-emerald-200"
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Solution Cards
-              </label>
+
               <div className="space-y-4">
+                <label className="font-semibold text-emerald-800 dark:text-emerald-400">Key Features</label>
                 {formData.solution_cards.map((card, idx) => (
-                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
-                      <input
-                        type="text"
-                        value={card.title}
-                        onChange={(e) => {
-                          const newCards = [...formData.solution_cards]
-                          newCards[idx] = { ...card, title: e.target.value }
-                          setFormData({ ...formData, solution_cards: newCards })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Card title"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFormData({
-                            ...formData,
-                            solution_cards: formData.solution_cards.filter((_, i) => i !== idx),
-                          })
-                        }}
-                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
-                      >
-                        <Trash2 className="w-4 h-4 inline mr-2" />
-                        Remove
-                      </button>
-                    </div>
+                  <div key={idx} className="bg-white dark:bg-gray-900 p-4 rounded-xl shadow-sm border border-emerald-100 dark:border-emerald-900/30 relative group">
+                    <input
+                      type="text"
+                      value={card.title}
+                      onChange={(e) => {
+                        const newCards = [...formData.solution_cards];
+                        newCards[idx].title = e.target.value;
+                        setFormData({ ...formData, solution_cards: newCards });
+                      }}
+                      className="font-bold text-emerald-700 dark:text-emerald-400 w-full bg-transparent border-none p-0 focus:ring-0 mb-2"
+                      placeholder="Feature Title"
+                    />
                     <textarea
                       value={card.description}
                       onChange={(e) => {
-                        const newCards = [...formData.solution_cards]
-                        newCards[idx] = { ...card, description: e.target.value }
-                        setFormData({ ...formData, solution_cards: newCards })
+                        const newCards = [...formData.solution_cards];
+                        newCards[idx].description = e.target.value;
+                        setFormData({ ...formData, solution_cards: newCards });
                       }}
                       rows={2}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Card description"
+                      className="w-full text-sm text-gray-600 dark:text-gray-300 bg-transparent border-none p-0 focus:ring-0 resize-none"
+                      placeholder="Description..."
                     />
+                    <button type="button" onClick={() => {
+                      const newCards = formData.solution_cards.filter((_, i) => i !== idx);
+                      setFormData({ ...formData, solution_cards: newCards });
+                    }} className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:text-red-600"><X className="w-4 h-4" /></button>
                   </div>
                 ))}
+                <button type="button" onClick={() => setFormData({ ...formData, solution_cards: [...formData.solution_cards, { title: "", description: "" }] })} className="w-full py-2 border-2 border-dashed border-emerald-200 dark:border-emerald-900/50 rounded-xl text-emerald-600 dark:text-emerald-400 font-medium hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all">+ Add Feature</button>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    solution_cards: [...formData.solution_cards, { title: "", description: "" }],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Solution Card
-              </button>
             </div>
           </div>
         )}
 
-        {/* Outcomes Tab */}
-        {activeTab === "outcomes" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Outcomes Heading
-              </label>
-              <input
-                type="text"
-                value={formData.outcomes_heading}
-                onChange={(e) => setFormData({ ...formData, outcomes_heading: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="e.g. Measurable Results"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Outcomes
-              </label>
-              <div className="space-y-4">
-                {formData.outcomes.map((outcome, idx) => (
-                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
-                      <input
-                        type="text"
-                        value={outcome.type}
-                        onChange={(e) => {
-                          const newOutcomes = [...formData.outcomes]
-                          newOutcomes[idx] = { ...outcome, type: e.target.value }
-                          setFormData({ ...formData, outcomes: newOutcomes })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Type (e.g., positive)"
-                      />
-                      <input
-                        type="number"
-                        value={outcome.value}
-                        onChange={(e) => {
-                          const newOutcomes = [...formData.outcomes]
-                          newOutcomes[idx] = { ...outcome, value: parseFloat(e.target.value) || 0 }
-                          setFormData({ ...formData, outcomes: newOutcomes })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Value"
-                      />
-                      <input
-                        type="text"
-                        value={outcome.unit}
-                        onChange={(e) => {
-                          const newOutcomes = [...formData.outcomes]
-                          newOutcomes[idx] = { ...outcome, unit: e.target.value }
-                          setFormData({ ...formData, outcomes: newOutcomes })
-                        }}
-                        className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                        placeholder="Unit (e.g., %)"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFormData({
-                            ...formData,
-                            outcomes: formData.outcomes.filter((_, i) => i !== idx),
-                          })
-                        }}
-                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
-                      >
-                        <Trash2 className="w-4 h-4 inline mr-2" />
-                        Remove
-                      </button>
-                    </div>
+        {/* --- IMPACT TAB --- */}
+        {activeTab === "impact" && (
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800 shadow-sm space-y-8">
+            <h3 className="text-xl font-bold">Project Impact & Results</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {formData.impact.map((item, idx) => (
+                <div key={idx} className="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 relative group hover:shadow-md transition-all">
+                  <div className="flex gap-4 mb-4">
+                    <input
+                      type="number"
+                      value={item.value}
+                      onChange={(e) => {
+                        const newImpact = [...formData.impact];
+                        newImpact[idx].value = parseFloat(e.target.value) || 0;
+                        setFormData({ ...formData, impact: newImpact });
+                      }}
+                      className="w-24 text-4xl font-bold bg-transparent border-none p-0 focus:ring-0 text-indigo-600 dark:text-indigo-400"
+                      placeholder="0"
+                    />
                     <input
                       type="text"
-                      value={outcome.title}
+                      value={item.unit}
                       onChange={(e) => {
-                        const newOutcomes = [...formData.outcomes]
-                        newOutcomes[idx] = { ...outcome, title: e.target.value }
-                        setFormData({ ...formData, outcomes: newOutcomes })
+                        const newImpact = [...formData.impact];
+                        newImpact[idx].unit = e.target.value;
+                        setFormData({ ...formData, impact: newImpact });
                       }}
-                      className="w-full mb-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Title"
-                    />
-                    <textarea
-                      value={outcome.description}
-                      onChange={(e) => {
-                        const newOutcomes = [...formData.outcomes]
-                        newOutcomes[idx] = { ...outcome, description: e.target.value }
-                        setFormData({ ...formData, outcomes: newOutcomes })
-                      }}
-                      rows={2}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Description"
+                      className="w-16 text-xl font-medium bg-transparent border-none p-0 focus:ring-0 text-gray-400 mt-auto mb-1"
+                      placeholder="%"
                     />
                   </div>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    outcomes: [
-                      ...formData.outcomes,
-                      { type: "positive", value: 0, unit: "", title: "", description: "" },
-                    ],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Outcome
-              </button>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Next Steps
-              </label>
-              <textarea
-                value={formData.next_steps}
-                onChange={(e) => setFormData({ ...formData, next_steps: e.target.value })}
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="Describe future plans or next steps..."
-              />
-            </div>
-          </div>
-        )}
+                  <input
+                    type="text"
+                    value={item.title}
+                    onChange={(e) => {
+                      const newImpact = [...formData.impact];
+                      newImpact[idx].title = e.target.value;
+                      setFormData({ ...formData, impact: newImpact });
+                    }}
+                    className="w-full font-bold text-gray-900 dark:text-white bg-transparent border-none p-0 focus:ring-0 mb-1"
+                    placeholder="Metric Title"
+                  />
+                  <textarea
+                    value={item.description}
+                    onChange={(e) => {
+                      const newImpact = [...formData.impact];
+                      newImpact[idx].description = e.target.value;
+                      setFormData({ ...formData, impact: newImpact });
+                    }}
+                    rows={2}
+                    className="w-full text-sm text-gray-500 dark:text-gray-400 bg-transparent border-none p-0 focus:ring-0 resize-none"
+                    placeholder="Brief explanation..."
+                  />
 
-        {/* Process Tab */}
-        {activeTab === "process" && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Process Section Heading
-              </label>
-              <input
-                type="text"
-                value={formData.process_heading}
-                onChange={(e) => setFormData({ ...formData, process_heading: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="e.g. Design Process, Development Steps"
-              />
-            </div>
+                  <button type="button" onClick={() => {
+                    const newImpact = formData.impact.filter((_, i) => i !== idx);
+                    setFormData({ ...formData, impact: newImpact });
+                  }} className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-2 bg-white dark:bg-gray-700 rounded-lg text-red-500 shadow-sm"><Trash2 className="w-4 h-4" /></button>
+                </div>
+              ))}
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Project Steps
-              </label>
-              <div className="space-y-4">
-                {formData.project_steps.map((step, idx) => (
-                  <div key={idx} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Step {idx + 1}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFormData({
-                            ...formData,
-                            project_steps: formData.project_steps.filter((_, i) => i !== idx),
-                          })
-                        }}
-                        className="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-sm"
-                      >
-                        <Trash2 className="w-4 h-4 inline mr-2" />
-                        Remove
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      value={step.title}
-                      onChange={(e) => {
-                        const newSteps = [...formData.project_steps]
-                        newSteps[idx] = { ...step, title: e.target.value }
-                        setFormData({ ...formData, project_steps: newSteps })
-                      }}
-                      className="w-full mb-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      placeholder="Step title"
-                    />
-                    <textarea
-                      value={step.description}
-                      onChange={(e) => {
-                        const newSteps = [...formData.project_steps]
-                        newSteps[idx] = { ...step, description: e.target.value }
-                        setFormData({ ...formData, project_steps: newSteps })
-                      }}
-                      rows={3}
-                      className="w-full mb-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono text-sm"
-                      placeholder="Step description. Use ### for subheadings."
-                    />
-                    <p className="text-xs text-gray-500 mb-2">
-                      Supports Markdown: Use <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">### Subheading</code> for section titles.
-                    </p>
-                    <ImageUploader
-                      label={`Step ${idx + 1} Image (optional)`}
-                      currentImageUrl={step.image || ""}
-                      storagePath={`portfolio/${formData.id}/step-${idx + 1}-${Date.now()}.jpg`}
-                      onUploadSuccess={(url, path) => {
-                        const newSteps = [...formData.project_steps]
-                        newSteps[idx] = { ...step, image: url }
-                        setFormData({ ...formData, project_steps: newSteps })
-                      }}
-                      onRemove={() => {
-                        const newSteps = [...formData.project_steps]
-                        newSteps[idx] = { ...step, image: null }
-                        setFormData({ ...formData, project_steps: newSteps })
-                      }}
-                      helperText="Image for this project step (recommended: 600×400px)"
-                      className="mt-2"
-                    />
-                  </div>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    project_steps: [
-                      ...formData.project_steps,
-                      { title: "", description: "", image: null },
-                    ],
-                  })
-                }}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg"
-              >
-                <Plus className="w-4 h-4" />
-                Add Project Step
+              <button type="button" onClick={() => setFormData({ ...formData, impact: [...formData.impact, { type: 'positive', value: 0, unit: '%', title: '', description: '' }] })} className="flex flex-col items-center justify-center p-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 transition-all gap-2 text-gray-500 hover:text-indigo-600">
+                <Plus className="w-8 h-8" />
+                <span className="font-medium">Add Metric</span>
               </button>
             </div>
           </div>
         )}
 
-        {/* Submit Button */}
-        <div className="flex items-center justify-end gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
-          <Link
-            href="/admin/portfolio"
-            className="px-6 py-3 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-          >
-            Cancel
-          </Link>
-          <button
-            type="submit"
-            disabled={saving}
-            className="flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Save className="w-5 h-5" />
-            {saving ? "Saving..." : portfolioId ? "Update Portfolio" : "Create Portfolio"}
-          </button>
-        </div>
       </form>
     </div>
   )
 }
-

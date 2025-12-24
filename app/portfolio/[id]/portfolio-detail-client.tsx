@@ -456,7 +456,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                 </div>
                                 {portfolio.projectSteps && portfolio.projectSteps.length > 0 ? (
                                     portfolio.projectSteps.map((step: any, idx: number) => (
-                                        <div key={idx} className="space-y-8">
+                                        <div key={idx} className="space-y-6">
                                             {step.title && (
                                                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
                                                     {step.title}
@@ -501,7 +501,60 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                 </div>
                                             )}
 
-                                            {/* (Image moved to top) */}
+                                            {/* Substeps */}
+                                            {step.substeps && step.substeps.length > 0 && (
+                                                <div className="mt-8 space-y-6 pl-0 sm:pl-6 border-l-0 sm:border-l-2 border-gray-200 dark:border-gray-800">
+                                                    {step.substeps.map((substep: any, subIdx: number) => (
+                                                        <div key={subIdx} className="space-y-4">
+                                                            {substep.title && (
+                                                                <h4 className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
+                                                                    {substep.title}
+                                                                </h4>
+                                                            )}
+
+                                                            {/* Substep Description */}
+                                                            {substep.description && (
+                                                                <div className="prose prose-sm sm:prose-base prose-indigo dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed">
+                                                                    <ReactMarkdown
+                                                                        components={{
+                                                                            p: ({ node, ...props }) => <p className="mb-4 last:mb-0" {...props} />,
+                                                                            strong: ({ node, ...props }) => <span className="bg-amber-100 dark:bg-amber-900/30 text-gray-900 dark:text-gray-100 font-medium px-0.5 rounded" {...props} />,
+                                                                        }}
+                                                                    >
+                                                                        {substep.description}
+                                                                    </ReactMarkdown>
+                                                                </div>
+                                                            )}
+
+                                                            {/* Substep Images */}
+                                                            {substep.images && substep.images.length > 0 && (
+                                                                <div className={`grid gap-4 ${substep.images.length === 1
+                                                                        ? 'grid-cols-1 max-w-2xl'
+                                                                        : substep.images.length === 2
+                                                                            ? 'grid-cols-1 sm:grid-cols-2'
+                                                                            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                                                                    }`}>
+                                                                    {substep.images.map((img: string, imgIdx: number) => (
+                                                                        <div
+                                                                            key={imgIdx}
+                                                                            className="relative rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-sm"
+                                                                            style={{ aspectRatio: substep.images.length === 1 ? "16/9" : "4/3" }}
+                                                                        >
+                                                                            <Image
+                                                                                src={img}
+                                                                                alt={`${substep.title || 'Substep'} - Image ${imgIdx + 1}`}
+                                                                                fill
+                                                                                className="object-cover"
+                                                                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                                            />
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
                                     ))
                                 ) : (

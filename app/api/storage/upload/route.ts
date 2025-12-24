@@ -54,13 +54,18 @@ export async function POST(request: NextRequest) {
         const arrayBuffer = await file.arrayBuffer()
         const buffer = Buffer.from(arrayBuffer)
 
+        // Generate unique filename to prevent overwriting
+        const timestamp = Date.now()
+        const fileExt = file.name.split('.').pop() || 'jpg'
+        const uniquePath = `${path}-${timestamp}.${fileExt}`
+
         // Upload to Supabase Storage
         const { data, error } = await supabase.storage
             .from("portfolio-images")
-            .upload(path, buffer, {
+            .upload(uniquePath, buffer, {
                 contentType: file.type,
                 cacheControl: "no-cache, no-store, must-revalidate", // Prevent browser caching
-                upsert: true, // Replace if exists
+                upsert: false, // Don't replace if exists
             })
 
         if (error) {

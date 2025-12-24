@@ -1,44 +1,15 @@
 "use client"
 
-import { useState, useEffect, useRef, ChangeEvent } from "react"
-import { Upload, X, Image as ImageIcon, Loader2 } from "lucide-react"
+import { useState, useEffect, useRef, ChangeEvent, DragEvent } from "react"
+import { Upload, X, Image as ImageIcon, Loader2, UploadCloud } from "lucide-react"
 
 interface ImageUploaderProps {
-    /**
-     * Current image URL (can be Unsplash or Supabase URL)
-     */
     currentImageUrl?: string
-
-    /**
-     * Label for the uploader
-     */
     label: string
-
-    /**
-     * Path in Supabase Storage bucket
-     * Example: "portfolio/ess/hero.jpg"
-     */
     storagePath: string
-
-    /**
-     * Callback when upload is successful
-     * Returns the new public URL
-     */
     onUploadSuccess: (url: string, path: string) => void
-
-    /**
-     * Callback when image is removed
-     */
     onRemove?: () => void
-
-    /**
-     * Optional helper text
-     */
     helperText?: string
-
-    /**
-     * Optional className for styling
-     */
     className?: string
 }
 
@@ -54,25 +25,20 @@ export default function ImageUploader({
     const [uploading, setUploading] = useState(false)
     const [preview, setPreview] = useState<string | null>(currentImageUrl || null)
     const [error, setError] = useState<string | null>(null)
+    const [isDragging, setIsDragging] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
-    // Sync preview with currentImageUrl prop changes
     useEffect(() => {
         setPreview(currentImageUrl || null)
     }, [currentImageUrl])
 
-    const handleFileSelect = async (e: ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]
-        if (!file) return
-
-        // Validate file type
+    const processFile = async (file: File) => {
         if (!file.type.startsWith("image/")) {
             setError("Please select an image file")
             return
         }
 
-        // Validate file size (5MB max)
-        const maxSize = 5 * 1024 * 1024
+        const maxSize = 5 * 1024 * 1024 // 5MB
         if (file.size > maxSize) {
             setError("File size must be less than 5MB")
             return
@@ -89,7 +55,7 @@ export default function ImageUploader({
             }
             reader.readAsDataURL(file)
 
-            // Upload to server
+            // Upload
             const formData = new FormData()
             formData.append("file", file)
             formData.append("path", storagePath)
@@ -105,15 +71,10 @@ export default function ImageUploader({
                 throw new Error(data.error || "Failed to upload image")
             }
 
-            // Add cache busting timestamp to force browser reload
             const urlWithCacheBust = `${data.url}?t=${Date.now()}`
-
-            // Call success callback with new URL (without cache bust for storage)
             onUploadSuccess(data.url, data.path)
-            // Set preview with cache bust to force reload
             setPreview(urlWithCacheBust)
 
-            // Reset file input to allow uploading the same file again
             if (fileInputRef.current) {
                 fileInputRef.current.value = ""
             }
@@ -126,104 +87,116 @@ export default function ImageUploader({
         }
     }
 
+    const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) processFile(file)
+    }
+
+    const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        setIsDragging(true)
+    }
+
+    const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        setIsDragging(false)
+    }
+
+    const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        setIsDragging(false)
+        const file = e.dataTransfer.files?.[0]
+        if (file) processFile(file)
+    }
+
     const handleRemove = () => {
         setPreview(null)
         setError(null)
-        if (fileInputRef.current) {
-            fileInputRef.current.value = ""
-        }
+        if (fileInputRef.current) fileInputRef.current.value = ""
         onRemove?.()
-    }
-
-    const handleClick = () => {
-        fileInputRef.current?.click()
     }
 
     return (
         <div className={`space-y-2 ${className}`}>
-            {/* Label */}
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 {label}
             </label>
 
-            {/* Upload Area */}
-            <div className="relative">
+            <div
+                className={`relative group transition-all duration-200 ease-in-out ${isDragging
+                    ? "ring-2 ring-indigo-500 ring-offset-2 bg-indigo-50 dark:bg-indigo-900/10"
+                    : ""
+                    }`}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+            >
                 {preview ? (
-                    // Image Preview
-                    <div className="relative group">
-                        <img
-                            src={preview}
-                            alt={label}
-                            className="w-full h-48 object-cover rounded-lg border-2 border-gray-200 dark:border-gray-700"
-                            key={preview} // Force re-render when preview changes
-                        />
-
-                        {/* Overlay with actions */}
-                        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
-                            <button
-                                type="button"
-                                onClick={handleClick}
-                                disabled={uploading}
-                                className="px-4 py-2 bg-white text-gray-900 rounded-md hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                            >
-                                {uploading ? (
-                                    <>
-                                        <Loader2 className="w-4 h-4 animate-spin" />
-                                        Uploading...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Upload className="w-4 h-4" />
-                                        Replace
-                                    </>
-                                )}
-                            </button>
-
-                            <button
-                                type="button"
-                                onClick={handleRemove}
-                                disabled={uploading}
-                                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                            >
-                                <X className="w-4 h-4" />
-                                Remove
-                            </button>
-                        </div>
-
-                        {/* Uploading indicator */}
-                        {uploading && (
-                            <div className="absolute inset-0 bg-black bg-opacity-70 rounded-lg flex items-center justify-center">
-                                <div className="text-center text-white">
-                                    <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />
-                                    <p className="text-sm">Uploading...</p>
-                                </div>
+                    <div className="relative rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                        <div className="relative aspect-video">
+                            <img
+                                src={preview}
+                                alt={label}
+                                className="w-full h-full object-cover"
+                                key={preview}
+                            />
+                            {/* Overlay */}
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-[2px]">
+                                <button
+                                    type="button"
+                                    onClick={() => fileInputRef.current?.click()}
+                                    disabled={uploading}
+                                    className="p-2 bg-white/90 text-gray-900 rounded-lg hover:bg-white hover:scale-105 transition-all shadow-lg"
+                                    title="Replace Image"
+                                >
+                                    <Upload className="w-5 h-5" />
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleRemove}
+                                    disabled={uploading}
+                                    className="p-2 bg-red-500/90 text-white rounded-lg hover:bg-red-500 hover:scale-105 transition-all shadow-lg"
+                                    title="Remove Image"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
                             </div>
-                        )}
+                        </div>
                     </div>
                 ) : (
-                    // Upload Placeholder
-                    <button
-                        type="button"
-                        onClick={handleClick}
-                        disabled={uploading}
-                        className="w-full h-48 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-gray-400 dark:hover:border-gray-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex flex-col items-center justify-center gap-2 text-gray-500 dark:text-gray-400"
+                    <div
+                        onClick={() => fileInputRef.current?.click()}
+                        className={`
+                            relative w-full aspect-video rounded-xl border-2 border-dashed 
+                            flex flex-col items-center justify-center gap-4 cursor-pointer
+                            transition-all duration-200
+                            ${isDragging
+                                ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-900/10"
+                                : "border-gray-300 dark:border-gray-700 hover:border-indigo-400 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                            }
+                        `}
                     >
-                        {uploading ? (
-                            <>
+                        <div className={`
+                            p-4 rounded-full bg-gray-100 dark:bg-gray-800 
+                            ${isDragging ? "bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600" : "text-gray-500 dark:text-gray-400"}
+                        `}>
+                            {uploading ? (
                                 <Loader2 className="w-8 h-8 animate-spin" />
-                                <p className="text-sm">Uploading...</p>
-                            </>
-                        ) : (
-                            <>
-                                <ImageIcon className="w-8 h-8" />
-                                <p className="text-sm font-medium">Click to upload image</p>
-                                <p className="text-xs">PNG, JPG, WEBP up to 5MB</p>
-                            </>
-                        )}
-                    </button>
+                            ) : (
+                                <UploadCloud className="w-8 h-8" />
+                            )}
+                        </div>
+                        <div className="text-center space-y-1">
+                            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                {uploading ? "Uploading..." : "Click to upload or drag and drop"}
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                                SVG, PNG, JPG or GIF (max. 5MB)
+                            </p>
+                        </div>
+                    </div>
                 )}
 
-                {/* Hidden file input */}
                 <input
                     ref={fileInputRef}
                     type="file"
@@ -233,20 +206,14 @@ export default function ImageUploader({
                 />
             </div>
 
-            {/* Helper text */}
-            {helperText && !error && (
-                <p className="text-xs text-gray-500 dark:text-gray-400">{helperText}</p>
+            {(error || helperText) && (
+                <div className="flex flex-col gap-1">
+                    {error && <p className="text-sm text-red-500">{error}</p>}
+                    {helperText && !error && (
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{helperText}</p>
+                    )}
+                </div>
             )}
-
-            {/* Error message */}
-            {error && (
-                <p className="text-xs text-red-600 dark:text-red-400">{error}</p>
-            )}
-
-            {/* Storage path info */}
-            <p className="text-xs text-gray-400 dark:text-gray-500 font-mono">
-                Path: {storagePath}
-            </p>
         </div>
     )
 }
