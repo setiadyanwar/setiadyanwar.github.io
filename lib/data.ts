@@ -1068,7 +1068,7 @@ export const portfolioItems = [
     technologies: ["Nuxt 3", "Vue.js", "TailwindCSS", "PrimeVue", "Pinia", "Nuxt Auth"],
     overviewHeading: "The Project Description",
     description:
-      "ESS (Employee Self Service) is a **web-based portal developed for PT Sigma Cipta Caraka (Telkomsigma)** that provides a single entry point to internal systems and allows employees to manage their personal data. I designed the interface from scratch and implemented the entire frontend using **Nuxt 3, Vue.js, TailwindCSS, PrimeVue, Pinia, and Nuxt Auth**, focusing on fast interaction, clear information hierarchy, and a responsive layout across devices.",
+      "ESS (Employee Self Service) is a **web-based portal developed for PT Sigma Cipta Caraka (Telkomsigma)** that provides a single entry point to internal systems. I also developed the **Employee Personal Data Update Request Module**, enabling employees to securely manage their information. I designed the interface from scratch and implemented the entire frontend using **Nuxt 3, Vue.js, TailwindCSS, PrimeVue, Pinia, and Nuxt Auth**, focusing on fast interaction, clear information hierarchy, and a responsive layout across devices.",
     role: "Frontend Developer & UI/UX Designer",
     responsibilities: [
       "Designing the ESS dashboard shell and profile/personal data forms from initial wireframes to high-fidelity UI",
@@ -1078,13 +1078,13 @@ export const portfolioItems = [
       "Ensuring usability and accessibility for internal employees through iterative internal testing",
     ],
     challenges:
-      "**Designing the ESS portal UI from the ground up** while aligning with the existing corporate design system, modelling profile and personal data flows in **Nuxt 3 + PrimeVue**, wiring authentication and state management with **Nuxt Auth and Pinia**, and keeping pages fast while consuming multiple backend services.",
+      "**Deeply understanding and complying with company data security policies (UU PDP)** was the primary challenge, requiring a major focus on creating a secure architecture. I had to **design the ESS portal UI from the ground up** while aligning with the existing corporate design system, modelling profile and personal data flows in **Nuxt 3 + PrimeVue**, wiring authentication and state management with **Nuxt Auth and Pinia**, and ensuring the platform remained secure and performant.",
     problemImage:
       "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
     solutionImage:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
     problemDescription:
-      "Before the new ESS portal, employees had to **jump between several internal apps** just to access HR information and update personal data. Different UX patterns and tech stacks made the ecosystem **confusing for users** and difficult to maintain.",
+      "Before the new ESS portal, employees had to **jump between several internal apps** just to access HR information and update personal data. Additionally, **Personal Data Updates were previously handled manually**, which was inefficient. To strictly comply with the **Personal Data Protection Law (UU PDP)**, an ESS system was required to allow employees to formally request data updates directly to the HR/HC system.",
     problemCards: [
       {
         title: "Too many separate internal apps",
@@ -1108,7 +1108,7 @@ export const portfolioItems = [
       },
     ],
     solutionDescription:
-      "The ESS portal **consolidates HR entry points** and personal data management into a single **Nuxt 3 microfrontends shell**. I designed and built the frontend so navigation is clear, the **UI follows the corporate design system**, and new modules or fixes can be shipped independently through a ticketing workflow.",
+      "The ESS portal **consolidates HR entry points** and personal data management into a single **Nuxt 3 microfrontends shell**, including a dedicated **Personal Data Update Module**. I designed and built the frontend so navigation is clear, the **UI follows the corporate design system**, and compliance with security standards is maintained throughout.",
     solutionCards: [
       {
         title: "Unified HR entry point",
@@ -1135,27 +1135,27 @@ export const portfolioItems = [
     demoUrl: "#",
     repoUrl: "#",
     impact: [
-      "Reduced manual HR processing time for leave and attendance by ~40%",
-      "Increased employee self-service adoption rate to ~85% within the first month",
+      "Used by more than 1,500 Telkomsigma employees",
+      "Successfully implemented the Personal Data Update Module within the Internal App Portal",
       "Decreased support tickets related to HR information by ~30%",
       "Improved internal user satisfaction score to 4.7/5.0 for the new ESS interface",
     ],
     outcomes: [
       {
         type: "positive",
-        value: 40,
-        unit: "%",
-        title: "Reduced manual HR processing",
+        value: 1500,
+        unit: "+",
+        title: "Active Users",
         description:
-          "Automated flows for leave and attendance reduced the amount of repetitive work handled by HR teams.",
+          "Over 1,500 employees now use the ESS portal for their daily HR needs and data updates.",
       },
       {
         type: "positive",
-        value: 85,
+        value: 100,
         unit: "%",
-        title: "High ESS adoption",
+        title: "UU PDP Compliance",
         description:
-          "Most employees quickly adopted the new portal thanks to clearer navigation and better alignment with their daily tasks.",
+          "The new Personal Data Update Module ensures full compliance with company data protection regulations.",
       },
       {
         type: "positive",
