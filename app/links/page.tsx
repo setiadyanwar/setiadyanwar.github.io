@@ -235,7 +235,7 @@ export default function LinksPage() {
       try {
         // Update all links in this section
         const linksToUpdate = linksData.filter(link => link.section === editingSection);
-        
+
         for (const link of linksToUpdate) {
           const updatedLink = { ...link, section: newSectionName };
           await fetch('/api/links', {
@@ -244,7 +244,7 @@ export default function LinksPage() {
             body: JSON.stringify(updatedLink),
           });
         }
-        
+
         await fetchLinks();
         setEditingSection(null);
         setNewSectionName("");
@@ -468,7 +468,7 @@ export default function LinksPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Last Semester Resources   
+            Last Semester Resources
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Semua link penting kuliah
@@ -825,172 +825,173 @@ export default function LinksPage() {
         {!loading && (
           <div className="space-y-8">
             {groupedEntries.map(({ key, label, sectionValue, links }, sectionIndex) => (
-            <div key={key}>
-              {/* Section Title */}
-              <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">
-                {editingSection === label ? (
-                  <div className="flex items-center gap-2 flex-1">
-                    <Input
-                      value={newSectionName}
-                      onChange={(e) => setNewSectionName(e.target.value)}
-                      className="text-lg font-semibold"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') handleSaveSection();
-                        if (e.key === 'Escape') {
+              <div key={key}>
+                {/* Section Title */}
+                <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">
+                  {editingSection === label ? (
+                    <div className="flex items-center gap-2 flex-1">
+                      <Input
+                        value={newSectionName}
+                        onChange={(e) => setNewSectionName(e.target.value)}
+                        className="text-lg font-semibold"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') handleSaveSection();
+                          if (e.key === 'Escape') {
+                            setEditingSection(null);
+                            setNewSectionName("");
+                          }
+                        }}
+                      />
+                      <Button
+                        onClick={handleSaveSection}
+                        size="sm"
+                        className="h-8"
+                      >
+                        <Save className="w-3 h-3" />
+                      </Button>
+                      <Button
+                        onClick={() => {
                           setEditingSection(null);
                           setNewSectionName("");
-                        }
-                      }}
-                    />
-                    <Button
-                      onClick={handleSaveSection}
-                      size="sm"
-                      className="h-8"
-                    >
-                      <Save className="w-3 h-3" />
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        setEditingSection(null);
-                        setNewSectionName("");
-                      }}
-                      variant="outline"
-                      size="sm"
-                      className="h-8"
-                    >
-                      <X className="w-3 h-3" />
-                    </Button>
-                  </div>
-                ) : (
-                  <>
-                    <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                      {label}
-                    </h2>
-                    {editMode && (
-                      <div className="flex gap-1">
-                        <Button
-                          onClick={() => handleMoveSection(sectionValue ?? null, "up")}
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 w-8 p-0"
-                          disabled={sectionIndex === 0 || isReordering}
-                        >
-                          <ArrowUp className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          onClick={() => handleMoveSection(sectionValue ?? null, "down")}
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 w-8 p-0"
-                          disabled={sectionIndex === groupedEntries.length - 1 || isReordering}
-                        >
-                          <ArrowDown className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          onClick={() => handleEditSection(label)}
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 w-8 p-0"
-                          disabled={isAdding || editingId !== null}
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-
-              {/* Links in this section */}
-              <div className="space-y-3">
-                {links.map((link, linkIndex) => (
-                  <div key={link.id} className="flex items-start gap-2">
-                    <Link
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex-1 ${editMode ? 'pointer-events-none opacity-50' : ''}`}
-                    >
-                      <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 overflow-hidden">
-                        {link.preview?.image && (
-                          <div className="h-32 w-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
-                            <img
-                              src={link.preview.image}
-                              alt={link.title}
-                              className="h-full w-full object-cover"
-                              onError={(e) => {
-                                e.currentTarget.style.display = 'none'
-                              }}
-                            />
-                          </div>
-                        )}
-                        <div className="p-4 flex items-start gap-3">
-                          <div className="text-gray-600 dark:text-gray-400 flex-shrink-0">
-                            {getIcon(link)}
-                          </div>
-                          <div className="flex-1 min-w-0 space-y-2">
-                            <div className="text-base font-medium text-gray-900 dark:text-white">
-                              {link.title}
-                            </div>
-                            {link.preview?.text && (
-                              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                                {link.preview.text}
-                              </p>
-                            )}
-                            <div className="text-xs text-gray-500 dark:text-gray-500 flex items-center gap-1">
-                              <Globe className="w-3 h-3" />
-                              {link.preview?.domain || getDomain(link.url)}
-                            </div>
-                          </div>
-                          <ExternalLink className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                        }}
+                        variant="outline"
+                        size="sm"
+                        className="h-8"
+                      >
+                        <X className="w-3 h-3" />
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        {label}
+                      </h2>
+                      {editMode && (
+                        <div className="flex gap-1">
+                          <Button
+                            onClick={() => handleMoveSection(sectionValue ?? null, "up")}
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                            disabled={sectionIndex === 0 || isReordering}
+                          >
+                            <ArrowUp className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            onClick={() => handleMoveSection(sectionValue ?? null, "down")}
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                            disabled={sectionIndex === groupedEntries.length - 1 || isReordering}
+                          >
+                            <ArrowDown className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            onClick={() => handleEditSection(label)}
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                            disabled={isAdding || editingId !== null}
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </Button>
                         </div>
-                      </div>
-                    </Link>
-                    {editMode && (
-                      <div className="flex flex-col gap-1 pt-4">
-                        <Button
-                          onClick={() => handleMoveLink(sectionValue ?? null, link.id, "up")}
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 w-8 p-0"
-                          disabled={linkIndex === 0 || isReordering}
-                        >
-                          <ArrowUp className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          onClick={() => handleEdit(link)}
-                          variant="outline"
-                          size="sm"
-                          className="h-9 w-9 p-0"
-                          disabled={isAdding || editingId !== null}
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          onClick={() => handleDelete(link.id)}
-                          variant="outline"
-                          size="sm"
-                          className="h-9 w-9 p-0 text-red-600 hover:text-red-700"
-                          disabled={isAdding || editingId !== null}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          onClick={() => handleMoveLink(sectionValue ?? null, link.id, "down")}
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 w-8 p-0"
-                          disabled={linkIndex === links.length - 1 || isReordering}
-                        >
-                          <ArrowDown className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                      )}
+                    </>
+                  )}
+                </div>
+
+                {/* Links in this section */}
+                <div className="space-y-3">
+                  {links.map((link, linkIndex) => (
+                    <div key={link.id} className="flex items-start gap-2">
+                      <Link
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex-1 ${editMode ? 'pointer-events-none opacity-50' : ''}`}
+                      >
+                        <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 overflow-hidden">
+                          {link.preview?.image && (
+                            <div className="h-32 w-full bg-gray-100 dark:bg-gray-800 overflow-hidden relative">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={link.preview.image}
+                                alt={link.title}
+                                className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  e.currentTarget.style.display = 'none'
+                                }}
+                              />
+                            </div>
+                          )}
+                          <div className="p-4 flex items-start gap-3">
+                            <div className="text-gray-600 dark:text-gray-400 flex-shrink-0">
+                              {getIcon(link)}
+                            </div>
+                            <div className="flex-1 min-w-0 space-y-2">
+                              <div className="text-base font-medium text-gray-900 dark:text-white">
+                                {link.title}
+                              </div>
+                              {link.preview?.text && (
+                                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                                  {link.preview.text}
+                                </p>
+                              )}
+                              <div className="text-xs text-gray-500 dark:text-gray-500 flex items-center gap-1">
+                                <Globe className="w-3 h-3" />
+                                {link.preview?.domain || getDomain(link.url)}
+                              </div>
+                            </div>
+                            <ExternalLink className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                          </div>
+                        </div>
+                      </Link>
+                      {editMode && (
+                        <div className="flex flex-col gap-1 pt-4">
+                          <Button
+                            onClick={() => handleMoveLink(sectionValue ?? null, link.id, "up")}
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                            disabled={linkIndex === 0 || isReordering}
+                          >
+                            <ArrowUp className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            onClick={() => handleEdit(link)}
+                            variant="outline"
+                            size="sm"
+                            className="h-9 w-9 p-0"
+                            disabled={isAdding || editingId !== null}
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            onClick={() => handleDelete(link.id)}
+                            variant="outline"
+                            size="sm"
+                            className="h-9 w-9 p-0 text-red-600 hover:text-red-700"
+                            disabled={isAdding || editingId !== null}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            onClick={() => handleMoveLink(sectionValue ?? null, link.id, "down")}
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                            disabled={linkIndex === links.length - 1 || isReordering}
+                          >
+                            <ArrowDown className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
           </div>
         )}
 

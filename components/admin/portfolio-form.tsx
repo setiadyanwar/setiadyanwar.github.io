@@ -339,6 +339,26 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                   </select>
                 </div>
 
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
+                  <select
+                    value={formData.status}
+                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                    className={`w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg font-medium ${formData.status === 'published'
+                        ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400'
+                        : 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400'
+                      }`}
+                  >
+                    <option value="draft">Draft (Hidden)</option>
+                    <option value="published">Published (Visible)</option>
+                  </select>
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    {formData.status === 'published'
+                      ? '✓ This portfolio item is visible on your website'
+                      : '⚠ This portfolio item is hidden from your website'}
+                  </p>
+                </div>
+
                 <div className="col-span-2">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subtitle</label>
                   <input

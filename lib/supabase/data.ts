@@ -10,7 +10,7 @@ function getSupabaseClient() {
 }
 
 // Portfolio Items
-export async function getPortfolioItems() {
+export async function getPortfolioItems(includeHidden: boolean = false) {
   const supabase = getSupabaseClient()
   if (!supabase) {
     // Fallback to local data if Supabase is not configured
@@ -18,9 +18,15 @@ export async function getPortfolioItems() {
     return portfolioItems
   }
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("portfolio_items")
-    .select("id, title, subtitle, category, image, technologies, date, created_at, display_order")
+    .select("id, title, subtitle, category, image, technologies, date, created_at, display_order, status")
+
+  if (!includeHidden) {
+    query = query.eq("status", "published") // Only show published items for public
+  }
+
+  const { data, error } = await query
     .order("display_order", { ascending: true })
     .order("created_at", { ascending: false })
 
