@@ -484,6 +484,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                     <ReactMarkdown
                                                         components={{
                                                             p: ({ node, ...props }) => <p className="mb-6 last:mb-0" {...props} />,
+                                                            h3: ({ node, ...props }) => <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 mt-8 mb-4" {...props} />,
                                                             ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-6 space-y-2" {...props} />,
                                                             ol: ({ node, ...props }) => <ol className="list-decimal pl-6 mb-6 space-y-2" {...props} />,
                                                             li: ({ node, ...props }) => <li className="pl-2" {...props} />,

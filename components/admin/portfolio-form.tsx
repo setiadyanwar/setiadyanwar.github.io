@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Save, X, Plus, Trash2, Eye, Sparkles } from "lucide-react"
 import Link from "next/link"
+import ImageUploader from "@/components/admin/image-uploader"
 
 interface PortfolioFormData {
   id: string
@@ -793,15 +794,17 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Problem Image URL
-              </label>
-              <input
-                type="text"
-                value={formData.problem_image}
-                onChange={(e) => setFormData({ ...formData, problem_image: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="/portfolio/web/image.png or https://images.unsplash.com/..."
+              <ImageUploader
+                label="Problem Section Image"
+                currentImageUrl={formData.problem_image}
+                storagePath={`portfolio/${formData.id}/problem-${Date.now()}.jpg`}
+                onUploadSuccess={(url, path) => {
+                  setFormData({ ...formData, problem_image: url })
+                }}
+                onRemove={() => {
+                  setFormData({ ...formData, problem_image: "" })
+                }}
+                helperText="Image for problem section (recommended: 800×600px)"
               />
             </div>
             <div>
@@ -908,15 +911,17 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Solution Image URL
-              </label>
-              <input
-                type="text"
-                value={formData.solution_image}
-                onChange={(e) => setFormData({ ...formData, solution_image: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                placeholder="/portfolio/web/image.png or https://images.unsplash.com/..."
+              <ImageUploader
+                label="Solution Section Image"
+                currentImageUrl={formData.solution_image}
+                storagePath={`portfolio/${formData.id}/solution-${Date.now()}.jpg`}
+                onUploadSuccess={(url, path) => {
+                  setFormData({ ...formData, solution_image: url })
+                }}
+                onRemove={() => {
+                  setFormData({ ...formData, solution_image: "" })
+                }}
+                helperText="Image for solution section (recommended: 800×600px)"
               />
             </div>
             <div>
@@ -1172,36 +1177,28 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                       }}
                       rows={3}
                       className="w-full mb-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono text-sm"
-                      placeholder="Step description (Markdown supported)"
+                      placeholder="Step description. Use ### for subheadings."
                     />
-                    <div>
-                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
-                        Step Image URL (optional)
-                      </label>
-                      <input
-                        type="text"
-                        value={step.image || ""}
-                        onChange={(e) => {
-                          const newSteps = [...formData.project_steps]
-                          newSteps[idx] = { ...step, image: e.target.value || null }
-                          setFormData({ ...formData, project_steps: newSteps })
-                        }}
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
-                        placeholder="/portfolio/web/step-image.png or https://..."
-                      />
-                      {step.image && (
-                        <div className="mt-2 relative w-full h-32 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
-                          <img
-                            src={step.image.split("?")[0]}
-                            alt={`Preview ${step.title}`}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              e.currentTarget.style.display = "none"
-                            }}
-                          />
-                        </div>
-                      )}
-                    </div>
+                    <p className="text-xs text-gray-500 mb-2">
+                      Supports Markdown: Use <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">### Subheading</code> for section titles.
+                    </p>
+                    <ImageUploader
+                      label={`Step ${idx + 1} Image (optional)`}
+                      currentImageUrl={step.image || ""}
+                      storagePath={`portfolio/${formData.id}/step-${idx + 1}-${Date.now()}.jpg`}
+                      onUploadSuccess={(url, path) => {
+                        const newSteps = [...formData.project_steps]
+                        newSteps[idx] = { ...step, image: url }
+                        setFormData({ ...formData, project_steps: newSteps })
+                      }}
+                      onRemove={() => {
+                        const newSteps = [...formData.project_steps]
+                        newSteps[idx] = { ...step, image: null }
+                        setFormData({ ...formData, project_steps: newSteps })
+                      }}
+                      helperText="Image for this project step (recommended: 600×400px)"
+                      className="mt-2"
+                    />
                   </div>
                 ))}
               </div>

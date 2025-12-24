@@ -7,8 +7,9 @@ import PortfolioDetailSkeleton from "@/components/portfolio/portfolio-detail-ske
 
 // ... (keep generateMetadata as is)
 
-// Revalidate every 5 minutes for fresh data while maintaining performance
-export const revalidate = 300
+// Disable cache for real-time updates (set to 0)
+// In production, you can increase this for better performance
+export const revalidate = 0
 
 export default async function PortfolioDetail({ params }: { params: { id: string } }) {
   // Fetch data server-side from database only

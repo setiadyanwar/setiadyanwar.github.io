@@ -10,9 +10,12 @@
     "migrate:supabase": "tsx scripts/database/migrate-to-supabase.ts",
     "update:portfolio-order": "tsx scripts/database/update-portfolio-order.ts",
     "check:duplicates": "tsx scripts/database/check-duplicates.ts",
+    "check:experience-duplicates": "tsx scripts/database/check-experience-duplicates.ts",
     "remove:duplicates": "tsx scripts/database/remove-duplicates.ts",
+    "remove:experience-duplicates": "tsx scripts/database/remove-experience-duplicates.ts",
     "verify:portfolio-images": "tsx scripts/verification/verify-portfolio-images.ts",
-    "verify:unsplash-urls": "tsx scripts/verification/verify-unsplash-urls.ts"
+    "verify:unsplash-urls": "tsx scripts/verification/verify-unsplash-urls.ts",
+    "storage:create-folders": "tsx scripts/storage/create-bucket-folders.ts"
   },
   "dependencies": {
     "@eslint/config-array": "^0.20.0",
