@@ -28,12 +28,16 @@ const VisitorChart = ({ data }: { data: any[] }) => {
     )
   }
 
+  // Calculate totals for display
+  const totalVisits = data.reduce((sum, d) => sum + (Number(d.total_visits) || 0), 0)
+  const totalPages = data.reduce((sum, d) => sum + (Number(d.unique_paths) || 0), 0)
+
   const maxVal = Math.max(...data.map((d: any) => Number(d.total_visits) || 0), 1)
 
   // Get day names from dates
   const getDayName = (dateStr: string) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const date = new Date(dateStr)
+    const date = new Date(dateStr + 'T00:00:00') // Force local timezone
     return days[date.getDay()]
   }
 
@@ -50,52 +54,87 @@ const VisitorChart = ({ data }: { data: any[] }) => {
         </div>
       </div>
 
+      {/* Summary Stats */}
+      <div className="flex items-center gap-6 mb-6 pb-4 border-b border-gray-100 dark:border-gray-800">
+        <div>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalVisits}</p>
+          <p className="text-xs text-gray-500">Total Visits</p>
+        </div>
+        <div>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalPages}</p>
+          <p className="text-xs text-gray-500">Unique Pages</p>
+        </div>
+      </div>
+
       {/* Chart Area */}
-      <div className="h-64 w-full flex items-end gap-2 sm:gap-4 relative z-10">
+      <div className="h-64 w-full flex items-end gap-2 sm:gap-4 relative">
         {data.map((item: any, index: number) => {
           const visits = Number(item.total_visits) || 0
           const uniquePaths = Number(item.unique_paths) || 0
 
-          const heightPercent = Math.min((visits / maxVal) * 100, 100)
-          const pathPercent = visits > 0 ? Math.min((uniquePaths / visits) * 100, 100) : 0
+          // Calculate height percentage with minimum 5% for visibility
+          let heightPercent = 0
+          if (visits > 0) {
+            heightPercent = Math.max((visits / maxVal) * 100, 8) // Min 8% for visibility
+          }
+
+          const pathPercent = visits > 0 && uniquePaths > 0
+            ? Math.min((uniquePaths / visits) * 100, 100)
+            : 0
 
           return (
-            <div key={item.date || index} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+            <div key={item.date || index} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer relative">
               {/* Tooltip */}
-              <div className="opacity-0 group-hover:opacity-100 absolute -top-12 transition-opacity bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs py-1 px-2 rounded shadow-lg whitespace-nowrap z-20 pointer-events-none mb-2">
-                {visits} Visits • {uniquePaths} Pages
+              <div className="opacity-0 group-hover:opacity-100 absolute -top-14 left-1/2 -translate-x-1/2 transition-opacity bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs py-1.5 px-3 rounded shadow-lg whitespace-nowrap z-20 pointer-events-none">
+                <div className="font-semibold">{getDayName(item.date)}</div>
+                <div className="text-xs opacity-75">{visits} Visits • {uniquePaths} Pages</div>
               </div>
 
-              {/* Bar */}
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: `${heightPercent}%` }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="w-full bg-indigo-100 dark:bg-gray-800 rounded-t-lg relative overflow-hidden group-hover:bg-indigo-200 dark:group-hover:bg-gray-700 transition-colors min-h-[4px]"
-              >
-                <motion.div
-                  initial={{ height: 0 }}
-                  animate={{ height: `${pathPercent}%` }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                  className="absolute bottom-0 w-full bg-indigo-600 dark:bg-indigo-500 rounded-t-lg"
-                />
-              </motion.div>
+              {/* Bar Container */}
+              <div className="w-full h-full flex items-end justify-center" style={{ minHeight: '200px' }}>
+                {visits > 0 ? (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: `${heightPercent}%`, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                    className="w-full bg-gradient-to-t from-indigo-100 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-t-xl relative overflow-hidden group-hover:from-indigo-200 group-hover:to-indigo-100 dark:group-hover:from-gray-700 dark:group-hover:to-gray-600 transition-colors shadow-sm"
+                    style={{ minHeight: '16px' }}
+                  >
+                    {/* Inner bar for unique paths */}
+                    {pathPercent > 0 && (
+                      <motion.div
+                        initial={{ height: 0 }}
+                        animate={{ height: `${pathPercent}%` }}
+                        transition={{ duration: 0.6, delay: 0.3 + index * 0.1, ease: "easeOut" }}
+                        className="absolute bottom-0 w-full bg-gradient-to-t from-indigo-600 to-indigo-500 dark:from-indigo-500 dark:to-indigo-400 rounded-t-xl"
+                      />
+                    )}
+
+                    {/* Value label on bar */}
+                    <div className="absolute top-2 left-0 right-0 text-center">
+                      <span className="text-xs font-bold text-indigo-700 dark:text-indigo-300">{visits}</span>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <div className="w-full h-1 bg-gray-100 dark:bg-gray-800 rounded"></div>
+                )}
+              </div>
 
               {/* Label */}
-              <span className="text-xs text-gray-400 font-medium">{getDayName(item.date)}</span>
+              <span className="text-xs text-gray-600 dark:text-gray-400 font-medium mt-2">{getDayName(item.date)}</span>
             </div>
           )
         })}
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-6 mt-6">
+      <div className="flex items-center justify-center gap-6 mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
         <div className="flex items-center gap-2 text-xs text-gray-500">
-          <span className="w-3 h-3 bg-indigo-600 rounded-full"></span>
+          <span className="w-3 h-3 bg-gradient-to-br from-indigo-600 to-indigo-500 rounded-full"></span>
           Unique Pages
         </div>
         <div className="flex items-center gap-2 text-xs text-gray-500">
-          <span className="w-3 h-3 bg-indigo-100 dark:bg-gray-800 rounded-full"></span>
+          <span className="w-3 h-3 bg-gradient-to-br from-indigo-100 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-full border border-gray-200 dark:border-gray-600"></span>
           Total Visits
         </div>
       </div>
@@ -165,6 +204,8 @@ export default function AdminDashboard() {
           getTopPages(10),
         ])
 
+        console.log('📊 Analytics Data:', analytics)
+
         setStats({
           portfolio: portfolio.length,
           work: work.length,
@@ -175,9 +216,7 @@ export default function AdminDashboard() {
         setAnalyticsData(analytics)
         setTopPages(pages)
       } catch (error) {
-        if (process.env.NODE_ENV !== "production") {
-          console.error("Error fetching stats:", error)
-        }
+        console.error("❌ Error fetching stats:", error)
       } finally {
         setLoading(false)
       }
