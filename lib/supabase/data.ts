@@ -166,28 +166,61 @@ export async function getTechnologies() {
 
 // Analytics Functions
 export async function getVisitorAnalytics(daysBack: number = 7) {
-  const supabase = getSupabaseServerClient()
+  // Use browser client if in browser, server client otherwise
+  const supabase = typeof window !== 'undefined'
+    ? getSupabaseBrowserClient()
+    : getSupabaseServerClient()
+
   if (!supabase) {
     return []
   }
 
   try {
+    // Try RPC function first
     const { data, error } = await supabase.rpc('get_analytics_summary', {
       days_back: daysBack
     })
 
     if (error) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error('Error fetching analytics:', error)
+      console.warn('RPC error, falling back to direct query:', error.message)
+
+      // Fallback: Direct query if RPC fails
+      const startDate = new Date()
+      startDate.setDate(startDate.getDate() - daysBack)
+
+      const { data: rawData, error: queryError } = await supabase
+        .from('analytics')
+        .select('date, visits, path')
+        .gte('date', startDate.toISOString().split('T')[0])
+        .order('date', { ascending: true })
+
+      if (queryError) {
+        console.error('Direct query also failed:', queryError)
+        return []
       }
-      return []
+
+      // Aggregate manually
+      const aggregated = rawData?.reduce((acc: any[], row: any) => {
+        const existing = acc.find(item => item.date === row.date)
+        if (existing) {
+          existing.total_visits += row.visits
+          existing.unique_paths = new Set([...existing.unique_paths, row.path]).size
+        } else {
+          acc.push({
+            date: row.date,
+            total_visits: row.visits,
+            unique_paths: 1
+          })
+        }
+        return acc
+      }, []) || []
+
+      return aggregated
     }
 
     return data || []
   } catch (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error('Analytics fetch error:', error)
-    }
+    console.error('Analytics fetch error:', error)
     return []
   }
 }
