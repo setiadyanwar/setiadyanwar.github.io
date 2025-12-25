@@ -1,10 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getPortfolioItems, getWorkExperiences, getEducationExperiences, getOrganizationExperiences, getVisitorAnalytics } from "@/lib/supabase/data"
+import { getPortfolioItems, getWorkExperiences, getEducationExperiences, getOrganizationExperiences, getVisitorAnalytics, getTopPages } from "@/lib/supabase/data"
 import { Briefcase, GraduationCap, Users, Monitor, ArrowUpRight, Globe, Activity } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import TopPages from "@/components/admin/top-pages"
 
 // --- COMPONENTS ---
 
@@ -149,17 +150,19 @@ export default function AdminDashboard() {
     organization: 0,
   })
   const [analyticsData, setAnalyticsData] = useState<any[]>([])
+  const [topPages, setTopPages] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchStats() {
       try {
-        const [portfolio, work, education, org, analytics] = await Promise.all([
+        const [portfolio, work, education, org, analytics, pages] = await Promise.all([
           getPortfolioItems(true),
           getWorkExperiences(),
           getEducationExperiences(),
           getOrganizationExperiences(),
           getVisitorAnalytics(7),
+          getTopPages(10),
         ])
 
         setStats({
@@ -170,6 +173,7 @@ export default function AdminDashboard() {
         })
 
         setAnalyticsData(analytics)
+        setTopPages(pages)
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
           console.error("Error fetching stats:", error)
@@ -280,6 +284,11 @@ export default function AdminDashboard() {
         <div className="lg:col-span-1">
           <RecentActivity />
         </div>
+      </div>
+
+      {/* Top Pages Section */}
+      <div>
+        <TopPages pages={topPages} />
       </div>
 
       {/* Quick Links Footer */}
