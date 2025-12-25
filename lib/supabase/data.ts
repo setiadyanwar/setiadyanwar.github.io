@@ -164,4 +164,60 @@ export async function getTechnologies() {
   return data || []
 }
 
+// Analytics Functions
+export async function getVisitorAnalytics(daysBack: number = 7) {
+  const supabase = getSupabaseServerClient()
+  if (!supabase) {
+    return []
+  }
 
+  try {
+    const { data, error } = await supabase.rpc('get_analytics_summary', {
+      days_back: daysBack
+    })
+
+    if (error) {
+      if (process.env.NODE_ENV !== "production") {
+        console.error('Error fetching analytics:', error)
+      }
+      return []
+    }
+
+    return data || []
+  } catch (error) {
+    if (process.env.NODE_ENV !== "production") {
+      console.error('Analytics fetch error:', error)
+    }
+    return []
+  }
+}
+
+export async function getTopPages(limit: number = 10) {
+  const supabase = getSupabaseServerClient()
+  if (!supabase) {
+    return []
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('analytics')
+      .select('path, visits')
+      .gte('date', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0])
+      .order('visits', { ascending: false })
+      .limit(limit)
+
+    if (error) {
+      if (process.env.NODE_ENV !== "production") {
+        console.error('Error fetching top pages:', error)
+      }
+      return []
+    }
+
+    return data || []
+  } catch (error) {
+    if (process.env.NODE_ENV !== "production") {
+      console.error('Top pages fetch error:', error)
+    }
+    return []
+  }
+}

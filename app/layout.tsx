@@ -11,6 +11,7 @@ import { personJsonLd, websiteJsonLd, organizationJsonLd } from "@/lib/utils/str
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import ConditionalLayout from "@/components/conditional-layout"
 import { siteConfig } from "@/lib/config/site-config"
+import AnalyticsTracker from "@/components/analytics-tracker"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,141 +31,7 @@ export const metadata: Metadata = {
     canonical: siteConfig.url,
   },
   keywords: [
-    // Primary Skills
-    "Frontend Developer",
-    "UI/UX Designer",
-    "React Developer",
-    "Next.js Developer",
-    "Vue.js Developer",
-    "Laravel Developer",
-    "JavaScript Developer",
-    "TypeScript Developer",
-    "Web Developer",
-    "Full Stack Developer",
-
-    // Technologies & Frameworks
-    "React.js",
-    "Next.js",
-    "Vue.js",
-    "Laravel",
-    "JavaScript",
-    "TypeScript",
-    "Tailwind CSS",
-    "Bootstrap",
-    "Node.js",
-    "Express.js",
-    "MongoDB",
-    "MySQL",
-    "PostgreSQL",
-    "Firebase",
-    "Git",
-    "GitHub",
-
-    // Design & UI/UX
-    "UI Design",
-    "UX Design",
-    "Web Design",
-    "Mobile App Design",
-    "Responsive Design",
-    "Figma",
-    "Adobe XD",
-    "Photoshop",
-    "Illustrator",
-    "Prototyping",
-    "Wireframing",
-    "User Experience",
-    "User Interface",
-
-    // Location & Services
-    "Web Developer Indonesia",
-    "Frontend Developer Jakarta",
-    "UI/UX Designer Tangerang",
-    "Web Developer Tangerang",
-    "Digital Agency Tangerang",
-    "Web Developer Bogor",
-    "Frontend Developer Bogor",
-    "UI/UX Designer Bogor",
-    "Web Developer West Java",
-    "Freelance Web Developer",
-    "Web Development Services",
-    "Custom Website Development",
-    "E-commerce Development",
-    "Portfolio Website",
-
-    // Personal Information & Education
-    "Setiady Ibrahim Anwar",
-    "Setiady Anwar",
-    "Setiady Ibrahim",
-    "IPB University",
-    "Institut Pertanian Bogor",
-    "Bogor Agricultural University",
-    "IPB Student",
-    "IPB Graduate",
-    "Bogor",
-    "West Java",
-    "Indonesia",
-
-    // Certifications & Experience
-    "BNSP Certified",
-    "Certified Web Developer",
-    "Professional Web Developer",
-    "Experienced Developer",
-    "2+ Years Experience",
-    "Kreavoks Digital Agency",
-    "Kreavoks",
-    "Digital Agency",
-
-    // Industry Terms
-    "Software Development",
-    "Web Application",
-    "Mobile Application",
-    "Progressive Web App",
-    "PWA",
-    "API Development",
-    "RESTful API",
-    "GraphQL",
-    "Microservices",
-    "Cloud Computing",
-    "AWS",
-    "Vercel",
-    "Netlify",
-
-    // Business Keywords
-    "Hire Web Developer",
-    "Web Development Company",
-    "Custom Software Development",
-    "Website Maintenance",
-    "SEO Optimization",
-    "Performance Optimization",
-    "Code Review",
-    "Technical Consulting",
-    "Project Management",
-    "Agile Development",
-
-    // Academic & Professional Networks
-    "IPB Alumni",
-    "IPB Graduate",
-    "Bogor Agricultural University Alumni",
-    "Computer Science IPB",
-    "Informatika IPB",
-    "Teknologi Informasi IPB",
-    "GDG IPB",
-    "Google Developer Group IPB",
-    "GDGOC IPB",
-    "Google Developer Group on Campus IPB",
-    "Student Developer",
-    "Campus Developer",
-    "University Developer",
-
-    // Personal Branding
-    "Setiady Portfolio",
-    "Setiady Ibrahim Anwar Portfolio",
-    "Setiady Developer",
-    "Setiady UI/UX",
-    "Setiady Web Developer",
-    "Setiady Frontend",
-    "Setiady React Developer",
-    "Setiady Next.js Developer"
+    "Frontend Developer", "UI/UX Designer", "React Developer", "Next.js Developer", "Vue.js Developer", "Laravel Developer", "JavaScript Developer", "TypeScript Developer", "Web Developer", "Full Stack Developer", "React.js", "Next.js", "Vue.js", "Laravel", "JavaScript", "TypeScript", "Tailwind CSS", "Bootstrap", "Node.js", "Express.js", "MongoDB", "MySQL", "PostgreSQL", "Firebase", "Git", "GitHub", "UI Design", "UX Design", "Web Design", "Mobile App Design", "Responsive Design", "Figma", "Adobe XD", "Photoshop", "Illustrator", "Prototyping", "Wireframing", "User Experience", "User Interface", "Web Developer Indonesia", "Frontend Developer Jakarta", "UI/UX Designer Tangerang", "Web Developer Tangerang", "Digital Agency Tangerang", "Web Developer Bogor", "Frontend Developer Bogor", "UI/UX Designer Bogor", "Web Developer West Java", "Freelance Web Developer", "Web Development Services", "Custom Website Development", "E-commerce Development", "Portfolio Website", "Setiady Ibrahim Anwar", "Setiady Anwar", "Setiady Ibrahim", "IPB University", "Institut Pertanian Bogor", "Bogor Agricultural University", "IPB Student", "IPB Graduate", "Bogor", "West Java", "Indonesia", "BNSP Certified", "Certified Web Developer", "Professional Web Developer", "Experienced Developer", "2+ Years Experience", "Kreavoks Digital Agency", "Kreavoks", "Digital Agency", "Software Development", "Web Application", "Mobile Application", "Progressive Web App", "PWA", "API Development", "RESTful API", "GraphQL", "Microservices", "Cloud Computing", "AWS", "Vercel", "Netlify", "Hire Web Developer", "Web Development Company", "Custom Software Development", "Website Maintenance", "SEO Optimization", "Performance Optimization", "Code Review", "Technical Consulting", "Project Management", "Agile Development", "IPB Alumni", "IPB Graduate", "Bogor Agricultural University Alumni", "Computer Science IPB", "Informatika IPB", "Teknologi Informasi IPB", "GDG IPB", "Google Developer Group IPB", "GDGOC IPB", "Google Developer Group on Campus IPB", "Student Developer", "Campus Developer", "University Developer", "Setiady Portfolio", "Setiady Ibrahim Anwar Portfolio", "Setiady Developer", "Setiady UI/UX", "Setiady Web Developer", "Setiady Frontend", "Setiady React Developer", "Setiady Next.js Developer"
   ],
   authors: [{ name: "Setiady Ibrahim Anwar" }],
   creator: "Setiady Ibrahim Anwar",
@@ -245,6 +112,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+          <AnalyticsTracker />
           <ConditionalLayout
             animatedCursor={<AnimatedCursor />}
             header={<Header />}
