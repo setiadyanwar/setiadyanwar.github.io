@@ -2,186 +2,190 @@
 
 import { useState, useEffect } from "react"
 import { getPortfolioItems, getWorkExperiences, getEducationExperiences, getOrganizationExperiences, getVisitorAnalytics, getTopPages } from "@/lib/supabase/data"
-import { Briefcase, GraduationCap, Users, Monitor, ArrowUpRight, Globe, Activity } from "lucide-react"
+import { Briefcase, GraduationCap, Users, Monitor, ArrowUpRight, Globe, Activity, TrendingUp, Clock, FileText, Sun, Moon } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import TopPages from "@/components/admin/top-pages"
+import { useTheme } from "next-themes"
 
 // --- COMPONENTS ---
 
-// 1. Interactive Visitor Chart (using SVG + Framer Motion)
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+
+// 1. Interactive Visitor Line Chart (Recharts)
 const VisitorChart = ({ data }: { data: any[] }) => {
-  // If no data yet, show empty state
-  if (!data || data.length === 0) {
-    return (
-      <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm">
-        <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-full mb-4">
-            <Activity className="w-8 h-8 text-gray-400" />
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No Analytics Data Yet</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm">
-            Start browsing your website to collect visitor data. Data will appear here within 24 hours.
+  // Generate last 7 days to ensure chart always spans full width
+  const chartData = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (6 - i))
+    const dateStr = d.toISOString().split('T')[0]
+    // Find matching data or default to 0
+    const found = data?.find((item: any) => item.date === dateStr)
+    return {
+      date: dateStr,
+      displayDate: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()],
+      visits: found ? (Number(found.total_visits) || 0) : 0
+    }
+  })
+
+  // Custom Tooltip
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs py-2 px-3 rounded-lg shadow-xl">
+          <p className="font-bold mb-1">{label}</p>
+          <p className="font-medium text-indigo-300 dark:text-indigo-600">
+            {payload[0].value} Visits
           </p>
         </div>
-      </div>
-    )
-  }
-
-  // Calculate totals for display
-  const totalVisits = data.reduce((sum, d) => sum + (Number(d.total_visits) || 0), 0)
-  const totalPages = data.reduce((sum, d) => sum + (Number(d.unique_paths) || 0), 0)
-
-  const maxVal = Math.max(...data.map((d: any) => Number(d.total_visits) || 0), 1)
-
-  // Get day names from dates
-  const getDayName = (dateStr: string) => {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const date = new Date(dateStr + 'T00:00:00') // Force local timezone
-    return days[date.getDay()]
+      )
+    }
+    return null
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm relative overflow-hidden">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">Visitor Analytics</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Real-time data from last 7 days</p>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 rounded-full font-medium">
-          <ArrowUpRight className="w-4 h-4" />
+    <div className="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-800 shadow-sm h-full flex flex-col">
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
+          <TrendingUp className="w-4 h-4 text-indigo-500" />
+          Visitor Analytics
+        </h3>
+        <div className="flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded-full font-medium border border-emerald-100 dark:border-emerald-900/30">
+          <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
           <span>Live</span>
         </div>
       </div>
 
-      {/* Summary Stats */}
-      <div className="flex items-center gap-6 mb-6 pb-4 border-b border-gray-100 dark:border-gray-800">
-        <div>
-          <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalVisits}</p>
-          <p className="text-xs text-gray-500">Total Visits</p>
-        </div>
-        <div>
-          <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalPages}</p>
-          <p className="text-xs text-gray-500">Unique Pages</p>
-        </div>
-      </div>
-
-      {/* Chart Area */}
-      <div className="h-64 w-full flex items-end gap-2 sm:gap-4 relative">
-        {data.map((item: any, index: number) => {
-          const visits = Number(item.total_visits) || 0
-          const uniquePaths = Number(item.unique_paths) || 0
-
-          // Calculate height percentage with minimum 5% for visibility
-          let heightPercent = 0
-          if (visits > 0) {
-            heightPercent = Math.max((visits / maxVal) * 100, 8) // Min 8% for visibility
-          }
-
-          const pathPercent = visits > 0 && uniquePaths > 0
-            ? Math.min((uniquePaths / visits) * 100, 100)
-            : 0
-
-          return (
-            <div key={item.date || index} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer relative">
-              {/* Tooltip */}
-              <div className="opacity-0 group-hover:opacity-100 absolute -top-14 left-1/2 -translate-x-1/2 transition-opacity bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs py-1.5 px-3 rounded shadow-lg whitespace-nowrap z-20 pointer-events-none">
-                <div className="font-semibold">{getDayName(item.date)}</div>
-                <div className="text-xs opacity-75">{visits} Visits • {uniquePaths} Pages</div>
-              </div>
-
-              {/* Bar Container */}
-              <div className="w-full h-full flex items-end justify-center" style={{ minHeight: '200px' }}>
-                {visits > 0 ? (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: `${heightPercent}%`, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                    className="w-full bg-gradient-to-t from-indigo-100 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-t-xl relative overflow-hidden group-hover:from-indigo-200 group-hover:to-indigo-100 dark:group-hover:from-gray-700 dark:group-hover:to-gray-600 transition-colors shadow-sm"
-                    style={{ minHeight: '16px' }}
-                  >
-                    {/* Inner bar for unique paths */}
-                    {pathPercent > 0 && (
-                      <motion.div
-                        initial={{ height: 0 }}
-                        animate={{ height: `${pathPercent}%` }}
-                        transition={{ duration: 0.6, delay: 0.3 + index * 0.1, ease: "easeOut" }}
-                        className="absolute bottom-0 w-full bg-gradient-to-t from-indigo-600 to-indigo-500 dark:from-indigo-500 dark:to-indigo-400 rounded-t-xl"
-                      />
-                    )}
-
-                    {/* Value label on bar */}
-                    <div className="absolute top-2 left-0 right-0 text-center">
-                      <span className="text-xs font-bold text-indigo-700 dark:text-indigo-300">{visits}</span>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <div className="w-full h-1 bg-gray-100 dark:bg-gray-800 rounded"></div>
-                )}
-              </div>
-
-              {/* Label */}
-              <span className="text-xs text-gray-600 dark:text-gray-400 font-medium mt-2">{getDayName(item.date)}</span>
-            </div>
-          )
-        })}
-      </div>
-
-      {/* Legend */}
-      <div className="flex items-center justify-center gap-6 mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
-        <div className="flex items-center gap-2 text-xs text-gray-500">
-          <span className="w-3 h-3 bg-gradient-to-br from-indigo-600 to-indigo-500 rounded-full"></span>
-          Unique Pages
-        </div>
-        <div className="flex items-center gap-2 text-xs text-gray-500">
-          <span className="w-3 h-3 bg-gradient-to-br from-indigo-100 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-full border border-gray-200 dark:border-gray-600"></span>
-          Total Visits
-        </div>
+      <div className="flex-1 w-full min-h-[200px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={chartData}
+            margin={{ top: 10, right: 0, left: -20, bottom: 0 }}
+          >
+            <defs>
+              <linearGradient id="colorVisits" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#374151" opacity={0.1} />
+            <XAxis
+              dataKey="displayDate"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 10, fill: '#9ca3af' }}
+              dy={10}
+            />
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 10, fill: '#9ca3af' }}
+              allowDecimals={false}
+            />
+            <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#6366f1', strokeWidth: 1, strokeDasharray: '4 4' }} />
+            <Area
+              type="monotone"
+              dataKey="visits"
+              stroke="#6366f1"
+              strokeWidth={3}
+              fillOpacity={1}
+              fill="url(#colorVisits)"
+              activeDot={{ r: 6, strokeWidth: 0, fill: '#6366f1' }}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
       </div>
     </div>
   )
 }
 
-// 2. Recent Log Activity
-const RecentActivity = () => {
-  const activities = [
-    { action: "Analytics System", item: "Successfully initialized", time: "Just now", icon: Activity, color: "text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20" },
-    { action: "Database Setup", item: "Tables created", time: "1 minute ago", icon: Globe, color: "text-blue-500 bg-blue-50 dark:bg-blue-900/20" },
-    { action: "Tracking Active", item: "Monitoring page views", time: "2 minutes ago", icon: Activity, color: "text-indigo-500 bg-indigo-50 dark:bg-indigo-900/20" },
-  ]
+// 2. Combined Sidebar (Top Pages + System Status)
+const AnalyticsSidebar = ({ pages, visitorsToday }: { pages: any[], visitorsToday: number }) => {
+  const maxVisits = Number(pages?.[0]?.visits) || 1
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm h-full">
-      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">System Status</h3>
-      <div className="space-y-6">
-        {activities.map((act, i) => (
-          <div key={i} className="flex items-start gap-4">
-            <div className={`p-2 rounded-lg shrink-0 ${act.color}`}>
-              <act.icon className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-900 dark:text-gray-200">{act.action}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{act.item}</p>
-            </div>
-            <span className="ml-auto text-xs text-gray-400 whitespace-nowrap">{act.time}</span>
+    <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm h-full flex flex-col divide-y divide-gray-100 dark:divide-gray-800">
+
+      {/* SECTION 1: TOP PAGES */}
+      <div className="p-5 flex-1">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
+            <Globe className="w-4 h-4 text-indigo-500" />
+            Top Content
+          </h3>
+          <span className="text-[10px] text-gray-400 bg-gray-50 dark:bg-gray-800 px-2 py-0.5 rounded">Last 7 Days</span>
+        </div>
+
+        {!pages || pages.length === 0 ? (
+          <div className="text-center py-6 text-gray-400 text-sm">No data available</div>
+        ) : (
+          <div className="space-y-4">
+            {pages.slice(0, 5).map((page, index) => {
+              const isPortfolio = page.path.startsWith('/portfolio/')
+              let label = page.path
+              if (label === '/') label = 'Homepage'
+              else if (label.startsWith('/portfolio/')) {
+                label = label.split('/')[2].replace(/-/g, ' ')
+              } else if (label.startsWith('/admin')) label = 'Admin Panel'
+
+              const percentage = ((Number(page.visits) || 0) / maxVisits) * 100
+
+              return (
+                <div key={page.path} className="group">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-2 overflow-hidden">
+                      <span className="text-gray-400 font-mono text-xs w-3">#{index + 1}</span>
+                      <span className={`text-sm font-medium truncate capitalize ${isPortfolio ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-300'}`}>
+                        {label}
+                      </span>
+                    </div>
+                    <span className="text-sm font-bold text-gray-900 dark:text-white shrink-0 bg-gray-50 dark:bg-gray-800 px-1.5 rounded">{page.visits}</span>
+                  </div>
+                  {/* Custom Progress Bar */}
+                  <div className="h-1.5 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${percentage}%` }}
+                      transition={{ duration: 0.5, delay: 0.1 * index }}
+                      className={`h-full ${isPortfolio ? 'bg-indigo-500' : 'bg-gray-400 dark:bg-gray-600'}`}
+                    />
+                  </div>
+                </div>
+              )
+            })}
           </div>
-        ))}
+        )}
       </div>
-      <div className="mt-8 pt-4 border-t border-gray-100 dark:border-gray-800">
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-gray-500">Analytics Status</span>
-          <span className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-            Active
-          </span>
+
+      {/* SECTION 2: SYSTEM STATUS */}
+      <div className="p-5 bg-gray-50/50 dark:bg-gray-800/20 rounded-b-2xl">
+        <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">System Pulse</h3>
+        <div className="grid grid-cols-2 gap-3">
+          {/* Status Item 1 */}
+          <div className="bg-white dark:bg-gray-900 p-3 rounded-xl border border-gray-100 dark:border-gray-800 flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <div>
+              <p className="text-[10px] text-gray-400">Live Traffic</p>
+              <p className="text-xs font-bold text-gray-900 dark:text-white">{visitorsToday} Active</p>
+            </div>
+          </div>
+          {/* Status Item 2 */}
+          <div className="bg-white dark:bg-gray-900 p-3 rounded-xl border border-gray-100 dark:border-gray-800 flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+            <div>
+              <p className="text-[10px] text-gray-400">Database</p>
+              <p className="text-xs font-bold text-gray-900 dark:text-white">Connected</p>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   )
 }
 
 // --- MAIN PAGE ---
 export default function AdminDashboard() {
+  const { theme, setTheme } = useTheme()
   const [stats, setStats] = useState({
     portfolio: 0,
     work: 0,
@@ -204,8 +208,6 @@ export default function AdminDashboard() {
           getTopPages(10),
         ])
 
-        console.log('📊 Analytics Data:', analytics)
-
         setStats({
           portfolio: portfolio.length,
           work: work.length,
@@ -224,14 +226,18 @@ export default function AdminDashboard() {
     fetchStats()
   }, [])
 
+  // Calculate generic stats
+  const totalVisits = analyticsData.reduce((sum, d) => sum + (Number(d.total_visits) || 0), 0)
+  const visitorsToday = analyticsData.length > 0 ? (Number(analyticsData[analyticsData.length - 1].total_visits) || 0) : 0
+
   const statCards = [
     {
-      title: "Total Portfolio",
+      title: "Projects",
       value: stats.portfolio,
       icon: Briefcase,
       href: "/admin/portfolio",
       color: "indigo",
-      trend: `${stats.portfolio} items`
+      trend: "Total Items"
     },
     {
       title: "Experience",
@@ -239,7 +245,7 @@ export default function AdminDashboard() {
       icon: Monitor,
       href: "/admin/experience",
       color: "blue",
-      trend: "Professional"
+      trend: "Career"
     },
     {
       title: "Education",
@@ -250,98 +256,158 @@ export default function AdminDashboard() {
       trend: "Academic"
     },
     {
-      title: "Activity",
-      value: analyticsData.reduce((sum, d) => sum + (Number(d.total_visits) || 0), 0),
+      title: "Page Views",
+      value: totalVisits,
       icon: Activity,
       href: "/admin/organization",
       color: "amber",
-      trend: "Total visits"
+      trend: "Last 7 Days"
     },
   ]
 
   if (loading) {
     return (
-      <div className="space-y-8 animate-pulse">
-        <div className="h-10 bg-gray-200 dark:bg-gray-800 rounded w-1/3"></div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map(i => <div key={i} className="h-32 bg-gray-200 dark:bg-gray-800 rounded-2xl"></div>)}
+      <div className="space-y-6 pb-10 animate-pulse">
+        {/* Header Skeleton */}
+        <div className="flex justify-between items-center">
+          <div className="space-y-2">
+            <div className="h-8 w-40 bg-gray-200 dark:bg-gray-800 rounded-lg" />
+            <div className="h-4 w-60 bg-gray-100 dark:bg-gray-800/50 rounded-lg" />
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-gray-200 dark:bg-gray-800 rounded-lg" />
+            <div className="h-6 w-24 bg-gray-200 dark:bg-gray-800 rounded hidden sm:block" />
+          </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-96">
-          <div className="lg:col-span-2 bg-gray-200 dark:bg-gray-800 rounded-2xl"></div>
-          <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl"></div>
+
+        {/* Stats Cards Skeleton */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map(i => (
+            <div key={i} className="bg-white dark:bg-gray-900 rounded-2xl p-4 border border-gray-100 dark:border-gray-800 h-[100px] flex flex-col justify-between">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800" />
+                <div className="h-3 w-20 bg-gray-100 dark:bg-gray-800 rounded" />
+              </div>
+              <div>
+                <div className="h-8 w-16 bg-gray-200 dark:bg-gray-800 rounded mb-1" />
+                <div className="h-2 w-24 bg-gray-100 dark:bg-gray-800 rounded" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Main Grid Skeleton */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[400px]">
+          {/* Chart Skeleton */}
+          <div className="lg:col-span-2 bg-white dark:bg-gray-900 rounded-2xl p-5 border border-gray-100 dark:border-gray-800 flex flex-col">
+            <div className="flex justify-between items-center mb-6">
+              <div className="h-5 w-32 bg-gray-200 dark:bg-gray-800 rounded" />
+              <div className="h-5 w-16 bg-gray-200 dark:bg-gray-800 rounded-full" />
+            </div>
+            <div className="flex-1 bg-gray-50 dark:bg-gray-800/30 rounded-xl w-full" />
+          </div>
+
+          {/* Sidebar Skeleton */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+              <div className="h-4 w-24 bg-gray-200 dark:bg-gray-800 rounded" />
+              <div className="h-4 w-16 bg-gray-100 dark:bg-gray-800 rounded" />
+            </div>
+            <div className="space-y-4 flex-1">
+              {[1, 2, 3, 4, 5].map(i => (
+                <div key={i} className="flex flex-col gap-2">
+                  <div className="flex justify-between">
+                    <div className="h-3 w-32 bg-gray-100 dark:bg-gray-800 rounded" />
+                    <div className="h-3 w-8 bg-gray-100 dark:bg-gray-800 rounded" />
+                  </div>
+                  <div className="h-1.5 w-full bg-gray-100 dark:bg-gray-800 rounded-full" />
+                </div>
+              ))}
+            </div>
+            <div className="pt-4 border-t border-gray-100 dark:border-gray-800 grid grid-cols-2 gap-3">
+              <div className="h-12 bg-gray-100 dark:bg-gray-800 rounded-xl" />
+              <div className="h-12 bg-gray-100 dark:bg-gray-800 rounded-xl" />
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="space-y-8 pb-10">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Dashboard Overview</h1>
-        <p className="text-gray-500 mt-1">Welcome back, Admin. Here&apos;s your real-time portfolio analytics.</p>
+    <div className="space-y-6 pb-10">
+      {/* Compact Header */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Dashboard</h1>
+          <p className="text-sm text-gray-500">Welcome back, Admin.</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+          >
+            {theme === "dark" ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
+          </button>
+          <div className="text-xs font-mono text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded hidden sm:block">
+            Analytics Active
+          </div>
+        </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Stats Cards - More compact */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {statCards.map((stat) => {
           const Icon = stat.icon
           return (
             <Link
               key={stat.href}
               href={stat.href}
-              className="group bg-white dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-800 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-500/10 transition-all duration-300 relative overflow-hidden"
+              className="group bg-white dark:bg-gray-900 rounded-2xl p-4 border border-gray-200 dark:border-gray-800 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300"
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-transparent to-current opacity-[0.03] group-hover:opacity-[0.06] rounded-bl-full transition-opacity pointer-events-none text-gray-900 dark:text-white" />
-
-              <div className="flex justify-between items-start mb-4">
-                <div className={`p-3 rounded-xl bg-gray-50 dark:bg-gray-800 group-hover:bg-${stat.color}-50 dark:group-hover:bg-${stat.color}-900/20 transition-colors`}>
-                  <Icon className={`w-6 h-6 text-gray-600 dark:text-gray-400 group-hover:text-${stat.color}-600 dark:group-hover:text-${stat.color}-400 transition-colors`} />
+              <div className="flex items-center gap-3 mb-2">
+                <div className={`p-2 rounded-lg bg-gray-50 dark:bg-gray-800 group-hover:bg-${stat.color}-50 dark:group-hover:bg-${stat.color}-900/20 transition-colors`}>
+                  <Icon className={`w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-${stat.color}-600 dark:group-hover:text-${stat.color}-400 transition-colors`} />
                 </div>
-                <span className={`text-xs font-medium px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 group-hover:bg-${stat.color}-50 dark:group-hover:bg-${stat.color}-900/20 group-hover:text-${stat.color}-600 dark:group-hover:text-${stat.color}-400 transition-colors`}>
-                  {stat.trend}
-                </span>
+                <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium">{stat.title}</h3>
               </div>
-
-              <div>
-                <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium">{stat.title}</h3>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1 group-hover:scale-105 origin-left transition-transform">{stat.value}</p>
-              </div>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">{stat.value}</p>
+              <p className="text-[10px] text-gray-400 mt-1">{stat.trend}</p>
             </Link>
           )
         })}
       </div>
 
-      {/* Charts & Activity Section */}
+      {/* Main Grid: Chart + Combined Sidebar */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Chart */}
-        <div className="lg:col-span-2">
+        {/* Left Column: Line Chart (2/3 width) - Fixed Height */}
+        <div className="lg:col-span-2 h-[400px]">
           <VisitorChart data={analyticsData} />
         </div>
 
-        {/* Recent Activity Sidebar */}
-        <div className="lg:col-span-1">
-          <RecentActivity />
+        {/* Right Sidebar: Combined Widget (1/3 width) - Fixed Height matches chart */}
+        <div className="lg:col-span-1 h-[400px]">
+          <AnalyticsSidebar pages={topPages} visitorsToday={visitorsToday} />
         </div>
       </div>
 
-      {/* Top Pages Section */}
-      <div>
-        <TopPages pages={topPages} />
-      </div>
-
-      {/* Quick Links Footer */}
-      <div className="flex flex-wrap gap-3 pt-4">
-        <span className="text-sm text-gray-500 self-center mr-2">Quick Actions:</span>
-        {['Portfolio', 'Experience', 'Education', 'Organization'].map((item) => (
-          <Link
-            key={item}
-            href={`/admin/${item.toLowerCase()}/new`}
-            className="px-4 py-2 text-xs font-semibold bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors shadow-sm"
-          >
-            + New {item}
-          </Link>
-        ))}
+      {/* Footer Actions */}
+      <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+        <div className="flex flex-wrap gap-2">
+          {['Portfolio', 'Experience', 'Education', 'Organization'].map((item) => (
+            <Link
+              key={item}
+              href={`/admin/${item.toLowerCase()}/new`}
+              className="px-3 py-1.5 text-xs font-semibold bg-gray-50 dark:bg-gray-800 border border-transparent hover:border-indigo-300 text-gray-600 dark:text-gray-400 rounded-lg hover:text-indigo-600 transition-all flex items-center gap-1.5"
+            >
+              <span>+ {item}</span>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )
