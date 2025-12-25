@@ -236,23 +236,39 @@ export async function getTopPages(limit: number = 10) {
   }
 
   try {
-    const startDate = new Date()
-    startDate.setDate(startDate.getDate() - 7)
-
-    const { data, error } = await supabase
+    // Get all analytics data (remove date filter to avoid timezone issues)
+    const { data: rawData, error } = await supabase
       .from('analytics')
       .select('path, visits')
-      .gte('date', startDate.toISOString().split('T')[0])
-      .order('visits', { ascending: false })
-      .limit(limit)
 
     if (error) {
       console.error('Error fetching top pages:', error)
       return []
     }
 
-    console.log('📄 Top Pages Data:', data)
-    return data || []
+    if (!rawData || rawData.length === 0) {
+      console.log('📄 No top pages data found')
+      return []
+    }
+
+    console.log('✅ Raw data fetched:', rawData.length, 'rows')
+
+    // Aggregate visits per path manually
+    const pathMap = new Map<string, number>()
+
+    rawData.forEach((row: any) => {
+      const currentVisits = pathMap.get(row.path) || 0
+      pathMap.set(row.path, currentVisits + (Number(row.visits) || 0))
+    })
+
+    // Convert to array and sort
+    const aggregated = Array.from(pathMap.entries())
+      .map(([path, visits]) => ({ path, visits }))
+      .sort((a, b) => b.visits - a.visits)
+      .slice(0, limit)
+
+    console.log('🎯 Top Pages Aggregated:', aggregated)
+    return aggregated
   } catch (error) {
     console.error('Top pages fetch error:', error)
     return []
