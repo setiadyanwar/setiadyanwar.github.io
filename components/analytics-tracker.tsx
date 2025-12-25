@@ -14,34 +14,28 @@ export default function AnalyticsTracker() {
         // Skip admin pages
         if (pathname.startsWith('/admin')) return
 
-        // Skip if already tracked this path in current session
-        if (trackedRef.current.has(pathname)) return
-
         // Only track in production (remove this condition if you want to test in dev)
         if (process.env.NODE_ENV === 'development') {
             console.log('[Analytics] Would track:', pathname, '(disabled in dev)')
             return
         }
 
+
+
         const trackView = async () => {
             try {
-                // Dynamic import to avoid bundling Supabase in every page
-                const { getSupabaseBrowserClient } = await import('@/lib/supabase/client')
-                const supabase = getSupabaseBrowserClient()
-
-                if (!supabase) {
-                    console.warn('[Analytics] Supabase client not available')
-                    return
-                }
-
-                const { error } = await supabase.rpc('increment_page_view', {
-                    page_path: pathname
+                // Call our Next.js API route to handle tracking (IP, Device, etc.)
+                const response = await fetch('/api/analytics/track', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ path: pathname }),
                 })
 
-                if (error) {
-                    // Only log in development
+                if (!response.ok) {
                     if (process.env.NODE_ENV === 'development') {
-                        console.warn('[Analytics] Tracking error:', error.message)
+                        console.warn('[Analytics] Tracking failed:', response.statusText)
                     }
                 } else {
                     // Mark as tracked
@@ -50,7 +44,7 @@ export default function AnalyticsTracker() {
             } catch (error) {
                 // Silently fail in production, log in development
                 if (process.env.NODE_ENV === 'development') {
-                    console.warn('[Analytics] Setup required. Run SQL script in Supabase.')
+                    console.warn('[Analytics] Request failed:', error)
                 }
             }
         }

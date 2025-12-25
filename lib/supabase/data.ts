@@ -274,3 +274,37 @@ export async function getTopPages(limit: number = 10) {
     return []
   }
 }
+
+export async function getRecentVisitors(limit: number = 20) {
+  const supabase = typeof window !== 'undefined'
+    ? getSupabaseBrowserClient()
+    : getSupabaseServerClient()
+
+  if (!supabase) return []
+
+  try {
+    const { data, error } = await supabase.rpc('get_recent_visitors', {
+      limit_count: limit
+    })
+
+    if (error) {
+      console.warn('RPC error for recent visitors, falling back to direct query:', error.message)
+      const { data: rawData, error: queryError } = await supabase
+        .from('visitor_logs')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(limit)
+
+      if (queryError) {
+        console.error('Error fetching recent visitors:', queryError)
+        return []
+      }
+      return rawData || []
+    }
+
+    return data || []
+  } catch (error) {
+    console.error('Recent visitors fetch error:', error)
+    return []
+  }
+}

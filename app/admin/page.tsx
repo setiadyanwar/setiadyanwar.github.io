@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getPortfolioItems, getWorkExperiences, getEducationExperiences, getOrganizationExperiences, getVisitorAnalytics, getTopPages } from "@/lib/supabase/data"
+import { getPortfolioItems, getWorkExperiences, getEducationExperiences, getOrganizationExperiences, getVisitorAnalytics, getTopPages, getRecentVisitors } from "@/lib/supabase/data"
 import { Briefcase, GraduationCap, Users, Monitor, ArrowUpRight, Globe, Activity, TrendingUp, Clock, FileText, Sun, Moon } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
+import RecentVisitors from "@/components/admin/recent-visitors"
 
 // --- COMPONENTS ---
 
@@ -194,18 +195,20 @@ export default function AdminDashboard() {
   })
   const [analyticsData, setAnalyticsData] = useState<any[]>([])
   const [topPages, setTopPages] = useState<any[]>([])
+  const [recentVisitors, setRecentVisitors] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchStats() {
       try {
-        const [portfolio, work, education, org, analytics, pages] = await Promise.all([
+        const [portfolio, work, education, org, analytics, pages, visitors] = await Promise.all([
           getPortfolioItems(true),
           getWorkExperiences(),
           getEducationExperiences(),
           getOrganizationExperiences(),
           getVisitorAnalytics(7),
           getTopPages(10),
+          getRecentVisitors(20),
         ])
 
         setStats({
@@ -217,6 +220,7 @@ export default function AdminDashboard() {
 
         setAnalyticsData(analytics)
         setTopPages(pages)
+        setRecentVisitors(visitors)
       } catch (error) {
         console.error("❌ Error fetching stats:", error)
       } finally {
@@ -393,6 +397,11 @@ export default function AdminDashboard() {
         <div className="lg:col-span-1 h-[400px]">
           <AnalyticsSidebar pages={topPages} visitorsToday={visitorsToday} />
         </div>
+      </div>
+
+      {/* Recent Visitors Section */}
+      <div className="h-[400px]">
+        <RecentVisitors visitors={recentVisitors} />
       </div>
 
       {/* Footer Actions */}
