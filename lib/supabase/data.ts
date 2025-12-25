@@ -226,31 +226,35 @@ export async function getVisitorAnalytics(daysBack: number = 7) {
 }
 
 export async function getTopPages(limit: number = 10) {
-  const supabase = getSupabaseServerClient()
+  // Use browser client if in browser, server client otherwise
+  const supabase = typeof window !== 'undefined'
+    ? getSupabaseBrowserClient()
+    : getSupabaseServerClient()
+
   if (!supabase) {
     return []
   }
 
   try {
+    const startDate = new Date()
+    startDate.setDate(startDate.getDate() - 7)
+
     const { data, error } = await supabase
       .from('analytics')
       .select('path, visits')
-      .gte('date', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0])
+      .gte('date', startDate.toISOString().split('T')[0])
       .order('visits', { ascending: false })
       .limit(limit)
 
     if (error) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error('Error fetching top pages:', error)
-      }
+      console.error('Error fetching top pages:', error)
       return []
     }
 
+    console.log('📄 Top Pages Data:', data)
     return data || []
   } catch (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error('Top pages fetch error:', error)
-    }
+    console.error('Top pages fetch error:', error)
     return []
   }
 }
