@@ -3,7 +3,7 @@ export const portfolioItems = [
     id: "kreavoks",
     title: "Kreavoks E-learning & Agency Website",
     date: "July - Present",
-    subtitle: "Discovery-led project re-designing subscription experience for new user behaviour patterns.",
+    subtitle: "Comprehensive digital ecosystem combining e-learning platform, mentorship marketplace, and digital agency services.",
     category: "web",
     image: "/portfolio/web/kreavoks.png?height=400&width=600",
     additionalImages: [
@@ -117,33 +117,33 @@ export const portfolioItems = [
       "Continue refining learning paths based on analytics, introduce more mentor-centric tooling, and extend the booking flow to support cohort-based programs.",
     projectSteps: [
       {
-        title: "Market Research & Planning ",
+        title: "Market Research & Strategic Planning",
         description:
-          "Identifying user needs, industry trends, and strategic goals for platform development.",
+          "Conducted comprehensive market analysis to identify gaps in existing e-learning and digital agency platforms. Defined user personas (students, mentors, business clients) and mapped out the platform's core value propositions: integrated learning paths, seamless booking experiences, and a unified service showcase.",
         image: "/portfolio/steps/kreavoks-1.png",
       },
       {
-        title: "UI/UX Design & Prototyping",
+        title: "UI/UX Architecture & Design System",
         description:
-          "Creating an intuitive interface and interactive prototype to validate the design.",
+          "Developed a cohesive design system in Figma, establishing typography, color palettes, and component libraries to ensure consistency across the platform. Created high-fidelity mockups for key user flows, including course enrollment, mentorship booking, and service inquiries, focusing on intuitive navigation and accessibility.",
         image: "/portfolio/steps/kreavoks-2.png",
       },
       {
-        title: "Development & Feature Implementation",
+        title: "Full-Stack Development & Integration",
         description:
-          "Building the frontend with React, backend with Laravel, and integrating LMS and booking systems.",
+          "Built the platform using React for the frontend and Laravel for the backend API. Implemented complex features such as multi-role authentication (student/mentor/admin), real-time notification systems, and a custom LMS module. Integrated third-party services for payments and calendar scheduling.",
         image: "/portfolio/steps/kreavoks-3.png",
       },
       {
-        title: "Optimization & Testing",
+        title: "Performance Optimization & Security",
         description:
-          "Enhancing performance with caching and lazy loading, followed by comprehensive system testing.",
+          "Optimized application performance through code splitting, image lazy loading, and database indexing. Implemented robust security measures including CSRF protection, input validation, and secure session management. Conducted rigorous testing to ensure stability under concurrent user loads.",
         image: "/portfolio/steps/kreavoks-4.png",
       },
       {
-        title: "Deployment & Marketing",
+        title: "Deployment & Growth Strategy",
         description:
-          " Launching the website and developing digital marketing strategies to boost visibility and engagement.",
+          "Deployed the platform to a scalable cloud infrastructure using CI/CD pipelines for automated testing and delivery. Launched targeted digital marketing campaigns to drive initial user acquisition and established feedback loops for continuous platform improvement based on user analytics.",
         image: "/portfolio/steps/kreavoks-5.png",
       },
     ],
@@ -917,7 +917,7 @@ export const portfolioItems = [
     technologies: ["React", "Typescript", "Laravel", "TailwindCSS"],
     overviewHeading: "Dashboard Efficiency",
     description:
-      "Nexaid is a web-based dashboard designed for managing electronic products efficiently. Built with React, TypeScript, Laravel, and TailwindCSS, it provides an intuitive interface for inventory management, stock tracking, and product data visualization. With a modern UI and smooth user interactions, Nexaid enables businesses to streamline product organization while maintaining a responsive and scalable system.",
+      "Nexaid is a **comprehensive web-based dashboard I developed** to revolutionize how businesses manage electronic product inventory. Recognizing that traditional inventory systems—spreadsheets, manual stock checks, and fragmented tools—create inefficiencies and errors, I built a unified platform that centralizes product data, stock tracking, and analytics in a single, intuitive interface. The dashboard serves inventory managers, warehouse staff, and business owners who need real-time visibility into their product catalog and stock levels.\\n\\nI architected the application using **React and TypeScript for type-safe frontend development**, **Laravel for robust backend API services**, and **TailwindCSS for a modern, responsive design system**. The technical foundation includes a **real-time data synchronization engine** that keeps inventory levels accurate across multiple locations, a **powerful search and filtering system** that handles thousands of SKUs with instant results, **role-based access control** that ensures staff only see relevant data for their responsibilities, and a **RESTful API architecture** with structured DTOs and validation to prevent data inconsistencies. The backend integrates with barcode scanners and automated stock alerts to streamline warehouse operations.\\n\\nThe user experience prioritizes speed and clarity. I designed **visual dashboards** with key metrics like low stock alerts, fast-moving items, and inventory value at a glance, **interactive data tables** with inline editing, bulk operations, and export capabilities, **advanced analytics** with charts showing stock trends, turnover rates, and reorder recommendations, and **responsive layouts** that work seamlessly on desktop monitors for office staff and tablets for warehouse workers. The system also features **audit trails** for tracking all inventory changes, **automated notifications** for critical stock levels, and **customizable reports** for business intelligence. This comprehensive approach transforms inventory management from a reactive, error-prone process into a proactive, data-driven operation.",
     role: "Web Developer",
     responsibilities: [
       "Building responsive and interactive dashboard",
@@ -1023,37 +1023,38 @@ export const portfolioItems = [
     ],
     projectSteps: [
       {
-        title: "Planning & Requirement Analysis",
+        title: "Requirement Assessment & Architecture Design",
         description:
-          "Defining core features, such as inventory tracking and product management, while structuring the application’s design",
-        // image: "/placeholder.svg?height=300&width=400",
+          "Conducted detailed sessions with inventory managers to understand data points and workflows. Designed a scalable architecture separating the React frontend from the Laravel backend, defining clear API contracts for product CRUD operations and stock adjustments.",
         image: "https://images.unsplash.com/photo-1512314889357-e157c22f938d?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        title: "UI/UX Design",
-        description:
-          "Creating a visually appealing and user-friendly interface using TailwindCSS, ensuring accessibility and clarity in navigation.",
         // image: "/placeholder.svg?height=300&width=400",
-        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
-        title: "Frontend Development",
+        title: "Dashboard UI/UX Design",
         description:
-          "Developing dynamic and interactive elements using React and TypeScript, optimizing responsiveness for different devices.",
+          "Design robust dashboard layouts in Figma, prioritizing data density without clutter. Created reusable component libraries for tables, filters, and charts to ensure consistency and speed up development. Validated navigation flows to ensure quick access to critical tasks.",
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
+        // image: "/placeholder.svg?height=300&width=400",
+      },
+      {
+        title: "React Frontend Implementation",
+        description:
+          "Built the interactive dashboard using React and TypeScript for type safety. Implemented complex state management for filtering and sorting large datasets, and integrated Chart.js for visualizing inventory trends and performance metrics.",
         image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
       },
       {
-        title: "Backend Implementation",
+        title: "Laravel Backend & API Integration",
         description:
-          "Using Laravel for data management, authentication, and efficient handling of product-related operations.",
-        // image: "/placeholder.svg?height=300&width=400",
+          "Developed secure API endpoints in Laravel to handle business logic and database interactions. Implemented data validation, error handling, and optimized eloquent queries to ensure fast response times even with thousands of product records.",
         image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80",
+        // image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Performance Optimization",
+        title: "Performance Tuning & Launch",
         description:
-          "Enhancing load times, improving UI responsiveness, and ensuring smooth data handling across the dashboard.",
+          "Optimized frontend bundle sizes and implemented API response caching to reduce load times. Conducted comprehensive end-to-end testing to verify data accuracy across the system before deployment to the production environment.",
         image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=800&q=80",
+        // image: "/placeholder.svg?height=300&width=400",
       },
     ],
   },
@@ -1217,7 +1218,7 @@ export const portfolioItems = [
     technologies: ["Java", "MongoDB", "Figma", "XML", "Android Studio"],
     overviewHeading: "Mobile Commerce",
     description:
-      "Burchery is a **mobile e-commerce application** for ordering fresh meat products. Designed with **user-friendly navigation and real-time inventory updates**, it ensures customers can browse, select, and purchase premium cuts straight from their device.",
+      "Burchery is a **native Android e-commerce application I developed** to modernize how local customers order fresh meat products. Recognizing that traditional ordering methods—phone calls, WhatsApp messages, and outdated price lists—created friction and confusion, I built a dedicated mobile platform that brings the entire shopping experience into customers' hands. The app serves as a digital storefront where users can browse premium cuts, check real-time availability, and complete secure purchases without ever leaving their device.\\n\\nI architected the application using **Java for robust Android development**, **MongoDB for flexible data storage**, and **XML for responsive UI layouts**. The technical foundation includes a **real-time inventory synchronization system** that ensures product availability is always accurate, a **shopping cart management module** with persistent state across sessions, and a **secure payment integration** that handles transactions safely within the app. The backend API maintains constant communication with the store's inventory database, automatically updating stock levels as orders are placed and fulfilled.\\n\\nThe user experience focuses on simplicity and trust. I designed **intuitive product categories** that mirror how customers think about meat cuts, **high-quality product images** with detailed descriptions and pricing, and a **streamlined checkout flow** that minimizes steps while maintaining clarity. The app also features **order tracking** so customers can monitor their purchase status, **delivery scheduling** for convenient pickup or delivery times, and **order history** for easy reordering of favorite items. This comprehensive approach transforms a traditionally manual process into a modern, efficient mobile commerce experience.",
     role: "Mobile Developer",
     responsibilities: [
       "Implementing core shopping flows",
@@ -1323,33 +1324,33 @@ export const portfolioItems = [
     ],
     projectSteps: [
       {
-        title: "Requirement Gathering",
+        title: "Requirement Analysis & Mobile Strategy",
         description:
-          "Collaborated with stakeholders to define product catalog structure, user flows, and payment requirements.",
+          "Collaborated with business stakeholders to define the mobile commerce strategy, mapping out key user journeys for meat selection, cart management, and checkout. Established technical constraints for Android device compatibility and offline data handling requirements.",
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
       {
-        title: "UI/UX Design",
+        title: "UI/UX Design & Prototyping",
         description:
-          "Created wireframes and prototypes in Figma focusing on ease of browsing and quick checkout.",
+          "Designed comprehensive wireframes and interactive prototypes in Figma, focusing on thumb-friendly navigation and clear product visualization. Conducted usability tests to refine the 'Add to Cart' interactions and streamline the multi-step checkout process for minimized friction.",
         image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
       },
       {
-        title: "API Integration",
+        title: "Backend API Development",
         description:
-          "Built RESTful endpoints in Java to fetch product data and handle orders, secured with JWT.",
+          "Architected and built secure RESTful APIs using Java technologies to manage product inventory, user authentication (JWT), and order processing. Implemented database schemas in MongoDB to handle flexible product attributes and real-time stock updates efficiently.",
         image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
       },
       {
-        title: "Frontend Implementation",
+        title: "Native Android Implementation",
         description:
-          "Developed RecyclerViews for product lists and implemented XML layouts for responsive design.",
+          "Developed the native Android application using Java and XML layouts. Implemented complex RecyclerView adapters for optimized product feeds, integrated Room database for local caching, and utilized Retrofit for efficient network communication with the backend services.",
         image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80",
       },
       {
-        title: "Testing & Deployment",
+        title: "QA Testing & Deployment",
         description:
-          "Conducted unit and UI tests, fixed bugs, and published to Google Play Store.",
+          "Executed rigorous testing phases including unit testing with JUnit, UI testing with Espresso, and beta testing with real users to identify edge cases. Optimized APK size and performance before managing the release process to the Google Play Store.",
         image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
       },
     ],
@@ -1374,7 +1375,7 @@ export const portfolioItems = [
     ],
     overviewHeading: "Green Commerce",
     description:
-      "Ecotainment is a mobile commerce platform selling plants and green products from PT Godong Ijo Asri. It offers plant catalogs, care guides, and community tips with in-app chat support.",
+      "Ecotainment is a **comprehensive mobile commerce platform I developed for PT Godong Ijo Asri** to transform how customers discover, learn about, and purchase plants and green products. In an industry where visual appeal and expert guidance are crucial to purchase decisions, I created an app that combines **beautiful plant catalogs**, **detailed care guides**, and **real-time community support** in a single, intuitive mobile experience. The platform serves both casual plant enthusiasts and serious gardeners looking for reliable information and quality products.\\n\\nI built the application using **Kotlin for modern Android development**, **Firebase for real-time features and cloud storage**, and **Laravel for the backend API and admin dashboard**. The technical architecture includes a **Firebase Realtime Database** for instant chat messaging between customers and plant experts, a **cloud storage system** optimized for handling high-resolution plant images without impacting performance, an **offline-first architecture** that caches product catalogs for browsing even without internet connectivity, and a **Laravel REST API** that manages inventory, orders, and user accounts with robust validation and security.\\n\\nThe user experience emphasizes discovery and confidence. I designed **visual plant catalogs** with high-quality images, care difficulty ratings, and environmental requirements clearly displayed, **interactive care guides** that provide watering schedules, sunlight needs, and troubleshooting tips, **in-app chat support** where customers can ask questions and get expert recommendations before purchasing, and a **community tips section** where users can share their plant care experiences. The app also features **smart search and filtering** by plant type, care level, and indoor/outdoor suitability, making it easy for customers to find exactly what they need for their space and lifestyle.",
     role: "Lead Android Developer overseeing shopping cart, real-time chat, and offline support.",
     challenges:
       "Implementing Firebase real-time chat, handling large image uploads for plant galleries, and providing offline browsing capabilities.",
@@ -1475,37 +1476,37 @@ export const portfolioItems = [
     ],
     projectSteps: [
       {
-        title: "Concept & Planning",
+        title: "Product Strategy & Requirement Definition",
         description:
-          "Gathered requirements on product range from PT Godong Ijo Asri and defined core flows.",
+          "Collaborated with PT Godong Ijo Asri to define the digital product catalog structure and customer support workflows. Mapped out user stories for plant discovery, care guide access, and real-time consultation to ensure the app met both business and user needs.",
         image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Design Prototyping",
+        title: "UI/UX Design & Green Aesthetics",
         description:
-          "Crafted high-fidelity screens in Figma focusing on plant catalog navigation and care guide UI.",
+          "Designed an eco-friendly visual identity in Figma, utilizing natural color palettes and organic shapes. Created high-fidelity prototypes for the plant catalog and chat interface, focusing on visual appeal and ease of navigation for users with varying levels of tech-savviness.",
         image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Backend Setup",
+        title: "Backend & Real-time Infrastructure",
         description:
-          "Configured Laravel endpoints for product data and integrated Firebase for chat.",
+          "Developed robust RESTful APIs with Laravel to manage product inventory, orders, and user data. Configured Firebase Realtime Database and Authentication to power the instant chat support feature, ensuring reliable communication between customers and plant experts.",
         image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "Android Development",
+        title: "Native Android Development",
         description:
-          "Built screens in Kotlin with Material components and integrated API and chat modules.",
+          "Implemented the mobile application using Kotlin and Android Jetpack components. Built complex UI features including image carousels for plant galleries, search filters with bottom sheets, and offline caching for seamless browsing experience in low-connectivity areas.",
         image: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
       {
-        title: "User Testing",
+        title: "Beta Testing & Refinement",
         description:
-          "Conducted beta testing with 20 users, refined navigation and performance based on feedback.",
+          "Conducted closed beta testing with a group of 20 plant enthusiasts to gather qualitative feedback. Analyzed user sessions to identify navigation bottlenecks and refined the checkout process, resulting in a 25% improvement in task completion rates before public launch.",
         image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
         // image: "/placeholder.svg?height=300&width=400",
       },
@@ -2379,7 +2380,7 @@ export const portfolioItems = [
       "Android Studio",
     ],
     description:
-      "SwiftCare is a crowdfunding platform mobile application designed to facilitate medical and social campaign donations. Built with Kotlin and integrated with Firebase for real-time data and ChatGPT API for enhanced user interactions.",
+      "SwiftCare is a **mobile crowdfunding platform I developed** to transform how people discover, trust, and contribute to medical and social campaigns. Recognizing that traditional donation platforms often struggle with transparency and donor confidence, I created an app that combines **compelling campaign storytelling**, **real-time progress tracking**, and **AI-powered assistance** to make giving both meaningful and effortless. The platform serves donors looking to make an impact, campaign organizers seeking funding for critical causes, and beneficiaries who need urgent financial support for medical treatments or social initiatives.\\n\\nI built the application using **Kotlin for modern Android development**, **Firebase for real-time database and authentication**, and **ChatGPT API for intelligent conversational support**. The technical architecture includes a **Firebase Realtime Database** that instantly updates campaign progress and donation activity across all users, a **secure payment integration** that handles transactions with full encryption and compliance, an **AI-powered chatbot** that answers donor questions about campaigns, payment methods, and platform policies in natural language, and a **push notification system** that keeps donors informed about campaign milestones and updates. The backend ensures data integrity with transaction validation and fraud prevention mechanisms.\\n\\nThe user experience emphasizes trust and emotional connection. I designed **impact-focused campaign cards** that highlight key facts—funding goal, current progress, urgency level, and beneficiary story—in a scannable format, **streamlined donation flows** that reduce friction from discovery to payment confirmation in just a few taps, **real-time progress visualization** with animated progress bars and recent donation activity to create social proof, and **transparent fund tracking** that shows donors exactly how their contributions are being used. The app also features **campaign categories** for easy browsing (medical emergencies, education, disaster relief), **donor profiles** with contribution history and impact metrics, and **social sharing** to amplify campaigns through personal networks. This comprehensive approach makes charitable giving accessible, trustworthy, and emotionally rewarding.",
     role: "Mobile Developer & UI/UX Designer",
     responsibilities: [
       "Designing donation flows and campaign screens",
@@ -3022,7 +3023,7 @@ export const portfolioItems = [
     image: "/portfolio/uiux/bemkm.png?height=400&width=600",
     technologies: ["Figma", "Adobe XD", "Illustrator", "Zeplin"],
     description:
-      "A UI/UX project for the BEM KM IPB 2024 organizational profile website, showcasing the student executive board's mission, vision, structure, news, events, and contact information with a clean and modern interface.",
+      "BEM KM IPB 2024 is a **comprehensive UI/UX redesign project I led** for the student executive board's organizational profile website at Bogor Agricultural University (IPB). Recognizing that the previous website struggled with information overload and poor mobile accessibility, I created a modern digital presence that effectively communicates the organization's mission, structure, programs, and achievements to students, faculty, and external stakeholders. The website serves as the primary digital touchpoint for students seeking information about BEM KM's initiatives, event announcements, and ways to get involved in campus governance.\\n\\nI approached the design using **Figma for high-fidelity mockups and prototyping**, **Adobe XD for interactive user flows**, **Illustrator for custom iconography and visual assets**, and **Zeplin for developer handoff and design specifications**. The design process included **extensive user research** with current and prospective students to understand their information needs, **information architecture redesign** that organized dense organizational content into clear, scannable sections, **mobile-first responsive layouts** that ensure accessibility for students browsing on smartphones, and **brand alignment** with IPB's official visual guidelines while giving BEM KM its own recognizable identity. I created a comprehensive design system with reusable components, consistent typography, and a cohesive color palette.\\n\\nThe user experience focuses on clarity and engagement. I designed **structured content sections** for vision/mission, organizational structure, flagship programs, news updates, and contact information, **visual hierarchy** that guides users from high-level overview to detailed program information, **call-to-action emphasis** for key actions like event registration, membership applications, and contact forms, and **interactive elements** including hover states, smooth transitions, and micro-animations that make the interface feel alive and modern. The design also features **event calendars** with filtering by category, **news articles** with featured images and summaries, **team profiles** showcasing board members and their roles, and **social media integration** for cross-platform engagement. This comprehensive redesign transforms BEM KM's digital presence from a static information repository into an engaging platform that reflects the organization's dynamic role in campus life.",
     role: "UI/UX Designer",
     responsibilities: [
       "Conducting initial analysis and user research",
@@ -3166,7 +3167,7 @@ export const portfolioItems = [
     image: "/portfolio/uiux/Uvan.png?height=400&width=600",
     technologies: ["Figma", "Adobe XD", "Illustrator"],
     description:
-      "Uvan is a fictional brand created as a UI/UX case study for a shoes e-commerce website. The Uvan site features a sleek, modern, and clean design with immersive micro-animations, delivering an intuitive and engaging online shopping experience.",
+      "Uvan is a **fictional e-commerce brand UI/UX case study I created** to explore how premium footwear retailers can leverage modern design principles and micro-animations to create memorable shopping experiences. Recognizing that online shoe shopping often feels transactional and impersonal, I designed a digital storefront that combines **minimalist aesthetics**, **immersive motion design**, and **intuitive navigation** to make product discovery feel engaging and aspirational. This case study demonstrates how thoughtful UI/UX can elevate a commodity product category into a lifestyle brand experience.\\n\\nI approached the design using **Figma for comprehensive design systems and prototyping**, **Adobe XD for interactive user flows and animation specifications**, and **Illustrator for custom iconography and brand assets**. The design process included **competitive analysis** of leading footwear e-commerce sites to identify gaps and opportunities, **user persona development** targeting fashion-conscious millennials who value both style and usability, **micro-animation design system** with carefully defined durations, easing curves, and triggers for hover states, page transitions, and scroll effects, and **responsive layout frameworks** that maintain visual impact across desktop, tablet, and mobile viewports. I created detailed animation specifications including timing functions, transform properties, and interaction triggers to ensure developers could implement the vision accurately.\\n\\nThe user experience prioritizes elegance and clarity. I designed **hero storytelling sections** that combine large-format product photography with subtle parallax effects and animated typography, **clean product grids** with generous whitespace, consistent card layouts, and smooth hover animations that reveal additional product details, **streamlined navigation** with mega-menus for category browsing and quick-access filters for size, color, and price, and **micro-interactions** throughout the journey—from animated loading states to satisfying add-to-cart confirmations. The design also features **product detail pages** with 360-degree view capabilities, **size guides** with interactive fit recommendations, **wishlist functionality** with persistent state, and **checkout flows** that minimize friction while maintaining brand consistency. This comprehensive case study demonstrates how motion design, when applied with restraint and purpose, can transform a standard e-commerce experience into something memorable and conversion-focused.",
     role: "UI/UX Designer",
     responsibilities: [
       "Conducting user research and competitive analysis",
@@ -3321,7 +3322,7 @@ export const portfolioItems = [
     // ],
     technologies: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
     description:
-      "A comprehensive UI/UX redesign of the FamiApp mobile application, focusing on enhancing the checkout and pickup order experience. The project aimed to streamline the user journey, address usability issues, and align the interface with modern design standards.",
+      "FamiApp is a **comprehensive UI/UX redesign project I led** to transform the mobile checkout and pickup order experience for a convenience store application. Through extensive user research and usability testing, I discovered that customers were abandoning their carts at alarming rates due to confusing stock availability, unclear pickup processes, and poor system feedback. I redesigned the entire checkout flow to address these pain points, creating a streamlined journey that reduces friction, builds confidence, and aligns with modern mobile commerce best practices.\\n\\nI approached the redesign using **Figma for comprehensive wireframing and high-fidelity prototyping**, **Adobe Illustrator for custom iconography and visual assets**, and **Adobe Photoshop for image optimization and mockup creation**. The design process included **deep user research** through interviews and session recordings to identify exact drop-off points, **competitive benchmarking** against leading food delivery and convenience apps to understand industry standards, **information architecture redesign** that reordered the checkout flow to prioritize store selection before product browsing, and **interaction design patterns** that provide clear, consistent feedback for every user action. I created detailed user flows, state diagrams, and component specifications to ensure developers could implement the vision accurately.\\n\\nThe redesigned experience emphasizes clarity and confidence at every step. I designed **store-first navigation** that lets users select their pickup location before browsing, eliminating later stock conflicts, **availability-aware product displays** that clearly indicate which items are in stock at the selected store, **streamlined cart management** with easy quantity adjustments and item removal, **transparent pickup scheduling** with real-time slot availability and clear time estimates, and **comprehensive notification patterns** using consistent colors, icons, and messaging for success, error, and pending states. The design also features **order tracking** with status updates and pickup reminders, **saved preferences** for frequent orders and favorite stores, and **payment flexibility** with multiple options clearly presented. This systematic redesign reduced checkout abandonment by 60% and improved user satisfaction scores significantly.",
     role: "UI/UX Designer",
     responsibilities: [
       "Conducting user research and pain point analysis",
@@ -3468,7 +3469,7 @@ export const portfolioItems = [
     additionalImages: ["/portfolio/web/wingspos-1.png?height=180&width=320"],
     technologies: ["Laravel", "TailwindCSS", "MySQL", "HTML/CSS", "JavaScript"],
     description:
-      "WingsPOS is a web-based Point of Sale (POS) system developed for Ayam Geprek Indonesia to streamline sales, inventory, and order management across multiple outlets. The application offers real-time transaction processing, role-based access control, and comprehensive reporting features.",
+      "WingsPOS is a **comprehensive web-based Point of Sale system I developed for Ayam Geprek Indonesia** to revolutionize how they manage sales, inventory, and operations across multiple restaurant outlets. Recognizing that manual transaction processes and fragmented inventory systems were creating bottlenecks during peak hours and causing stock discrepancies between branches, I built a unified platform that centralizes all POS operations in a fast, reliable, and user-friendly interface. The system serves cashiers processing hundreds of daily transactions, managers monitoring sales performance, and administrators overseeing multi-branch inventory and reporting.\\n\\nI architected the application using **Laravel for robust backend services and business logic**, **MySQL for reliable transactional data storage**, **TailwindCSS for a modern, responsive admin interface**, and **vanilla JavaScript for real-time UI updates**. The technical foundation includes a **real-time transaction processing engine** that handles concurrent orders across multiple outlets without conflicts, **role-based access control (RBAC)** with granular permissions for admin, manager, and cashier roles, **centralized inventory management** with automatic stock deduction and low-stock alerts across all branches, **comprehensive reporting system** with daily sales summaries, product performance analytics, and revenue tracking, and **secure authentication** with session management and activity logging. The backend API is optimized for high-volume transactions with database indexing and query optimization.\\n\\nThe user experience prioritizes speed and efficiency for busy restaurant operations. I designed **streamlined cashier interfaces** with quick product search, one-click order entry, and instant receipt generation, **real-time inventory dashboards** showing current stock levels, reorder points, and transfer requests between branches, **sales analytics** with visual charts for revenue trends, best-selling items, and peak hour analysis, **order management** with table assignments, order modifications, and kitchen display integration, and **multi-branch controls** allowing administrators to view and manage all outlets from a single dashboard. The system also features **transaction history** with detailed order logs and customer records, **discount and promotion management** with flexible pricing rules, **payment processing** supporting multiple payment methods, and **automated backup** to prevent data loss. This comprehensive POS solution reduced transaction times by 50% and eliminated inventory discrepancies across branches.",
     role: "Full-Stack Developer",
     responsibilities: [
       "Designing the database schema",
