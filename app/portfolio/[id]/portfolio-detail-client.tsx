@@ -12,6 +12,7 @@ import MobileNavigationToggle from "@/components/portfolio/mobile-navigation-tog
 import MobileNavigationSidebar from "@/components/portfolio/mobile-navigation-sidebar"
 import ProjectInfoBentoGrid from "@/components/portfolio/project-info-bento-grid"
 import AdditionalImagesGallery from "@/components/portfolio/additional-images-gallery"
+import FullScreenImageGallery from "@/components/portfolio/full-screen-image-gallery"
 import ReactMarkdown from "react-markdown"
 
 const sections = [
@@ -36,6 +37,22 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
     const [activeStep, setActiveStep] = useState<number>(0)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [mounted, setMounted] = useState(false)
+
+    // Image Preview State
+    const [previewImages, setPreviewImages] = useState<Array<{ url: string; description?: string }>>([])
+    const [previewIndex, setPreviewIndex] = useState(0)
+    const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+
+    const openImagePreview = (images: string[], index: number, title: string) => {
+        const uniqueKey = Date.now(); // force re-render if needed
+        const formattedImages = images.map((img, i) => ({
+            url: img,
+            description: `${title} - Image ${i + 1}`
+        }))
+        setPreviewImages(formattedImages)
+        setPreviewIndex(index)
+        setIsPreviewOpen(true)
+    }
 
     const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
     const activeSectionRef = useRef<string>("overview")
@@ -529,24 +546,31 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                             {/* Substep Images */}
                                                             {substep.images && substep.images.length > 0 && (
                                                                 <div className={`grid gap-4 ${substep.images.length === 1
-                                                                        ? 'grid-cols-1 max-w-2xl'
-                                                                        : substep.images.length === 2
-                                                                            ? 'grid-cols-1 sm:grid-cols-2'
-                                                                            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                                                                    ? 'grid-cols-1 max-w-2xl'
+                                                                    : substep.images.length === 2
+                                                                        ? 'grid-cols-1 sm:grid-cols-2'
+                                                                        : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
                                                                     }`}>
                                                                     {substep.images.map((img: string, imgIdx: number) => (
                                                                         <div
                                                                             key={imgIdx}
-                                                                            className="relative rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-sm"
+                                                                            className="relative rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-sm cursor-pointer group"
                                                                             style={{ aspectRatio: substep.images.length === 1 ? "16/9" : "4/3" }}
+                                                                            onClick={() => openImagePreview(substep.images, imgIdx, substep.title || step.title || 'Process Step')}
                                                                         >
                                                                             <Image
                                                                                 src={img}
                                                                                 alt={`${substep.title || 'Substep'} - Image ${imgIdx + 1}`}
                                                                                 fill
-                                                                                className="object-cover"
+                                                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
                                                                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                                                             />
+                                                                            {/* Hover overlay hint */}
+                                                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                                                                <div className="opacity-0 group-hover:opacity-100 bg-black/50 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                                                                    View Image
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     ))}
                                                                 </div>
@@ -616,6 +640,14 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                         </section>
 
 
+
+                        {/* Reuse Responsive Gallery Modal for Sub-step Images */}
+                        <FullScreenImageGallery
+                            images={previewImages}
+                            initialIndex={previewIndex}
+                            isOpen={isPreviewOpen}
+                            onClose={() => setIsPreviewOpen(false)}
+                        />
 
                         {/* Navigation Buttons */}
                         <div className="flex justify-between items-center pt-16 border-t border-gray-200 dark:border-gray-800">

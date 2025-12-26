@@ -71,7 +71,7 @@ export default function AnimatedCursor() {
       {/* Default Arrow Cursor */}
       {cursorVariant === "default" && (
         <motion.div
-          className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
+          className="fixed top-0 left-0 pointer-events-none z-[10001] hidden md:block"
           style={{
             x: mousePosition.x,
             y: mousePosition.y,
@@ -103,7 +103,7 @@ export default function AnimatedCursor() {
       {/* Click Hand Cursor */}
       {cursorVariant === "click" && (
         <motion.div
-          className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
+          className="fixed top-0 left-0 pointer-events-none z-[10001] hidden md:block"
           style={{
             x: mousePosition.x,
             y: mousePosition.y,
@@ -121,8 +121,8 @@ export default function AnimatedCursor() {
             <Image
               src="/Rotation Prank macOS Animated--pointer--SweezyCursors.png"
               alt="Pointer cursor"
-              width={48}
-              height={48}
+              width={24}
+              height={24}
               className="drop-shadow-lg"
               unoptimized
               style={{ objectFit: "contain" }}
@@ -136,7 +136,7 @@ export default function AnimatedCursor() {
         <>
           {/* Arrow cursor at mouse position */}
           <motion.div
-            className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
+            className="fixed top-0 left-0 pointer-events-none z-[10001] hidden md:block"
             style={{
               x: mousePosition.x,
               y: mousePosition.y,
@@ -163,10 +163,10 @@ export default function AnimatedCursor() {
               />
             </svg>
           </motion.div>
-          
+
           {/* Button pill to the right and slightly below arrow */}
           <motion.div
-            className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center"
+            className="fixed top-0 left-0 pointer-events-none z-[10001] hidden md:flex items-center justify-center"
             style={{
               x: mousePosition.x + 16,
               y: mousePosition.y + 8,
@@ -181,7 +181,7 @@ export default function AnimatedCursor() {
             }}
           >
             <div className="bg-indigo-600 text-white px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap shadow-lg">
-              View Detail 
+              View Detail
             </div>
           </motion.div>
         </>
