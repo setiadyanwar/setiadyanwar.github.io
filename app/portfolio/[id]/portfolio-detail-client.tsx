@@ -78,27 +78,36 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                     {substep.images.map((img: string, imgIdx: number) => (
                         <div
                             key={imgIdx}
-                            className="sticky w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-xl cursor-pointer group mb-12"
+                            className="sticky w-full mb-32 md:mb-48 [--stack-top:5rem] md:[--stack-top:6rem] [--stack-step:1.5rem] md:[--stack-step:2.5rem]"
                             style={{
-                                aspectRatio: "16/9",
-                                top: `calc(6rem + ${imgIdx * 2.5}rem)`,
+                                top: `calc(var(--stack-top) + ${imgIdx} * var(--stack-step))`,
+                                zIndex: imgIdx + 1
                             }}
-                            onClick={() => openImagePreview(substep.images, imgIdx, substep.title || stepTitle || 'Process Step')}
                         >
-                            <div className="relative w-full h-full">
-                                <Image
-                                    src={img}
-                                    alt={`${substep.title || 'Substep'} - Image ${imgIdx + 1}`}
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 768px) 100vw, 800px"
-                                />
-                            </div>
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center pointer-events-none">
-                                <div className="opacity-0 group-hover:opacity-100 bg-black/60 text-white text-xs font-medium px-4 py-2 rounded-full backdrop-blur-md transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-lg">
-                                    View Fullscreen
+                            <motion.div
+                                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.5, ease: "easeOut" }}
+                                className="w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-xl cursor-pointer group"
+                                style={{ aspectRatio: "16/9" }}
+                                onClick={() => openImagePreview(substep.images, imgIdx, substep.title || stepTitle || 'Process Step')}
+                            >
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src={img}
+                                        alt={`${substep.title || 'Substep'} - Image ${imgIdx + 1}`}
+                                        fill
+                                        className="object-cover"
+                                        sizes="(max-width: 768px) 100vw, 800px"
+                                    />
                                 </div>
-                            </div>
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center pointer-events-none">
+                                    <div className="opacity-0 group-hover:opacity-100 bg-black/60 text-white text-xs font-medium px-4 py-2 rounded-full backdrop-blur-md transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-lg">
+                                        View Fullscreen
+                                    </div>
+                                </div>
+                            </motion.div>
                         </div>
                     ))}
                 </div>
