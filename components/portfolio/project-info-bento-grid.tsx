@@ -10,7 +10,7 @@ interface PortfolioItem {
   technologies?: string[]
   demoUrl?: string
   repoUrl?: string
-  impact?: string[]
+  impact?: string[] | any[]
   responsibilities?: string[] | string
   deliverables?: string
   businessObjective?: string

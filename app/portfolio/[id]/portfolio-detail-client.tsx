@@ -70,6 +70,77 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
             nextPortfolio: idx < allPortfolioItems.length - 1 && idx >= 0 ? allPortfolioItems[idx + 1] : null,
         }
     }, [portfolio, allPortfolioItems])
+
+    const renderSubstepImages = (substep: any, stepTitle: string) => {
+        if (substep.layout === 'stack') {
+            return (
+                <div className="flex flex-col pb-24 relative z-0">
+                    {substep.images.map((img: string, imgIdx: number) => (
+                        <div
+                            key={imgIdx}
+                            className="sticky w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-xl cursor-pointer group mb-12"
+                            style={{
+                                aspectRatio: "16/9",
+                                top: `calc(6rem + ${imgIdx * 2.5}rem)`,
+                            }}
+                            onClick={() => openImagePreview(substep.images, imgIdx, substep.title || stepTitle || 'Process Step')}
+                        >
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src={img}
+                                    alt={`${substep.title || 'Substep'} - Image ${imgIdx + 1}`}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 100vw, 800px"
+                                />
+                            </div>
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center pointer-events-none">
+                                <div className="opacity-0 group-hover:opacity-100 bg-black/60 text-white text-xs font-medium px-4 py-2 rounded-full backdrop-blur-md transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-lg">
+                                    View Fullscreen
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )
+        }
+
+        return (
+            <div className={`grid gap-4 ${substep.images.length === 1
+                ? 'grid-cols-1 max-w-2xl'
+                : substep.images.length === 2
+                    ? 'grid-cols-1 sm:grid-cols-2'
+                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                }`}>
+                {substep.images.map((img: string, imgIdx: number) => (
+                    <div
+                        key={imgIdx}
+                        className="relative rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-sm cursor-pointer group"
+                        style={{ aspectRatio: substep.images.length === 1 ? "16/9" : "4/3" }}
+                        onClick={() => openImagePreview(substep.images, imgIdx, substep.title || stepTitle || 'Process Step')}
+                    >
+                        <Image
+                            src={img}
+                            alt={`${substep.title || 'Substep'} - Image ${imgIdx + 1}`}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                            }}
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                            <div className="opacity-0 group-hover:opacity-100 bg-black/50 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                View Image
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
     const { currentIndex, prevPortfolio, nextPortfolio } = navigationData
 
     // Memoize problem/solution cards
@@ -237,7 +308,6 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                     const target = e.target as HTMLImageElement;
                                                     target.src = "/placeholder.svg";
                                                 }}
-                                                unoptimized={portfolio.image?.includes('supabase')}
                                             />
                                         </div>
                                     </div>
@@ -501,7 +571,6 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                             const target = e.target as HTMLImageElement;
                                                             target.style.display = 'none';
                                                         }}
-                                                        unoptimized={step.image?.includes('supabase')}
                                                     />
                                                 </div>
                                             )}
@@ -554,40 +623,10 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                             )}
 
                                                             {/* Substep Images */}
+                                                            {/* Substep Images */}
                                                             {substep.images && substep.images.length > 0 && (
-                                                                <div className={`grid gap-4 ${substep.images.length === 1
-                                                                    ? 'grid-cols-1 max-w-2xl'
-                                                                    : substep.images.length === 2
-                                                                        ? 'grid-cols-1 sm:grid-cols-2'
-                                                                        : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-                                                                    }`}>
-                                                                    {substep.images.map((img: string, imgIdx: number) => (
-                                                                        <div
-                                                                            key={imgIdx}
-                                                                            className="relative rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shadow-sm cursor-pointer group"
-                                                                            style={{ aspectRatio: substep.images.length === 1 ? "16/9" : "4/3" }}
-                                                                            onClick={() => openImagePreview(substep.images, imgIdx, substep.title || step.title || 'Process Step')}
-                                                                        >
-                                                                            <Image
-                                                                                src={img}
-                                                                                alt={`${substep.title || 'Substep'} - Image ${imgIdx + 1}`}
-                                                                                fill
-                                                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                                                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                                                                onError={(e) => {
-                                                                                    const target = e.target as HTMLImageElement;
-                                                                                    target.style.display = 'none';
-                                                                                }}
-                                                                                unoptimized={img?.includes('supabase')}
-                                                                            />
-                                                                            {/* Hover overlay hint */}
-                                                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                                                                                <div className="opacity-0 group-hover:opacity-100 bg-black/50 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
-                                                                                    View Image
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    ))}
+                                                                <div className="mt-4">
+                                                                    {renderSubstepImages(substep, step.title)}
                                                                 </div>
                                                             )}
                                                         </div>
