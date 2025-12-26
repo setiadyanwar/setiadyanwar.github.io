@@ -43,11 +43,7 @@ export default function RecentProjects() {
     fetchProjects()
   }, [])
 
-  // Don't render if no projects loaded yet
-  if (loading || recentProjects.length === 0) {
-    return null
-  }
-
+  // Memoize project cards - must be called before any early returns
   const projectCards = useMemo(() => recentProjects.map((project) => (
     <Card key={project.id}>
       <UICard className="group overflow-hidden h-full bg-white border border-gray-200 shadow-[0_26px_60px_rgba(15,23,42,0.16)] rounded-3xl flex flex-col dark:bg-[#05010d] dark:border-white/10">
@@ -129,6 +125,11 @@ export default function RecentProjects() {
       </UICard>
     </Card>
   )), [recentProjects])
+
+  // Don't render if no projects loaded yet
+  if (loading || recentProjects.length === 0) {
+    return null
+  }
 
   return (
     <section className="py-24 bg-gray-100 text-gray-900 dark:bg-[#05010d] dark:text-white rounded-3xl overflow-hidden">

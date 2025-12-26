@@ -1,38 +1,25 @@
 "use client"
-
+import React, { useMemo } from 'react'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { TrendingUp } from "lucide-react"
 
 // 1. Interactive Visitor Line Chart (Recharts)
 const VisitorChart = ({ data }: { data: any[] }) => {
     // Generate last 7 days to ensure chart always spans full width
-    const chartData = Array.from({ length: 7 }, (_, i) => {
-        const d = new Date()
-        d.setDate(d.getDate() - (6 - i))
-        const dateStr = d.toISOString().split('T')[0]
-        // Find matching data or default to 0
-        const found = data?.find((item: any) => item.date === dateStr)
-        return {
-            date: dateStr,
-            displayDate: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()],
-            visits: found ? (Number(found.total_visits) || 0) : 0
-        }
-    })
-
-    // Custom Tooltip
-    const CustomTooltip = ({ active, payload, label }: any) => {
-        if (active && payload && payload.length) {
-            return (
-                <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs py-2 px-3 rounded-lg shadow-xl">
-                    <p className="font-bold mb-1">{label}</p>
-                    <p className="font-medium text-indigo-300 dark:text-indigo-600">
-                        {payload[0].value} Visits
-                    </p>
-                </div>
-            )
-        }
-        return null
-    }
+    const chartData = useMemo(() => {
+        return Array.from({ length: 7 }, (_, i) => {
+            const d = new Date()
+            d.setDate(d.getDate() - (6 - i))
+            const dateStr = d.toISOString().split('T')[0]
+            // Find matching data or default to 0
+            const found = data?.find((item: any) => item.date === dateStr)
+            return {
+                date: dateStr,
+                displayDate: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()],
+                visits: found ? (Number(found.total_visits) || 0) : 0
+            }
+        })
+    }, [data])
 
     return (
         <div className="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-gray-200 dark:border-gray-800 shadow-sm h-full flex flex-col">
@@ -88,6 +75,21 @@ const VisitorChart = ({ data }: { data: any[] }) => {
             </div>
         </div>
     )
+}
+
+// Custom Tooltip moved outside
+const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs py-2 px-3 rounded-lg shadow-xl">
+                <p className="font-bold mb-1">{label}</p>
+                <p className="font-medium text-indigo-300 dark:text-indigo-600">
+                    {payload[0].value} Visits
+                </p>
+            </div>
+        )
+    }
+    return null
 }
 
 export default VisitorChart

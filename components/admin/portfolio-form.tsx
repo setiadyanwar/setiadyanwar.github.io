@@ -924,68 +924,157 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
         {/* --- IMPACT TAB --- */}
         {activeTab === "impact" && (
           <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800 shadow-sm space-y-8">
-            <h3 className="text-xl font-bold">Project Impact & Results</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {formData.impact.map((item, idx) => (
-                <div key={idx} className="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 relative group hover:shadow-md transition-all">
-                  <div className="flex gap-4 mb-4">
-                    <input
-                      type="number"
-                      value={item.value}
-                      onChange={(e) => {
-                        const newImpact = [...formData.impact];
-                        newImpact[idx].value = parseFloat(e.target.value) || 0;
-                        setFormData({ ...formData, impact: newImpact });
-                      }}
-                      className="w-24 text-4xl font-bold bg-transparent border-none p-0 focus:ring-0 text-indigo-600 dark:text-indigo-400"
-                      placeholder="0"
-                    />
+            <div>
+              <h3 className="text-xl font-bold mb-6">Project Impact & Results</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {formData.impact.map((item, idx) => (
+                  <div key={idx} className="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 relative group hover:shadow-md transition-all">
+                    <div className="flex gap-4 mb-4">
+                      <input
+                        type="number"
+                        value={item.value}
+                        onChange={(e) => {
+                          const newImpact = [...formData.impact];
+                          newImpact[idx].value = parseFloat(e.target.value) || 0;
+                          setFormData({ ...formData, impact: newImpact });
+                        }}
+                        className="w-24 text-4xl font-bold bg-transparent border-none p-0 focus:ring-0 text-indigo-600 dark:text-indigo-400"
+                        placeholder="0"
+                      />
+                      <input
+                        type="text"
+                        value={item.unit}
+                        onChange={(e) => {
+                          const newImpact = [...formData.impact];
+                          newImpact[idx].unit = e.target.value;
+                          setFormData({ ...formData, impact: newImpact });
+                        }}
+                        className="w-16 text-xl font-medium bg-transparent border-none p-0 focus:ring-0 text-gray-400 mt-auto mb-1"
+                        placeholder="%"
+                      />
+                    </div>
                     <input
                       type="text"
-                      value={item.unit}
+                      value={item.title}
                       onChange={(e) => {
                         const newImpact = [...formData.impact];
-                        newImpact[idx].unit = e.target.value;
+                        newImpact[idx].title = e.target.value;
                         setFormData({ ...formData, impact: newImpact });
                       }}
-                      className="w-16 text-xl font-medium bg-transparent border-none p-0 focus:ring-0 text-gray-400 mt-auto mb-1"
-                      placeholder="%"
+                      className="w-full font-bold text-gray-900 dark:text-white bg-transparent border-none p-0 focus:ring-0 mb-1"
+                      placeholder="Metric Title"
                     />
+                    <textarea
+                      value={item.description}
+                      onChange={(e) => {
+                        const newImpact = [...formData.impact];
+                        newImpact[idx].description = e.target.value;
+                        setFormData({ ...formData, impact: newImpact });
+                      }}
+                      rows={2}
+                      className="w-full text-sm text-gray-500 dark:text-gray-400 bg-transparent border-none p-0 focus:ring-0 resize-none"
+                      placeholder="Brief explanation..."
+                    />
+
+                    <button type="button" onClick={() => {
+                      const newImpact = formData.impact.filter((_, i) => i !== idx);
+                      setFormData({ ...formData, impact: newImpact });
+                    }} className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-2 bg-white dark:bg-gray-700 rounded-lg text-red-500 shadow-sm"><Trash2 className="w-4 h-4" /></button>
                   </div>
-                  <input
-                    type="text"
-                    value={item.title}
-                    onChange={(e) => {
-                      const newImpact = [...formData.impact];
-                      newImpact[idx].title = e.target.value;
-                      setFormData({ ...formData, impact: newImpact });
-                    }}
-                    className="w-full font-bold text-gray-900 dark:text-white bg-transparent border-none p-0 focus:ring-0 mb-1"
-                    placeholder="Metric Title"
-                  />
-                  <textarea
-                    value={item.description}
-                    onChange={(e) => {
-                      const newImpact = [...formData.impact];
-                      newImpact[idx].description = e.target.value;
-                      setFormData({ ...formData, impact: newImpact });
-                    }}
-                    rows={2}
-                    className="w-full text-sm text-gray-500 dark:text-gray-400 bg-transparent border-none p-0 focus:ring-0 resize-none"
-                    placeholder="Brief explanation..."
-                  />
+                ))}
 
-                  <button type="button" onClick={() => {
-                    const newImpact = formData.impact.filter((_, i) => i !== idx);
-                    setFormData({ ...formData, impact: newImpact });
-                  }} className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-2 bg-white dark:bg-gray-700 rounded-lg text-red-500 shadow-sm"><Trash2 className="w-4 h-4" /></button>
+                <button type="button" onClick={() => setFormData({ ...formData, impact: [...formData.impact, { type: 'positive', value: 0, unit: '%', title: '', description: '' }] })} className="flex flex-col items-center justify-center p-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 transition-all gap-2 text-gray-500 hover:text-indigo-600">
+                  <Plus className="w-8 h-8" />
+                  <span className="font-medium">Add Metric</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-gray-200 dark:border-gray-800"></div>
+
+            {/* Outcomes Section */}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold">Project Outcomes</h3>
+                <div className="w-1/3">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={formData.outcomes_heading}
+                      onChange={(e) => setFormData({ ...formData, outcomes_heading: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500"
+                      placeholder="Outcomes Heading (Default: Outcomes)"
+                    />
+                    <label className="absolute -top-2 left-2 bg-white dark:bg-gray-900 px-1 text-xs font-medium text-gray-500">
+                      Section Title
+                    </label>
+                  </div>
                 </div>
-              ))}
+              </div>
 
-              <button type="button" onClick={() => setFormData({ ...formData, impact: [...formData.impact, { type: 'positive', value: 0, unit: '%', title: '', description: '' }] })} className="flex flex-col items-center justify-center p-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 transition-all gap-2 text-gray-500 hover:text-indigo-600">
-                <Plus className="w-8 h-8" />
-                <span className="font-medium">Add Metric</span>
-              </button>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {formData.outcomes.map((item, idx) => (
+                  <div key={idx} className="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 relative group hover:shadow-md transition-all">
+                    <div className="flex gap-4 mb-4">
+                      <input
+                        type="number"
+                        value={item.value}
+                        onChange={(e) => {
+                          const newOutcomes = [...formData.outcomes];
+                          newOutcomes[idx].value = parseFloat(e.target.value) || 0;
+                          setFormData({ ...formData, outcomes: newOutcomes });
+                        }}
+                        className="w-24 text-4xl font-bold bg-transparent border-none p-0 focus:ring-0 text-indigo-600 dark:text-indigo-400"
+                        placeholder="0"
+                      />
+                      <input
+                        type="text"
+                        value={item.unit}
+                        onChange={(e) => {
+                          const newOutcomes = [...formData.outcomes];
+                          newOutcomes[idx].unit = e.target.value;
+                          setFormData({ ...formData, outcomes: newOutcomes });
+                        }}
+                        className="w-16 text-xl font-medium bg-transparent border-none p-0 focus:ring-0 text-gray-400 mt-auto mb-1"
+                        placeholder="%"
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      value={item.title}
+                      onChange={(e) => {
+                        const newOutcomes = [...formData.outcomes];
+                        newOutcomes[idx].title = e.target.value;
+                        setFormData({ ...formData, outcomes: newOutcomes });
+                      }}
+                      className="w-full font-bold text-gray-900 dark:text-white bg-transparent border-none p-0 focus:ring-0 mb-1"
+                      placeholder="Outcome Title"
+                    />
+                    <textarea
+                      value={item.description}
+                      onChange={(e) => {
+                        const newOutcomes = [...formData.outcomes];
+                        newOutcomes[idx].description = e.target.value;
+                        setFormData({ ...formData, outcomes: newOutcomes });
+                      }}
+                      rows={2}
+                      className="w-full text-sm text-gray-500 dark:text-gray-400 bg-transparent border-none p-0 focus:ring-0 resize-none"
+                      placeholder="Brief explanation..."
+                    />
+
+                    <button type="button" onClick={() => {
+                      const newOutcomes = formData.outcomes.filter((_, i) => i !== idx);
+                      setFormData({ ...formData, outcomes: newOutcomes });
+                    }} className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-2 bg-white dark:bg-gray-700 rounded-lg text-red-500 shadow-sm"><Trash2 className="w-4 h-4" /></button>
+                  </div>
+                ))}
+
+                <button type="button" onClick={() => setFormData({ ...formData, outcomes: [...formData.outcomes, { type: 'positive', value: 0, unit: '%', title: '', description: '' }] })} className="flex flex-col items-center justify-center p-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 transition-all gap-2 text-gray-500 hover:text-indigo-600">
+                  <Plus className="w-8 h-8" />
+                  <span className="font-medium">Add Outcome</span>
+                </button>
+              </div>
             </div>
           </div>
         )}
