@@ -233,6 +233,11 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                 alt={portfolio.title}
                                                 fill
                                                 className="object-cover"
+                                                onError={(e) => {
+                                                    const target = e.target as HTMLImageElement;
+                                                    target.src = "/placeholder.svg";
+                                                }}
+                                                unoptimized={portfolio.image?.includes('supabase')}
                                             />
                                         </div>
                                     </div>
@@ -492,6 +497,11 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                         className="object-cover"
                                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
                                                         priority={idx === 0}
+                                                        onError={(e) => {
+                                                            const target = e.target as HTMLImageElement;
+                                                            target.style.display = 'none';
+                                                        }}
+                                                        unoptimized={step.image?.includes('supabase')}
                                                     />
                                                 </div>
                                             )}
@@ -564,6 +574,11 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                                                                 fill
                                                                                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                                                                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                                                onError={(e) => {
+                                                                                    const target = e.target as HTMLImageElement;
+                                                                                    target.style.display = 'none';
+                                                                                }}
+                                                                                unoptimized={img?.includes('supabase')}
                                                                             />
                                                                             {/* Hover overlay hint */}
                                                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">

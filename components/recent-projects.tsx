@@ -1,20 +1,52 @@
 "use client"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, ExternalLink, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { portfolioItems } from "@/lib/data"
+import { getPortfolioItems } from "@/lib/supabase/data"
 import CardSwap, { Card } from "@/components/ui/card-swap"
 import { Card as UICard } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { motion } from "framer-motion"
 
+interface PortfolioItem {
+  id: string
+  title: string
+  description?: string
+  image?: string
+  category: string
+  date?: string
+  technologies: string[]
+}
+
 export default function RecentProjects() {
-  // Get the specific 3 most recent projects by ID (latest web projects)
-  const recentProjectIds = ["ess", "nexaid", "kreavoks"]
-  const recentProjects = recentProjectIds
-    .map((id) => portfolioItems.find((item) => item.id === id))
-    .filter((project) => project !== undefined) as typeof portfolioItems
+  const [recentProjects, setRecentProjects] = useState<PortfolioItem[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const items = await getPortfolioItems()
+        // Get the specific 3 most recent projects by ID (latest web projects)
+        const recentProjectIds = ["ess", "nexaid", "kreavoks"]
+        const filtered = recentProjectIds
+          .map((id) => items.find((item) => item.id === id))
+          .filter((project) => project !== undefined)
+        setRecentProjects(filtered)
+      } catch (error) {
+        // Silently fail
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProjects()
+  }, [])
+
+  // Don't render if no projects loaded yet
+  if (loading || recentProjects.length === 0) {
+    return null
+  }
 
   return (
     <section className="py-24 bg-gray-100 text-gray-900 dark:bg-[#05010d] dark:text-white rounded-3xl overflow-hidden">

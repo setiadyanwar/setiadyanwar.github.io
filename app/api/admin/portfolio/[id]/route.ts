@@ -40,10 +40,19 @@ export async function PUT(
   try {
     const supabase = getSupabaseServerClient()
     if (!supabase) {
+
       return NextResponse.json({ error: "Supabase client not available" }, { status: 500 })
     }
 
     const body = await request.json()
+
+    // Validate required fields
+    if (!body.title) {
+
+      return NextResponse.json({ error: "Title is required" }, { status: 400 })
+    }
+
+
 
     const { data, error } = await supabase
       .from("portfolio_items")
@@ -85,12 +94,20 @@ export async function PUT(
       .single()
 
     if (error) {
+
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
+    if (!data) {
+
+      return NextResponse.json({ error: "Update failed - no data returned" }, { status: 500 })
+    }
+
+
     return NextResponse.json({ data })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+
+    return NextResponse.json({ error: error.message || "Internal server error" }, { status: 500 })
   }
 }
 

@@ -31,9 +31,7 @@ export default function PortfolioSection() {
 
         setPortfolioItems(transformed)
       } catch (error) {
-        if (process.env.NODE_ENV !== "production") {
-          console.error("Error fetching portfolio items:", error)
-        }
+
       } finally {
         setLoading(false)
       }

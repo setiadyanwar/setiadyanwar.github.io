@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { Save, X, Plus, Trash2, Eye, Sparkles, LayoutGrid, List } from "lucide-react"
 import Link from "next/link"
@@ -156,7 +156,7 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
         outcomes_heading: data.outcomes_heading || "",
       })
     } catch (error) {
-      console.error("Error fetching portfolio:", error)
+
       alert("Failed to load portfolio")
     } finally {
       setLoading(false)
@@ -168,6 +168,8 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
     setSaving(true)
 
     try {
+
+
       const url = portfolioId
         ? `/api/admin/portfolio/${portfolioId}`
         : "/api/admin/portfolio"
@@ -179,14 +181,20 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
         body: JSON.stringify(formData),
       })
 
+      const result = await response.json()
+
       if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.error || "Failed to save portfolio")
+
+        throw new Error(result.error || `Failed to save portfolio (${response.status})`)
       }
 
+
       router.push("/admin/portfolio")
+      router.refresh() // Force refresh to clear cache
     } catch (error: any) {
-      alert(error.message || "Failed to save portfolio")
+
+      const errorMessage = error.message || "Failed to save portfolio. Please check your connection and try again."
+      alert(`❌ ${errorMessage}`)
     } finally {
       setSaving(false)
     }
@@ -236,6 +244,35 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
       textarea.setSelectionRange(start + offset, end + offset)
     }, 0)
   }
+
+  // Optimized handlers to prevent INP issues
+  const updateSubstepTitle = useCallback((stepIdx: number, substepIdx: number, value: string) => {
+    setFormData(prev => {
+      const newSteps = [...prev.project_steps]
+      const newSubsteps = [...(newSteps[stepIdx].substeps || [])]
+      newSubsteps[substepIdx] = { ...newSubsteps[substepIdx], title: value }
+      newSteps[stepIdx] = { ...newSteps[stepIdx], substeps: newSubsteps }
+      return { ...prev, project_steps: newSteps }
+    })
+  }, [])
+
+  const updateSubstepDescription = useCallback((stepIdx: number, substepIdx: number, value: string) => {
+    setFormData(prev => {
+      const newSteps = [...prev.project_steps]
+      const newSubsteps = [...(newSteps[stepIdx].substeps || [])]
+      newSubsteps[substepIdx] = { ...newSubsteps[substepIdx], description: value }
+      newSteps[stepIdx] = { ...newSteps[stepIdx], substeps: newSubsteps }
+      return { ...prev, project_steps: newSteps }
+    })
+  }, [])
+
+  const removeSubstep = useCallback((stepIdx: number, substepIdx: number) => {
+    setFormData(prev => {
+      const newSteps = [...prev.project_steps]
+      newSteps[stepIdx].substeps = (newSteps[stepIdx].substeps || []).filter((_, i) => i !== substepIdx)
+      return { ...prev, project_steps: newSteps }
+    })
+  }, [])
 
   if (loading) {
     return (
@@ -345,8 +382,8 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                     value={formData.status}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                     className={`w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg font-medium ${formData.status === 'published'
-                        ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400'
-                        : 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400'
+                      ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400'
+                      : 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400'
                       }`}
                   >
                     <option value="draft">Draft (Hidden)</option>
@@ -661,24 +698,13 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                                     <input
                                       type="text"
                                       value={substep.title}
-                                      onChange={(e) => {
-                                        const newSteps = [...formData.project_steps]
-                                        const newSubsteps = [...(newSteps[idx].substeps || [])]
-                                        newSubsteps[subIdx] = { ...newSubsteps[subIdx], title: e.target.value }
-                                        newSteps[idx].substeps = newSubsteps
-                                        setFormData({ ...formData, project_steps: newSteps })
-                                      }}
+                                      onChange={(e) => updateSubstepTitle(idx, subIdx, e.target.value)}
                                       className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-sm font-medium"
                                       placeholder="Activity title..."
                                     />
                                     <button
                                       type="button"
-                                      onClick={() => {
-                                        const newSteps = [...formData.project_steps]
-                                        const newSubsteps = (newSteps[idx].substeps || []).filter((_, i) => i !== subIdx)
-                                        newSteps[idx].substeps = newSubsteps
-                                        setFormData({ ...formData, project_steps: newSteps })
-                                      }}
+                                      onClick={() => removeSubstep(idx, subIdx)}
                                       className="text-gray-400 hover:text-red-500 p-2"
                                     >
                                       <Trash2 className="w-4 h-4" />
@@ -690,13 +716,7 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
                                     <label className="block text-xs text-gray-500 mb-1">Description</label>
                                     <textarea
                                       value={substep.description || ''}
-                                      onChange={(e) => {
-                                        const newSteps = [...formData.project_steps]
-                                        const newSubsteps = [...(newSteps[idx].substeps || [])]
-                                        newSubsteps[subIdx] = { ...newSubsteps[subIdx], description: e.target.value }
-                                        newSteps[idx].substeps = newSubsteps
-                                        setFormData({ ...formData, project_steps: newSteps })
-                                      }}
+                                      onChange={(e) => updateSubstepDescription(idx, subIdx, e.target.value)}
                                       rows={3}
                                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-sm"
                                       placeholder="Describe this activity..."

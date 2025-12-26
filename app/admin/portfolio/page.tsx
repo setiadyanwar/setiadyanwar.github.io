@@ -46,89 +46,106 @@ const SortableHeader = ({
 )
 
 // --- COMPONENT: Portfolio Row ---
-const PortfolioRow = memo(({ item, onDelete }: { item: any; onDelete: (id: string) => void }) => (
-  <motion.tr
-    layout
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-    className="group border-b border-gray-100 dark:border-gray-800 last:border-0 hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors"
-  >
-    <td className="px-6 py-4">
-      <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm group-hover:shadow-md transition-all">
-        {item.image ? (
-          <Image
-            src={item.image.split("?")[0]}
-            alt={item.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-            unoptimized
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-300 dark:text-gray-600 bg-gray-50 dark:bg-gray-900">
-            <LayoutGrid className="w-5 h-5" />
-          </div>
-        )}
-      </div>
-    </td>
-    <td className="px-6 py-4">
-      <div className="flex flex-col">
-        <span className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-sm">
-          {item.title}
-        </span>
-        {item.subtitle && (
-          <span className="text-xs text-gray-500 dark:text-gray-500 mt-0.5 max-w-[200px] truncate">
-            {item.subtitle}
+const PortfolioRow = memo(({ item, onDelete }: { item: any; onDelete: (id: string) => void }) => {
+  const formatDate = (dateString: string) => {
+    if (!dateString) return '-'
+    const date = new Date(dateString)
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    }).format(date)
+  }
+
+  return (
+    <motion.tr
+      layout
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      className="group border-b border-gray-100 dark:border-gray-800 last:border-0 hover:bg-indigo-50/30 dark:hover:bg-white/5 transition-colors"
+    >
+      <td className="px-6 py-4">
+        <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm group-hover:shadow-md transition-all">
+          {item.image ? (
+            <Image
+              src={item.image.split("?")[0]}
+              alt={item.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              unoptimized
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-300 dark:text-gray-600 bg-gray-50 dark:bg-gray-900">
+              <LayoutGrid className="w-5 h-5" />
+            </div>
+          )}
+        </div>
+      </td>
+      <td className="px-6 py-4">
+        <div className="flex flex-col">
+          <span className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-sm">
+            {item.title}
           </span>
-        )}
-      </div>
-    </td>
-    <td className="px-6 py-4">
-      <div className="inline-flex">
-        <span className="px-2.5 py-1 text-xs font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 capitalize shadow-sm tracking-wide">
-          {item.category}
+          {item.subtitle && (
+            <span className="text-xs text-gray-500 dark:text-gray-500 mt-0.5 max-w-[200px] truncate">
+              {item.subtitle}
+            </span>
+          )}
+        </div>
+      </td>
+      <td className="px-6 py-4">
+        <div className="inline-flex">
+          <span className="px-2.5 py-1 text-xs font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 capitalize shadow-sm tracking-wide">
+            {item.category}
+          </span>
+        </div>
+      </td>
+      <td className="px-6 py-4">
+        <div className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${item.status === "published"
+          ? "bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
+          : "bg-amber-50 dark:bg-amber-900/10 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800"
+          }`}>
+          <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${item.status === "published" ? "bg-emerald-500 animate-pulse" : "bg-amber-500"
+            }`}></span>
+          <span className="capitalize">{item.status || "draft"}</span>
+        </div>
+      </td>
+      <td className="px-6 py-4">
+        <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+          {formatDate(item.created_at)}
         </span>
-      </div>
-    </td>
-    <td className="px-6 py-4">
-      <div className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${item.status === "published"
-        ? "bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
-        : "bg-amber-50 dark:bg-amber-900/10 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800"
-        }`}>
-        <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${item.status === "published" ? "bg-emerald-500 animate-pulse" : "bg-amber-500"
-          }`}></span>
-        <span className="capitalize">{item.status || "draft"}</span>
-      </div>
-    </td>
-    <td className="px-6 py-4">
-      <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-2 group-hover:translate-x-0">
-        <Link
-          href={`/portfolio/${item.id}`}
-          target="_blank"
-          className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-all tooltip-trigger"
-          title="Preview Live"
-        >
-          <Eye className="w-4 h-4" />
-        </Link>
-        <Link
-          href={`/admin/portfolio/${item.id}/edit`}
-          className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-all"
-          title="Edit Details"
-        >
-          <Edit className="w-4 h-4" />
-        </Link>
-        <button
-          onClick={() => onDelete(item.id)}
-          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all"
-          title="Delete Item"
-        >
-          <Trash2 className="w-4 h-4" />
-        </button>
-      </div>
-    </td>
-  </motion.tr>
-))
+      </td>
+      <td className="px-6 py-4">
+        <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-2 group-hover:translate-x-0">
+          <Link
+            href={`/portfolio/${item.id}`}
+            target="_blank"
+            className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-all tooltip-trigger"
+            title="Preview Live"
+          >
+            <Eye className="w-4 h-4" />
+          </Link>
+          <Link
+            href={`/admin/portfolio/${item.id}/edit`}
+            className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-all"
+            title="Edit Details"
+          >
+            <Edit className="w-4 h-4" />
+          </Link>
+          <button
+            onClick={() => onDelete(item.id)}
+            className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all"
+            title="Delete Item"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
+      </td>
+    </motion.tr>
+  )
+})
 PortfolioRow.displayName = "PortfolioRow"
 
 // --- MAIN PAGE COMPONENT ---
@@ -192,13 +209,23 @@ export default function PortfolioManagement() {
 
     // 2. Sort
     items.sort((a, b) => {
-      const aValue = a[sortField] || ''
-      const bValue = b[sortField] || ''
+      let aValue = a[sortField]
+      let bValue = b[sortField]
 
+      // Handle date fields specially
+      if (sortField === 'created_at') {
+        aValue = new Date(aValue || 0).getTime()
+        bValue = new Date(bValue || 0).getTime()
+        return sortOrder === 'asc' ? aValue - bValue : bValue - aValue
+      }
+
+      // Handle string fields
       if (typeof aValue === 'string' && typeof bValue === 'string') {
         const comparison = aValue.localeCompare(bValue)
         return sortOrder === 'asc' ? comparison : -comparison
       }
+
+      // Fallback for other types
       return 0
     })
 
@@ -354,6 +381,7 @@ export default function PortfolioManagement() {
                 <SortableHeader label="Project Name" field="title" currentSort={sortField} currentOrder={sortOrder} onSort={handleSort} />
                 <SortableHeader label="Category" field="category" currentSort={sortField} currentOrder={sortOrder} onSort={handleSort} />
                 <SortableHeader label="Status" field="status" currentSort={sortField} currentOrder={sortOrder} onSort={handleSort} />
+                <SortableHeader label="Created" field="created_at" currentSort={sortField} currentOrder={sortOrder} onSort={handleSort} />
                 <th className="px-6 py-4 text-right text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
@@ -365,7 +393,7 @@ export default function PortfolioManagement() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <td colSpan={5} className="px-6 py-24 text-center">
+                    <td colSpan={6} className="px-6 py-24 text-center">
                       <div className="flex flex-col items-center justify-center max-w-sm mx-auto">
                         <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-full mb-6">
                           <Search className="w-8 h-8 text-gray-400" />

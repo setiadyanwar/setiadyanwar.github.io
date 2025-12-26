@@ -43,7 +43,7 @@ export async function DELETE(request: NextRequest) {
             .remove([path])
 
         if (error) {
-            console.error("Delete error:", error)
+
             return NextResponse.json(
                 { error: error.message || "Failed to delete file" },
                 { status: 500 }
@@ -55,7 +55,7 @@ export async function DELETE(request: NextRequest) {
             message: "File deleted successfully",
         })
     } catch (error: any) {
-        console.error("Unexpected delete error:", error)
+
         return NextResponse.json(
             { error: error.message || "Internal server error" },
             { status: 500 }

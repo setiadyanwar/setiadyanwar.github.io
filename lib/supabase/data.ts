@@ -13,9 +13,7 @@ function getSupabaseClient() {
 export async function getPortfolioItems(includeHidden: boolean = false) {
   const supabase = getSupabaseClient()
   if (!supabase) {
-    // Fallback to local data if Supabase is not configured
-    const { portfolioItems } = await import("../data")
-    return portfolioItems
+    return []
   }
 
   let query = supabase
@@ -31,12 +29,7 @@ export async function getPortfolioItems(includeHidden: boolean = false) {
     .order("created_at", { ascending: false })
 
   if (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("Error fetching portfolio items:", error)
-    }
-    // Fallback to local data
-    const { portfolioItems } = await import("../data")
-    return portfolioItems
+    return []
   }
 
 
@@ -46,8 +39,7 @@ export async function getPortfolioItems(includeHidden: boolean = false) {
 export async function getPortfolioItemById(id: string) {
   const supabase = getSupabaseClient()
   if (!supabase) {
-    const { portfolioItems } = await import("../data")
-    return portfolioItems.find((item) => item.id === id) || null
+    return null
   }
 
   const { data, error } = await supabase
@@ -58,11 +50,7 @@ export async function getPortfolioItemById(id: string) {
     .single()
 
   if (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("Error fetching portfolio item:", error)
-    }
-    const { portfolioItems } = await import("../data")
-    return portfolioItems.find((item) => item.id === id) || null
+    return null
   }
 
   return data
@@ -72,8 +60,7 @@ export async function getPortfolioItemById(id: string) {
 export async function getWorkExperiences() {
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    const { workExperiences } = await import("../data")
-    return workExperiences
+    return []
   }
 
   const { data, error } = await supabase
@@ -82,11 +69,7 @@ export async function getWorkExperiences() {
     .order("display_order", { ascending: true })
 
   if (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("Error fetching work experiences:", error)
-    }
-    const { workExperiences } = await import("../data")
-    return workExperiences
+    return []
   }
 
   return data || []
@@ -96,8 +79,7 @@ export async function getWorkExperiences() {
 export async function getEducationExperiences() {
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    const { educationExperiences } = await import("../data")
-    return educationExperiences
+    return []
   }
 
   const { data, error } = await supabase
@@ -106,11 +88,7 @@ export async function getEducationExperiences() {
     .order("display_order", { ascending: true })
 
   if (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("Error fetching education experiences:", error)
-    }
-    const { educationExperiences } = await import("../data")
-    return educationExperiences
+    return []
   }
 
   return data || []
@@ -120,8 +98,7 @@ export async function getEducationExperiences() {
 export async function getOrganizationExperiences() {
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    const { organizationExperiences } = await import("../data")
-    return organizationExperiences
+    return []
   }
 
   const { data, error } = await supabase
@@ -130,11 +107,7 @@ export async function getOrganizationExperiences() {
     .order("display_order", { ascending: true })
 
   if (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("Error fetching organization experiences:", error)
-    }
-    const { organizationExperiences } = await import("../data")
-    return organizationExperiences
+    return []
   }
 
   return data || []
@@ -144,8 +117,7 @@ export async function getOrganizationExperiences() {
 export async function getTechnologies() {
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    const { technologies } = await import("../data")
-    return technologies
+    return []
   }
 
   const { data, error } = await supabase
@@ -154,11 +126,7 @@ export async function getTechnologies() {
     .order("name", { ascending: true })
 
   if (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("Error fetching technologies:", error)
-    }
-    const { technologies } = await import("../data")
-    return technologies
+    return []
   }
 
   return data || []
@@ -182,7 +150,6 @@ export async function getVisitorAnalytics(daysBack: number = 7) {
     })
 
     if (error) {
-      console.warn('RPC error, falling back to direct query:', error.message)
 
       // Fallback: Direct query if RPC fails
       const startDate = new Date()
@@ -195,7 +162,7 @@ export async function getVisitorAnalytics(daysBack: number = 7) {
         .order('date', { ascending: true })
 
       if (queryError) {
-        console.error('Direct query also failed:', queryError)
+
         return []
       }
 
@@ -220,7 +187,6 @@ export async function getVisitorAnalytics(daysBack: number = 7) {
 
     return data || []
   } catch (error) {
-    console.error('Analytics fetch error:', error)
     return []
   }
 }
@@ -242,16 +208,15 @@ export async function getTopPages(limit: number = 10) {
       .select('path, visits')
 
     if (error) {
-      console.error('Error fetching top pages:', error)
       return []
     }
 
     if (!rawData || rawData.length === 0) {
-      console.log('📄 No top pages data found')
+
       return []
     }
 
-    console.log('✅ Raw data fetched:', rawData.length, 'rows')
+
 
     // Aggregate visits per path manually
     const pathMap = new Map<string, number>()
@@ -267,10 +232,9 @@ export async function getTopPages(limit: number = 10) {
       .sort((a, b) => b.visits - a.visits)
       .slice(0, limit)
 
-    console.log('🎯 Top Pages Aggregated:', aggregated)
+
     return aggregated
   } catch (error) {
-    console.error('Top pages fetch error:', error)
     return []
   }
 }
@@ -288,7 +252,6 @@ export async function getRecentVisitors(limit: number = 20) {
     })
 
     if (error) {
-      console.warn('RPC error for recent visitors, falling back to direct query:', error.message)
       const { data: rawData, error: queryError } = await supabase
         .from('visitor_logs')
         .select('*')
@@ -296,7 +259,7 @@ export async function getRecentVisitors(limit: number = 20) {
         .limit(limit)
 
       if (queryError) {
-        console.error('Error fetching recent visitors:', queryError)
+
         return []
       }
       return rawData || []
@@ -304,7 +267,6 @@ export async function getRecentVisitors(limit: number = 20) {
 
     return data || []
   } catch (error) {
-    console.error('Recent visitors fetch error:', error)
     return []
   }
 }

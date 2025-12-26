@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
             })
 
         if (error) {
-            console.error("Upload error:", error)
+
             return NextResponse.json(
                 { error: error.message || "Failed to upload file" },
                 { status: 500 }
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
             url: urlData.publicUrl,
         })
     } catch (error: any) {
-        console.error("Unexpected upload error:", error)
+
         return NextResponse.json(
             { error: error.message || "Internal server error" },
             { status: 500 }
