@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Download, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 
 // Import optimized sub-components
@@ -11,6 +11,7 @@ import BackgroundOrbs from "./hero-section/background-orbs";
 import EyeTracker from "./hero-section/eye-tracker";
 import ProfileCard from "./hero-section/profile-card";
 import ContactDropdown from "./contact-dropdown";
+import CvDownloadDropdown from "./cv-download-dropdown";
 
 export default function HeroSection() {
   return (
@@ -130,17 +131,8 @@ export default function HeroSection() {
               </div>
 
               {/* CV Download Button */}
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-2 border-gray-600 dark:border-gray-400 text-gray-800 dark:text-gray-200 hover:text-gray-800 dark:hover:text-gray-300 rounded-full px-4 py-6 font-medium transition-all duration-200 group btn-splash"
-              >
-                <Link href="/cv/cv_setiady.pdf" className="flex items-center gap-2">
-                  <Download className="h-5 w-5 group-hover:animate-bounce" />
-                  <span>Download CV</span>
-                </Link>
-              </Button>
+              {/* CV Download Dropdown */}
+              <CvDownloadDropdown />
             </motion.div>
 
             {/* Social Links */}
