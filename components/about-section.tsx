@@ -5,6 +5,8 @@ import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Globe, Instagram, Github, Linkedin, Mail, ArrowUpRight, Award, X } from "lucide-react"
+import { FaBehance, FaDribbble, FaLinkedin, FaInstagram, FaGithub, FaEnvelope } from "react-icons/fa"
+import { FaMedium } from "react-icons/fa6"
 
 export default function AboutSection() {
     const [selectedCert, setSelectedCert] = useState<number | null>(null)
@@ -264,25 +266,48 @@ export default function AboutSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.4 }}
-                            className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+                            className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-7 gap-3 md:gap-4"
                         >
                             {[
-                                { name: 'LinkedIn', icon: Linkedin, href: "#", color: "hover:text-blue-500" },
-                                { name: 'Email', icon: Mail, href: "mailto:hello@setiady.com", color: "hover:text-red-500" },
-                                { name: 'Instagram', icon: Instagram, href: "#", color: "hover:text-pink-500" },
-                                { name: 'GitHub', icon: Github, href: "#", color: "hover:text-gray-900 dark:hover:text-white" }
-                            ].map((social, id) => (
-                                <a
-                                    key={id}
-                                    href={social.href}
-                                    className="group relative flex flex-col items-center justify-center p-6 bg-gray-50/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-3xl transition-all duration-300 hover:bg-white dark:hover:bg-white/10 hover:shadow-xl hover:shadow-indigo-500/5 hover:-translate-y-1 overflow-hidden"
-                                >
-                                    <div className={`relative z-10 transition-colors duration-300 ${social.color}`}>
-                                        <social.icon className="w-6 h-6" />
-                                    </div>
-                                    <ArrowUpRight className="absolute top-3 right-3 w-3 h-3 text-gray-300 dark:text-gray-600 group-hover:text-indigo-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                                </a>
-                            ))}
+                                { name: 'LinkedIn', icon: FaLinkedin, href: "https://linkedin.com/in/setiadyanwar", color: "hover:text-blue-500" },
+                                { name: 'Instagram', icon: FaInstagram, href: "https://www.instagram.com/setiadyanwarr", color: "hover:text-pink-500" },
+                                { name: 'GitHub', icon: FaGithub, href: "https://github.com/setiadyanwar", color: "hover:text-gray-900 dark:hover:text-white" },
+                                { name: 'Email', icon: FaEnvelope, href: "mailto:setiadyanwar@gmail.com", color: "hover:text-red-500" },
+                                {
+                                    name: 'Behance',
+                                    icon: FaBehance,
+                                    href: "https://behance.com/setiadyanwar",
+                                    color: "hover:text-blue-400"
+                                },
+                                {
+                                    name: 'Dribbble',
+                                    icon: FaDribbble,
+                                    href: "https://dribbble.com/setiadyanwar",
+                                    color: "hover:text-pink-400"
+                                },
+                                {
+                                    name: 'Medium',
+                                    icon: FaMedium,
+                                    href: "https://medium.com/@setiadyanwar",
+                                    color: "hover:text-gray-900 dark:hover:text-white"
+                                }
+                            ].map((social, id) => {
+                                const Icon = social.icon;
+                                return (
+                                    <a
+                                        key={id}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group relative flex flex-col items-center justify-center p-4 md:p-6 bg-gray-50/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-3xl transition-all duration-300 hover:bg-white dark:hover:bg-white/10 hover:shadow-xl hover:shadow-indigo-500/5 hover:-translate-y-1 overflow-hidden"
+                                    >
+                                        <div className={`relative z-10 transition-colors duration-300 ${social.color}`}>
+                                            <Icon className="w-6 h-6" />
+                                        </div>
+                                        <ArrowUpRight className="absolute top-2 right-2 w-3 h-3 text-gray-300 dark:text-gray-600 group-hover:text-indigo-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                                    </a>
+                                );
+                            })}
                         </motion.div>
                     </div>
                 </div>

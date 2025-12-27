@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Github, Linkedin, Instagram, Mail } from "lucide-react"
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope, FaBehance, FaDribbble, FaWhatsapp } from "react-icons/fa"
+import { FaMedium } from "react-icons/fa6"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -23,7 +25,7 @@ export default function Footer() {
   }, [titles.length])
 
   return (
-    <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 mt-16">
+    <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -36,28 +38,56 @@ export default function Footer() {
                 href="https://github.com/setiadyanwar"
                 className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
-                <Github className="h-5 w-5" />
+                <FaGithub className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
                 href="https://linkedin.com/in/setiadyanwar"
                 className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
-                <Linkedin className="h-5 w-5" />
+                <FaLinkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
               <Link
                 href="https://instagram.com/setiadyanwarr"
                 className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
-                <Instagram className="h-5 w-5" />
+                <FaInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
+              </Link>
+              <Link
+                href="https://behance.com/setiadyanwar"
+                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+              >
+                <FaBehance className="h-5 w-5" />
+                <span className="sr-only">Behance</span>
+              </Link>
+              <Link
+                href="https://dribbble.com/setiadyanwar"
+                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+              >
+                <FaDribbble className="h-5 w-5" />
+                <span className="sr-only">Dribbble</span>
+              </Link>
+              <Link
+                href="https://medium.com/@setiadyanwar"
+                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+              >
+                <FaMedium className="h-5 w-5" />
+                <span className="sr-only">Medium</span>
+              </Link>
+              <Link
+                href="https://wa.me/6289662007938"
+                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+              >
+                <FaWhatsapp className="h-5 w-5" />
+                <span className="sr-only">WhatsApp</span>
               </Link>
               <Link
                 href="mailto:setiadyanwar@gmail.com"
                 className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               >
-                <Mail className="h-5 w-5" />
+                <FaEnvelope className="h-5 w-5" />
                 <span className="sr-only">Email</span>
               </Link>
             </div>
@@ -66,14 +96,6 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-                >
-                  About Me
-                </Link>
-              </li>
               <li>
                 <Link
                   href="/experience"

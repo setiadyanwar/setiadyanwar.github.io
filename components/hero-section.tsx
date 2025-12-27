@@ -14,7 +14,7 @@ import CvDownloadDropdown from "./cv-download-dropdown";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center bg-[#fafafa] dark:bg-black overflow-hidden pt-20">
+    <section className="relative min-h-[90vh] flex items-center justify-center bg-[#fafafa] dark:bg-black overflow-x-clip overflow-y-visible pt-20 z-20">
       {/* Background Orbs */}
       <BackgroundOrbs />
 

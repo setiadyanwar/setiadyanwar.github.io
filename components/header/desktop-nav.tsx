@@ -17,7 +17,6 @@ const mainNavLinks = [
     { name: "Home", href: "/" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Experience", href: "/experience" },
-    { name: "About", href: "/about" },
 ];
 
 export default function DesktopNav({ onSearchOpen }: DesktopNavProps) {

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MessageCircle, ChevronDown } from "lucide-react";
+import { Mail, MessageCircle, ChevronDown, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function CTASection() {
@@ -27,164 +27,125 @@ export default function CTASection() {
     }, [isContactOpen]);
 
     return (
-        <section className="py-24 md:py-32 max-w-full">
-            <div className="container mx-auto px-4 max-w-full">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="relative rounded-3xl bg-gray-100 dark:bg-gray-900 p-8 md:p-12 lg:p-16 border border-gray-200 dark:border-gray-800 overflow-hidden"
-                >
-                    {/* Decorative elements - subtle */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-
-                    {/* Decorative grid pattern - subtle */}
-                    <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]">
-                        <div className="absolute inset-0" style={{
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                        }}></div>
-                    </div>
-
-                    <div className="relative z-10 max-w-3xl mx-auto text-center">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 pb-2 leading-tight bg-gradient-to-r from-gray-900 via-indigo-600 to-gray-900 dark:from-white dark:via-indigo-400 dark:to-white bg-clip-text text-transparent animate-shine"
-                            style={{
-                                backgroundSize: '200% auto',
-                                animation: 'shine 3s linear infinite',
-                            }}
-                        >
-                            Let&apos;s Work Together
-                        </motion.h2>
-
-                        <style jsx>{`
-                            @keyframes shine {
-                                to {
-                                    background-position: 200% center;
-                                }
-                            }
-                        `}</style>
-
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto"
-                        >
-                            Ready to bring your ideas to life? Let&apos;s create something amazing together.
-                        </motion.p>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                            className="relative inline-block"
-                            ref={contactRef}
-                        >
-                            <Button
-                                onClick={() => setIsContactOpen(!isContactOpen)}
-                                size="lg"
-                                className="bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 px-8 py-6 text-base md:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+        <section className="relative w-full overflow-x-clip overflow-y-visible px-0 z-30">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative z-10 bg-indigo-600 dark:bg-indigo-700 rounded-t-[2.5rem]"
+            >
+                <div className="container mx-auto px-6 md:px-12 py-12 md:py-16">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16">
+                        {/* Left Side: Content */}
+                        <div className="flex-1 text-center md:text-left">
+                            <motion.h2
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.1 }}
+                                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight tracking-tight"
                             >
-                                Get in Touch
-                                <ChevronDown className={`ml-2 h-5 w-5 transition-transform duration-300 ${isContactOpen ? 'rotate-180' : ''}`} />
-                            </Button>
+                                Let&apos;s Work Together
+                            </motion.h2>
 
-                            {/* Contact Dropdown - same as hero section */}
+                            <motion.p
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="text-base md:text-lg text-indigo-100 max-w-xl font-normal"
+                            >
+                                Ready to bring your ideas to life? I&apos;m currently available for new projects and collaborations.
+                            </motion.p>
+
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.4 }}
+                                className="mt-6 flex flex-wrap justify-center md:justify-start gap-6 text-xs md:text-sm text-indigo-200"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <Mail className="w-4 h-4" />
+                                    <span>setiadyanwar@gmail.com</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <MapPin className="w-4 h-4" />
+                                    <span>Tangerang, Indonesia</span>
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        {/* Right Side: Button */}
+                        <div className="relative flex-shrink-0" ref={contactRef}>
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.3 }}
+                            >
+                                <Button
+                                    onClick={() => setIsContactOpen(!isContactOpen)}
+                                    size="lg"
+                                    className="bg-white text-indigo-600 hover:bg-gray-100 px-10 py-7 text-lg font-bold rounded-2xl transition-all duration-300 flex items-center gap-3 border-none"
+                                >
+                                    Get in Touch
+                                    <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isContactOpen ? 'rotate-180' : ''}`} />
+                                </Button>
+                            </motion.div>
+
                             <AnimatePresence>
                                 {isContactOpen && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
+                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        className="absolute bottom-[calc(100%+12px)] md:bottom-auto md:top-[calc(100%+12px)] left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 w-[85vw] max-w-[260px] bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-2 z-[60] overflow-hidden"
                                     >
-                                        <div className="py-2">
-                                            <button
-                                                onClick={() => {
-                                                    const message = `Halo Setiady! 👋
+                                        <button
+                                            onClick={() => {
+                                                const message = `Halo Setiady! 👋\n\nI visited your portfolio and I'm interested in working with you.`;
+                                                window.open(`https://wa.me/6289662007938?text=${encodeURIComponent(message)}`, '_blank');
+                                                setIsContactOpen(false);
+                                            }}
+                                            className="w-full flex items-center gap-3 p-2 md:p-3 rounded-xl hover:bg-indigo-50 transition-colors group"
+                                        >
+                                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-green-500/10 flex items-center justify-center text-green-600 flex-shrink-0">
+                                                <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
+                                            </div>
+                                            <div className="text-left min-w-0">
+                                                <div className="text-sm font-bold text-gray-900 truncate">WhatsApp</div>
+                                                <div className="text-[10px] text-gray-500 truncate">Fast Response</div>
+                                            </div>
+                                        </button>
 
-Saya tertarik untuk berdiskusi tentang:
-• Project collaboration
-• Job opportunities  
-• Consultation services
-• Other inquiries
-
-Mohon informasi lebih lanjut. Terima kasih!`;
-                                                    const encodedMessage = encodeURIComponent(message);
-                                                    window.open(`https://wa.me/6289662007938?text=${encodedMessage}`, '_blank');
-                                                    setIsContactOpen(false);
-                                                }}
-                                                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group"
-                                            >
-                                                <MessageCircle className="w-4 h-4 text-green-500 group-hover:text-green-600 dark:group-hover:text-green-400" />
-                                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">WhatsApp</span>
-                                            </button>
-
-                                            <div className="h-px bg-gray-100 dark:bg-gray-800 mx-2"></div>
-
-                                            <button
-                                                onClick={() => {
-                                                    const subject = 'Collaboration Inquiry - Portfolio Website';
-                                                    const body = `Dear Setiady,
-
-I hope this email finds you well. I came across your portfolio website and I'm interested in discussing:
-
-• Potential collaboration opportunities
-• Job openings in your company
-• Consultation services you offer
-• Other business inquiries
-
-I would appreciate the opportunity to connect and learn more about your services.
-
-Best regards,
-[Your Name]
-[Your Company/Organization]
-[Your Contact Information]`;
-                                                    const encodedSubject = encodeURIComponent(subject);
-                                                    const encodedBody = encodeURIComponent(body);
-                                                    window.location.href = `mailto:setiadyanwar@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-                                                    setIsContactOpen(false);
-                                                }}
-                                                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group"
-                                            >
-                                                <Mail className="w-4 h-4 text-blue-500 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
-                                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Email</span>
-                                            </button>
-                                        </div>
+                                        <button
+                                            onClick={() => {
+                                                window.location.href = `mailto:setiadyanwar@gmail.com?subject=Project Inquiry`;
+                                                setIsContactOpen(false);
+                                            }}
+                                            className="w-full flex items-center gap-3 p-2 md:p-3 rounded-xl hover:bg-indigo-50 transition-colors group"
+                                        >
+                                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-600 flex-shrink-0">
+                                                <Mail className="w-5 h-5 md:w-6 md:h-6" />
+                                            </div>
+                                            <div className="text-left min-w-0">
+                                                <div className="text-sm font-bold text-gray-900 truncate">Email</div>
+                                                <div className="text-[10px] text-gray-500 truncate">Official Channel</div>
+                                            </div>
+                                        </button>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </motion.div>
-
-                        {/* Optional: Quick contact info */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400"
-                        >
-                            <div className="flex items-center gap-2">
-                                <Mail className="h-4 w-4" />
-                                <span>setiadyanwar@gmail.com</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <MessageCircle className="h-4 w-4" />
-                                <span>Available for freelance</span>
-                            </div>
-                        </motion.div>
+                        </div>
                     </div>
-                </motion.div>
-            </div>
+                </div>
+
+                {/* Subtle decorative circles */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl pointer-events-none" />
+            </motion.div>
         </section>
     );
 }

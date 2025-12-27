@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Moon, Sun, Search, Menu, Home, User, Briefcase, FolderOpen } from "lucide-react";
+import { Moon, Sun, Search, Menu, Home, Briefcase, FolderOpen } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -17,7 +17,6 @@ const mainNavLinks = [
     { name: "Home", href: "/" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Experience", href: "/experience" },
-    { name: "About", href: "/about" },
 ];
 
 function getNavIcon(href: string) {
@@ -25,7 +24,6 @@ function getNavIcon(href: string) {
         case "/": return <Home className="h-4 w-4" />;
         case "/portfolio": return <FolderOpen className="h-4 w-4" />;
         case "/experience": return <Briefcase className="h-4 w-4" />;
-        case "/about": return <User className="h-4 w-4" />;
         default: return <Home className="h-4 w-4" />;
     }
 }
