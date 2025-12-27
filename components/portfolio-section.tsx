@@ -1,18 +1,28 @@
 "use client"
 
-import { useState, useEffect, useMemo, useCallback } from "react"
+import { useState, useEffect, useMemo, useCallback, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import PortfolioCard from "@/components/portfolio-card"
 import { getPortfolioItems } from "@/lib/supabase/data"
 import PortfolioListSkeleton from "@/components/portfolio/portfolio-list-skeleton"
 
-export default function PortfolioSection() {
+function PortfolioContent() {
+  const searchParams = useSearchParams()
   const [filter, setFilter] = useState("all")
   const [currentPage, setCurrentPage] = useState(1)
   const [portfolioItems, setPortfolioItems] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const itemsPerPage = 6
+
+  // Handle URL parameters for filtering
+  useEffect(() => {
+    const filterParam = searchParams.get("filter")
+    if (filterParam) {
+      setFilter(filterParam)
+    }
+  }, [searchParams])
 
   useEffect(() => {
     async function fetchData() {
@@ -197,5 +207,13 @@ export default function PortfolioSection() {
         )}
       </div>
     </section>
+  )
+}
+
+export default function PortfolioSection() {
+  return (
+    <Suspense fallback={<PortfolioListSkeleton />}>
+      <PortfolioContent />
+    </Suspense>
   )
 }
