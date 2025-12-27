@@ -26,13 +26,13 @@ export default function FocusOn() {
 
   const item = {
     hidden: { opacity: 0, y: 30 },
-    show: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { 
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
         duration: 0.6,
         ease: [0.25, 0.46, 0.45, 0.94]
-      } 
+      }
     },
   }
 
@@ -89,18 +89,19 @@ export default function FocusOn() {
             <motion.div
               key={index}
               variants={item}
-              whileHover={{ 
-                y: -8, 
-                transition: { 
+              whileHover={{
+                y: -8,
+                transition: {
                   duration: 0.3,
                   ease: [0.25, 0.46, 0.45, 0.94]
-                } 
+                }
               }}
               className="group relative"
             >
               <SpotlightCard
+                variant="inverted"
                 spotlightColor={service.spotlightColor}
-                className="p-8 md:p-10 hover:shadow-xl hover:shadow-gray-200/20 dark:hover:shadow-black/20 transition-all duration-500"
+                className="p-8 md:p-10 hover:drop-shadow-xl transition-all duration-500"
               >
                 {/* Icon */}
                 <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100/80 dark:bg-gray-800/80 mb-6 group-hover:scale-110 transition-all duration-300 ${service.color}`}>

@@ -3,220 +3,130 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { MapPin } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
+import Image from "next/image";
 
 // Import optimized sub-components
 import BackgroundOrbs from "./hero-section/background-orbs";
 import EyeTracker from "./hero-section/eye-tracker";
-import ProfileCard from "./hero-section/profile-card";
 import ContactDropdown from "./contact-dropdown";
 import CvDownloadDropdown from "./cv-download-dropdown";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center bg-[#fafafa] dark:bg-black">
-      {/* Clean Apple-style background */}
-      <div className="absolute inset-0 bg-[#fafafa] dark:bg-black"></div>
-
-      {/* Background Orbs - Separated component */}
+    <section className="relative min-h-[90vh] flex items-center justify-center bg-[#fafafa] dark:bg-black overflow-hidden pt-20">
+      {/* Background Orbs */}
       <BackgroundOrbs />
 
-      <div className="container mx-auto px-4 py-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Profile photo for mobile - Separated component */}
-            <ProfileCard isMobile />
-
-            {/* Greeting with Eye Tracker */}
-            <motion.h2
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base md:text-lg text-gray-500 dark:text-gray-400 mb-2 text-center md:text-left md:flex md:items-center md:gap-3"
+      <div className="container mx-auto px-4 relative z-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-5xl mx-auto"
+        >
+          {/* Greeting with Eye Tracker centered */}
+          <div className="flex justify-center mb-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center gap-3 bg-white/50 dark:bg-white/5 backdrop-blur-md px-4 py-2 rounded-full border border-gray-200 dark:border-white/10"
             >
-              {/* Eyes that follow cursor - Optimized component */}
               <EyeTracker />
-              Hello, I&apos;m Setiady
-            </motion.h2>
-
-            {/* Main Heading */}
-            <motion.h1
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-normal text-gray-500 mb-8 text-center md:text-left leading-[1.6] max-w-3xl"
-            >
-              I solve{" "}
-              <span className="font-bold text-gray-900 dark:text-white">user problems</span>{" "}
-              through thoughtful{" "}
-              <span className="text-black dark:text-white font-bold">
-                design
-              </span>{" "}
-              and {" "}
-              <span className="text-black dark:text-white font-bold">
-                elegant code
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+                Hello, I&apos;m Setiady
               </span>
-              , creating digital products that matter.
-            </motion.h1>
-
-            {/* Founder Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex text-center justify-center md:justify-start md:text-left mb-4 text-gray-700 dark:text-gray-300"
-            >
-              <h4>Founder of Kreavoks Digital Agency | </h4>
-              <img
-                src="/client/kreavoks.svg"
-                alt="Kreavoks Logo"
-                className="h-6 w-16 ml-2"
-              />
             </motion.div>
+          </div>
 
-            {/* TypeAnimation */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-xl h-20 mx-auto md:mx-0 text-center md:text-left"
-            >
-              <TypeAnimation
-                sequence={[
-                  "BNSP-Certified Web Programmer", 1000,
-                  "Frontend Developer & UI/UX Enthusiast", 1000,
-                  "Web Programmer with BNSP Certification and over 2 years of experience in Frontend Development and UI/UX Design", 1000
-                ]}
-                wrapper="p"
-                speed={50}
-                repeat={Infinity}
-                className="min-h-[80px]"
-              />
-            </motion.div>
+          {/* New Headline Style inspired by Image 1 */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1] mb-8">
+            Solving{" "}
+            <span className="inline-block align-middle mx-1">
+              <motion.div
+                initial={{ scale: 0, rotate: -20 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.5 }}
+                className="relative w-12 h-16 md:w-16 md:h-22 lg:w-20 lg:h-28 bg-indigo-100 dark:bg-indigo-900/30 rounded-full overflow-hidden border-2 border-white dark:border-gray-800 shadow-xl"
+              >
+                <Image
+                  src="/setiady.png"
+                  alt="Setiady"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+            </span>{" "}
+            problems <br className="hidden md:block" />
+            through <span className="text-indigo-600 dark:text-indigo-400">design</span> &{" "}
+            <span className="relative inline-block">
+              code
+              <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 100 8" preserveAspectRatio="none">
+                <path d="M0 7C25 2 75 2 100 7" stroke="currentColor" strokeWidth="3" fill="none" className="text-indigo-600/30" />
+              </svg>
+            </span>
+          </h1>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex flex-wrap gap-4 justify-center md:justify-start"
-            >
-              {/* Combined Explore & Contact Button */}
-              <div className="flex bg-gray-100 dark:bg-gray-800 rounded-full p-1.5 shadow-sm gap-1">
-                {/* Explore Button */}
-                <Button
-                  asChild
-                  className="rounded-full px-4 py-6 font-medium transition-all duration-200 bg-indigo-600 text-white hover:text-indigo-600 btn-splash"
-                  size="lg"
-                >
-                  <Link href="/portfolio" className="flex items-center gap-2">
-                    <span>Explore Works</span>
-                    <motion.div
-                      animate={{ x: [0, 4, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                      style={{ willChange: 'transform' }}
-                    >
-                      →
-                    </motion.div>
-                  </Link>
-                </Button>
-
-                {/* Contact Dropdown - Separated component */}
-                <ContactDropdown />
+          {/* Founder Info Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="flex items-center justify-center mb-10"
+          >
+            <div className="flex items-center gap-3 bg-gray-100/50 dark:bg-white/5 px-4 py-2 rounded-2xl border border-gray-200/50 dark:border-white/10 backdrop-blur-md transition-all hover:bg-gray-100/80 dark:hover:bg-white/10 group">
+              <span className="text-sm text-gray-500 dark:text-gray-400 font-medium tracking-tight">
+                Founder of
+              </span>
+              <div className="h-4 w-[1px] bg-gray-300 dark:bg-gray-700 mx-1" />
+              <div className="flex items-center">
+                <Image
+                  src="/client/kreavoks.svg"
+                  alt="Kreavoks Logo"
+                  width={85}
+                  height={24}
+                  className="opacity-70 group-hover:opacity-100 transition-opacity"
+                />
               </div>
-
-              {/* CV Download Button */}
-              {/* CV Download Dropdown */}
-              <CvDownloadDropdown />
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="flex items-center gap-4 mt-8 justify-center md:justify-start"
-            >
-              <Link
-                href="https://behance.net/setiadyanwar"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-all hover:scale-110 duration-300"
-              >
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800">
-                  <span className="font-semibold text-xs">Bē</span>
-                </div>
-              </Link>
-              <Link
-                href="https://github.com/setiadyanwar"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-all hover:scale-110 duration-300"
-              >
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800">
-                  <span className="sr-only">Github</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="16"
-                    height="16"
-                  >
-                    <g
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    >
-                      <path d="M9.096 21.25v-3.146a3.33 3.33 0 0 1 .758-2.115c-3.005-.4-5.28-1.859-5.28-5.798c0-1.666 1.432-3.89 1.432-3.89c-.514-1.13-.5-3.084.06-3.551c0 0 1.95.175 3.847 1.75c1.838-.495 3.764-.554 5.661 0c1.897-1.575 3.848-1.75 3.848-1.75c.558.467.573 2.422.06 3.551c0 0 1.432 2.224 1.432 3.89c0 3.94-2.276 5.398-5.28 5.798a3.33 3.33 0 0 1 .757 2.115v3.146"></path>
-                      <path d="M3.086 16.57c.163.554.463 1.066.878 1.496c.414.431.932.77 1.513.988a4.46 4.46 0 0 0 3.62-.216"></path>
-                    </g>
-                  </svg>
-                </div>
-              </Link>
-              <Link
-                href="https://instagram.com/setiadyanwarr"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-all hover:scale-110 duration-300"
-              >
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800">
-                  <span className="sr-only">Instagram</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect
-                      width="20"
-                      height="20"
-                      x="2"
-                      y="2"
-                      rx="5"
-                      ry="5"
-                    ></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                  </svg>
-                </div>
-              </Link>
-              <div className="ml-4 text-gray-600 dark:text-gray-400">
-                <span className="flex items-center">
-                  <MapPin className="mr-2 h-4 w-4" />
-                  Indonesia / Tangerang
-                </span>
-              </div>
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Profile Card Desktop - Separated component */}
-          <ProfileCard />
-        </div>
+          {/* TypeAnimation centered */}
+          <div className="text-lg md:text-xl text-gray-500 dark:text-gray-400 mb-12 h-16 max-w-2xl mx-auto">
+            <TypeAnimation
+              sequence={[
+                "Building immersive digital experiences.", 1000,
+                "Focused on UI/UX and Frontend Dev.", 1000,
+                "Certified Web Programmer based in ID.", 1000
+              ]}
+              wrapper="p"
+              speed={50}
+              repeat={Infinity}
+            />
+          </div>
+
+          {/* CTA Buttons centered */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div className="flex bg-white dark:bg-gray-900 rounded-full p-1.5 border border-gray-200 dark:border-white/10 gap-1">
+              <Button
+                asChild
+                className="rounded-full px-8 py-6 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 transition-all"
+                size="lg"
+              >
+                <Link href="/portfolio" className="flex items-center gap-2">
+                  <span>Explore Works</span>
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >→</motion.span>
+                </Link>
+              </Button>
+              <ContactDropdown />
+            </div>
+            <CvDownloadDropdown />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

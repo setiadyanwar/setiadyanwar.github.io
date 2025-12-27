@@ -1,263 +1,338 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
-import { CheckCircle, X } from "lucide-react"
-
-interface ImageInfo {
-  src: string
-  alt: string
-  title: string
-  description: string
-  thumbnail?: string
-}
+import { Badge } from "@/components/ui/badge"
+import { Globe, Instagram, Github, Linkedin, Mail, ArrowUpRight, Award, X } from "lucide-react"
 
 export default function AboutSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedImage, setSelectedImage] = useState<ImageInfo | null>(null)
+    const [selectedCert, setSelectedCert] = useState<number | null>(null)
+    const scrollRefLeft = useRef<HTMLDivElement>(null)
+    const scrollRefRight = useRef<HTMLDivElement>(null)
 
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
-    return () => {
-      document.body.style.overflow = "unset"
-    }
-  }, [isModalOpen])
+    const certificates = [
+        { id: 1, title: "BNSP Web Developer Professional Certificate", image: "/sertifikat/bnsp-setiady.png" },
+        { id: 2, title: "Google Cloud Skills Boost - Cloud Computing", image: "/sertifikat/google.png" },
+        { id: 3, title: "Dicoding - Frontend Web Development", image: "/sertifikat/sertif-dicoding.png" },
+        { id: 4, title: "SKK - Web Programmer Certification", image: "/sertifikat/skk%20sample.png" },
+    ]
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }
+    const clients = [
+        { id: 1, name: "Google", logo: "/client/google.svg" },
+        { id: 2, name: "MicroIT", logo: "/client/microit.svg" },
+        { id: 3, name: "svipb", logo: "/client/svipb.png" },
+        { id: 4, name: "Agrimovie", logo: "/client/Agrimovie.png" },
+        { id: 5, name: "niagahoster", logo: "/client/niagahoster.svg" },
+        { id: 6, name: "GDGOC", logo: "/client/gdgoc.svg" },
+        { id: 7, name: "Upala", logo: "/client/upala.png" },
+        { id: 8, name: "Kreavoks", logo: "/client/kreavoks.svg" },
+        { id: 9, name: "IPB University", logo: "/client/ipb.png" },
+    ]
 
-  const values = [
-    "Clean & Maintainable Code",
-    "User-Centered Design",
-    "Responsive & Accessible Interfaces",
-    "Performance Optimization",
-  ]
+    // Split clients into two groups for two directions
+    const clientsRow1 = clients.slice(0, 5)
+    const clientsRow2 = clients.slice(5)
 
-  const images: ImageInfo[] = [
-    {
-      src: "/sertifikat/Web Developer - Setiady Ibrahim Anwar.pdf",
-      alt: "BNSP Certification",
-      title: "BNSP Certification",
-      description:
-        "Professional certification from the National Professional Certification Agency (BNSP) validating my expertise in web development and design.",
-      thumbnail: "/sertifikat/bnsp-setiady.png"
-    },
-    {
-      src: "/sertifikat/google.png?height=128&width=128",
-      alt: "ux sertif",
-      title: "Foundations of User Experience (UX) Design",
-      description: "Gained a solid foundation in UX design principles, conducted user research through interviews, surveys, and usability studies, applied the design thinking framework to solve complex problems, and created wireframes and interactive prototypes to visualize and validate design ideas.",
-    },
-    {
-      src: "/sertifikat/sertif-dicoding.png?height=128&width=128",
-      alt: "dicoding",
-      title: "Fundamentals of Web Development",
-      description:
-        "Completed a comprehensive course on web development fundamentals, covering HTML, CSS, and JavaScript.",
-    },
-  ]
+    // Infinite Auto-scrolling effect for both directions
+    useEffect(() => {
+        const scrollContainerLeft = scrollRefLeft.current
+        const scrollContainerRight = scrollRefRight.current
 
-  const openModal = (image: ImageInfo) => {
-    setSelectedImage(image)
-    setIsModalOpen(true)
-  }
+        let scrollPosLeft = 0
+        let scrollPosRight = 0
+        const scrollSpeed = 0.5
 
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
+        const scroll = () => {
+            // Scroll Left (to the left)
+            if (scrollContainerLeft) {
+                scrollPosLeft += scrollSpeed
+                if (scrollPosLeft >= scrollContainerLeft.scrollWidth / 2) scrollPosLeft = 0
+                scrollContainerLeft.scrollLeft = scrollPosLeft
+            }
 
-  return (
-    <section id="about" className="py-24 max-w-full overflow-x-hidden">
-      <div className="container mx-auto px-4 max-w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            variants={fadeIn}
-            className="relative"
-          >
-            {/* Main photo container - responsive design */}
-            <div className="relative h-[340px] w-full rounded-2xl overflow-hidden">
-              {/* Background gradient with photo and text inside */}
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
-                {/* Text overlay behind photo - hidden on mobile to prevent overflow */}
-                <div className="absolute inset-0 hidden lg:flex items-center justify-start pl-8 xl:pl-16">
-                  <div className="text-5xl xl:text-7xl font-bold text-gray-300 dark:text-gray-700 opacity-30 select-none">
-                    <span className="block">WEB</span>
-                    <span className="block">DEVELOPER</span>
-                  </div>
-                </div>
+            // Scroll Right (reverse direction)
+            if (scrollContainerRight) {
+                scrollPosRight += scrollSpeed
+                if (scrollPosRight >= scrollContainerRight.scrollWidth / 2) scrollPosRight = 0
+                // For "scrolling right" visually, we can just invert the scrollLeft logically or use a different math
+                // but simplest is just adjusting the scroll speed and initial position
+                scrollContainerRight.scrollLeft = (scrollContainerRight.scrollWidth / 2) - scrollPosRight
+            }
 
-                {/* Photo container */}
-                <div className="absolute inset-0 flex items-center justify-end">
-                  <div
-                    className="relative grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
-                    style={{
-                      width: '83%',
-                      height: '83%',
-                      marginTop: '-5rem',
-                      marginLeft: '0rem',
-                      transform: 'scale(2.0)',
-                    }}
-                  >
-                    <Image
-                      src="/setiady2.png"
-                      alt="About Setiady Ibrahim Anwar"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 3500px"
-                      style={{
-                        objectFit: "contain", // change to "cover" or "fill" if needed
-                        objectPosition: "center" // change to "left", "right", "top", "bottom" if needed
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            requestAnimationFrame(scroll)
+        }
+        const animation = requestAnimationFrame(scroll)
+        return () => cancelAnimationFrame(animation)
+    }, [])
 
-            {/* All certification photos - horizontal layout below photo container */}
-            <div className="flex space-x-4 mt-6 justify-center">
-              {images.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.6 + (index * 0.2) }}
-                  className="relative w-24 h-24 rounded-xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg cursor-pointer hover:scale-105 transition-all duration-300 hover:-translate-y-1"
-                  onClick={() => openModal(image)}
-                >
-                  <Image
-                    src={image.thumbnail || image.src || "/placeholder.svg"}
-                    alt={image.alt}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+    return (
+        <section id="about" className="py-24 relative min-h-screen flex items-center overflow-x-clip">
+            <div className="container mx-auto px-4 relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            variants={fadeIn}
-            className="space-y-6"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Setiady Ibrahim Anwar</h2>
+                    {/* Left Column: Portrait */}
+                    <div className="lg:col-span-5 flex flex-col items-center relative py-10">
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-gray-500 dark:text-gray-400 font-normal text-sm md:text-base mb-2 relative z-10"
+                        >
+                            FrontEnd Developer & UI/UX Designer
+                        </motion.p>
 
-            <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-              Web Developer & UI/UX Designer
-            </h3>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-2xl md:text-3xl lg:text-4xl font-bold dark:text-white text-center leading-tight relative z-10 mb-6 px-4"
+                        >
+                            Setiady Ibrahim Anwar
+                        </motion.h2>
 
-            <p className="text-gray-700 dark:text-gray-300">
-              I&apos;m a passionate Web Developer specialize in frontend developer and UI/UX Designer with a keen eye for detail and a commitment to
-              creating exceptional user experiences. With expertise in modern web technologies, I specialize in building
-              responsive, accessible, and visually appealing interfaces that balance aesthetics with functionality.
-            </p>
+                        {/* Photo Container */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="relative w-full max-w-[550px] flex items-end justify-center z-10 overflow-visible"
+                        >
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] lg:w-[150%] h-[120%] lg:h-[150%] rounded-full bg-indigo-600/20 dark:bg-indigo-500/20 blur-[80px] lg:blur-[120px] z-0 pointer-events-none" />
 
-            <p className="text-gray-700 dark:text-gray-300">
-              My approach combines technical expertise with creative problem-solving to deliver solutions that not only
-              look great but also perform flawlessly across all devices and platforms.
-            </p>
-
-            <div className="space-y-3 mt-6">
-              <h4 className="font-semibold text-gray-900 dark:text-gray-100">What I value:</h4>
-              <ul className="space-y-2">
-                {values.map((value, index) => (
-                  <li key={index} className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-2" />
-                    <span>{value}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Custom Image Modal */}
-      <AnimatePresence>
-        {isModalOpen && selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-            onClick={closeModal}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-white dark:bg-gray-900 rounded-lg max-w-4xl w-full max-h-[95vh] overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{selectedImage.title}</h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{selectedImage.description}</p>
-              </div>
-
-              <div className="relative w-full h-[70vh] bg-gray-100 dark:bg-gray-800">
-                {selectedImage.src.endsWith('.pdf') ? (
-                  <div className="w-full h-full flex flex-col">
-                    <div className="flex-1 bg-white">
-                      <iframe
-                        src={`${selectedImage.src}#view=FitH&toolbar=1&navpanes=1&scrollbar=1`}
-                        className="w-full h-full border-0 rounded"
-                        title="PDF Preview"
-                        onError={() => { }}
-                        allow="fullscreen"
-                      />
+                            <div className="relative z-10 w-full flex items-end justify-center overflow-visible">
+                                <Image
+                                    src="/setiady.png"
+                                    alt="Setiady Ibrahim Anwar"
+                                    width={1000}
+                                    height={1200}
+                                    className="object-contain w-full h-auto drop-shadow-2xl scale-110 origin-bottom"
+                                    style={{
+                                        maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
+                                        WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)'
+                                    }}
+                                    priority
+                                />
+                            </div>
+                        </motion.div>
                     </div>
-                    <div className="p-3 bg-gray-50 dark:bg-gray-800 border-t flex justify-between items-center">
-                      <div className="text-sm text-gray-600 dark:text-gray-400">
-                        Use the toolbar above to navigate through pages
-                      </div>
-                      <a
-                        href={selectedImage.src}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors inline-flex items-center gap-2"
-                      >
-                        <span>📄</span>
-                        Open in New Tab
-                      </a>
+
+                    {/* Right Column: Content */}
+                    <div className="lg:col-span-7 space-y-8 lg:space-y-10 pt-10">
+                        {/* 1. About Me */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="space-y-4"
+                        >
+                            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+                                <span className="text-xs font-bold uppercase tracking-widest">About Me</span>
+                                <div className="h-[1px] flex-1 bg-gray-100 dark:bg-white/10" />
+                            </div>
+                            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
+                                I bridge the gap between human empathy and technical precision. My approach centers on deep <span className="text-indigo-600 dark:text-indigo-400 font-semibold">user-centered thinking</span>—understanding their needs to craft <span className="text-indigo-600 dark:text-indigo-400 font-semibold">visual designs</span> that resonate and <span className="text-indigo-600 dark:text-indigo-400 font-semibold">code implementations</span> that perform.
+                            </p>
+                        </motion.div>
+
+                        {/* 2. Collaborating with Industry Leaders (Two Directions) */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="space-y-4"
+                        >
+                            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+                                <span className="text-xs font-bold uppercase tracking-widest">Collaborating with Industry Leaders</span>
+                                <div className="h-[1px] flex-1 bg-gray-100 dark:bg-white/10" />
+                            </div>
+                            <div className="relative group space-y-4">
+                                {/* Row 1: Scroll Left */}
+                                <div
+                                    ref={scrollRefLeft}
+                                    className="flex space-x-12 py-1 overflow-x-auto scrollbar-hide no-scrollbar"
+                                    style={{
+                                        scrollbarWidth: "none",
+                                        msOverflowStyle: "none",
+                                        maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+                                        WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
+                                    }}
+                                >
+                                    {[...clientsRow1, ...clientsRow1].map((client, index) => (
+                                        <div
+                                            key={`${client.id}-r1-${index}`}
+                                            className="flex-shrink-0 h-6 md:h-8 flex items-center justify-center filter grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                                        >
+                                            <img src={client.logo} alt={client.name} className="h-full w-auto object-contain" />
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Row 2: Scroll Right */}
+                                <div
+                                    ref={scrollRefRight}
+                                    className="flex space-x-12 py-1 overflow-x-auto scrollbar-hide no-scrollbar"
+                                    style={{
+                                        scrollbarWidth: "none",
+                                        msOverflowStyle: "none",
+                                        maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+                                        WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
+                                    }}
+                                >
+                                    {[...clientsRow2, ...clientsRow2].map((client, index) => (
+                                        <div
+                                            key={`${client.id}-r2-${index}`}
+                                            className="flex-shrink-0 h-6 md:h-8 flex items-center justify-center filter grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                                        >
+                                            <img src={client.logo} alt={client.name} className="h-full w-auto object-contain" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* 3. Certifications */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="space-y-4"
+                        >
+                            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+                                <Award className="w-4 h-4" />
+                                <span className="text-xs font-bold uppercase tracking-widest">Certifications</span>
+                                <div className="h-[1px] flex-1 bg-gray-100 dark:bg-white/10" />
+                            </div>
+
+                            <div className="flex flex-wrap gap-4">
+                                {certificates.map((cert, index) => (
+                                    <motion.div
+                                        key={cert.id}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => setSelectedCert(index)}
+                                        className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden cursor-pointer border border-gray-200 dark:border-white/10 group bg-white dark:bg-white/5 flex-shrink-0"
+                                    >
+                                        <img
+                                            src={cert.image}
+                                            alt={cert.title}
+                                            className="w-full h-full object-cover transition-all duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-indigo-600/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-[1px]">
+                                            <Award className="w-4 h-4 text-white" />
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+
+                        {/* 4. Core Values & Skills */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="space-y-4"
+                        >
+                            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+                                <span className="text-xs font-bold uppercase tracking-widest">Core Values & Skills</span>
+                                <div className="h-[1px] flex-1 bg-gray-100 dark:bg-white/10" />
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                {[
+                                    "User-Centered Design", "User Empathy", "Visual Design Strategy",
+                                    "Clean Code Implementation", "Design-to-Code Handoff", "UX Research",
+                                    "Prototyping", "Systematic Thinking", "Interface Interaction",
+                                    "Problem Solving"
+                                ].map((skill, index) => (
+                                    <Badge
+                                        key={index}
+                                        variant="outline"
+                                        className="px-3 py-1 text-xs md:text-sm rounded-full border-indigo-500/20 dark:border-white/10 bg-indigo-50/30 dark:bg-white/5 text-gray-600 dark:text-gray-400 font-medium cursor-default shadow-sm"
+                                    >
+                                        {skill}
+                                    </Badge>
+                                ))}
+                            </div>
+                        </motion.div>
+
+                        {/* 5. Sosmed Cards */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 }}
+                            className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+                        >
+                            {[
+                                { name: 'LinkedIn', icon: Linkedin, href: "#", color: "hover:text-blue-500" },
+                                { name: 'Email', icon: Mail, href: "mailto:hello@setiady.com", color: "hover:text-red-500" },
+                                { name: 'Instagram', icon: Instagram, href: "#", color: "hover:text-pink-500" },
+                                { name: 'GitHub', icon: Github, href: "#", color: "hover:text-gray-900 dark:hover:text-white" }
+                            ].map((social, id) => (
+                                <a
+                                    key={id}
+                                    href={social.href}
+                                    className="group relative flex flex-col items-center justify-center p-6 bg-gray-50/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-3xl transition-all duration-300 hover:bg-white dark:hover:bg-white/10 hover:shadow-xl hover:shadow-indigo-500/5 hover:-translate-y-1 overflow-hidden"
+                                >
+                                    <div className={`relative z-10 transition-colors duration-300 ${social.color}`}>
+                                        <social.icon className="w-6 h-6" />
+                                    </div>
+                                    <ArrowUpRight className="absolute top-3 right-3 w-3 h-3 text-gray-300 dark:text-gray-600 group-hover:text-indigo-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                                </a>
+                            ))}
+                        </motion.div>
                     </div>
-                  </div>
-                ) : (
-                  <Image
-                    src={selectedImage.src || "/placeholder.svg"}
-                    alt={selectedImage.alt}
-                    fill
-                    className="object-contain"
-                  />
+                </div>
+            </div>
+
+            {/* Certificate Modal */}
+            <AnimatePresence>
+                {selectedCert !== null && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+                        onClick={() => setSelectedCert(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="relative w-full max-w-6xl max-h-[90vh] flex flex-col rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-[#0a0a0a]"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                className="absolute top-6 right-6 z-[110] p-3 rounded-full bg-white/20 hover:bg-white/40 text-white transition-all backdrop-blur-xl border border-white/20 shadow-xl"
+                                onClick={() => setSelectedCert(null)}
+                            >
+                                <X className="h-6 w-6" />
+                            </button>
+
+                            <div className="flex-1 flex items-center justify-center p-2 md:p-6 bg-gray-100 dark:bg-gray-950 overflow-auto">
+                                <img
+                                    src={certificates[selectedCert].image}
+                                    alt={certificates[selectedCert].title}
+                                    className="max-w-full max-h-[75vh] object-contain shadow-2xl"
+                                />
+                            </div>
+
+                            <div className="p-6 md:p-10 border-t border-gray-100 dark:border-white/5 bg-white dark:bg-[#0a0a0a] flex flex-col items-center gap-3">
+                                <div className="flex items-center gap-2 px-4 py-1.5 bg-indigo-600/10 rounded-full border border-indigo-600/20">
+                                    <Award className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                                    <span className="text-[10px] md:text-xs text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-[0.2em]">Verified Professional Credential</span>
+                                </div>
+                                <h3 className="text-gray-900 dark:text-white font-bold text-xl md:text-3xl text-center leading-tight">
+                                    {certificates[selectedCert].title}
+                                </h3>
+                            </div>
+                        </motion.div>
+                    </motion.div>
                 )}
-              </div>
-
-              <button
-                onClick={closeModal}
-                className="absolute top-4 right-4 p-1 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Close modal"
-              >
-                <X className="h-5 w-5 text-gray-700 dark:text-gray-300" />
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
-  )
+            </AnimatePresence>
+        </section>
+    )
 }

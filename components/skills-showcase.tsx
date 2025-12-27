@@ -24,9 +24,9 @@ export default function SkillsShowcase() {
 
     // Right side skills
     { name: "JavaScript", icon: "/tech/javascript.svg", x: 0.85, y: 0.18, size: 1 },
-      { name: "TypeScript", icon: "/tech/typescript.svg", x: 0.85, y: 0.4, size: 1 },
-      { name: "Flutter", icon: "/tech/flutter.svg", x: 0.85, y: 0.65, size: 0.8 },
-      { name: "Tailwind", icon: "/tech/tailwind.svg", x: 0.85, y: 1, size: 0.9 }
+    { name: "TypeScript", icon: "/tech/typescript.svg", x: 0.85, y: 0.4, size: 1 },
+    { name: "Flutter", icon: "/tech/flutter.svg", x: 0.85, y: 0.65, size: 0.8 },
+    { name: "Tailwind", icon: "/tech/tailwind.svg", x: 0.85, y: 1, size: 0.9 }
   ]
 
   // Adjust positions for mobile
@@ -42,10 +42,10 @@ export default function SkillsShowcase() {
         Flutter: { x: 0.54, y: 0.94 },
         Tailwind: { x: 0.8, y: 0.5 },
       }
-  
+
       return mobilePositions[skill.name] || { x: skill.x, y: skill.y }
     }
-  
+
     return { x: skill.x, y: skill.y }
   }
 
