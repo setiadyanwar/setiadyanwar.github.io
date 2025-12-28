@@ -15,8 +15,8 @@ export async function generateStaticParams() {
   }))
 }
 
-// Production: 1 hour cache (real-time is too slow for navigation)
-export const revalidate = 3600
+// Production: Always fresh for now to reflect database updates immediately
+export const revalidate = 0
 
 export default async function PortfolioDetail({ params }: { params: { id: string } }) {
   // Fetch data server-side from database only
