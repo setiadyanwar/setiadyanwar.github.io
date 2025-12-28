@@ -195,7 +195,6 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
 
     try {
 
-
       const url = portfolioId
         ? `/api/admin/portfolio/${portfolioId}`
         : "/api/admin/portfolio"
@@ -210,10 +209,10 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
       const result = await response.json()
 
       if (!response.ok) {
-
         throw new Error(result.error || `Failed to save portfolio (${response.status})`)
       }
 
+      alert(`✅ Portfolio "${formData.title}" saved successfully!`)
 
       router.push("/admin/portfolio")
       router.refresh() // Force refresh to clear cache
