@@ -44,7 +44,7 @@ export default function DesktopNav({ onSearchOpen }: DesktopNavProps) {
 
     return (
         <div className={cn(
-            "hidden md:block fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out",
+            "hidden md:block fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ease-in-out",
             isScrolled
                 ? "py-4 px-4"
                 : "py-6 px-0"

@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
 
@@ -13,6 +14,16 @@ import ContactDropdown from "./contact-dropdown";
 import CvDownloadDropdown from "./cv-download-dropdown";
 
 export default function HeroSection() {
+  const words = ["problems", "needs", "challenges", "ideas", "complexities"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center bg-[#fafafa] dark:bg-black overflow-x-clip overflow-y-visible pt-20 z-20">
       {/* Background Orbs */}
@@ -58,7 +69,27 @@ export default function HeroSection() {
                 />
               </motion.div>
             </span>{" "}
-            problems <br className="hidden md:block" />
+            <span
+              className="relative inline-flex h-[1.12em] items-center overflow-hidden lg:min-w-[5ch] align-middle -translate-y-1"
+              style={{ perspective: "1000px" }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={words[index]}
+                  initial={{ y: "100%", opacity: 0, rotateX: -90, filter: "blur(8px)" }}
+                  animate={{ y: 0, opacity: 1, rotateX: 0, filter: "blur(0px)" }}
+                  exit={{ y: "-100%", opacity: 0, rotateX: 90, filter: "blur(8px)" }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="inline-block !leading-none"
+                >
+                  {words[index]}
+                </motion.span>
+              </AnimatePresence>
+            </span>{" "}
+            <br className="hidden md:block" />
             through <span className="text-indigo-600 dark:text-indigo-400">design</span> &{" "}
             <span className="relative inline-block">
               code

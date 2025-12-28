@@ -7,7 +7,7 @@ import { Moon, Sun, Search, Menu, Home, Briefcase, FolderOpen } from "lucide-rea
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface MobileNavProps {
     onSearchOpen: () => void;
@@ -30,7 +30,6 @@ function getNavIcon(href: string) {
 
 export default function MobileNav({ onSearchOpen }: MobileNavProps) {
     const { theme, setTheme } = useTheme();
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
     const pathname = usePathname();
 
@@ -40,95 +39,84 @@ export default function MobileNav({ onSearchOpen }: MobileNavProps) {
     }, []);
 
     return (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
-            <motion.header
-                initial={false}
+        <div className="md:hidden fixed bottom-6 left-0 right-0 z-[100] px-4">
+            <motion.div
+                initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white/80 dark:bg-black/80 backdrop-blur-3xl backdrop-saturate-150 border-t border-white/20 dark:border-white/10 shadow-2xl shadow-gray-200/20 dark:shadow-black/20"
-                suppressHydrationWarning
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="max-w-md mx-auto"
             >
-                <div className="px-4 py-3 safe-area-pb">
-                    {/* Mobile Bottom Navigation */}
-                    <div className="flex items-center justify-around">
-                        {mainNavLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className={cn(
-                                    "flex flex-col items-center space-y-1 py-2 px-3 rounded-xl transition-all min-w-0",
-                                    pathname === link.href
-                                        ? "text-indigo-600 dark:text-indigo-400"
-                                        : "text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-                                )}
-                                onClick={() => setIsMenuOpen(false)}
+                {/* Main Floating Nav Bar */}
+                <header className="bg-white/40 dark:bg-black/40 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 dark:border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] px-2 py-2 ring-1 ring-white/20 dark:ring-white/5">
+                    <div className="flex items-center justify-between gap-1">
+                        {/* Navigation Links */}
+                        <div className="flex items-center gap-1">
+                            {mainNavLinks.map((link) => {
+                                const isActive = pathname === link.href;
+                                return (
+                                    <Link
+                                        key={link.name}
+                                        href={link.href}
+                                        className={cn(
+                                            "relative flex flex-col items-center justify-center h-12 px-4 rounded-full transition-colors duration-300",
+                                            isActive ? "text-indigo-600 dark:text-indigo-400" : "text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                        )}
+                                    >
+                                        {isActive && (
+                                            <motion.div
+                                                layoutId="nav-pill"
+                                                className="absolute inset-0 bg-indigo-50 dark:bg-indigo-950/40 rounded-full -z-10"
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                            />
+                                        )}
+                                        <div className="flex flex-col items-center">
+                                            <motion.div
+                                                animate={{ scale: isActive ? 1.1 : 1 }}
+                                                className="mb-0.5"
+                                            >
+                                                {getNavIcon(link.href)}
+                                            </motion.div>
+                                            <span className="text-[10px] font-bold uppercase tracking-tighter mt-[-2px]">
+                                                {link.name}
+                                            </span>
+                                        </div>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+
+                        {/* Separator */}
+                        <div className="w-[1px] h-6 bg-gray-200 dark:bg-white/10 mx-1" />
+
+                        {/* Utility Buttons */}
+                        <div className="flex items-center gap-1">
+                            {/* Search Button */}
+                            <button
+                                onClick={onSearchOpen}
+                                className="flex flex-col items-center justify-center w-11 h-12 rounded-full text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition-all"
                             >
-                                <div className={cn(
-                                    "w-7 h-7 rounded-full flex items-center justify-center transition-all",
-                                    pathname === link.href
-                                        ? "bg-indigo-600 text-white dark:bg-indigo-400 dark:text-gray-900"
-                                        : "bg-gray-200/80 dark:bg-gray-700/80 text-gray-600 dark:text-gray-400"
-                                )}>
-                                    {getNavIcon(link.href)}
-                                </div>
-                                <span className="text-xs font-medium truncate">{link.name}</span>
-                            </Link>
-                        ))}
+                                <Search className="h-5 w-5" />
+                                <span className="text-[9px] font-bold uppercase tracking-tighter mt-0.5">Search</span>
+                            </button>
 
-                        {/* Search Button */}
-                        <button
-                            onClick={onSearchOpen}
-                            className="flex flex-col items-center space-y-1 py-2 px-3 rounded-xl transition-all min-w-0"
-                        >
-                            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-gray-200/80 dark:bg-gray-700/80 text-gray-600 dark:text-gray-400">
-                                <Search className="h-4 w-4" />
-                            </div>
-                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">Search</span>
-                        </button>
-
-                        {/* Settings/More Button */}
-                        <button
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="flex flex-col items-center space-y-1 py-2 px-3 rounded-xl transition-all min-w-0"
-                        >
-                            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-gray-200/80 dark:bg-gray-700/80 text-gray-600 dark:text-gray-400">
-                                <Menu className="h-4 w-4" />
-                            </div>
-                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">More</span>
-                        </button>
-                    </div>
-
-                    {/* Expandable Menu */}
-                    {isMenuOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="border-t border-gray-200/20 dark:border-gray-700/20 mt-3 pt-3"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Settings</div>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                    aria-label="Toggle theme"
-                                    className="h-8 w-8 rounded-lg bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-gray-300/50 dark:border-gray-600/50 hover:bg-white dark:hover:bg-black transition-all shadow-md"
-                                >
-                                    {mounted && theme === "dark" ? (
-                                        <Sun className="h-4 w-4 text-amber-500" />
-                                    ) : mounted ? (
-                                        <Moon className="h-4 w-4 text-indigo-600" />
+                            {/* Theme Toggle */}
+                            <button
+                                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                className="flex flex-col items-center justify-center w-11 h-12 rounded-full text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition-all"
+                            >
+                                {mounted && (
+                                    theme === "dark" ? (
+                                        <Sun className="h-5 w-5 text-amber-500" />
                                     ) : (
-                                        <Moon className="h-4 w-4 text-indigo-600" />
-                                    )}
-                                </Button>
-                            </div>
-                        </motion.div>
-                    )}
-                </div>
-            </motion.header>
+                                        <Moon className="h-5 w-5 text-indigo-600" />
+                                    )
+                                )}
+                                <span className="text-[9px] font-bold uppercase tracking-tighter mt-0.5">Mode</span>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+            </motion.div>
         </div>
     );
 }
