@@ -16,52 +16,44 @@ export default function AnimatedCursor() {
     handleResize()
     window.addEventListener("resize", handleResize)
 
-    const mouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      })
-    }
+    let lastExecution = 0;
+    const throttleDelay = 16; // ~60fps
 
-    window.addEventListener("mousemove", mouseMove)
-
-    // Add event listeners for interactive/viewable elements using event delegation
     const handleMouseMove = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (!target) return
+      const now = Date.now();
+      if (now - lastExecution < throttleDelay) return;
+      lastExecution = now;
 
-      // Check if element is clickable (button, link, etc.)
-      const isClickable =
-        target.closest('button:not([disabled]), a:not([href="#"]), [role="button"], input, textarea, select') ||
-        target.tagName === 'BUTTON' ||
-        target.tagName === 'A'
+      setMousePosition({ x: e.clientX, y: e.clientY });
 
-      // Check if element is viewable (cards, images, etc.)
-      const isViewable =
+      const target = e.target as HTMLElement;
+      if (!target) return;
+
+      const isClickable = target.closest('button:not([disabled]), a:not([href="#"]), [role="button"], input, textarea, select');
+      const isViewable = !isClickable && (
         target.closest('[data-cursor-view="true"]') ||
         target.tagName === 'IMG' ||
         target.closest('img') ||
         target.closest('[class*="card"]') ||
         target.closest('[class*="Card"]') ||
         target.closest('[class*="gallery"]')
+      );
 
-      if (isViewable && !isClickable) {
-        setCursorVariant("view")
+      if (isViewable) {
+        setCursorVariant("view");
       } else if (isClickable) {
-        setCursorVariant("click")
+        setCursorVariant("click");
       } else {
-        setCursorVariant("default")
+        setCursorVariant("default");
       }
-    }
+    };
 
-    // Use mousemove for real-time detection
-    document.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-      window.removeEventListener("mousemove", mouseMove)
-      document.removeEventListener("mousemove", handleMouseMove)
-    }
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, [])
 
   if (!isDesktop) return null

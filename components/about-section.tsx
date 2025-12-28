@@ -10,8 +10,6 @@ import { FaMedium } from "react-icons/fa6"
 
 export default function AboutSection() {
     const [selectedCert, setSelectedCert] = useState<number | null>(null)
-    const scrollRefLeft = useRef<HTMLDivElement>(null)
-    const scrollRefRight = useRef<HTMLDivElement>(null)
 
     const certificates = [
         { id: 1, title: "BNSP Web Developer Professional Certificate", image: "/sertifikat/bnsp-setiady.png" },
@@ -32,44 +30,30 @@ export default function AboutSection() {
         { id: 9, name: "IPB University", logo: "/client/ipb.png" },
     ]
 
-    // Split clients into two groups for two directions
     const clientsRow1 = clients.slice(0, 5)
     const clientsRow2 = clients.slice(5)
 
-    // Infinite Auto-scrolling effect for both directions
-    useEffect(() => {
-        const scrollContainerLeft = scrollRefLeft.current
-        const scrollContainerRight = scrollRefRight.current
-
-        let scrollPosLeft = 0
-        let scrollPosRight = 0
-        const scrollSpeed = 0.5
-
-        const scroll = () => {
-            // Scroll Left (to the left)
-            if (scrollContainerLeft) {
-                scrollPosLeft += scrollSpeed
-                if (scrollPosLeft >= scrollContainerLeft.scrollWidth / 2) scrollPosLeft = 0
-                scrollContainerLeft.scrollLeft = scrollPosLeft
-            }
-
-            // Scroll Right (reverse direction)
-            if (scrollContainerRight) {
-                scrollPosRight += scrollSpeed
-                if (scrollPosRight >= scrollContainerRight.scrollWidth / 2) scrollPosRight = 0
-                // For "scrolling right" visually, we can just invert the scrollLeft logically or use a different math
-                // but simplest is just adjusting the scroll speed and initial position
-                scrollContainerRight.scrollLeft = (scrollContainerRight.scrollWidth / 2) - scrollPosRight
-            }
-
-            requestAnimationFrame(scroll)
-        }
-        const animation = requestAnimationFrame(scroll)
-        return () => cancelAnimationFrame(animation)
-    }, [])
-
     return (
         <section id="about" className="py-24 relative min-h-screen flex items-center overflow-x-clip">
+            <style jsx>{`
+                @keyframes scroll-left {
+                    from { transform: translateX(0); }
+                    to { transform: translateX(-50%); }
+                }
+                @keyframes scroll-right {
+                    from { transform: translateX(-50%); }
+                    to { transform: translateX(0); }
+                }
+                .animate-scroll-left {
+                    animation: scroll-left 30s linear infinite;
+                }
+                .animate-scroll-right {
+                    animation: scroll-right 30s linear infinite;
+                }
+                .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+            `}</style>
             <div className="container mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
 
@@ -150,47 +134,57 @@ export default function AboutSection() {
                                 <span className="text-xs font-bold uppercase tracking-widest">Collaborating with Industry Leaders</span>
                                 <div className="h-[1px] flex-1 bg-gray-100 dark:bg-white/10" />
                             </div>
-                            <div className="relative group space-y-4">
+                            <div className="relative group space-y-4 overflow-hidden">
                                 {/* Row 1: Scroll Left */}
                                 <div
-                                    ref={scrollRefLeft}
-                                    className="flex space-x-12 py-1 overflow-x-auto scrollbar-hide no-scrollbar"
+                                    className="flex space-x-12 py-1 overflow-hidden"
                                     style={{
-                                        scrollbarWidth: "none",
-                                        msOverflowStyle: "none",
                                         maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
                                         WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
                                     }}
                                 >
-                                    {[...clientsRow1, ...clientsRow1].map((client, index) => (
-                                        <div
-                                            key={`${client.id}-r1-${index}`}
-                                            className="flex-shrink-0 h-6 md:h-8 flex items-center justify-center filter grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
-                                        >
-                                            <img src={client.logo} alt={client.name} className="h-full w-auto object-contain" />
-                                        </div>
-                                    ))}
+                                    <div className="flex space-x-12 animate-scroll-left min-w-max">
+                                        {[...clientsRow1, ...clientsRow1, ...clientsRow1].map((client, index) => (
+                                            <div
+                                                key={`${client.id}-r1-${index}`}
+                                                className="flex-shrink-0 h-6 md:h-8 flex items-center justify-center filter grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                                            >
+                                                <img
+                                                    src={client.logo}
+                                                    alt={client.name}
+                                                    className="h-full w-auto object-contain"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 {/* Row 2: Scroll Right */}
                                 <div
-                                    ref={scrollRefRight}
-                                    className="flex space-x-12 py-1 overflow-x-auto scrollbar-hide no-scrollbar"
+                                    className="flex space-x-12 py-1 overflow-hidden"
                                     style={{
-                                        scrollbarWidth: "none",
-                                        msOverflowStyle: "none",
                                         maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
                                         WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
                                     }}
                                 >
-                                    {[...clientsRow2, ...clientsRow2].map((client, index) => (
-                                        <div
-                                            key={`${client.id}-r2-${index}`}
-                                            className="flex-shrink-0 h-6 md:h-8 flex items-center justify-center filter grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
-                                        >
-                                            <img src={client.logo} alt={client.name} className="h-full w-auto object-contain" />
-                                        </div>
-                                    ))}
+                                    <div className="flex space-x-12 animate-scroll-right min-w-max">
+                                        {[...clientsRow2, ...clientsRow2, ...clientsRow2].map((client, index) => (
+                                            <div
+                                                key={`${client.id}-r2-${index}`}
+                                                className="flex-shrink-0 h-6 md:h-8 flex items-center justify-center filter grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                                            >
+                                                <img
+                                                    src={client.logo}
+                                                    alt={client.name}
+                                                    className="h-full w-auto object-contain"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>

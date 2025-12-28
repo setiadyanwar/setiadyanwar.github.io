@@ -114,6 +114,7 @@ export default function RecentProjects() {
 
               <Link
                 href={`/portfolio/${project.id}`}
+                prefetch={true}
                 className="inline-flex items-center px-4 py-2 rounded-full bg-gray-900 text-white text-xs font-semibold tracking-wide hover:bg-black transition-colors dark:bg-white dark:text-[#05010d] dark:hover:bg-gray-100"
               >
                 View case study

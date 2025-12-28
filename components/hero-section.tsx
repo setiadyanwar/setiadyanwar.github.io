@@ -66,6 +66,7 @@ export default function HeroSection() {
                   alt="Setiady"
                   fill
                   className="object-cover"
+                  priority
                 />
               </motion.div>
             </span>{" "}

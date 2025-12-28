@@ -7,10 +7,16 @@ import PortfolioDetailSkeleton from "@/components/portfolio/portfolio-detail-ske
 
 // ... (keep generateMetadata as is)
 
-// Smart caching: faster in dev, real-time in production
-// Development: 10 seconds cache (reduces DB calls during testing)
-// Production: 0 seconds (real-time updates)
-export const revalidate = process.env.NODE_ENV === "development" ? 10 : 0
+// Enable static generation for all portfolio items
+export async function generateStaticParams() {
+  const items = await getPortfolioItems()
+  return items.map((item: any) => ({
+    id: item.id,
+  }))
+}
+
+// Production: 1 hour cache (real-time is too slow for navigation)
+export const revalidate = 3600
 
 export default async function PortfolioDetail({ params }: { params: { id: string } }) {
   // Fetch data server-side from database only
