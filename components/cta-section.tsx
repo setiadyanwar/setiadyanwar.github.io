@@ -88,7 +88,7 @@ export default function CTASection() {
                                 <Button
                                     onClick={() => setIsContactOpen(!isContactOpen)}
                                     size="lg"
-                                    className="bg-white text-indigo-600 hover:bg-gray-100 px-10 py-7 text-lg font-bold rounded-2xl transition-all duration-300 flex items-center gap-3 border-none"
+                                    className="bg-white text-indigo-600 hover:bg-gray-100 px-10 py-7 text-lg font-bold rounded-full transition-all duration-300 flex items-center gap-3 border-none"
                                 >
                                     Get in Touch
                                     <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isContactOpen ? 'rotate-180' : ''}`} />

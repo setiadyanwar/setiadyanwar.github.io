@@ -46,7 +46,7 @@ export default function ContactForm() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <Card className="glassmorphism overflow-hidden">
+      <Card className="glassmorphism overflow-hidden rounded-3xl">
         <CardContent className="p-8">
           <h2 className="text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">Get In Touch</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
@@ -81,7 +81,7 @@ export default function ContactForm() {
         </CardContent>
       </Card>
 
-      <Card className="glassmorphism overflow-hidden">
+      <Card className="glassmorphism overflow-hidden rounded-3xl">
         <CardContent className="p-8">
           <h2 className="text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">Send a Message</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -142,7 +142,7 @@ export default function ContactForm() {
               />
             </div>
 
-            <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 btn-splash">
+            <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 btn-splash rounded-full">
               <Send className="h-4 w-4 mr-2" />
               <span>Send Message</span>
             </Button>
