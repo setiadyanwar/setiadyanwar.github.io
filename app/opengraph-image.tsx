@@ -32,20 +32,6 @@ export default async function Image() {
                     position: 'relative',
                 }}
             >
-                {/* Background Pattern */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        opacity: 0.1,
-                        background: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px)',
-                        backgroundSize: '50px 50px',
-                    }}
-                />
-
                 {/* Content */}
                 <div
                     style={{
@@ -94,8 +80,7 @@ export default async function Image() {
                             <div
                                 key={tech}
                                 style={{
-                                    background: 'rgba(255, 255, 255, 0.2)',
-                                    backdropFilter: 'blur(10px)',
+                                    background: 'rgba(255, 255, 255, 0.25)',
                                     padding: '12px 24px',
                                     borderRadius: 999,
                                     fontSize: 24,
