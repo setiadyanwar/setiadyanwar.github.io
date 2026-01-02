@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: siteConfig.ogImage,
+        secureUrl: siteConfig.ogImage,
         width: 1200,
         height: 630,
         alt: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
@@ -65,6 +66,34 @@ export const metadata: Metadata = {
     images: [siteConfig.ogImage],
     creator: "@setiadyanwarr",
     site: "@setiadyanwarr",
+  },
+  // Additional meta tags for better social media support
+  other: {
+    // Facebook/Meta (Instagram, Threads, Messenger)
+    "fb:app_id": "your-fb-app-id", // Optional: Add your Facebook App ID if you have one
+    "og:image:secure_url": siteConfig.ogImage,
+    "og:image:type": "image/png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
+
+    // Twitter/X specific
+    "twitter:image:src": siteConfig.ogImage,
+    "twitter:image:alt": "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
+    "twitter:domain": "setiadyanwar.github.io",
+
+    // LinkedIn
+    "article:author": "Setiady Ibrahim Anwar",
+
+    // WhatsApp & Telegram (use OG tags)
+    "og:site_name": "Setiady Ibrahim Anwar Portfolio",
+    "og:locale": "id_ID",
+    "og:locale:alternate": "en_US",
+
+    // General
+    "theme-color": "#6366f1",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
   },
   robots: {
     index: true,
