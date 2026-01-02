@@ -3,19 +3,19 @@ export const siteConfig = {
   description: "BNSP-Certified Frontend Developer & UI/UX Designer with 2+ years experience. Founder of Kreavoks Digital Agency.",
   url: "https://setiadyanwar.github.io",
   vercelUrl: "https://setiadyanwar-github-io.vercel.app", // URL Vercel yang akan di-noindex
-  ogImage: "https://setiadyanwar.github.io/setiady.png",
+  ogImage: "https://setiadyanwar.github.io/og-image.png",
   author: "Setiady Ibrahim Anwar",
   email: "setiadyanwar@gmail.com",
   phone: "+6289662007938",
   location: "Tangerang, Indonesia",
   social: {
     github: "https://github.com/setiadyanwar",
-    linkedin: "https://linkedin.com/in/setiadyanwar", 
+    linkedin: "https://linkedin.com/in/setiadyanwar",
     instagram: "https://instagram.com/setiadyanwarr",
   },
   keywords: [
     "Frontend Developer",
-    "UI/UX Designer", 
+    "UI/UX Designer",
     "React Developer",
     "Next.js Developer",
     "Vue.js Developer",

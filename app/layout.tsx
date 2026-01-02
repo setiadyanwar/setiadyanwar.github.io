@@ -50,10 +50,11 @@ export const metadata: Metadata = {
     description: "Professional Frontend Developer & UI/UX Designer from Indonesia. BNSP-Certified with 2+ years experience building modern web applications. Expert in React, Next.js, Vue.js, Laravel, TypeScript, and Tailwind CSS.",
     images: [
       {
-        url: "/setiady.png",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
         alt: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
+        type: "image/png",
       },
     ],
   },
@@ -61,7 +62,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
     description: "Professional Frontend Developer & UI/UX Designer from Indonesia. BNSP-Certified with 2+ years experience building modern web applications. Expert in React, Next.js, Vue.js, Laravel, TypeScript, and Tailwind CSS.",
-    images: ["/setiady.png"],
+    images: [siteConfig.ogImage],
+    creator: "@setiadyanwarr",
+    site: "@setiadyanwarr",
   },
   robots: {
     index: true,
