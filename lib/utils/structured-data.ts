@@ -5,7 +5,7 @@ export const personJsonLd = {
   alternateName: 'Setiadyanwar',
   description: 'BNSP-Certified Frontend Developer & UI/UX Designer with 2+ years experience. Founder of Kreavoks Digital Agency.',
   url: 'https://setiadyanwar.github.io',
-  image: 'https://setiadyanwar.github.io/cover.png',
+  image: 'https://setiadyanwar.github.io/og-cover-2026.png',
   sameAs: [
     'https://github.com/setiadyanwar',
     'https://linkedin.com/in/setiadyanwar',
