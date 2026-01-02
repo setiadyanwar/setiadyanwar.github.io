@@ -20,6 +20,9 @@ const inter = Inter({
   fallback: ["system-ui", "arial"],
 })
 
+// Construct absolute URL for OG Image to ensure social media platforms can find it
+const ogImageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString()
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -50,8 +53,8 @@ export const metadata: Metadata = {
     description: "Professional Frontend Developer & UI/UX Designer from Indonesia. BNSP-Certified with 2+ years experience building modern web applications. Expert in React, Next.js, Vue.js, Laravel, TypeScript, and Tailwind CSS.",
     images: [
       {
-        url: siteConfig.ogImage,
-        secureUrl: siteConfig.ogImage,
+        url: ogImageUrl,
+        secureUrl: ogImageUrl,
         width: 1200,
         height: 630,
         alt: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
@@ -63,22 +66,22 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
     description: "Professional Frontend Developer & UI/UX Designer from Indonesia. BNSP-Certified with 2+ years experience building modern web applications. Expert in React, Next.js, Vue.js, Laravel, TypeScript, and Tailwind CSS.",
-    images: [siteConfig.ogImage],
+    images: [ogImageUrl],
     creator: "@setiadyanwarr",
     site: "@setiadyanwarr",
   },
   // Additional meta tags for better social media support
   other: {
     // Facebook/Meta (Instagram, Threads, Messenger)
-    "fb:app_id": "your-fb-app-id", // Optional: Add your Facebook App ID if you have one
-    "og:image:secure_url": siteConfig.ogImage,
+    "fb:app_id": "", // Optional: Add your Facebook App ID if you have one
+    "og:image:secure_url": ogImageUrl,
     "og:image:type": "image/png",
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
 
     // Twitter/X specific
-    "twitter:image:src": siteConfig.ogImage,
+    "twitter:image:src": ogImageUrl,
     "twitter:image:alt": "Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer",
     "twitter:domain": "setiadyanwar.github.io",
 

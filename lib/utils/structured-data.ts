@@ -1,21 +1,26 @@
+import { siteConfig } from "@/lib/config/site-config"
+
+// Helper to ensure absolute image URL
+const ogImageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString()
+
 export const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Setiady Ibrahim Anwar',
+  name: siteConfig.author,
   alternateName: 'Setiadyanwar',
-  description: 'BNSP-Certified Frontend Developer & UI/UX Designer with 2+ years experience. Founder of Kreavoks Digital Agency.',
-  url: 'https://setiadyanwar.github.io',
-  image: 'https://setiadyanwar.github.io/og-cover-2026.png?v=20260102',
+  description: siteConfig.description,
+  url: siteConfig.url,
+  image: ogImageUrl,
   sameAs: [
-    'https://github.com/setiadyanwar',
-    'https://linkedin.com/in/setiadyanwar',
-    'https://instagram.com/setiadyanwarr',
+    siteConfig.social.github,
+    siteConfig.social.linkedin,
+    siteConfig.social.instagram,
   ],
   jobTitle: 'Frontend Developer & UI/UX Designer',
   worksFor: {
     '@type': 'Organization',
     name: 'Kreavoks Digital Agency',
-    url: 'https://setiadyanwar.github.io',
+    url: siteConfig.url,
   },
   alumniOf: {
     '@type': 'Organization',
@@ -26,7 +31,7 @@ export const personJsonLd = {
     addressLocality: 'Tangerang',
     addressCountry: 'Indonesia',
   },
-  email: 'setiadyanwar@gmail.com',
+  email: siteConfig.email,
   knowsAbout: [
     'Frontend Development',
     'UI/UX Design',
@@ -45,18 +50,18 @@ export const personJsonLd = {
 export const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Setiady Ibrahim Anwar Portfolio',
-  description: 'Professional portfolio of Setiady Ibrahim Anwar - Frontend Developer & UI/UX Designer',
-  url: 'https://setiadyanwar.github.io',
+  name: siteConfig.name,
+  description: siteConfig.description,
+  url: siteConfig.url,
   author: {
     '@type': 'Person',
-    name: 'Setiady Ibrahim Anwar',
+    name: siteConfig.author,
   },
   inLanguage: 'id',
   copyrightYear: new Date().getFullYear(),
   copyrightHolder: {
     '@type': 'Person',
-    name: 'Setiady Ibrahim Anwar',
+    name: siteConfig.author,
   },
 }
 
