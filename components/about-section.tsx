@@ -89,7 +89,7 @@ export default function AboutSection() {
 
                             <div className="relative z-10 w-full flex items-end justify-center overflow-visible">
                                 <Image
-                                    src="/setiady.png"
+                                    src="/profile-photo.png"
                                     alt="Setiady Ibrahim Anwar"
                                     width={1000}
                                     height={1200}

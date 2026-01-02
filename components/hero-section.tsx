@@ -62,7 +62,7 @@ export default function HeroSection() {
                 className="relative w-12 h-16 md:w-16 md:h-22 lg:w-20 lg:h-28 bg-indigo-100 dark:bg-indigo-900/30 rounded-full overflow-hidden border-2 border-white dark:border-gray-800 shadow-xl"
               >
                 <Image
-                  src="/setiady.png"
+                  src="/profile-photo.png"
                   alt="Setiady"
                   fill
                   className="object-cover"

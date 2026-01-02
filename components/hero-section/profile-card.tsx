@@ -77,7 +77,7 @@ export default function ProfileCard({ isMobile: forcedMobile = false }: ProfileC
                 <div className="relative">
                     <div className="w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border border-white/20 dark:border-white/10 p-1 bg-white/20 dark:bg-black/20 backdrop-blur-2xl backdrop-saturate-150 shadow-2xl">
                         <Image
-                            src="/setiady.png"
+                            src="/profile-photo.png"
                             alt="Setiady Ibrahim Anwar"
                             width={300}
                             height={300}
