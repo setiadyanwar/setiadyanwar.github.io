@@ -133,4 +133,22 @@ CREATE TRIGGER update_technologies_updated_at
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
+-- Admin Sessions Table (for session management)
+CREATE TABLE IF NOT EXISTS admin_sessions (
+  id TEXT PRIMARY KEY,
+  username TEXT NOT NULL,
+  ip_address TEXT,
+  user_agent TEXT,
+  device_info TEXT,
+  login_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  last_activity TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+  is_active BOOLEAN DEFAULT TRUE
+);
+
+-- Index for faster session lookup and cleanup
+CREATE INDEX IF NOT EXISTS idx_admin_sessions_expires_at ON admin_sessions(expires_at);
+CREATE INDEX IF NOT EXISTS idx_admin_sessions_is_active ON admin_sessions(is_active);
+CREATE INDEX IF NOT EXISTS idx_admin_sessions_username ON admin_sessions(username);
+
 

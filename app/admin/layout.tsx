@@ -3,17 +3,18 @@
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
-import { 
-  LayoutDashboard, 
-  Briefcase, 
-  GraduationCap, 
-  Users, 
+import {
+  LayoutDashboard,
+  Briefcase,
+  GraduationCap,
+  Users,
   LogOut,
   FileText,
   Settings,
   ArrowLeft,
   Menu,
-  X
+  X,
+  Shield
 } from "lucide-react"
 
 export default function AdminLayout({
@@ -62,6 +63,7 @@ export default function AdminLayout({
     { href: "/admin/experience", label: "Experience", icon: FileText },
     { href: "/admin/education", label: "Education", icon: GraduationCap },
     { href: "/admin/organization", label: "Organization", icon: Users },
+    { href: "/admin/sessions", label: "Sessions", icon: Shield },
   ]
 
   return (
@@ -100,9 +102,8 @@ export default function AdminLayout({
       </Link>
 
       {/* Sidebar */}
-      <aside className={`fixed left-0 top-0 h-full w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 z-40 transform transition-transform duration-300 ease-in-out ${
-        sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-      }`}>
+      <aside className={`fixed left-0 top-0 h-full w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 z-40 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}>
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center justify-between mb-8 lg:justify-start">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -124,11 +125,10 @@ export default function AdminLayout({
                   key={item.href}
                   href={item.href}
                   onClick={() => setSidebarOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    isActive
-                      ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 font-medium"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
-                  }`}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive
+                    ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 font-medium"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                    }`}
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>

@@ -4,32 +4,34 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Lock, Eye, EyeOff, User, ArrowRight, ShieldCheck } from "lucide-react"
+import { login } from "../actions"
 
 export default function AdminLogin() {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError("")
     setLoading(true)
 
-    // Check credentials against environment variables or secure defaults
-    const validUsername = process.env.NEXT_PUBLIC_ADMIN_USERNAME
-    const validPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+    const formData = new FormData(e.currentTarget)
 
-    // Simulate network delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 800))
+    try {
+      const result = await login(formData)
 
-    if (username === validUsername && password === validPassword) {
-      sessionStorage.setItem("admin_auth", "authenticated")
-      router.push("/admin")
-    } else {
-      setError("Invalid username or password")
+      if (result.success) {
+        // Keep sessionStorage for client-side UI compatibility (e.g. Sidebar layout)
+        sessionStorage.setItem("admin_auth", "authenticated")
+        router.push("/admin")
+      } else {
+        setError("Invalid username or password")
+        setLoading(false)
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.")
       setLoading(false)
     }
   }
@@ -69,9 +71,8 @@ export default function AdminLogin() {
               <div className="relative">
                 <input
                   id="username"
+                  name="username"
                   type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
                   className="w-full px-4 py-2.5 pl-10 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all outline-none text-sm"
                   placeholder="Enter username"
                   required
@@ -90,9 +91,8 @@ export default function AdminLogin() {
               <div className="relative">
                 <input
                   id="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-2.5 pl-10 pr-10 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all outline-none text-sm"
                   placeholder="Enter password"
                   required
