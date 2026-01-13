@@ -309,7 +309,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                     <div className="relative w-full rounded-2xl overflow-hidden">
                                         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                                             <Image
-                                                src={portfolio.image?.split("?")[0] || "/placeholder.svg"}
+                                                src={portfolio.image || "/placeholder.svg"}
                                                 alt={portfolio.title}
                                                 fill
                                                 className="object-cover"

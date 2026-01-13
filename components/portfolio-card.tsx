@@ -103,7 +103,7 @@ export default function PortfolioCard({
       <Card className="group h-full bg-transparent border-0 shadow-none rounded-3xl p-0">
         <div className="relative h-48 overflow-hidden rounded-3xl">
           <Image
-            src={image?.split("?")[0] || "/placeholder.svg"}
+            src={image || "/placeholder.svg"}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
