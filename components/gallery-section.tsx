@@ -12,7 +12,7 @@ export default function GallerySection() {
     id: i + 1,
     title: `Activity ${i + 1}`,
     description: `Description for activity or achievement ${i + 1}`,
-    image: `/placeholder.svg?height=400&width=${300 + (i % 3) * 100}`,
+    image: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23cccccc'/%3E%3C/svg%3E`,
   }))
 
   return (
@@ -34,7 +34,7 @@ export default function GallerySection() {
               >
                 <div className="relative">
                   <img
-                    src={item.image || "/placeholder.svg"}
+                    src={item.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3C/svg%3E"}
                     alt={item.title}
                     className="w-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
@@ -74,7 +74,7 @@ export default function GallerySection() {
               </button>
 
               <img
-                src={galleryImages[selectedImage].image || "/placeholder.svg"}
+                src={galleryImages[selectedImage].image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3C/svg%3E"}
                 alt={galleryImages[selectedImage].title}
                 className="max-h-[90vh] max-w-full object-contain"
               />

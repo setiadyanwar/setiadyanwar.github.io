@@ -131,7 +131,7 @@ export default function FullScreenImageGallery({
                                     className="relative w-full h-full flex items-center justify-center"
                                 >
                                     <Image
-                                        src={currentImage.url || "/placeholder.svg"}
+                                        src={currentImage.url || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3C/svg%3E"}
                                         alt={currentImage.description || `Gallery image ${currentIndex + 1}`}
                                         width={1920}
                                         height={1080}

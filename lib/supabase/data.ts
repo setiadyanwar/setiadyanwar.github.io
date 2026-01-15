@@ -18,7 +18,7 @@ export async function getPortfolioItems(includeHidden: boolean = false) {
 
   let query = supabase
     .from("portfolio_items")
-    .select("id, title, subtitle, category, image, technologies, date, created_at, display_order, status")
+    .select("id, title, subtitle, description, category, image, technologies, date, created_at, display_order, status")
 
   if (!includeHidden) {
     query = query.eq("status", "published") // Only show published items for public

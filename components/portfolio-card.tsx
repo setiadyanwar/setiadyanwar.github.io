@@ -101,9 +101,9 @@ export default function PortfolioCard({
       onMouseLeave={handleMouseLeave}
     >
       <Card className="group h-full bg-transparent border-0 shadow-none rounded-3xl p-0">
-        <div className="relative h-48 overflow-hidden rounded-3xl">
+        <div className="relative h-48 overflow-hidden rounded-3xl bg-gray-100 dark:bg-gray-800">
           <Image
-            src={image || "/placeholder.svg"}
+            src={image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3C/svg%3E"}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -117,7 +117,7 @@ export default function PortfolioCard({
         </div>
 
         <div className="pt-4">
-          <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors group-hover:text-indigo-600">
+          <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors group-hover:text-indigo-600 line-clamp-2" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', minHeight: '3.5rem' }}>
             {title}
           </h3>
 

@@ -310,13 +310,13 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                     <div className="relative w-full rounded-2xl overflow-hidden">
                                         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                                             <Image
-                                                src={portfolio.image || "/placeholder.svg"}
+                                                src={portfolio.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3C/svg%3E"}
                                                 alt={portfolio.title}
                                                 fill
                                                 className="object-cover"
                                                 onError={(e) => {
                                                     const target = e.target as HTMLImageElement;
-                                                    target.src = "/placeholder.svg";
+                                                    target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3C/svg%3E";
                                                 }}
                                             />
                                         </div>

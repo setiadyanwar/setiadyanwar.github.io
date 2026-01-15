@@ -41,7 +41,7 @@ export default function ExperienceCard({
                     {group.logo && (
                         <div className="w-12 h-12 rounded-lg overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex-shrink-0 flex items-center justify-center">
                             <Image
-                                src={group.logo.split("?")[0] || "/placeholder.svg"}
+                                src={group.logo.split("?")[0] || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3C/svg%3E"}
                                 alt={group.company}
                                 width={48}
                                 height={48}

@@ -28,12 +28,12 @@ export default function RecentProjects() {
     async function fetchProjects() {
       try {
         const items = await getPortfolioItems()
-        // Get the specific 3 most recent projects by ID (latest web projects)
-        const recentProjectIds = ["ess", "nexaid", "kreavoks"]
-        const filtered = recentProjectIds
-          .map((id) => items.find((item) => item.id === id))
-          .filter((project) => project !== undefined)
-        setRecentProjects(filtered)
+        // Dynamically take the 3 most recent projects and map fields correctly
+        const filtered = items.slice(0, 3).map(item => ({
+          ...item,
+          description: item.subtitle || item.description // Map subtitle to description for display
+        }))
+        setRecentProjects(filtered as PortfolioItem[])
       } catch (error) {
         // Silently fail
       } finally {
@@ -63,10 +63,10 @@ export default function RecentProjects() {
         </div>
 
         {/* Main content */}
-        <div className="relative flex-1 overflow-hidden">
+        <div className="relative flex-1 overflow-hidden bg-gray-100 dark:bg-gray-800">
           <div className="absolute inset-0 transition-opacity duration-500">
             <Image
-              src={project.image || "/placeholder.svg"}
+              src={project.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3C/svg%3E"}
               alt={project.title}
               fill
               sizes="600px"
@@ -82,7 +82,7 @@ export default function RecentProjects() {
               <p className="text-xs tracking-[0.18em] text-gray-500/80 dark:text-gray-300/80 uppercase">
                 {project.date || "Recent project"}
               </p>
-              <h3 className="text-2xl md:text-3xl font-semibold leading-snug text-gray-900 dark:text-white">
+              <h3 className="text-2xl md:text-3xl font-semibold leading-snug text-gray-900 dark:text-white line-clamp-2" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {project.title}
               </h3>
               <p className="text-sm text-gray-600/90 dark:text-gray-300/85 line-clamp-2 md:line-clamp-3">
@@ -117,7 +117,7 @@ export default function RecentProjects() {
                 prefetch={true}
                 className="inline-flex items-center px-4 py-2 rounded-full bg-gray-900 text-white text-xs font-semibold tracking-wide hover:bg-black transition-colors dark:bg-white dark:text-[#05010d] dark:hover:bg-gray-100"
               >
-                View case study
+                View project
                 <ArrowRight className="ml-2 h-3 w-3" />
               </Link>
             </div>
@@ -162,7 +162,7 @@ export default function RecentProjects() {
               {recentProjects.map((project) => (
                 <li key={project.id} className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400" />
-                  <span>{project.title}</span>
+                  <span className="truncate">{project.title}</span>
                 </li>
               ))}
             </ul>
