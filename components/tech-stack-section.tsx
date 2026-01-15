@@ -52,7 +52,13 @@ export default function TechStackSection() {
 
   return (
     <section id="skills" className="py-16 bg-gray-50 dark:bg-gray-900/50 rounded-3xl max-w-full">
-      <div className="container mx-auto px-4 max-w-full">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="container mx-auto px-4 max-w-full"
+      >
         {/* Compact filter buttons */}
         <div className="flex justify-center mb-6">
           <div className="flex flex-wrap gap-2 justify-center">
@@ -139,7 +145,7 @@ export default function TechStackSection() {
             </motion.div>
           )}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

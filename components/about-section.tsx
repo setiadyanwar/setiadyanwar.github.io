@@ -102,6 +102,41 @@ export default function AboutSection() {
                                 />
                             </div>
                         </motion.div>
+
+                        {/* Moved Certifications to Left Column */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="space-y-4 w-full mt-12 relative z-10"
+                        >
+                            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+                                <Award className="w-4 h-4" />
+                                <span className="text-xs font-bold uppercase tracking-widest">Certifications</span>
+                                <div className="h-[1px] flex-1 bg-gray-100 dark:bg-white/10" />
+                            </div>
+
+                            <div className="flex flex-wrap justify-center gap-4">
+                                {certificates.map((cert, index) => (
+                                    <motion.div
+                                        key={cert.id}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => setSelectedCert(index)}
+                                        className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden cursor-pointer border border-gray-200 dark:border-white/10 group bg-white dark:bg-white/5 flex-shrink-0"
+                                    >
+                                        <img
+                                            src={cert.image}
+                                            alt={cert.title}
+                                            className="w-full h-full object-cover transition-all duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-indigo-600/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-[1px]">
+                                            <Award className="w-4 h-4 text-white" />
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
                     </div>
 
                     {/* Right Column: Content */}
@@ -117,8 +152,13 @@ export default function AboutSection() {
                                 <span className="text-xs font-bold uppercase tracking-widest">About Me</span>
                                 <div className="h-[1px] flex-1 bg-gray-100 dark:bg-white/10" />
                             </div>
+                            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white leading-tight">
+                                I build digital products that <span className="text-indigo-600">don&apos;t just look good.</span> They perform.
+                            </h3>
                             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
-                                I bridge the gap between human empathy and technical precision. My approach centers on deep <span className="text-indigo-600 dark:text-indigo-400 font-semibold">user-centered thinking</span>—understanding their needs to craft <span className="text-indigo-600 dark:text-indigo-400 font-semibold">visual designs</span> that resonate and <span className="text-indigo-600 dark:text-indigo-400 font-semibold">code implementations</span> that perform.
+                                With a background that spans both technical engineering and human-centered design, I specialize in bridging the gap between <span className="font-semibold text-gray-900 dark:text-white">business goals</span> and <span className="font-semibold text-gray-900 dark:text-white">user needs</span>.
+                                <br /><br />
+                                My philosophy is simple: <span className="italic">Design is not what it looks like, it&apos;s how it works.</span> I take full ownership of the product lifecycle, from the first wireframe to the final line of production-ready code.
                             </p>
                         </motion.div>
 
@@ -189,40 +229,6 @@ export default function AboutSection() {
                             </div>
                         </motion.div>
 
-                        {/* 3. Certifications */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="space-y-4"
-                        >
-                            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-                                <Award className="w-4 h-4" />
-                                <span className="text-xs font-bold uppercase tracking-widest">Certifications</span>
-                                <div className="h-[1px] flex-1 bg-gray-100 dark:bg-white/10" />
-                            </div>
-
-                            <div className="flex flex-wrap gap-4">
-                                {certificates.map((cert, index) => (
-                                    <motion.div
-                                        key={cert.id}
-                                        whileTap={{ scale: 0.95 }}
-                                        onClick={() => setSelectedCert(index)}
-                                        className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden cursor-pointer border border-gray-200 dark:border-white/10 group bg-white dark:bg-white/5 flex-shrink-0"
-                                    >
-                                        <img
-                                            src={cert.image}
-                                            alt={cert.title}
-                                            className="w-full h-full object-cover transition-all duration-500"
-                                        />
-                                        <div className="absolute inset-0 bg-indigo-600/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-[1px]">
-                                            <Award className="w-4 h-4 text-white" />
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </motion.div>
 
                         {/* 4. Core Values & Skills */}
                         <motion.div
@@ -305,53 +311,55 @@ export default function AboutSection() {
                         </motion.div>
                     </div>
                 </div>
-            </div>
+            </div >
 
             {/* Certificate Modal */}
             <AnimatePresence>
-                {selectedCert !== null && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
-                        onClick={() => setSelectedCert(null)}
-                    >
+                {
+                    selectedCert !== null && (
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            className="relative w-full max-w-6xl max-h-[90vh] flex flex-col rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-[#0a0a0a]"
-                            onClick={(e) => e.stopPropagation()}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+                            onClick={() => setSelectedCert(null)}
                         >
-                            <button
-                                className="absolute top-6 right-6 z-[110] p-3 rounded-full bg-white/20 hover:bg-white/40 text-white transition-all backdrop-blur-xl border border-white/20 shadow-xl"
-                                onClick={() => setSelectedCert(null)}
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                                className="relative w-full max-w-6xl max-h-[90vh] flex flex-col rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-[#0a0a0a]"
+                                onClick={(e) => e.stopPropagation()}
                             >
-                                <X className="h-6 w-6" />
-                            </button>
+                                <button
+                                    className="absolute top-4 right-4 z-[110] p-3 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white transition-all shadow-xl hover:scale-110 active:scale-95"
+                                    onClick={() => setSelectedCert(null)}
+                                >
+                                    <X className="h-5 w-5 md:h-6 md:w-6" />
+                                </button>
 
-                            <div className="flex-1 flex items-center justify-center p-2 md:p-6 bg-gray-100 dark:bg-gray-950 overflow-auto">
-                                <img
-                                    src={certificates[selectedCert].image}
-                                    alt={certificates[selectedCert].title}
-                                    className="max-w-full max-h-[75vh] object-contain shadow-2xl"
-                                />
-                            </div>
-
-                            <div className="p-6 md:p-10 border-t border-gray-100 dark:border-white/5 bg-white dark:bg-[#0a0a0a] flex flex-col items-center gap-3">
-                                <div className="flex items-center gap-2 px-4 py-1.5 bg-indigo-600/10 rounded-full border border-indigo-600/20">
-                                    <Award className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-                                    <span className="text-[10px] md:text-xs text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-[0.2em]">Verified Professional Credential</span>
+                                <div className="flex-1 flex items-center justify-center p-2 md:p-6 bg-gray-100 dark:bg-gray-950 overflow-auto">
+                                    <img
+                                        src={certificates[selectedCert].image}
+                                        alt={certificates[selectedCert].title}
+                                        className="max-w-full max-h-[75vh] object-contain shadow-2xl"
+                                    />
                                 </div>
-                                <h3 className="text-gray-900 dark:text-white font-bold text-xl md:text-3xl text-center leading-tight">
-                                    {certificates[selectedCert].title}
-                                </h3>
-                            </div>
+
+                                <div className="p-6 md:p-10 border-t border-gray-100 dark:border-white/5 bg-white dark:bg-[#0a0a0a] flex flex-col items-center gap-3">
+                                    <div className="flex items-center gap-2 px-4 py-1.5 bg-indigo-600/10 rounded-full border border-indigo-600/20">
+                                        <Award className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                                        <span className="text-[10px] md:text-xs text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-[0.2em]">Verified Professional Credential</span>
+                                    </div>
+                                    <h3 className="text-gray-900 dark:text-white font-bold text-xl md:text-3xl text-center leading-tight">
+                                        {certificates[selectedCert].title}
+                                    </h3>
+                                </div>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </section>
+                    )
+                }
+            </AnimatePresence >
+        </section >
     )
 }

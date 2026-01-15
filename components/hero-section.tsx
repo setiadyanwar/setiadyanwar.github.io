@@ -14,7 +14,7 @@ import ContactDropdown from "./contact-dropdown";
 import CvDownloadDropdown from "./cv-download-dropdown";
 
 export default function HeroSection() {
-  const words = ["problems", "needs", "challenges", "ideas", "complexities"];
+  const words = ["problems", "needs", "logic", "ideas", "goals"];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center bg-[#fafafa] dark:bg-black overflow-x-clip overflow-y-visible pt-20 z-20">
+    <section className="relative min-h-screen flex items-center justify-center bg-[#fafafa] dark:bg-black overflow-x-clip overflow-y-visible pt-16 pb-16 z-20">
       {/* Background Orbs */}
       <BackgroundOrbs />
 
@@ -37,7 +37,7 @@ export default function HeroSection() {
           className="max-w-5xl mx-auto"
         >
           {/* Greeting with Eye Tracker centered */}
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-4 md:mb-6">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -51,8 +51,8 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* New Headline Style inspired by Image 1 */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1] mb-8">
+          {/* New Headline Style: Strategic & Problem-Solving */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1] mb-6 md:mb-8">
             Solving{" "}
             <span className="inline-block align-middle mx-1">
               <motion.div
@@ -70,6 +70,7 @@ export default function HeroSection() {
                 />
               </motion.div>
             </span>{" "}
+            Business{" "}
             <span
               className="relative inline-flex h-[1.12em] items-center overflow-hidden lg:min-w-[5ch] align-middle -translate-y-1"
               style={{ perspective: "1000px" }}
@@ -84,53 +85,58 @@ export default function HeroSection() {
                     duration: 0.6,
                     ease: [0.16, 1, 0.3, 1]
                   }}
-                  className="inline-block !leading-none"
+                  className="inline-block !leading-none text-indigo-600 dark:text-indigo-400"
                 >
                   {words[index]}
                 </motion.span>
               </AnimatePresence>
             </span>{" "}
             <br className="hidden md:block" />
-            through <span className="text-indigo-600 dark:text-indigo-400">design</span> &{" "}
-            <span className="relative inline-block">
-              code
-              <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 100 8" preserveAspectRatio="none">
-                <path d="M0 7C25 2 75 2 100 7" stroke="currentColor" strokeWidth="3" fill="none" className="text-indigo-600/30" />
+            with Strategic <span className="relative inline-block">
+              Design
+              <svg className="absolute -bottom-1.5 left-0 w-full" height="8" viewBox="0 0 100 8" preserveAspectRatio="none">
+                <motion.path
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ duration: 1.2, delay: 1.5, ease: "easeInOut" }}
+                  d="M2 6C20 3 40 3 60 5C75 7 90 6 98 3"
+                  stroke="currentColor"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  fill="none"
+                  className="text-indigo-600/40 dark:text-indigo-400/40"
+                />
               </svg>
-            </span>
+            </span> & Excellence
           </h1>
 
-          {/* Founder Info Badge */}
+          {/* Minimalist Availability Badge */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex items-center justify-center mb-10"
+            className="flex items-center justify-center mb-6 md:mb-8"
           >
-            <div className="flex items-center gap-3 bg-gray-100/50 dark:bg-white/5 px-4 py-2 rounded-2xl border border-gray-200/50 dark:border-white/10 backdrop-blur-md transition-all hover:bg-gray-100/80 dark:hover:bg-white/10 group">
-              <span className="text-sm text-gray-500 dark:text-gray-400 font-medium tracking-tight">
-                Founder of
-              </span>
-              <div className="h-4 w-[1px] bg-gray-300 dark:bg-gray-700 mx-1" />
-              <div className="flex items-center">
-                <Image
-                  src="/client/kreavoks.svg"
-                  alt="Kreavoks Logo"
-                  width={85}
-                  height={24}
-                  className="opacity-70 group-hover:opacity-100 transition-opacity"
-                />
+            <div className="inline-flex items-center gap-2.5 bg-white/40 dark:bg-white/5 px-4 py-2 rounded-full border border-gray-200/50 dark:border-white/10 backdrop-blur-sm">
+              <div className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </div>
+              <span className="text-[10px] md:text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-[0.1em]">Available for Hire</span>
+
+              <div className="hidden md:flex items-center gap-2.5 border-l border-gray-300/50 dark:border-gray-700/50 pl-2.5 ml-0.5">
+                <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Concept → Market</span>
               </div>
             </div>
           </motion.div>
 
-          {/* TypeAnimation centered */}
-          <div className="text-lg md:text-xl text-gray-500 dark:text-gray-400 mb-12 h-16 max-w-2xl mx-auto">
+          {/* Refined TypeAnimation */}
+          <div className="text-lg md:text-xl text-gray-500 dark:text-gray-400 mb-8 md:mb-10 h-16 max-w-2xl mx-auto font-medium">
             <TypeAnimation
               sequence={[
-                "Building immersive digital experiences.", 1000,
-                "Focused on UI/UX and Frontend Dev.", 1000,
-                "Certified Web Programmer based in ID.", 1000
+                "Turning complex problems into seamless interfaces.", 1500,
+                "Bridging the gap between UI/UX and Engineering.", 1500,
+                "Founder of Kreavoks. BNSP Certified Web Developer.", 1500
               ]}
               wrapper="p"
               speed={50}

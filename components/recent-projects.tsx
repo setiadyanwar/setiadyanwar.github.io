@@ -135,9 +135,21 @@ export default function RecentProjects() {
   return (
     <section className="py-24 bg-gray-100 text-gray-900 dark:bg-[#05010d] dark:text-white rounded-3xl overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="mb-12 grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-12 grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center"
+        >
           {/* Left content */}
-          <div className="space-y-6 max-w-xl">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-6 max-w-xl"
+          >
             <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
               Selected recent projects
               <br />
@@ -161,10 +173,16 @@ export default function RecentProjects() {
               View all projects
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
+          </motion.div>
 
           {/* Right card stack */}
-          <div className="relative h-[360px] sm:h-[420px] md:h-[520px]">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="relative h-[360px] sm:h-[420px] md:h-[520px]"
+          >
             <CardSwap
               cardDistance={60}
               verticalDistance={70}
@@ -175,8 +193,8 @@ export default function RecentProjects() {
             >
               {projectCards}
             </CardSwap>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )

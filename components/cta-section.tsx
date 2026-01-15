@@ -46,7 +46,7 @@ export default function CTASection() {
                                 transition={{ duration: 0.6, delay: 0.1 }}
                                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight tracking-tight"
                             >
-                                Let&apos;s Work Together
+                                Ready to Elevate Your <br className="hidden lg:block" /> Digital Product?
                             </motion.h2>
 
                             <motion.p
@@ -54,9 +54,10 @@ export default function CTASection() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: 0.2 }}
-                                className="text-base md:text-lg text-indigo-100 max-w-xl font-normal"
+                                className="text-base md:text-lg text-indigo-100 max-w-xl font-normal leading-relaxed"
                             >
-                                Ready to bring your ideas to life? I&apos;m currently available for new projects and collaborations.
+                                Hire me for <span className="text-white font-bold underline decoration-white/30 underline-offset-4">Strategic UI/UX Design</span> and <span className="text-white font-bold underline decoration-white/30 underline-offset-4">High-Performance Development</span>.
+                                Let&apos;s build something that matters.
                             </motion.p>
 
                             <motion.div

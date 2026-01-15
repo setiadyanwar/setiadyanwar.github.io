@@ -137,33 +137,61 @@ export default function SkillsShowcase() {
   return (
     <section className="py-12 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8"
+        >
           <h2 className="text-3xl font-bold mb-2">Technologies I Use</h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             The frameworks, tools, and languages I frequently work with to build powerful digital experiences.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="relative h-[400px] md:h-[500px] bg-gray-100 dark:bg-gray-900 rounded-xl mb-8 border border-gray-200 dark:border-gray-800">
-          <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none"></canvas>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative h-[400px] md:h-[500px] bg-gray-100 dark:bg-gray-950 rounded-3xl mb-8 border border-gray-200 dark:border-white/5 overflow-hidden"
+        >
+          <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none opacity-60"></canvas>
           {skills.map((skill, index) => {
             const pos = getResponsivePosition(skill)
             return (
               <div key={index} className="absolute z-10 select-none" style={{ left: `${pos.x * 100}%`, top: `${pos.y * 100}%`, transform: "translate(-50%, -50%)" }}>
                 <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 20, delay: index * 0.08 }}
-                  className="bg-white dark:bg-gray-800 shadow-lg p-2 rounded-2xl flex items-center justify-center cursor-default"
-                  whileHover={{ scale: 1.15 }}
+                  initial={{ opacity: 0, scale: 0, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 18,
+                    delay: 0.2 + (index * 0.1)
+                  }}
+                  className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md p-3 rounded-2xl flex items-center justify-center cursor-default border border-white dark:border-white/10"
+                  whileHover={{
+                    scale: 1.2,
+                    rotate: [0, -5, 5, 0],
+                    transition: { duration: 0.3 }
+                  }}
                 >
-                  <img src={skill.icon} alt={skill.name} className={`w-10 h-10 md:w-12 md:h-12 ${skill.name === "Next.js" ? "dark:filter dark:invert" : ""}`} style={{ transform: `scale(${skill.size})` }} />
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className={`w-10 h-10 md:w-12 md:h-12 ${skill.name === "Next.js" ? "dark:filter dark:invert" : ""}`}
+                    style={{ transform: `scale(${skill.size})` }}
+                  />
+                  {/* Subtle label on hover could be added here if needed */}
                 </motion.div>
               </div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </section >
   )
 }

@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useEffect, useState, useRef } from "react"
+import { ExternalLink } from "lucide-react"
 
 interface Activity {
   id: number
@@ -10,6 +11,7 @@ interface Activity {
   description: string
   image: string
   date: string
+  link?: string
 }
 
 export default function ActivityGallery() {
@@ -66,11 +68,27 @@ export default function ActivityGallery() {
     },
     {
       id: 8,
-      title: "Internship Telkomsigma — Frontend Web Developer",
+      title: "Internship Telkomsigma as Frontend Web Developer",
       description:
         "Contributed to frontend development using Nuxt JS and Tailwind CSS, implemented responsive UI components, optimized rendering performance, and collaborated with backend teams to integrate RESTful APIs.",
       image: "/activity/telkomsigma.jpg?height=300&width=500",
       date: "Juni 2025",
+    },
+    {
+      id: 9,
+      title: "Building Kreavoks Edutech & Software Agency",
+      description: "Co-founded Kreavoks with a mission to empower MSMEs (UMKM) through digital transformation while providing a platform for students to master high-demand digital skills through practical, real-world projects.",
+      image: "/activity/kreavoks.jpg",
+      date: "June 2024",
+      link: "https://sv.ipb.ac.id/2025/07/07/kreavoks-mahasiswa-sekolah-vokasi-ipb-university-kembangkan-startup-digital-untuk-perkuat-umkm-dan-talenta-muda/"
+    },
+    {
+      id: 10,
+      title: "2nd Winner UI/UX Competition at Innovation Week SI UAJY",
+      description: "Secured second place in the National UI/UX Competition organised by HIMSI UAJY. Developed 'Ready To Fly', an innovative solution focused on enhancing travel experiences through user-centered design.",
+      image: "/activity/uajay-ready-to-fly.jpg",
+      date: "July 2024",
+      link: "https://sv.ipb.ac.id/2024/07/10/mahasiswa-sekolah-vokasi-ipb-university-raih-juara-2-dalam-kompetisi-digital-nasional-ui-ux-competition-himsi-uajy-innovation-week-4-2024-di-yogyakarta/"
     },
   ])
 
@@ -90,6 +108,7 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1280)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const [isHovered, setIsHovered] = useState(false)
 
   // Create infinite scroll by duplicating activities
   const infiniteActivities = [...activities, ...activities, ...activities]
@@ -97,6 +116,8 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
 
   // Cycle highlight on the left and sync details on the right
   useEffect(() => {
+    if (isHovered) return
+
     const timer = setInterval(() => {
       setHighlightIndex((prev) => {
         const next = (prev + 1) % activities.length
@@ -105,7 +126,7 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
       })
     }, 5000)
     return () => clearInterval(timer)
-  }, [activities.length])
+  }, [activities.length, isHovered])
 
   // Listen for specific activity selection from search
   useEffect(() => {
@@ -317,6 +338,8 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
               className="flex overflow-x-auto scrollbar-hide gap-4 py-3 px-2 md:px-4"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', ...maskStyles }}
               onScroll={handleScroll}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
               {infiniteActivities.map((item, idx) => {
                 const actualIndex = idx % activities.length
@@ -356,13 +379,20 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
               })}
             </div>
 
-            {/* Scroll indicators */}
-            <div className="flex justify-center mt-2 space-x-1">
-              {Array.from({ length: Math.ceil(activities.length / 3) }).map((_, idx) => (
-                <div
+            {/* Scroll indicators - one per activity for smoother navigation */}
+            <div className="flex justify-center mt-4 space-x-2">
+              {activities.map((_, idx) => (
+                <button
                   key={idx}
-                  className={`w-2 h-2 rounded-full transition-colors ${Math.floor(currentIndex / 3) === idx ? 'bg-indigo-600' : 'bg-gray-300'
+                  onClick={() => {
+                    setCurrentIndex(idx)
+                    setHighlightIndex(idx)
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${currentIndex === idx
+                    ? 'bg-indigo-600 w-6'
+                    : 'bg-gray-300 hover:bg-gray-400'
                     }`}
+                  aria-label={`Go to activity ${idx + 1}`}
                 />
               ))}
             </div>
@@ -382,6 +412,20 @@ function TwoColumnShowcase({ activities }: { activities: Activity[] }) {
               <p className="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-prose">
                 {current.description}
               </p>
+
+              {current.link && (
+                <div className="mt-6">
+                  <a
+                    href={current.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-all group"
+                  >
+                    Read Article
+                    <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                </div>
+              )}
 
               <div className="mt-6 h-px bg-gradient-to-r from-gray-200/80 to-transparent dark:from-gray-800" />
               {/* Pagination removed for minimal design */}
