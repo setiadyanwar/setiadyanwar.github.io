@@ -637,19 +637,33 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
               <div className="border-t border-gray-100 dark:border-gray-800"></div>
 
               {/* Section 3: Challenges */}
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Challenges Faced</label>
-                  <button type="button" onClick={() => insertHighlight('challenges-input', 'challenges')} className="text-xs flex items-center gap-1 text-indigo-600 font-medium"><Sparkles className="w-3 h-3" /> Highlight Text</button>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Challenges Heading</label>
+                  <input
+                    type="text"
+                    value={formData.challenges_heading}
+                    onChange={(e) => setFormData({ ...formData, challenges_heading: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-lg font-semibold"
+                    placeholder="e.g. The Challenge, Hambatan Literasi & Teknis"
+                  />
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Default: "The Challenge"</p>
                 </div>
-                <textarea
-                  id="challenges-input"
-                  value={formData.challenges}
-                  onChange={(e) => setFormData({ ...formData, challenges: e.target.value })}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
-                  placeholder="What were the difficult parts..."
-                />
+
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Challenges Faced</label>
+                    <button type="button" onClick={() => insertHighlight('challenges-input', 'challenges')} className="text-xs flex items-center gap-1 text-indigo-600 font-medium"><Sparkles className="w-3 h-3" /> Highlight Text</button>
+                  </div>
+                  <textarea
+                    id="challenges-input"
+                    value={formData.challenges}
+                    onChange={(e) => setFormData({ ...formData, challenges: e.target.value })}
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+                    placeholder="What were the difficult parts..."
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -923,6 +937,19 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
             {/* Problem Section */}
             <div className="space-y-6 bg-red-50/50 dark:bg-red-900/10 p-6 rounded-2xl border border-red-100 dark:border-red-900/30">
               <h3 className="text-xl font-bold text-red-800 dark:text-red-400 flex items-center gap-2">The Problem</h3>
+
+              <div>
+                <label className="block text-sm font-medium text-red-700 dark:text-red-400 mb-2">Problem Section Heading</label>
+                <input
+                  type="text"
+                  value={formData.problem_heading}
+                  onChange={(e) => setFormData({ ...formData, problem_heading: e.target.value })}
+                  className="w-full px-4 py-2 border border-red-200 dark:border-red-900/50 rounded-lg bg-white dark:bg-gray-900 font-semibold"
+                  placeholder="e.g. Problem, Ketakutan akan Kompleksitas Digital"
+                />
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Default: "Problem"</p>
+              </div>
+
               <textarea
                 value={formData.problem_description}
                 onChange={(e) => setFormData({ ...formData, problem_description: e.target.value })}
@@ -977,6 +1004,19 @@ export default function PortfolioForm({ portfolioId }: { portfolioId?: string })
             {/* Solution Section */}
             <div className="space-y-6 bg-emerald-50/50 dark:bg-emerald-900/10 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/30">
               <h3 className="text-xl font-bold text-emerald-800 dark:text-emerald-400 flex items-center gap-2">The Solution</h3>
+
+              <div>
+                <label className="block text-sm font-medium text-emerald-700 dark:text-emerald-400 mb-2">Solution Section Heading</label>
+                <input
+                  type="text"
+                  value={formData.solution_heading}
+                  onChange={(e) => setFormData({ ...formData, solution_heading: e.target.value })}
+                  className="w-full px-4 py-2 border border-emerald-200 dark:border-emerald-900/50 rounded-lg bg-white dark:bg-gray-900 font-semibold"
+                  placeholder="e.g. Solution, Kenyamanan Negosiasi Melalui Chat"
+                />
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Default: "Solution"</p>
+              </div>
+
               <textarea
                 value={formData.solution_description}
                 onChange={(e) => setFormData({ ...formData, solution_description: e.target.value })}

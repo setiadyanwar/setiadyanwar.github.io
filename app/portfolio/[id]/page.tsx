@@ -38,12 +38,12 @@ export default async function PortfolioDetail({ params }: { params: { id: string
 
   const portfolio = {
     ...restPortfolioItem,
-    overviewHeading: portfolioItem.overview_heading || "Overview",
-    processHeading: portfolioItem.process_heading || "The Journey",
-    challengesHeading: portfolioItem.challenges_heading || "The Challenge",
-    problemHeading: portfolioItem.problem_heading || "Problem",
-    solutionHeading: portfolioItem.solution_heading || "Solution",
-    outcomesHeading: portfolioItem.outcomes_heading || "Outcomes",
+    overviewHeading: portfolioItem.overview_heading || "",
+    processHeading: portfolioItem.process_heading || "",
+    challengesHeading: portfolioItem.challenges_heading || "",
+    problemHeading: portfolioItem.problem_heading || "",
+    solutionHeading: portfolioItem.solution_heading || "",
+    outcomesHeading: portfolioItem.outcomes_heading || "",
     description: portfolioItem.description || "",
     challenges: portfolioItem.challenges || "",
     additionalImages: portfolioItem.additional_images || [],

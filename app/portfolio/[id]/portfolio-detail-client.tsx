@@ -15,15 +15,6 @@ import AdditionalImagesGallery from "@/components/portfolio/additional-images-ga
 import FullScreenImageGallery from "@/components/portfolio/full-screen-image-gallery"
 import ReactMarkdown from "react-markdown"
 
-const sections = [
-    { id: "overview", label: "Overview" },
-    { id: "challenges", label: "Challenges" },
-    { id: "problem", label: "Problem" },
-    { id: "solution", label: "Solution" },
-    { id: "process", label: "Process" },
-    { id: "outcomes", label: "Outcomes" },
-]
-
 const defaultProblemCards: any[] = []
 const defaultSolutionCards: any[] = []
 
@@ -37,6 +28,16 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
     const [activeStep, setActiveStep] = useState<number>(0)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [mounted, setMounted] = useState(false)
+
+    // Dynamic sections based on portfolio headings
+    const sections = [
+        { id: "overview", label: portfolio.overviewHeading || "Overview" },
+        { id: "challenges", label: portfolio.challengesHeading || "Challenges" },
+        { id: "problem", label: portfolio.problemHeading || "Problem" },
+        { id: "solution", label: portfolio.solutionHeading || "Solution" },
+        { id: "process", label: portfolio.processHeading || "Process" },
+        { id: "outcomes", label: portfolio.outcomesHeading || "Outcomes" },
+    ]
 
     // Image Preview State
     const [previewImages, setPreviewImages] = useState<Array<{ url: string; description?: string }>>([])
@@ -330,7 +331,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                                 <div className="space-y-6 sm:space-y-8 md:space-y-10">
                                     <div>
                                         <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 tracking-wide uppercase">
-                                            Project Overview
+                                            {portfolio.overviewHeading ? "Overview" : "Project Overview"}
                                         </h4>
                                         {portfolio.overviewHeading && (
                                             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
@@ -366,7 +367,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                             >
                                 <div className="space-y-4">
                                     <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 tracking-wide uppercase">
-                                        Challenges
+                                        {portfolio.challengesHeading ? "Challenges" : "Challenges"}
                                     </h4>
                                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
                                         {portfolio.challengesHeading || "The Challenge"}
@@ -549,7 +550,7 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                             <div className="space-y-12">
                                 <div>
                                     <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase mb-3">
-                                        Process
+                                        {portfolio.processHeading ? "Process" : "Process"}
                                     </h4>
                                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 sm:mb-8">
                                         {portfolio.processHeading || "The Journey"}

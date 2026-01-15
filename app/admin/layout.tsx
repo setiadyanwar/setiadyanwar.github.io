@@ -30,18 +30,65 @@ export default function AdminLayout({
 
   useEffect(() => {
     setMounted(true)
-    // Check authentication
-    const auth = sessionStorage.getItem("admin_auth")
-    if (auth === "authenticated") {
-      setAuthenticated(true)
-    } else if (pathname !== "/admin/login") {
-      router.push("/admin/login")
+
+    // Check authentication - validate with server
+    const validateSession = async () => {
+      try {
+        const response = await fetch('/api/admin/validate-session', {
+          method: 'GET',
+          credentials: 'include'
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          if (data.valid) {
+            sessionStorage.setItem("admin_auth", "authenticated")
+            setAuthenticated(true)
+            return
+          }
+        }
+
+        // Session invalid
+        sessionStorage.removeItem("admin_auth")
+        if (pathname !== "/admin/login") {
+          router.push("/admin/login")
+        }
+      } catch (error) {
+        console.error("Session validation error:", error)
+        sessionStorage.removeItem("admin_auth")
+        if (pathname !== "/admin/login") {
+          router.push("/admin/login")
+        }
+      }
     }
+
+    // Skip validation on login page
+    if (pathname === "/admin/login") {
+      return
+    }
+
+    validateSession()
   }, [router, pathname])
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("admin_auth")
-    router.push("/admin/login")
+  const handleLogout = async () => {
+    try {
+      // Call server-side logout
+      const response = await fetch('/api/admin/logout', {
+        method: 'POST',
+        credentials: 'include'
+      })
+
+      // Clean up client-side storage regardless of server response
+      sessionStorage.removeItem("admin_auth")
+
+      // Redirect to login
+      router.push("/admin/login")
+    } catch (error) {
+      console.error("Logout error:", error)
+      // Still clean up and redirect on error
+      sessionStorage.removeItem("admin_auth")
+      router.push("/admin/login")
+    }
   }
 
   if (!mounted) {
