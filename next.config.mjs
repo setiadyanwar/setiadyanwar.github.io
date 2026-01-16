@@ -30,7 +30,13 @@ const nextConfig = {
   },
   // Optimize bundle size
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion", "react-markdown"],
+    optimizePackageImports: [
+      "lucide-react",
+      "framer-motion",
+      "react-markdown",
+      "react-icons",
+      "@radix-ui/react-dialog"
+    ],
   },
   // Compiler optimizations
   compiler: {

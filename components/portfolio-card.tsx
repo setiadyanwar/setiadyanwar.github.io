@@ -4,14 +4,9 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useEffect, useRef } from "react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, ArrowRight } from "lucide-react"
-import { getPortfolioItemById } from "@/lib/supabase/data"
-
-// Cache for preloaded data
-const preloadCache = new Map<string, any>()
+import { ArrowRight } from "lucide-react"
 
 interface PortfolioCardProps {
   id: string
@@ -31,63 +26,18 @@ export default function PortfolioCard({
   category,
   image,
   technologies,
-  demoUrl,
-  repoUrl,
   delay = 0,
   filterKey,
 }: PortfolioCardProps) {
   const router = useRouter()
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const cardRef = useRef<HTMLDivElement>(null)
 
-  // Preload data on hover
+  // Prefetch on hover for faster navigation
   const handleMouseEnter = () => {
-    // Clear any existing timeout
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current)
-    }
-
-    // Prefetch route immediately
     router.prefetch(`/portfolio/${id}`)
-
-    // Preload data after a short delay (to avoid unnecessary requests on quick hovers)
-    hoverTimeoutRef.current = setTimeout(async () => {
-      // Check if already cached
-      if (preloadCache.has(id)) {
-        return
-      }
-
-      try {
-        // Fetch and cache the data
-        const data = await getPortfolioItemById(id)
-        if (data) {
-          preloadCache.set(id, data)
-        }
-      } catch (error) {
-        // Silently fail - preloading is optional
-      }
-    }, 100)
   }
-
-  const handleMouseLeave = () => {
-    // Clear timeout if user leaves before delay
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current)
-      hoverTimeoutRef.current = null
-    }
-  }
-
-  useEffect(() => {
-    return () => {
-      if (hoverTimeoutRef.current) {
-        clearTimeout(hoverTimeoutRef.current)
-      }
-    }
-  }, [])
 
   return (
     <motion.div
-      ref={cardRef}
       key={`${id}-${filterKey}`}
       variants={{
         hidden: { opacity: 0, y: 20 },
@@ -98,7 +48,6 @@ export default function PortfolioCard({
       transition={{ duration: 0.4, delay: delay * 0.1, ease: "easeOut" }}
       className="h-full"
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <Card className="group h-full bg-transparent border-0 shadow-none rounded-3xl p-0">
         <div className="relative h-48 overflow-hidden rounded-3xl bg-gray-100 dark:bg-gray-800">
@@ -150,6 +99,3 @@ export default function PortfolioCard({
     </motion.div>
   )
 }
-
-// Export cache for use in detail page
-export { preloadCache }
