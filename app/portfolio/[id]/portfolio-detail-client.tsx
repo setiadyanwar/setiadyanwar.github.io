@@ -13,6 +13,7 @@ import MobileNavigationSidebar from "@/components/portfolio/mobile-navigation-si
 import ProjectInfoBentoGrid from "@/components/portfolio/project-info-bento-grid"
 import AdditionalImagesGallery from "@/components/portfolio/additional-images-gallery"
 import FullScreenImageGallery from "@/components/portfolio/full-screen-image-gallery"
+import WebsitePreviewModal from "@/components/portfolio/website-preview-modal"
 import ReactMarkdown from "react-markdown"
 
 const defaultProblemCards: any[] = []
@@ -43,6 +44,17 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
     const [previewImages, setPreviewImages] = useState<Array<{ url: string; description?: string }>>([])
     const [previewIndex, setPreviewIndex] = useState(0)
     const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+
+    // Website Preview State
+    const [isWebsitePreviewOpen, setIsWebsitePreviewOpen] = useState(false)
+    const [websitePreviewUrl, setWebsitePreviewUrl] = useState("")
+    const [websitePreviewTitle, setWebsitePreviewTitle] = useState("")
+
+    const openWebsitePreview = (url: string, title?: string) => {
+        setWebsitePreviewUrl(url)
+        setWebsitePreviewTitle(title || portfolio.title)
+        setIsWebsitePreviewOpen(true)
+    }
 
     const openImagePreview = (images: string[], index: number, title: string) => {
         const uniqueKey = Date.now(); // force re-render if needed
@@ -353,7 +365,10 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
 
                                 </div>
 
-                                <ProjectInfoBentoGrid portfolio={portfolio} />
+                                <ProjectInfoBentoGrid
+                                    portfolio={portfolio}
+                                    onOpenDemo={(url) => openWebsitePreview(url, portfolio.title)}
+                                />
                             </div>
                         </section>
 
@@ -711,6 +726,14 @@ export default function PortfolioDetailClient({ portfolio, allPortfolioItems }: 
                             initialIndex={previewIndex}
                             isOpen={isPreviewOpen}
                             onClose={() => setIsPreviewOpen(false)}
+                        />
+
+                        {/* Website/Figma Preview Modal */}
+                        <WebsitePreviewModal
+                            url={websitePreviewUrl}
+                            isOpen={isWebsitePreviewOpen}
+                            onClose={() => setIsWebsitePreviewOpen(false)}
+                            title={websitePreviewTitle}
                         />
 
                         {/* Navigation Buttons */}

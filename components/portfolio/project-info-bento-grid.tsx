@@ -19,9 +19,10 @@ interface PortfolioItem {
 
 interface ProjectInfoBentoGridProps {
   portfolio: PortfolioItem
+  onOpenDemo?: (url: string) => void
 }
 
-export default function ProjectInfoBentoGrid({ portfolio }: ProjectInfoBentoGridProps) {
+export default function ProjectInfoBentoGrid({ portfolio, onOpenDemo }: ProjectInfoBentoGridProps) {
   // Format technologies for display
   const techStack = portfolio.technologies
     ? portfolio.technologies.slice(0, 4).join(", ")
@@ -30,6 +31,13 @@ export default function ProjectInfoBentoGrid({ portfolio }: ProjectInfoBentoGrid
   const hasLinks = (portfolio.demoUrl && portfolio.demoUrl !== "#") || (portfolio.repoUrl && portfolio.repoUrl !== "#")
   const hasImpact = Array.isArray(portfolio.impact) && portfolio.impact.length > 0
   const hasResponsibilities = !!portfolio.responsibilities
+
+  const handleDemoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onOpenDemo && portfolio.demoUrl && portfolio.demoUrl !== "#") {
+      e.preventDefault()
+      onOpenDemo(portfolio.demoUrl)
+    }
+  }
 
   return (
     <div className="w-full bg-white dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 p-6 md:p-8 space-y-8">
@@ -67,6 +75,7 @@ export default function ProjectInfoBentoGrid({ portfolio }: ProjectInfoBentoGrid
             {portfolio.demoUrl && portfolio.demoUrl !== "#" && (
               <a
                 href={portfolio.demoUrl}
+                onClick={handleDemoClick}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition-colors"
